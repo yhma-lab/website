@@ -1,0 +1,30 @@
+baseURL = "https://yhmayyds.group/"
+title = "Research Group of Yuhan Ma"
+
+enableRobotsTXT = true
+hasCJKLanguage = true
+
+languageCode = "en-us"
+defaultContentLanguage = 'en'
+
+
+[languages]
+[languages.en]
+title = "Research Group of Yuhan Ma"
+# [languages.en.params]
+# linkedin = 'https://linkedin.com/whoever'
+[languages.zh]
+title = "马宇翰"
+
+
+# theme = "starter-hugo-academic"
+[module]
+proxy = "https://goproxy.cn"
+
+[[module.imports]]
+# disable = false
+# ignoreConfig = false
+# ignoreImports = false
+path = 'github.com/wowchemy/starter-hugo-academic'
+[[module.imports]]
+path = 'github.com/wowchemy/starter-hugo-research-group'
