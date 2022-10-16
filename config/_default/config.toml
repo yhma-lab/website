@@ -1,23 +1,15 @@
 baseURL = "https://yhmayyds.group/"
 title = "Research Group of Yuhan Ma"
 
-enableRobotsTXT = true
-hasCJKLanguage = true
-
 languageCode = "en-us"
 defaultContentLanguage = 'en'
+defaultContentLanguageInSubdir = false
 
+hasCJKLanguage = true
+enableRobotsTXT = true
+enableEmoji = true
+removePathAccents = true
 
-[languages]
-[languages.en]
-title = "Research Group of Yuhan Ma"
-# [languages.en.params]
-# linkedin = 'https://linkedin.com/whoever'
-[languages.zh]
-title = "马宇翰"
-
-
-# theme = "starter-hugo-academic"
 [module]
 proxy = "https://goproxy.cn"
 
@@ -25,6 +17,15 @@ proxy = "https://goproxy.cn"
 # disable = false
 # ignoreConfig = false
 # ignoreImports = false
-path = 'github.com/wowchemy/starter-hugo-academic'
-[[module.imports]]
-path = 'github.com/wowchemy/starter-hugo-research-group'
+path = 'github.com/wowchemy/wowchemy-hugo-themes/modules/wowchemy/v5'
+# [[module.imports]]
+# path = 'github.com/wowchemy/starter-hugo-research-group'
+# [[module.imports]]
+# path = 'github.com/wowchemy/starter-hugo-academic'
+
+[security]
+_merge = "deep"
+[sitemap]
+_merge = "deep"
+[minify]
+_merge = "deep"
