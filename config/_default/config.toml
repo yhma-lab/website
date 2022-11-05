@@ -1,8 +1,8 @@
 baseURL = "https://yhmayyds.group/"
 title = "Research Group of Yuhan Ma"
 
-languageCode = "en-us"
-defaultContentLanguage = 'en'
+languageCode = "zh-cn"
+defaultContentLanguage = "zh"
 defaultContentLanguageInSubdir = false
 
 hasCJKLanguage = true
