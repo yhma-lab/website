@@ -3,13 +3,16 @@ SHELL := /bin/bash
 serve:
 	hugo server --bind "0.0.0.0"
 
-mod-gu:
+get-mod:
 	hugo mod get -u
 
-clean:
+clean-mod:
 	hugo mod clean --all
 
-build:
-	hugo
+clean:
+	rm -rf ./public
 
-setup: clean mod-gu
+build: clean
+	hugo --cleanDestinationDir --gc --minify
+
+setup: clean-mod get-mod
