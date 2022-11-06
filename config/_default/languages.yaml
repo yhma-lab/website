@@ -3,6 +3,7 @@ en:
   languageCode: en-us
   # Uncomment for multi-lingual sites, and move English content into `en` sub-folder.
   contentDir: content/en
+  title: Research Group of Yuhan Ma
 
 zh:
   languageCode: zh-Hans
@@ -15,3 +16,4 @@ zh:
 #      - name: 传
 #        url: '#about'
 #        weight: 1
+

@@ -3,7 +3,7 @@ title = "Research Group of Yuhan Ma"
 
 languageCode = "zh-cn"
 defaultContentLanguage = "zh"
-defaultContentLanguageInSubdir = false
+defaultContentLanguageInSubdir = true
 
 hasCJKLanguage = true
 enableRobotsTXT = true
@@ -22,6 +22,15 @@ path = 'github.com/wowchemy/wowchemy-hugo-themes/modules/wowchemy/v5'
 # path = 'github.com/wowchemy/starter-hugo-research-group'
 # [[module.imports]]
 # path = 'github.com/wowchemy/starter-hugo-academic'
+
+# [[module.mounts]]
+# source = "content/publication"
+# target = "content/en/publication"
+# lang = "en"
+# [[module.mounts]]
+# source = "content/publication"
+# target = "content/zh/publication"
+# lang = "zh"
 
 [security]
 _merge = "deep"
