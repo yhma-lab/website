@@ -21,8 +21,8 @@ doi: ""
 publication_types: ["2"]
 
 # Publication name and optional abbreviated publication name.
-publication: "Nuclear Physics B "
-publication_short: "Nucl. Phys. B"
+publication: "Nucl. Phys. B, 931, 418 (2018)"
+publication_short: ""
 
 abstract: ""
 

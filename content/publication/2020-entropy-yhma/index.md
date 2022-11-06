@@ -21,8 +21,8 @@ doi: ""
 publication_types: ["2"]
 
 # Publication name and optional abbreviated publication name.
-publication: Entropy
-publication_short: Entropy
+publication: Entropy, 22, 1002 (2020)
+publication_short: ""
 
 abstract: ""
 

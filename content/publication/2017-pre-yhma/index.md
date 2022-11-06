@@ -21,8 +21,8 @@ doi: ""
 publication_types: ["2"]
 
 # Publication name and optional abbreviated publication name.
-publication: "Physics Review E"
-publication_short: "PRE"
+publication: "Phys. Rev. E, 96, 022143 (2017)"
+publication_short: ""
 
 abstract: ""
 

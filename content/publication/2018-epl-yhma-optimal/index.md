@@ -22,8 +22,8 @@ doi: ""
 publication_types: ["2"]
 
 # Publication name and optional abbreviated publication name.
-publication: "Europhysics Letters"
-publication_short: "EPL"
+publication: "Europhysics Letters, 122, 30001 (2018)"
+publication_short: ""
 
 abstract: ""
 

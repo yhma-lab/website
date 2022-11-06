@@ -25,8 +25,8 @@ doi: ""
 publication_types: ["2"]
 
 # Publication name and optional abbreviated publication name.
-publication: "Physics Review Letter"
-publication_short: "PRL"
+publication: "Phys. Rev. Lett., 125, 210601 (2020)"
+publication_short: ""
 
 abstract: ""
 
