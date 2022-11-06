@@ -22,41 +22,41 @@ date_format: Jan 2006
 #   Leave `date_end` empty if it's your current employer.
 #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
 experience:
-  - title: 讲师
-    company: 北京师范大学物理学系
+  - title: AP
+    company: Dept. of Physics, Beijing Normal University
     company_url: https://www.bnu.edu.cn
     company_logo: org-bnu
-    location: 北京
+    location: Beijing
     date_start: 2022-12-01
     date_end: ""
     description: |2-
-      Taught electronic engineering and researched semiconductor physics.
-  - title: 博士后
-    company: 中国工程物理研究院 北京计算科学研究中心
+      researches in physics.
+  - title: Post-doctoral Fellow
+    company: Graduate School, China Academy of Engineering Physics
     company_url: https://gscaep.ac.cn
-    company_logo: org-gc
-    location: 北京
+    company_logo: org-x
+    location: Beijing
     date_start: 2021-01-01
     date_end: 2022-12-01
     description: 博强计划 "博强学者"
-  - title: 理论物理博士
-    company: 中国工程物理研究院 北京计算科学研究中心
+  - title: Ph.D of Physics
+    company: Computational Science Research Center, CAEP
     company_url: https://gscaep.ac.cn
     company_logo: org-x
-    location: 北京
+    location: Beijing
     date_start: 2015-09-01
     date_end: 2020-06-30
     description: |2-
-        学位论文: 有限系统热力学与非正则统计在黑洞信息问题中的应用  
-        导师: 孙昌璞院士
-  - title: 理学学士
-    company: 北京师范大学物理学系
+        Thesis: _有限系统热力学与非正则统计在黑洞信息问题中的应用_  
+        Supervisor: Prof. ChangPu Sun
+  - title: B.Sc of Physics
+    company: Dept. of Physics, Beijing Normal University
     company_url: https://www.bnu.edu.cn
     company_logo: org-bnu
-    location: 北京
+    location: Beijing
     date_start: 2011-09-01
     date_end: 2015-06-30
-    description: 学位论文《量子陀螺仪技术及其物理基础》
+    description: "Thesis: _量子陀螺仪技术及其物理基础_"
 
 design:
   columns: "2"

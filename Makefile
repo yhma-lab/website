@@ -11,3 +11,5 @@ clean:
 
 build:
 	hugo
+
+setup: clean mod-gu
