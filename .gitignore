@@ -6,6 +6,9 @@ hugo_stats.json
 .cache/
 .DS_Store
 
+node_modules/
+pnpm-lock.yaml
+
 # Executable may be added to repository
 hugo.exe
 hugo.darwin
