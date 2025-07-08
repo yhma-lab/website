@@ -5,6 +5,7 @@ cms_exclude: true
 # Build Options: https://gohugo.io/content-management/build-options/
 _build:
   render: never
+  # list: never
 cascade:
   _build:
     render: never

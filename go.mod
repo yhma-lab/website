@@ -1,7 +1,8 @@
-module github.com/lqhuang/yhma-group-yyds
+module github.com/yhma-lab/website
 
-go 1.19
+go 1.24
 
 require (
-	github.com/wowchemy/wowchemy-hugo-themes/modules/wowchemy/v5 v5.7.1-0.20221002163318-39a618761acc // indirect
+	github.com/HugoBlox/hugo-blox-builder/modules/blox-analytics v0.1.3 // indirect
+	github.com/HugoBlox/hugo-blox-builder/modules/blox-tailwind v0.3.2 // indirect
 )

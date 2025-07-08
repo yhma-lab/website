@@ -43,7 +43,7 @@ education:
 social:
   - icon: envelope
     icon_pack: fas
-    link: "/#contact"
+    link: '/#contact'
   # - icon: twitter
   #   icon_pack: fab
   #   link: https://twitter.com/GeorgeCushen
@@ -69,7 +69,7 @@ social:
 #   link: uploads/resume.pdf
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
-email: "yhma@gscaep.ac.cn"
+email: 'yhma@gscaep.ac.cn'
 
 # Highlight the author in author lists? (true/false)
 highlight_name: true
@@ -87,6 +87,3 @@ highlight_name: true
 _Nucl. Phys. B_,等 SCI 期刊发表论文 18 篇 (第一或通讯作者 13 篇)，被引用 318 次
 ，单篇最高引用 49 次，H 因子 10。在大学物理、物理与工程、物理教师、等教学类中文
 核心论文 13 篇。
-
-{{< icon name="download" pack="fas" >}} Download my
-{{< staticref "uploads/demo_resume.pdf" "newtab" >}}resumé{{< /staticref >}}.

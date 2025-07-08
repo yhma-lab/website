@@ -1,7 +1,6 @@
 # SITE SETUP
-# Guide: https://wowchemy.com/docs/getting-started/
-# Documentation: https://wowchemy.com/docs/
-# This file is formatted using YAML syntax - learn more at https://learnxinyminutes.com/docs/yaml/
+# Guide: https://docs.hugoblox.com/getting-started/customize/
+# Documentation: https://docs.hugoblox.com/
 
 # Appearance
 
@@ -28,7 +27,7 @@ header:
 footer:
   widget: minimal
   copyright:
-    notice: "© {year} Yuhan Ma. This site is licensed under {license}"
+    notice: '© {year} Yuhan Ma. This site is licensed under {license}'
     license:
       enable: true
       allow_derivatives: false
@@ -40,8 +39,8 @@ footer:
 # Localization
 
 locale:
-  date_format: "Jan 2, 2006"
-  time_format: "3:04 PM"
+  date_format: 'Jan 2, 2006'
+  time_format: '3:04 PM'
   address_format: en-us
 
 # Site features
@@ -53,7 +52,7 @@ features:
   math:
     enable: false
   repository:
-    url: "https://github.com/lqhuang/yhma-group-yyds"
+    url: 'https://github.com/lqhuang/yhma-group-yyds'
     content_dir: content
     branch: master
   avatar:
@@ -80,11 +79,10 @@ marketing:
   seo:
     site_type: Person
     # local_business_type: "" # https://schema.org/LocalBusiness#subtypes
-    org_name: "Beijing Normal University"
-    description:
-      "Yuhan Ma's personal resume and detail infomation about his research group"
+    org_name: 'Beijing Normal University'
+    description: "Yuhan Ma's personal resume and detail infomation about his research group"
   verification:
-    google: ""
-    baidu: ""
-    bing: ""
+    google: ''
+    baidu: ''
+    bing: ''
   google_optimize:
