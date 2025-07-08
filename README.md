@@ -13,6 +13,11 @@ Website: https://yhmayyds.group/
 - https://graphdeeplearning.github.io/
 - https://www.chaitjo.com/
 
+## Documentation
+
+- [Hugo Blox Docs](https://docs.hugoblox.com/)
+- [Hugo Docs](https://gohugo.io/documentation/)
+
 ## How to run or develop locally
 
 1. Minimal setup requirements:
