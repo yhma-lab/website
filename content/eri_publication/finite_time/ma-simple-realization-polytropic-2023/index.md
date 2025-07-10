@@ -1,5 +1,6 @@
 ---
 title: Simple Realization of the Polytropic Process with a Finite-Sized Reservoir
+featured: true
 authors:
 - Yu-Han Ma
 author_notes: []

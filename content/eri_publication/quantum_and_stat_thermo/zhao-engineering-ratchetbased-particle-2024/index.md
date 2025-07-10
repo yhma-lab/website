@@ -1,5 +1,6 @@
 ---
 title: Engineering Ratchet-Based Particle Separation via Extended Shortcuts to Isothermality
+featured: true
 authors:
 - Xiu-Hua Zhao
 - Z. C. Tu

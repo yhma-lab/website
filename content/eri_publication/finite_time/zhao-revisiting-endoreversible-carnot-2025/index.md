@@ -1,5 +1,6 @@
 ---
 title: 'Revisiting Endoreversible Carnot Engine: Extending the Yvon Engine'
+featured: true
 authors:
 - Xiu-Hua Zhao
 - Yu-Han Ma

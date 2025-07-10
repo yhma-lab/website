@@ -1,5 +1,6 @@
 ---
 title: Minimal Model for Carnot Efficiency at Maximum Power
+featured: true
 authors:
 - Shiling Liang
 - Yu-Han Ma
