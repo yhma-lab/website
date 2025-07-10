@@ -75,15 +75,40 @@ email: 'yhma@gscaep.ac.cn'
 highlight_name: true
 ---
 
-我的研究兴趣集中在有限系统的热力学和非平衡统计，包括量子热力学和黑洞信息问题的理
-论研究，以及有限时间热力学的理论和实验研究。最近，我关注 1）具有相互作用的量子系
-统中的能量传输和统计行为，希望探索微观尺度中相互作用对有限时间热力学循环优化中的
-影响；2）有限时间信息擦除问题，希望给出实际计算和信息处理过程中的最低能量消耗和
-最优操纵方式。另外，我也关心 3）热力学与统计物理在经济系统和可靠性分析中的运用。
-我希望将一些热力学概念，如功、热、熵等运用到这些领域，并建立一套理论化的体系
-。4）教学方面，我关注普通物理背景下基于 IYPT 的探究性课程设计，及面向中学生和本
-科生的基于研究性创新竞赛的学术人才培养体系研究。 2015 年至今，我已发表期刊论文
-32 篇，获国家专利两项，公开专利一项。在 _Phys. Rev. Lett._, _Phys. Rev. E_,
-_Nucl. Phys. B_,等 SCI 期刊发表论文 18 篇 (第一或通讯作者 13 篇)，被引用 318 次
-，单篇最高引用 49 次，H 因子 10。在大学物理、物理与工程、物理教师、等教学类中文
-核心论文 13 篇。
+
+
+我的研究兴趣集中在有限系统的热力学和非平衡统计，包括量子热力学和黑洞信息问题的理论研究，以及有限时间热力学的理论和实验研究。2015年至今，已发表期刊论文50余篇，获国家专利三项，公开专利两项。在Phys.Rev. Lett./E/A, New. J. Phys., Nucl. Phys. B, Front. Phys.等国际期刊发表研究论文29篇 (第一或通讯作者23篇)，被引用 700余次，单篇最高引用92次，H因子13（Google Scholar）。教学方面，关注普通物理背景下基于探究性学术竞赛的创新人才培养体系及课程建设。在大学物理、物理与工程、物理教师、物理实验等中文核心刊物发表教学相关论文23篇。
+
+有限时间热力学方向的邀稿综述：
+
+1. 能造出功率和效率都高的热机吗？——有限时间热力学的发展与展望
+
+     马宇翰，董辉，孙昌璞*，物理 50(01)，2021
+
+2. Finite-time thermodynamics: A journey beginning with optimizing heat engines
+
+     X. H. Zhao and Y. H. Ma*, Front. Phys. 20, 065500 (2025). 为合辑Roadmap on thermodynamics and thermal metamaterials中的一章
+
+最近的有趣研究：
+
+1. 以最大功率趋于卡诺效率的极简热机模型，S. Liang*, Y. H. Ma*, D. M. Busiello, and P. De Los Rios, Phys. Rev. Lett. 134, 027101 (2025). (入选Trending in PRL)
+
+Phys.org以“Rethinking Carnot: Scientists overcome traditional power-efficiency trade-off”为题对此项研究进行了专题新闻报道
+
+interestingengineering.com以“Chinese scientists crack code for heat engines with max power and efficiency”为题此对此进行了报道
+
+2. 理想气体中熵产生时间反比律的定量测量，Y. H. Ma, R. X. Zhai, J. F. Chen, C. P. Sun, and H. Dong*, Phys. Rev. Lett. 125, 210601 (2020)
+
+3. 电池充电过程的基本热力学约束，J. R. Lei, Y. Q. Lin, S. G. Ou, and Y. H. Ma*, Front. Phys. 20, 042202 (2025)
+
+4. 麦克斯韦妖“记忆快慢”的热力学影响，T. J. Zhou, Y. H. Ma*, and C. P. Sun*, Phys. Rev. Res. 6,043001 (2024)
+
+5. 肉眼可见的塞曼效应实验，S. H. Qin and Y. H. Ma*, https://arxiv.org/abs/2408.15142
+
+6. 可控的微观粒子分离，X. H. Zhao, Z. C. Tu, and Y. H. Ma*, Phys. Rev. E 110, 034105 (2024)
+
+7. 介观系统的温度涨落，Z. Fei and Y. H. Ma*, Phys. Rev. E 109, 044101 (2024)
+
+8. 拓展的Yvon热机：内可逆卡诺热机的再研究，X. H. Zhao and Y. H. Ma*, Entropy 27,195(2025).
+
+9. 有限热源实现理想气体多方过程，Y. H. Ma, Am. J. Phys. 91, 555 (2023)

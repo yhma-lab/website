@@ -38,7 +38,7 @@ experience:
     location: Beijing
     date_start: 2021-01-01
     date_end: 2022-12-01
-    description: 博强计划 "博强学者"
+    description: Boqiang Scholar, National Boqiang Program
   - title: Ph.D of Physics
     company: Computational Science Research Center, CAEP
     company_url: https://gscaep.ac.cn
@@ -47,7 +47,7 @@ experience:
     date_start: 2015-09-01
     date_end: 2020-06-30
     description: |2-
-        Thesis: _有限系统热力学与非正则统计在黑洞信息问题中的应用_  
+        Thesis: _Applications of Finite-System Thermodynamics and Noncanonical Statistics to the Black Hole Information Problem_  
         Supervisor: Prof. ChangPu Sun
   - title: B.Sc of Physics
     company: Dept. of Physics, Beijing Normal University
@@ -56,7 +56,7 @@ experience:
     location: Beijing
     date_start: 2011-09-01
     date_end: 2015-06-30
-    description: "Thesis: _量子陀螺仪技术及其物理基础_"
+    description: "Thesis: _Quantum Gyroscope Technology and Its Physical Foundations_"
 
 design:
   columns: "2"

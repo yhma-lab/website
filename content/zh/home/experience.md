@@ -22,23 +22,44 @@ date_format: Jan 2006
 #   Leave `date_end` empty if it's your current employer.
 #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
 experience:
+  - title: 副教授
+    company: 北京师范大学物理学系
+    company_url: https://www.bnu.edu.cn
+    company_logo: org-bnu
+    location: 北京
+    date_start: 2025-07-01
+    date_end: ""
+    description: |2-
+      Taught electronic engineering and researched semiconductor physics.
+
   - title: 讲师
     company: 北京师范大学物理学系
     company_url: https://www.bnu.edu.cn
     company_logo: org-bnu
     location: 北京
-    date_start: 2022-12-01
-    date_end: ""
+    date_start: 2023-02-01
+    date_end: 2025-06-01
     description: |2-
       Taught electronic engineering and researched semiconductor physics.
+
   - title: 博士后
     company: 中国工程物理研究院 北京计算科学研究中心
     company_url: https://gscaep.ac.cn
     company_logo: org-gc
     location: 北京
     date_start: 2021-01-01
-    date_end: 2022-12-01
+    date_end: 2023-02-01
     description: 博强计划 "博强学者"
+
+  - title: 访问学者
+    company: 中国工程物理研究院 北京计算科学研究中心
+    company_url: https://gscaep.ac.cn
+    company_logo: org-gc
+    location: 北京
+    date_start: 2020-07-01
+    date_end: 2021-02-01
+    description: 博强计划 "博强学者"
+ 
   - title: 理论物理博士
     company: 中国工程物理研究院 北京计算科学研究中心
     company_url: https://gscaep.ac.cn
