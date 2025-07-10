@@ -112,3 +112,33 @@ interestingengineering.com以“Chinese scientists crack code for heat engines w
 8. 拓展的Yvon热机：内可逆卡诺热机的再研究，X. H. Zhao and Y. H. Ma*, Entropy 27,195(2025).
 
 9. 有限热源实现理想气体多方过程，Y. H. Ma, Am. J. Phys. 91, 555 (2023)
+
+
+学术兼职：
+1. 担任Phys. Rev. Lett., Phys.Rev. X Quantum，Phys. Rev. E，Phys. Rev. A，Phys. Rev. Res，Physica A，Sci. Rep，Classical Quant. Grav.，Ann. Phys. (Berlin)，Front. Phys.，Entropy，Commun. Theor. Phys.，Chinese Phys. B，Am. J. Phys. 等国际刊物的审稿人
+
+2. 参与北京师范大学《京师物理》微信公众号PRLTI项目，担任PRL文章导读译者、Phys. Rev.系列五十周年里程碑文章导读负责人、译者
+
+3. 2018-2019年，参与科普书籍《公式之美》修改、校订工作。本书已于2020年十月出版
+
+4. 担任中国大学生物理学术竞赛（CUPT）评委、全国中学生物理学术竞赛CYPT评委（2024）、北师大物理学术竞赛BNUPT评委（2014-2023）、北京市高中生物理研究性学习活动BJYPT评委(2014-2019)
+
+5. 第15届中国大学生物理学术竞赛（CUPT）竞赛委员会委员，2024
+
+6. 负责《少年时》杂志《十节物理课》中“蒸汽机与热力学定律”一章的撰写工作
+
+荣誉与奖励
+
+IEEE PES中国卫星技术委员会杰出青年人才奖，2024
+
+国家博士后创新人才支持计划，2021
+
+中国大学生物理学术竞赛最佳裁判，2024
+
+《大学物理》优秀审稿专家、高贡献作者，2025
+
+北京市大学生物理学术竞赛优秀指导教师，2025
+
+北京市大学生物理学术竞赛优秀组织奖，2024、2025
+
+北京师范大学学生社团十佳指导教师，2025
