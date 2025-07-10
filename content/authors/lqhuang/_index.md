@@ -6,19 +6,23 @@ title: Lanqing Huang
 first_name: Lanqing
 last_name: Huang
 
-# Is this the primary user of the site?
-superuser: false
+# Enter email to display Gravatar (if Gravatar enabled in Config)
+email: 'lqhuang@typef.io'
 
 # Role/position/tagline
 role: Computing Consultant
 
 # Organizations/Affiliations to show in About widget
 organizations:
-  - name: Beijing Normal University
-    url: https://www.bnu.edu.cn/
+  - name: TypeF LLC
+    url: https://typef.io/
 
+# Is this the primary user of the site?
+superuser: false
 # Short bio (displayed in user profile at end of posts)
 bio: Nobody
+# Highlight the author in author lists? (true/false)
+highlight_name: false
 
 # Interests to show in About widget
 interests:
@@ -28,34 +32,33 @@ interests:
 
 # Education to show in About widget
 education:
-  courses:
-    - course: M.Sc. in Physics
-      institution: Beijing Computational Science Research Center
-      year: 2015 ~ 2018
-    - course: B.Sc. in Physics
-      institution: Beijing Normal University
-      year: 2011 ~ 2015
+  - area: M.Sc. in Physics
+    institution: Beijing Computational Science Research Center
+    date_start: 2015-09
+    date_end: 2018-06
+  - area: B.Sc. in Physics
+    institution: Beijing Normal University
+    date_start: 2011-09
+    date_end: 2015-06
 
-social:
-  - icon: envelope
-    icon_pack: fas
-    link: 'mailto:lqhuang@typef.io'
-  # - icon: twitter
-  #   icon_pack: fab
-  #   link: https://twitter.com/GeorgeCushen
-  #   label: Follow me on Twitter
-  #   display:
-  #     header: true
-  - icon: github
-    icon_pack: ai
+# Social network links
+profiles:
+  - icon: at-symbol
+    url: 'mailto:lqhuang@typef.io'
+    label: E-mail me
+  - icon: brands/github
     link: https://github.com/lqhuang
-  - icon: google-scholar
-    icon_pack: ai
+    label: GitHub
+  - icon: brands/linkedin
+    link: https://www.linkedin.com/in/lanqing-huang-a4ba20332/
+    label: X (Twitter)
+  - icon: brands/x
+    link: https://x.com/_lqhuang
+    label: X (Twitter)
+  - icon: academicons/orcid
+    link: https://orcid.org/0000-0002-9890-5013
+    label: OrcID
+  - icon: academicons/google-scholar
     link: https://scholar.google.com/citations?user=P0hXwosAAAAJ
-
-# Enter email to display Gravatar (if Gravatar enabled in Config)
-email: 'lqhuang@typef.io'
-
-# Highlight the author in author lists? (true/false)
-highlight_name: false
+    label: Google Scholar
 ---

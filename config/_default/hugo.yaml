@@ -1,6 +1,7 @@
-title: 'Research Group of Yuhan Ma'
-baseURL: 'https://yhmayyds.group/'
+title: 'yhma lab'
+org_name: 'Yuhan Ma Lab'
 
+baseURL: 'https://yhmayyds.group/'
 languageCode: 'en-US'
 defaultContentLanguage: 'en'
 defaultContentLanguageInSubdir: false
@@ -9,6 +10,9 @@ hasCJKLanguage: true
 enableRobotsTXT: true
 enableEmoji: true
 removePathAccents: true
+
+build:
+  writeStats: true
 
 markup:
   goldmark:

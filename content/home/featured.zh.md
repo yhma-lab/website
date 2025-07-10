@@ -10,7 +10,7 @@ headless: true
 weight: 60
 
 title: Featured Publications
-subtitle: ""
+subtitle: ''
 
 content:
   # Page type to display. E.g. post, talk, publication...
@@ -22,10 +22,10 @@ content:
     folders:
       - publication
     featured_only: true
-    author: ""
-    category: ""
-    publication_type: ""
-    tag: ""
+    author: ''
+    category: ''
+    publication_type: ''
+    tag: ''
   # Page order: descending (desc) or ascending (asc) date.
   order: desc
 
@@ -35,5 +35,5 @@ design:
   #   2 = Compact
   #   3 = Card
   #   4 = Citation (publication only)
-  view: 3
+  view: card
 ---
