@@ -1,21 +1,14 @@
-baseURL: 'https://yhmayyds.group/'
 title: 'Research Group of Yuhan Ma'
+baseURL: 'https://yhmayyds.group/'
 
 languageCode: 'en-US'
 defaultContentLanguage: 'en'
-defaultContentLanguageInSubdir: true
+defaultContentLanguageInSubdir: false
 
 hasCJKLanguage: true
 enableRobotsTXT: true
 enableEmoji: true
 removePathAccents: true
-
-security:
-  _merge: 'deep'
-sitemap:
-  _merge: 'deep'
-minify:
-  _merge: 'deep'
 
 markup:
   goldmark:
@@ -38,3 +31,10 @@ markup:
     lineNos: true
     style: monokai
     tabWidth: 4
+
+security:
+  _merge: 'deep'
+sitemap:
+  _merge: 'deep'
+minify:
+  _merge: 'deep'
