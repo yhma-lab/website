@@ -19,7 +19,7 @@ header:
     show_logo: true
     show_language: true
     show_day_night: true
-    show_search: true
+    show_search: false
     highlight_active_link: true
 
 # Site footer
@@ -52,14 +52,14 @@ features:
   math:
     enable: false
   repository:
-    url: 'https://github.com/lqhuang/yhma-group-yyds'
+    url: 'https://github.com/yhma-lab/website'
     content_dir: content
     branch: master
   avatar:
-    gravatar: false
+    gravatar: true
     shape: circle
-  search:
-    provider: wowchemy
+  privacy_pack:
+    enable: true
 
 # Extensions
 
@@ -72,6 +72,10 @@ extensions:
 security:
   # Allow frame for embedding speaker notes in slides
   allow_frame: true
+  permissions:
+    policy: >-
+      accelerometer=(), camera=(), geolocation=(), gyroscope=(),
+      magnetometer=(), microphone=(), payment=(), usb=()
 
 # SEO
 
@@ -85,4 +89,7 @@ marketing:
     google: ''
     baidu: ''
     bing: ''
-  google_optimize:
+  analytics:
+    # google_analytics: ''
+    # microsoft_clarity: 'YOUR_ID'
+    # plausible: 'YOUR_ID'

@@ -1,0 +1,40 @@
+baseURL: 'https://yhmayyds.group/'
+title: 'Research Group of Yuhan Ma'
+
+languageCode: 'en-US'
+defaultContentLanguage: 'en'
+defaultContentLanguageInSubdir: true
+
+hasCJKLanguage: true
+enableRobotsTXT: true
+enableEmoji: true
+removePathAccents: true
+
+security:
+  _merge: 'deep'
+sitemap:
+  _merge: 'deep'
+minify:
+  _merge: 'deep'
+
+markup:
+  goldmark:
+    extensions:
+      extras:
+        delete:
+          enable: true
+        insert:
+          enable: true
+        mark:
+          enable: true
+        subscript:
+          enable: true
+        superscript:
+          enable: true
+      strikethrough: false
+  highlight:
+    codeFences: true
+    guessSyntax: false
+    lineNos: true
+    style: monokai
+    tabWidth: 4
