@@ -1,0 +1,50 @@
+---
+title: Dark Information of Black Hole Radiation Raised by Dark Energy
+authors:
+- Yu-Han Ma
+- Jin-Fu Chen
+- Chang-Pu Sun
+author_notes: []
+date: '2018-06-01'
+publishDate: '2025-07-10T12:56:50.922961Z'
+publication_types:
+- article-journal
+publication: '*Nuclear Physics B*'
+publication_short: ''
+doi: 10.1016/j.nuclphysb.2018.05.001
+abstract: The ``lost'' information of black hole through the Hawking radiation was
+  discovered being stored in the correlation among the non-thermally radiated particles
+  (Parikh and Wilczek, 2000 [31], Zhang et al., 2009 [16]). This correlation information,
+  which has not yet been proved locally observable in principle, is named by dark
+  information. In this paper, we systematically study the influences of dark energy
+  on black hole radiation, especially on the dark information. Calculating the radiation
+  spectrum in the existence of dark energy by the approach of canonical typicality,
+  which is reconfirmed by the quantum tunneling method, we find that the dark energy
+  will effectively lower the Hawking temperature, and thus makes the black hole has
+  longer life time. It is also discovered that the non-thermal effect of the black
+  hole radiation is enhanced by dark energy so that the dark information of the radiation
+  is increased. Our observation shows that, besides the mechanical effect (e.g., gravitational
+  lensing effect), the dark energy rises the stored dark information, which could
+  be probed by a non-local coincidence measurement similar to the coincidence counting
+  of the Hanbury--Brown--Twiss experiment in quantum optics.
+summary: ''
+tags:
+- Nonextensive Radiation and Information Correlation in Black Holes
+featured: false
+url_pdf: ''
+url_code: ''
+url_dataset: ''
+url_poster: ''
+url_project: ''
+url_slides: ''
+url_source: ''
+url_video: ''
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: false
+projects: []
+---
+
+
+Add the **full text** or **supplementary notes** for the publication here using Markdown formatting.

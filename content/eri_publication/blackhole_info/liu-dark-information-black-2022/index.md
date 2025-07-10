@@ -1,0 +1,52 @@
+---
+title: Dark Information in Black Hole with $Łambdaǎrphi$ Fluid
+authors:
+- Yu-Xiao Liu
+- Yu-Han Ma
+- Yong-Qiang Wang
+- Shao-Wen Wei
+- Chang-Pu Sun
+author_notes: []
+date: '2022-01-01'
+publishDate: '2025-07-10T12:56:50.918173Z'
+publication_types:
+- article-journal
+publication: '*Symmetry*'
+publication_short: ''
+doi: 10.3390/sym14010118
+abstract: It has been shown that the nonthermal spectrum of Hawking radiation will
+  lead to information-carrying correlations between emitted particles in the radiation.
+  The mutual information carried by such correlations can not be locally observed
+  and hence is dark. With dark information, the black hole information is conserved.
+  In this paper, we look for the spherically symmetric black hole solution in a $łambdaǎrphi$
+  fluid model and investigate the radiation spectrum and dark information of the black
+  hole. The spacetime structure of this black hole is similar to that of the Schwarzschild
+  one, while its horizon radius is decreased by the $łambdařphi$ fluid. By using the
+  statistical mechanical method, the nonthermal radiation spectrum is calculated.
+  This radiation spectrum is very different from the Schwarzschild case at its last
+  stage because of the effect of the $łambdavp̌hi$ fluid. The $łambdavaȟi$ fluid reduces
+  the lifetime of the black hole, but increases the dark information of the Hawking
+  radiation.
+summary: ''
+tags:
+- black hole
+- Nonextensive Radiation and Information Correlation in Black Holes
+- black hole information
+featured: false
+url_pdf: ''
+url_code: ''
+url_dataset: ''
+url_poster: ''
+url_project: ''
+url_slides: ''
+url_source: ''
+url_video: ''
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: false
+projects: []
+---
+
+
+Add the **full text** or **supplementary notes** for the publication here using Markdown formatting.
