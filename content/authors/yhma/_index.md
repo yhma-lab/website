@@ -43,7 +43,7 @@ education:
 social:
   - icon: envelope
     icon_pack: fas
-    link: '/#contact'
+    link: 'mailto:yhma@bnu.edu.cn'
   # - icon: twitter
   #   icon_pack: fab
   #   link: https://twitter.com/GeorgeCushen
@@ -68,15 +68,10 @@ social:
 #   link: uploads/resume.pdf
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
-email: 'yhma@csrc.ac.cn'
+email: 'yhma@bnu.edu.cn'
 
 # Highlight the author in author lists? (true/false)
 highlight_name: true
 ---
 
-
-My research interests lie in the thermodynamics and nonequilibrium statistical physics of finite systems, including theoretical investigations in quantum thermodynamics and the black hole information problem, as well as both theoretical and experimental studies in finite-time thermodynamics. Since 2015, I have published over 50 journal articles and hold three granted national patents and two publicly disclosed patents. I have authored 29 research papers in international journals such as *Physical Review Letters*, *Physical Review E/A*, *New Journal of Physics*, *Nuclear Physics B*, and *Frontiers of Physics*, including 23 as first or corresponding author. My work has been cited over 700 times, with the most cited paper receiving 92 citations, and my current h-index is 13 (Google Scholar).
-
-In teaching, I focus on developing inquiry-based talent training systems and curriculum design within the context of general physics education and academic competitions. I have published 23 teaching-related papers in Chinese core journals, including *University Physics*, *Physics and Engineering*, *Physics Teacher*, and *Physics Experimentation*.
-
-
+Work in progress...
