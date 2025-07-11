@@ -19,6 +19,6 @@ sections:
           - publication
       # sort_by: 'Date'
     design:
-      # view: citation
+      # view: list
       fill_image: false
 ---

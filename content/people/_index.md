@@ -7,12 +7,15 @@ sections:
     content:
       title: Meet the Team
       # Choose which groups/teams of users to display.
-      #   Edit `user_groups` in each user's profile to add them to one or more of these groups.
+      # Edit `user_groups` in each user's profile to add them to one or more of these groups.
       user_groups:
-        - Principal Investigators
-        - Researchers
-        - Grad Students
-        - Administration
+        - Principal Investigator
+        - Faculty Members
+        - Postdoctoral Scholars
+        - PhD Students
+        - Students
+        - Research Assistants
+        - Collaborators
         - Visitors
         - Alumni
       sort_by: Params.last_name

@@ -9,8 +9,11 @@ last_name: Huang
 # Enter email to display Gravatar (if Gravatar enabled in Config)
 email: 'lqhuang@typef.io'
 
+status:
+  icon: ':coffee:'
+
 # Role/position/tagline
-role: Computing Consultant
+role: Advisor for Computing Science and Artificial Intelligence
 
 # Organizations/Affiliations to show in About widget
 organizations:
@@ -61,4 +64,8 @@ profiles:
   - icon: academicons/google-scholar
     link: https://scholar.google.com/citations?user=P0hXwosAAAAJ
     label: Google Scholar
+
+user_groups:
+  - Collaborators
+  - All
 ---

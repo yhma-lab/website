@@ -19,9 +19,9 @@ main:
   - name: Fundings
     url: '/fundings'
     weight: 40
-  - name: 'Talks & Events'
-    url: '/talks'
-    weight: 50
+  # - name: 'Talks & Events'
+  #   url: '/talks'
+  #   weight: 50
   # - name: Contact
   #   url: '/contact'
   #   weight: 60

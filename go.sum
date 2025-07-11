@@ -1,4 +1,8 @@
 github.com/HugoBlox/hugo-blox-builder/modules/blox-analytics v0.1.3 h1:RlzYOopMWua7wFWZr565QvvxkWaowal/aWsHlGMsSoY=
 github.com/HugoBlox/hugo-blox-builder/modules/blox-analytics v0.1.3/go.mod h1:0YQtVvRLCzZOpPmbVNk7WDx8t19/QfRTFO+pwyqQNk8=
+github.com/HugoBlox/hugo-blox-builder/modules/blox-analytics v0.1.4-0.20250301201144-44e75541f7be h1:a5uK4X9P5wan1tamjW8AemnlaVJw0SzVuRQYFUb50yo=
+github.com/HugoBlox/hugo-blox-builder/modules/blox-analytics v0.1.4-0.20250301201144-44e75541f7be/go.mod h1:0YQtVvRLCzZOpPmbVNk7WDx8t19/QfRTFO+pwyqQNk8=
 github.com/HugoBlox/hugo-blox-builder/modules/blox-tailwind v0.3.2 h1:Rh9CLgt4GpcWOoFJ0XyryvGjK/czOAa0eXuhjDisIC0=
 github.com/HugoBlox/hugo-blox-builder/modules/blox-tailwind v0.3.2/go.mod h1:bUQKSt1XQhk60nSpI6D+MibQi6v8s7HghF5qoAtlhws=
+github.com/HugoBlox/hugo-blox-builder/modules/blox-tailwind v0.3.3-0.20250301201144-44e75541f7be h1:6/X9MqK+zX1kizfAC5YjPfsSoO06aMzu2MsM+MdBiw8=
+github.com/HugoBlox/hugo-blox-builder/modules/blox-tailwind v0.3.3-0.20250301201144-44e75541f7be/go.mod h1:bUQKSt1XQhk60nSpI6D+MibQi6v8s7HghF5qoAtlhws=

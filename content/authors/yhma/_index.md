@@ -14,10 +14,11 @@ role: Assistant Professor
 
 # Organizations/Affiliations to show in About widget
 organizations:
-  - name: Beijing Normal University
-    url: https://www.bnu.edu.cn/
-  - name: Laboratory of ....
-    url: https://www.csrc.ac.cn/
+  - name: School of Physics and Astronomy, Beijing Normal University
+    url: https://physics.bnu.edu.cn/
+  - name: Key Laboratory of Multiscale Spin Physics, Beijing Normal University
+    url: https://multiscale.bnu.edu.cn/jj/index.htm/
+  # - url: https://english.bnu.edu.cn/
 
 # Is this the primary user of the site?
 superuser: true
@@ -116,6 +117,22 @@ awards:
     icon: datacamp
     summary: |
       Object-oriented programming (OOP) lets you specify relationships between functions and the objects that they can act on, helping you manage complexity in your code. This is an intermediate level course, providing an introduction to OOP, using the S3 and R6 systems. S3 is a great day-to-day R programming tool that simplifies some of the functions that you write. R6 is especially useful for industry-specific analyses, working with web APIs, and building GUIs.
+
+# Organizational groups that you belong to (for People block)
+#
+# Currently, supported groups are:
+#
+#   - Principal Investigator
+#   - Faculty Members
+#   - Postdoctoral Scholars
+#   - PhD Students
+#   - Students
+#   - Research Assistants
+#   - Collaborators
+#   - Visitors
+#   - Alumni
+user_groups:
+  - Principal Investigator
 ---
 
 Work in progress...
