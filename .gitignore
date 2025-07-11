@@ -6,8 +6,12 @@ hugo_stats.json
 .cache/
 .DS_Store
 
+.venv/
+.env
+
 node_modules/
 pnpm-lock.yaml
+
 
 # Executable may be added to repository
 hugo.exe
