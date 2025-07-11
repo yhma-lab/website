@@ -1,12 +1,12 @@
 ---
-title: Yun-Qian Lynn Lin  (林蕴芊)
-first_name: Yun-Qian Lynn
-last_name: Lin
-role: PhD Student
-user_group: PhD Students
+title: Sandy  (陈苗)
+first_name: Miao
+last_name: Chen
+role: Master Student
+user_group: Master Students
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
-email: linyq@mail.bnu.edu.cn
+email: miaochen@mail.bnu.edu.cn
 
 organizations:
   - name: School of Physics and Astronomy, Beijing Normal University
@@ -28,19 +28,20 @@ interests:
 
 # Education to show in About widget
 education:
-  - area: PhD in Theoretical Physics
+  - area: Master in Theoretical Physics
     institution: Beijing Normal University
-    date_start: 2025-09-01
+    date_start: 2024-09-01
     date_end: ""
     summary: |2-
-      Supervisor: Prof. Zhanchun Tu, Associate Prof. Yuhan Ma
+      Supervisor: Associate Prof. Yuhan Ma
     # button:
     #   text: 'Read Thesis'
     #   url: 'https://example.com'
   - area: B.Sc. in Physics
-    institution: Beijing Normal University
-    date_start: 2021-09-01
-    date_end: 2025-06-01
+    institution: Jiangxi Normal University
+    institution_zh: 江西师范大学物理与通信电子学院物理学本科
+    date_start: 2020-09-01
+    date_end: 2024-06-01
 
 
 
@@ -69,7 +70,8 @@ user_groups:
 ---
 
 论文：
-[1]  Lei J R, Lin Y Q, Ou S G, et al. Universal power-efficiency trade-off in battery charging[J]. Frontiers of Physics, 2025, 20(4): 042202.;
-[2]林蕴芊,雷家睿,马宇翰.黏性液膜在水平旋转柱体外的稳态行为[J].大学物理,2024,43(05):55-59.DOI:10.16854/j.cnki.1000-0712.230270.
-[3]李佳泓,林蕴芊,赵芸赫,等.撒克逊碗的下沉临界条件与沉没时间[J].物理与工程,2023,33(01):107-114.
+[1]Rényi entanglement asymmetry in (1+1)-dimensional conformal field theories, https://journals.aps.org/prd/abstract/10.1103/PhysRevD.109.065009
+[2]Finite-time and Finite-size scalings of coercivity in dynamic hysteresis, Miao Chen, Xiu-Hua Zhao, Yu-Han Ma, https://arxiv.org/abs/2507.07933
+[3]Coercivity Panorama of Dynamic Hysteresis, Miao Chen, Xiu-Hua Zhao, Yu-Han Ma, https://arxiv.org/abs/2506.24035v1
+[4]陈苗,郭琴.络纱问题理论研究及可视化[J].大学物理,2024,43(04):65-68+80.DOI:10.16854/j.cnki.1000-0712.230114.
 
