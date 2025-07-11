@@ -31,5 +31,4 @@ url_video: ""
 slides: ""
 ---
 
-
-some detals
+Need more info

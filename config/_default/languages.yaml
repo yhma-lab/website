@@ -1,8 +1,8 @@
 # Default language
 en:
-  languageCode: en-us
+  languageCode: en-US
   # Uncomment for multi-lingual sites, and move English content into `en` sub-folder.
-  contentDir: content/en
+  # contentDir: content
   title: Research Group of Yuhan Ma
 
 zh:

@@ -13,8 +13,7 @@ address:
   country: United States
 
 summary: An example talk using Wowchemy's Markdown slides feature.
-abstract:
-  "TODO."
+abstract:  "TODO."
 
 # Talk start and end times.
 #   End time can optionally be hidden by prefixing the line with `#`.
