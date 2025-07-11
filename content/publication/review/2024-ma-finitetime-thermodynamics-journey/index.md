@@ -7,15 +7,10 @@ author_notes: []
 date: '2024-11-01'
 publication_types:
   - manuscript
-publication: '*arXiv.org*'
+publication: 'arXiv.org'
 publication_short: ''
 doi: ''
-abstract:
-  In this paper, we summarize the historical development of finite-time thermodynamics
-  and review the current state of research over the past two decades in this field,
-  focusing on fundamental constraints of finite-time thermodynamic cycles, optimal
-  control and optimization of thermodynamic processes, the operation of unconventional
-  heat engines, and experimental progress.
+abstract: In this paper, we summarize the historical development of finite-time thermodynamics and review the current state of research over the past two decades in this field, focusing on fundamental constraints of finite-time thermodynamic cycles, optimal control and optimization of thermodynamic processes, the operation of unconventional heat engines, and experimental progress.
 summary: ''
 tags:
   - review
@@ -35,4 +30,3 @@ image:
 projects: []
 ---
 
-Add the **full text** or **supplementary notes** for the publication here using Markdown formatting.

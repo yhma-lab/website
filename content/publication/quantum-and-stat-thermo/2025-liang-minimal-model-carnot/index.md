@@ -10,18 +10,10 @@ author_notes: []
 date: '2025-01-01'
 publication_types:
 - article-journal
-publication: '*Physical Review Letters*'
+publication: 'Physical Review Letters'
 publication_short: ''
 doi: 10.1103/PhysRevLett.134.027101
-abstract: Carnot efficiency sets a fundamental upper bound on the heat engine efficiency,
-  attainable in the quasistatic limit, albeit at the cost of completely sacrificing
-  power output. Here, we present a minimal heat engine model that can attain Carnot
-  efficiency while achieving maximum power output. We unveil the potential of intrinsic
-  divergent physical quantities within the working substance, such as degeneracy,
-  as promising thermodynamic resources to break through the universal power-efficiency
-  trade-off imposed by nonequilibrium thermodynamics for conventional heat engines.
-  Our findings provide novel insights into the collective advantage in harnessing
-  energy of many-body interacting systems.
+abstract: Carnot efficiency sets a fundamental upper bound on the heat engine efficiency, attainable in the quasistatic limit, albeit at the cost of completely sacrificing power output. Here, we present a minimal heat engine model that can attain Carnot efficiency while achieving maximum power output. We unveil the potential of intrinsic divergent physical quantities within the working substance, such as degeneracy, as promising thermodynamic resources to break through the universal power-efficiency trade-off imposed by nonequilibrium thermodynamics for conventional heat engines. Our findings provide novel insights into the collective advantage in harnessing energy of many-body interacting systems.
 summary: ''
 tags:
 - Quantum Thermodynamics and Stochastic Thermodynamics
@@ -41,4 +33,3 @@ image:
 projects: []
 ---
 
-Add the **full text** or **supplementary notes** for the publication here using Markdown formatting.
