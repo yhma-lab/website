@@ -9,7 +9,7 @@ author_notes: []
 date: '2024-09-01'
 publication_types:
 - article-journal
-publication: '*Physical Review E*'
+publication: 'Physical Review E'
 publication_short: ''
 doi: 10.1103/PhysRevE.110.034105
 abstract: Microscopic particle separation plays a vital role in various scientific

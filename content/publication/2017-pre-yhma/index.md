@@ -3,7 +3,7 @@ title: Quantum thermodynamic cycle with quantum phase transition
 authors:
   - yhma
   - S. H. Su
-  - C. P. Sun
+  - cpsun
 # author_notes:
 #   - "Equal contribution"
 #   - "Equal contribution"
@@ -15,10 +15,11 @@ doi: ''
 # 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;
 # 3 = Preprint / Working Paper; 4 = Report; 5 = Book; 6 = Book section;
 # 7 = Thesis; 8 = Patent
-publication_types: ['2']
+publication_types:
+  - journal-article
 
 # Publication name and optional abbreviated publication name.
-publication: 'Phys. Rev. E, 96, 022143 (2017)'
+publication: 'Physical Review E'
 publication_short: ''
 
 abstract: ''

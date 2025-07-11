@@ -8,7 +8,7 @@ author_notes: []
 date: '2022-02-01'
 publication_types:
   - article-journal
-publication: '*Physical Review E*'
+publication: 'Physical Review E'
 publication_short: ''
 doi: 10.1103/physreve.105.l022101
 abstract: ''

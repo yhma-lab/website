@@ -9,7 +9,7 @@ author_notes: []
 date: '2022-09-01'
 publication_types:
   - article-journal
-publication: '*Physical Review E*'
+publication: 'Physical Review E'
 publication_short: ''
 doi: 10.1103/PhysRevE.106.034112
 abstract:
@@ -41,7 +41,5 @@ image:
   caption: ''
   focal_point: ''
   preview_only: false
-projects: []
+fundings: []
 ---
-
-Add the **full text** or **supplementary notes** for the publication here using Markdown formatting.

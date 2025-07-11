@@ -8,7 +8,7 @@ author_notes: []
 date: '2021-11-01'
 publication_types:
   - article-journal
-publication: '*Communications in Theoretical Physics*'
+publication: 'Communications in Theoretical Physics'
 publication_short: ''
 doi: 10.1088/1572-9494/ac2cb8
 abstract: Consistency of optimizing finite-time Carnot engines with the low-dissipation model in the two-level atomic heat engine
@@ -28,7 +28,5 @@ image:
   caption: ''
   focal_point: ''
   preview_only: false
-projects: []
+fundings: []
 ---
-
-Add the **full text** or **supplementary notes** for the publication here using Markdown formatting.

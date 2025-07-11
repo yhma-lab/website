@@ -10,7 +10,7 @@ author_notes: []
 date: '2020-01-01'
 publication_types:
   - article-journal
-publication: '*Physical Review E*'
+publication: 'Physical Review E'
 publication_short: ''
 doi: 10.1103/PhysRevE.101.012106
 abstract:
