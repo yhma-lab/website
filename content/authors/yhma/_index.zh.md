@@ -93,22 +93,22 @@ experience:
 social:
   - icon: envelope
     icon_pack: fas
-    link: '/#contact'
+    url: '/#contact'
   # - icon: twitter
   #   icon_pack: fab
-  #   link: https://twitter.com/GeorgeCushen
+  #   url: https://twitter.com/GeorgeCushen
   #   label: Follow me on Twitter
   #   display:
   #     header: true
   - icon: google-scholar
     icon_pack: ai
-    link: https://scholar.google.com/citations?user=_7G8UhcAAAAJ
+    url: https://scholar.google.com/citations?user=_7G8UhcAAAAJ
   - icon: arxiv
     icon_pack: ai
-    link: https://scholar.google.com/citations?user=_7G8UhcAAAAJ
+    url: https://scholar.google.com/citations?user=_7G8UhcAAAAJ
   - icon: researchgate
     icon_pack: ai
-    link: https://www.researchgate.net/profile/Yu-Han-Ma
+    url: https://www.researchgate.net/profile/Yu-Han-Ma
   # https://jpswalsh.github.io/academicons/
 
 # Link to a PDF of your resume/CV.

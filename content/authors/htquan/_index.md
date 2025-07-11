@@ -1,6 +1,6 @@
 ---
 # Display name
-title: Haitao Quan (全海涛)
+title: Haitao Quan # (全海涛)
 
 first_name: Haitao
 last_name: Quan

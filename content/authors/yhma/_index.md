@@ -91,13 +91,13 @@ profiles:
     url: 'mailto:yhma@bnu.edu.cn'
     label: E-mail me
   - icon: academicons/google-scholar
-    link: https://scholar.google.com/citations?user=_7G8UhcAAAAJ
+    url: https://scholar.google.com/citations?user=_7G8UhcAAAAJ
     label: Google Scholar
   - icon: academicons/arxiv
-    link: https://scholar.google.com/citations?user=_7G8UhcAAAAJ
+    url: https://scholar.google.com/citations?user=_7G8UhcAAAAJ
     label: arXiv
   - icon: academicons/researchgate
-    link: https://www.researchgate.net/profile/Yu-Han-Ma
+    url: https://www.researchgate.net/profile/Yu-Han-Ma
     label: ResearchGate
 
 # Awards.

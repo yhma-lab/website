@@ -10,16 +10,43 @@
 {{ $show_organizations := $block.design.show_organizations | default false }}
 {{ $show_role := $block.design.show_role | default true }}
 
-<div class="people">
+<style>
+.avatar-wrapper {
+  width: 100px; // Match image size in about.avatar widget
+  height: 100px;
+
+  .avatar-emoji {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 100%;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+    font-size: 20px;
+    background-color: #fff;
+    color: #000; // override parent alpha
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.04), 0 2px 6px rgba(0, 0, 0, 0.04), 0 0 1px rgba(0, 0, 0, 0.04);
+  }
+}
+
+.dark .avatar-emoji {
+  background-color: #000;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.04), 0 2px 6px rgba(0, 0, 0, 0.04), 0 0 1px rgba(255, 255, 255, 0.96);
+}
+</style>
+
+<div class="container mx-auto flex flex-col justify-center items-center">
   {{ with $block.content.title }}
-    <div class="section mb-3 text-center">
-      <h1 class="mb-0">{{ . | markdownify | emojify }}</h1>
-      {{ with $block.content.subtitle }}<p class="mt-1">{{ . | markdownify | emojify }}</p>{{ end }}
+    <div class="my-3 mb-4 text-pretty flex flex-col items-center">
+      <h1 class="text-4xl text-balance">{{ . | markdownify | emojify }}</h1>
+      {{ with $block.content.subtitle }}<p class="text-gray-500 mt-1">{{ . | markdownify | emojify }}</p>{{ end }}
     </div>
   {{ end }}
 
   {{ with $block.content.text }}
-    <div class="">
+    <div class="px-8 text-pretty mb-6">
       {{ . | emojify | $page.RenderString }}
     </div>
   {{ end }}
@@ -35,52 +62,63 @@
     {{ $query = sort $query $sort_by $sort_order }}
 
     {{if $query | and (gt (len $block.content.user_groups) 1) }}
-      <div class="col-md-12">
-        <h2 class="mb-4">{{ . | markdownify }}</h2>
+      <div class="mt-8 my-3">
+        <h2 class="text-2xl text-lime-400">{{ . | markdownify }}</h2>
       </div>
-    {{end}}
 
-    {{ range $query }}
-      {{ $person := .Params }}
-      {{ $avatar := (.Resources.ByType "image").GetMatch "*avatar*" }}
-      {{/* Get link to user's profile page. */}}
-      {{ $link := "" }}
-      {{ with site.GetPage (printf "/authors/%s" (path.Base .File.Dir)) }}
-        {{ $link = .RelPermalink }}
-      {{ end }}
-      <div class="avatar-wrapper">
-        {{ $src := "" }}
-        {{ if $avatar }}
-          {{ $avatar_image := $avatar.Fill "270x270 Center" }}
-          {{ $src = $avatar_image.RelPermalink }}
-        {{ else if site.Params.features.avatar.gravatar }}
-          {{ $src = printf "https://s.gravatar.com/avatar/%s?s=300" (md5 .Params.email) }}
-        {{ end }}
-        {{ if $src }}
-          {{ $avatar_shape := site.Params.features.avatar.shape | default "circle" }}
-          {{with $link}}
-          <a href="{{.}}">
-          {{end}}
-            <img
-              width="270" height="270" loading="lazy"
-              class="avatar {{if eq $avatar_shape "square"}}rounded-none{{else}}rounded-full{{end}}"
-              src="{{ $src }}"
-              alt="Avatar"
-            />
-            {{with $person.status.icon}}<span class="avatar-emoji">{{.|emojify}}</span>{{end}}
-          {{if $link}}
-          </a>
-          {{end}}
+      <div class='mt-3 flex flex-row flex-wrap gap-8'>
+      {{ range $query }}
+
+        {{/* Define inner vars */}}
+        {{ $person := .Params }}
+        {{ $avatar := (.Resources.ByType "image").GetMatch "*avatar*" }}
+        {{/* Get link to user's profile page. */}}
+        {{ $link := "" }}
+        {{ with site.GetPage (printf "/people/%s" (.Name)) }}
+          {{ $link = .RelPermalink }}
         {{ end }}
 
-        <div class="">
-          <h2>{{with $link}}<a href="{{.}}">{{end}}{{ .Title }}{{if $link}}</a>{{end}}</h2>
-          {{ if and $show_organizations .Params.organizations }}{{ range .Params.organizations }}<h3>{{ .name }}</h3>{{ end }}{{ end }}
-          {{ if and $show_role .Params.role }}<h3>{{ .Params.role | markdownify | emojify }}</h3>{{ end }}
-          {{ if $show_social }}{{ partial "social_links" . }}{{ end }}
-          {{ if and $show_interests .Params.interests }}<p class="people-interests">{{ delimit .Params.interests ", " | markdownify | emojify }}</p>{{ end }}
+        <div class="flex flex-col items-center justify-start">
+          {{ $src := "" }}
+          {{ if $avatar }}
+            {{ $avatar_image := $avatar.Fill "512x512 Center" }}
+            {{ $src = $avatar_image.RelPermalink }}
+          {{ else if site.Params.features.avatar.gravatar }}
+            {{ $src = printf "https://s.gravatar.com/avatar/%s?s=300" (md5 .Params.email) }}
+          {{ end }}
+          {{ if $src }}
+            {{ $avatar_shape := site.Params.features.avatar.shape | default "circle" }}
+            <div class='avatar-wrapper'>
+            {{with $link}}
+            <a href="{{.}}">
+            {{end}}
+              <img
+                width="100" height="100" loading="lazy"
+                class="avatar {{if eq $avatar_shape "square"}}rounded-none{{else}}rounded-full{{end}}"
+                src="{{ $src }}"
+                alt="Avatar"
+              />
+              {{with $person.status.icon}}<span class="avatar-emoji">{{.|emojify}}</span>{{end}}
+            {{if $link}}
+            </a>
+            {{end}}
+            </div>
+          {{ end }}
+
+          <div class="mt-3 flex flex-col items-center justify-center text-balance">
+            {{with $link}}<a class="hover:underline" href="{{.}}">{{end}}
+              <h2 class="text-primary-600">{{ .Title }}</h2>
+            {{if $link}}</a>{{end}}
+            {{ if and $show_organizations .Params.organizations }}{{ range .Params.organizations }}<h3>{{ .name }}</h3>{{ end }}{{ end }}
+            {{ if and $show_role .Params.role }}<h3 class="text-sm text-gray-400 my-1">{{ .Params.role | markdownify | emojify }}</h3>{{ end }}
+            {{ if $show_social }}{{ partial "social_links" . }}{{ end }}
+            {{ if and $show_interests .Params.interests }}<p class="people-interests">{{ delimit .Params.interests ", " | markdownify | emojify }}</p>{{ end }}
+          </div>
         </div>
+      {{ end }}
       </div>
     {{ end }}
+
+
   {{ end }}
 </div>

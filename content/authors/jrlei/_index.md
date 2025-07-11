@@ -1,5 +1,5 @@
 ---
-title: Jiarui Lei (雷家睿)
+title: Jiarui Lei # (雷家睿)
 first_name: Jiarui
 last_name: Lei
 

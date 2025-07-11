@@ -1,6 +1,6 @@
 ---
 # Display name
-title: Cong Fu (付聪)
+title: Cong Fu # (付聪)
 
 first_name: Cong
 last_name: Fu

@@ -52,18 +52,18 @@ profiles:
     url: 'mailto:lqhuang@typef.io'
     label: E-mail me
   - icon: brands/github
-    link: https://github.com/lqhuang
+    url: https://github.com/lqhuang
     label: GitHub
   # - icon: brands/linkedin
-  #   link: https://www.linkedin.com/in/lanqing-huang-a4ba20332/
+  #   url: https://www.linkedin.com/in/lanqing-huang-a4ba20332/
   #   label: LinkedIn
   # - icon: brands/x
-  #   link: https://x.com/_lqhuang
+  #   url: https://x.com/_lqhuang
   #   label: X (Twitter)
   - icon: academicons/orcid
-    link: https://orcid.org/0000-0002-9890-5013
+    url: https://orcid.org/0000-0002-9890-5013
     label: OrcID
   - icon: academicons/google-scholar
-    link: https://scholar.google.com/citations?user=P0hXwosAAAAJ
+    url: https://scholar.google.com/citations?user=P0hXwosAAAAJ
     label: Google Scholar
 ---
