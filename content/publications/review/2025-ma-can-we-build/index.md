@@ -1,19 +1,19 @@
 ---
-title: Can We Build a Heat Engine with Both High Power and High Efficiency?------The
-  Development and Prospects of Finite-Time Thermodynamics
+title: Can We Build a Heat Engine with Both High Power and High Efficiency?
+subtitle: The Development and Prospects of Finite-Time Thermodynamics
 authors: []
 author_notes: []
 date: '2021-01-01'
 publishDate: '2025-07-10T12:11:12.545719Z'
 publication_types:
-- manuscript
+  - manuscript
 publication: ''
 publication_short: ''
 doi: ''
 abstract: ''
 summary: ''
 tags:
-- review
+  - review
 featured: false
 url_pdf: ''
 url_code: ''
@@ -29,6 +29,5 @@ image:
   preview_only: false
 projects: []
 ---
-
 
 Add the **full text** or **supplementary notes** for the publication here using Markdown formatting.
