@@ -11,7 +11,7 @@
 {{ $show_role := $block.design.show_role | default true }}
 
 <style>
-.avatar-wrapper {
+.people-avatar-wrapper {
   width: 100px; // Match image size in about.avatar widget
   height: 100px;
 
@@ -88,7 +88,7 @@
           {{ end }}
           {{ if $src }}
             {{ $avatar_shape := site.Params.features.avatar.shape | default "circle" }}
-            <div class='avatar-wrapper'>
+            <div class='people-avatar-wrapper'>
             {{with $link}}
             <a href="{{.}}">
             {{end}}
@@ -112,7 +112,7 @@
             {{ if and $show_organizations .Params.organizations }}{{ range .Params.organizations }}<h3>{{ .name }}</h3>{{ end }}{{ end }}
             {{ if and $show_role .Params.role }}<h3 class="text-sm text-gray-400 my-1">{{ .Params.role | markdownify | emojify }}</h3>{{ end }}
             {{ if $show_social }}{{ partial "social_links" . }}{{ end }}
-            {{ if and $show_interests .Params.interests }}<p class="people-interests">{{ delimit .Params.interests ", " | markdownify | emojify }}</p>{{ end }}
+            {{/* {{ if and $show_interests .Params.interests }}<p class="people-interests">{{ delimit .Params.interests ", " | markdownify | emojify }}</p>{{ end }} */}}
           </div>
         </div>
       {{ end }}

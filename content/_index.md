@@ -63,15 +63,14 @@ sections:
           parallax: false
   - block: community/people
     content:
-      title: Meet the incredible team (check full list of all members in the **[People](/people/)** page)
-      # Current active user groups to display
+      title: Meet the incredible team 
+      subtitle: check full list of all members in the **[People](/people/)** page
       user_groups:
+        - Principal Investigator
         - Faculty Members
         - Postdoctoral Scholars
-        - PhD Students
+        - Graduate Students
         - Students
-        - Research Assistants
-        - Alumni
       sort_by: Params.last_name
       sort_ascending: true
     design:

@@ -11,6 +11,21 @@ email: yhma@bnu.edu.cn
 
 # Role/position/tagline
 role: Associate Professor
+# Organizational groups that you belong to (for People block)
+#
+# Currently, supported groups are:
+#
+#   - Principal Investigator
+#   - Faculty Members
+#   - Postdoctoral Scholars
+#   - Graduate Students
+#   - Students
+#   - Research Assistants
+#   - Collaborators
+#   - Visiting Scholars
+#   - Alumni
+user_groups:
+  - Principal Investigator
 
 # Organizations/Affiliations to show in About widget
 organizations:
@@ -62,8 +77,8 @@ work:
     company_logo: org-bnu
     date_start: 2025-07-01
     date_end: ''
-  - title: Lecturer
-    company: School of Physics and Astronomy, Beijing Normal University
+  - position: Lecturer
+    company_name: School of Physics and Astronomy, Beijing Normal University
     company_url: https://english.bnu.edu.cn/
     company_logo: org-bnu
     date_start: 2023-02-01
@@ -76,14 +91,13 @@ work:
     date_start: 2021-01-01
     date_end: 2022-12-01
     summary: Boqiang Scholar, National Boqiang Program
-  - title: Visiting Scholar
-    company: Computational Science Research Center, China Academy of Engineering Physics
+  - position: Visiting Scholar
+    company_name: Computational Science Research Center, China Academy of Engineering Physics
     company_url: https://gscaep.ac.cn
     company_logo: org-gc
-    location: 北京
     date_start: 2020-07-01
     date_end: 2021-02-01
-    description: 博强计划 "博强学者"
+    description: Boqiang Scholar, National Boqiang Program
 
 # Social network links
 profiles:
@@ -105,47 +119,20 @@ profiles:
 #   Only `title`, `awarder`, and `date` are required.
 #   Begin multi-line `summary` with YAML's `|` or `|2-` multi-line prefix and indent 2 spaces below.
 awards:
-  - title: Neural Networks and Deep Learning
+  - title: IEEE PES 中国卫星技术委员会杰出青年人才奖
     url: https://www.coursera.org/learn/neural-networks-deep-learning
-    date: '2023-11-25'
-    awarder: Coursera
+    certificate_url: https://www.bnu.edu.cn
+    date: '2024-01-01'
+    awarder: IEEE
     icon: coursera
-    summary: |
-      I studied the foundational concept of neural networks and deep learning. By the end, I was familiar with the significant technological trends driving the rise of deep learning; build, train, and apply fully connected deep neural networks; implement efficient (vectorized) neural networks; identify key parameters in a neural network’s architecture; and apply deep learning to your own applications.
-  - title: Blockchain Fundamentals
-    url: https://www.edx.org/professional-certificate/uc-berkeleyx-blockchain-fundamentals
-    date: '2023-07-01'
-    awarder: edX
-    icon: edx
-    summary: |
-      Learned:
-      - Synthesize your own blockchain solutions
-      - Gain an in-depth understanding of the specific mechanics of Bitcoin
-      - Understand Bitcoin’s real-life applications and learn how to attack and destroy Bitcoin, Ethereum, smart contracts and Dapps, and alternatives to Bitcoin’s Proof-of-Work consensus algorithm
-  - title: 'Object-Oriented Programming in R'
-    url: https://www.datacamp.com/courses/object-oriented-programming-with-s3-and-r6-in-r
-    certificate_url: https://www.datacamp.com
-    date: '2023-01-21'
+    summary: TODO
+  - title: '北京师范大学学生社团十佳指导教师'
+    url: https://www.bnu.edu.cn
+    certificate_url: https://www.bnu.edu.cn
+    date: '2025-06-01'
     awarder: datacamp
     icon: datacamp
-    summary: |
-      Object-oriented programming (OOP) lets you specify relationships between functions and the objects that they can act on, helping you manage complexity in your code. This is an intermediate level course, providing an introduction to OOP, using the S3 and R6 systems. S3 is a great day-to-day R programming tool that simplifies some of the functions that you write. R6 is especially useful for industry-specific analyses, working with web APIs, and building GUIs.
-
-# Organizational groups that you belong to (for People block)
-#
-# Currently, supported groups are:
-#
-#   - Principal Investigator
-#   - Faculty Members
-#   - Postdoctoral Scholars
-#   - Graduate Students
-#   - Students
-#   - Research Assistants
-#   - Collaborators
-#   - Visiting Scholars
-#   - Alumni
-user_groups:
-  - Principal Investigator
+    # summary: 'a'
 ---
 
 My research interests lie in the thermodynamics and nonequilibrium statistical physics of finite systems, including theoretical investigations in quantum thermodynamics and the black hole information problem, as well as both theoretical and experimental studies in finite-time thermodynamics. Since 2015, I have published over 50 journal articles and hold three granted national patents and two publicly disclosed patents. I have authored 29 research papers in international journals such as _Physical Review Letters_, _Physical Review E/A_, _New Journal of Physics_, _Nuclear Physics B_, and _Frontiers of Physics_, including 23 as first or corresponding author. My work has been cited over 700 times, with the most cited paper receiving 92 citations, and my current h-index is 13 (Google Scholar).
