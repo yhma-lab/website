@@ -1,10 +1,10 @@
 ---
-title: 有限系统的非平衡热力学及其在信息处理中的应用
-summary: "博士后创新人才支持计划, 基金费用 63 万, 主持, 结项"
+title: 国青年（title？
+summary: "国家自然科学基金青年科学基金，30万，主持，在研"
 tags:
   - funding
-  - over
-date: "2021.01 — 2023.01"
+  - ongoing
+date: "2024.01 — 2026.12"
 
 # Optional external URL for project (replaces project detail page).
 external_link: ""
@@ -31,4 +31,5 @@ url_video: ""
 slides: ""
 ---
 
-Need more info
+
+some detals
