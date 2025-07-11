@@ -3,7 +3,7 @@ title: Works with Quantum Resource of Coherence
 authors:
   - yhma
   - C. L. Liu
-  - C. P. Sun
+  - cpsun
 author_notes: []
 date: '2021-10-01'
 publication_types:

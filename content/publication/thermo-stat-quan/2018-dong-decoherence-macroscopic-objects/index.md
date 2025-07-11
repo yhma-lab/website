@@ -1,21 +1,19 @@
 ---
-title: Decoherence of Macroscopic Objects from Relativistic Effect*
+title: Decoherence of Macroscopic Objects from Relativistic Effect
 authors:
   - Guo-Hui Dong
   - yhma
-  - Jing-Fu Chen
+  - jfchen
   - Xin Wang
-  - Chang-Pu Sun
+  - cpsun
 author_notes: []
 date: '2018-10-01'
 publication_types:
   - article-journal
-publication: '*Chinese Physics B*'
+publication: 'Chinese Physics B'
 publication_short: ''
 doi: 10.1088/1674-1056/27/10/100301
-abstract:
-  Decoherence of macroscopic objects from relativistic effect*, Dong, Guo-Hui,
-  Ma, Yu-Han, Chen, Jing-Fu, Wang, Xin, Sun, Chang-Pu
+abstract: Decoherence of macroscopic objects from relativistic effect
 summary: ''
 tags:
   - Fundamental Problems in Thermodynamics, Statistical Physics, and Quantum Mechanics

@@ -1,16 +1,16 @@
 ---
 title: The Heat and Work of Quantum Thermodynamic Processes with Quantum Coherence*
 authors:
-  - Shanhe Su
-  - Jinfu Chen
+  - sushanhe
+  - jfchen
   - yhma
-  - Jincan Chen
-  - Changpu Sun
+  - Jin-Can Chen
+  - cpsun
 author_notes: []
 date: '2018-06-01'
 publication_types:
   - article-journal
-publication: '*Chinese Physics B*'
+publication: 'Chinese Physics B'
 publication_short: ''
 doi: 10.1088/1674-1056/27/6/060502
 abstract:

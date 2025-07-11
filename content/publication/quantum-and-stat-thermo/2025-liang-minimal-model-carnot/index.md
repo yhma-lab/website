@@ -2,7 +2,7 @@
 title: Minimal Model for Carnot Efficiency at Maximum Power
 featured: true
 authors:
-- Shiling Liang
+- shiling
 - yhma
 - Daniel Maria Busiello
 - Paolo De Los Rios

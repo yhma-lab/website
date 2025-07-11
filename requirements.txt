@@ -1,1 +1,1 @@
-ruamel.yaml
+python-frontmatter # https://github.com/eyeseast/python-frontmatter

@@ -2,8 +2,8 @@
 title: Dark Information of Black Hole Radiation Raised by Dark Energy
 authors:
   - yhma
-  - Jin-Fu Chen
-  - Chang-Pu Sun
+  - jfchen
+  - cpsun
 author_notes: []
 date: '2018-06-01'
 publication_types:

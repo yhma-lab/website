@@ -3,8 +3,8 @@ title: Quantum Illumination Assistant with Error-Correcting Codes
 authors:
   - Wen-Zhao Zhang
   - yhma
-  - Jing-Fu Chen
-  - Chang-Pu Sun
+  - jfchen
+  - cpsun
 author_notes: []
 date: '2020-01-01'
 publication_types:

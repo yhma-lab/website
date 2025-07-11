@@ -2,7 +2,7 @@
 title: 'Finite-Time Thermodynamics: A Journey Beginning with Optimizing Heat Engines'
 authors:
   - yhma
-  - Xiu-Hua Zhao
+  - hua
 author_notes: []
 date: '2024-11-01'
 publication_types:

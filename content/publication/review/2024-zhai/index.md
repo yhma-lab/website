@@ -1,15 +1,15 @@
 ---
 title: 理想气体有限时间热力学实验平台的搭建与有限时间热力学的前沿研究
 authors:
-  - '翟若迅'
+  - 翟若迅
   - yhma
-  - '董辉'
-  - '孙昌璞'
+  - hdong
+  - cpsun
 author_notes: []
 date: '2024-01-01'
 publication_types:
   - article-journal
-publication: '*物理实验*'
+publication: '物理实验'
 publication_short: ''
 doi: ''
 abstract: ''

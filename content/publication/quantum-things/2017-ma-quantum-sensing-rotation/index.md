@@ -2,7 +2,7 @@
 title: Quantum Sensing of Rotation Velocity Based on Transverse Field Ising Model
 authors:
   - yhma
-  - Chang-Pu Sun
+  - cpsun
 author_notes: []
 date: '2017-10-01'
 publication_types:

@@ -5,7 +5,7 @@ authors:
   - yhma
   - Yong-Qiang Wang
   - Shao-Wen Wei
-  - Chang-Pu Sun
+  - cpsun
 author_notes: []
 date: '2022-01-01'
 publication_types:

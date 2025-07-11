@@ -1,8 +1,8 @@
 ---
 title: Thermodynamic constraints on heat engine cycles between asymmetrical finite-sized reservoirs
 authors:
-  - Xiuhua Zhao
-  - Zhanchun Tu
+  - hua
+  - tuzc
   - yhma
 author_notes: []
 date: '2023-12-01'

@@ -4,7 +4,7 @@ featured: true
 authors:
 - Tan-Ji Zhou
 - yhma
-- C. P. Sun
+- cpsun
 author_notes: []
 date: '2024-10-01'
 publication_types:

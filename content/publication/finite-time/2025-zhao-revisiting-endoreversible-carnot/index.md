@@ -2,7 +2,7 @@
 title: 'Revisiting Endoreversible Carnot Engine: Extending the Yvon Engine'
 featured: true
 authors:
-- Xiu-Hua Zhao
+- hua
 - yhma
 author_notes: []
 date: '2025-02-01'

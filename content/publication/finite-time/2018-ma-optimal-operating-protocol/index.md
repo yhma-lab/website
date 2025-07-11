@@ -2,9 +2,9 @@
 title: Optimal Operating Protocol to Achieve Efficiency at Maximum Power of Heat Engines
 authors:
   - yhma
-  - Dazhi Xu
-  - Hui Dong
-  - Chang-Pu Sun
+  - Da-Zhi Xu
+  - hdong
+  - cpsun
 author_notes: []
 date: '2018-08-01'
 publication_types:

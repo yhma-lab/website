@@ -2,9 +2,9 @@
 title: The Uniqueness of the Integration Factor Associated with the Exchanged Heat in Thermodynamics
 authors:
   - yhma
-  - Hui Dong
-  - Hai-Tao Quan
-  - Chang-Pu Sun
+  - hdong
+  - htquan
+  - cpsun
 author_notes: []
 date: '2021-01-01'
 publication_types:

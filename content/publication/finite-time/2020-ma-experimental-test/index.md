@@ -4,9 +4,9 @@ featured: true
 authors:
   - yhma
   - Ruo-Xun Zhai
-  - Jinfu Chen
-  - C. P. Sun
-  - Hui Dong
+  - jfchen
+  - cpsun
+  - hdong
 author_notes: []
 date: '2020-11-01'
 publication_types:

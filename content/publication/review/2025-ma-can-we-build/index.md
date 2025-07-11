@@ -3,7 +3,7 @@ title: Can We Build a Heat Engine with Both High Power and High Efficiency?
 subtitle: The Development and Prospects of Finite-Time Thermodynamics
 authors:
   - yhma
-  - Chang-Pu Sun
+  - cpsun
 author_notes: []
 date: '2021-01-01'
 publication_types:

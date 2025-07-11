@@ -164,7 +164,7 @@ highlight_name: true
 
 有限时间热力学方向的邀稿综述：
 
-1. 能造出功率和效率都高的热机吗？——有限时间热力学的发展与展望，马宇翰，董辉，孙昌璞\*，物理 50(01)，2021
+1. 能造出功率和效率都高的热机吗？——有限时间热力学的发展与展望，马宇翰，董辉，cpsun\*，物理 50(01)，2021
 2. Finite-time thermodynamics: A journey beginning with optimizing heat engines, X. H. Zhao and Y. H. Ma\*, Front. Phys. 20,065500 (2025). 为合辑 Roadmap on thermodynamics and thermal metamaterials 中的一章
 
 最近的有趣研究：
@@ -172,9 +172,9 @@ highlight_name: true
 1. 以最大功率趋于卡诺效率的极简热机模型，S. Liang*, Y. H. Ma*, D. M. Busiello, and P. De Los Rios, Phys. Rev. Lett. 134, 027101 (2025). (入选 Trending in PRL)
    Phys.org 以“Rethinking Carnot: Scientists overcome traditional power-efficiency trade-off”为题对此项研究进行了专题新闻报道
    interestingengineering.com 以“Chinese scientists crack code for heat engines with max power and efficiency”为题此对此进行了报道
-2. 理想气体中熵产生时间反比律的定量测量，Y. H. Ma, R. X. Zhai, J. F. Chen, C. P. Sun, and H. Dong\*, Phys. Rev. Lett. 125, 210601 (2020)
+2. 理想气体中熵产生时间反比律的定量测量，Y. H. Ma, R. X. Zhai, J. F. Chen, cpsun, and H. Dong\*, Phys. Rev. Lett. 125, 210601 (2020)
 3. 电池充电过程的基本热力学约束，J. R. Lei, Y. Q. Lin, S. G. Ou, and Y. H. Ma\*, Front. Phys. 20, 042202 (2025)
-4. 麦克斯韦妖“记忆快慢”的热力学影响，T. J. Zhou, Y. H. Ma*, and C. P. Sun*, Phys. Rev. Res. 6,043001 (2024)
+4. 麦克斯韦妖“记忆快慢”的热力学影响，T. J. Zhou, Y. H. Ma*, and cpsun*, Phys. Rev. Res. 6,043001 (2024)
 5. 肉眼可见的塞曼效应实验，S. H. Qin and Y. H. Ma\*, https://arxiv.org/abs/2408.15142
 6. 可控的微观粒子分离，X. H. Zhao, Z. C. Tu, and Y. H. Ma\*, Phys. Rev. E 110, 034105 (2024)
 7. 介观系统的温度涨落，Z. Fei and Y. H. Ma\*, Phys. Rev. E 109, 044101 (2024)

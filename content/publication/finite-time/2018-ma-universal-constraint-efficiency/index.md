@@ -2,9 +2,9 @@
 title: Universal Constraint for Efficiency and Power of a Low-Dissipation Heat Engine
 authors:
   - yhma
-  - Dazhi Xu
-  - Hui Dong
-  - Chang-Pu Sun
+  - Da-Zhi Xu
+  - hdong
+  - cpsun
 author_notes: []
 date: '2018-10-01'
 publication_types:

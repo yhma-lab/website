@@ -2,8 +2,8 @@
 title: Quantum Thermodynamic Cycle with Quantum Phase Transition
 authors:
   - yhma
-  - Shan-He Su
-  - Chang-Pu Sun
+  - sushanhe
+  - cpsun
 author_notes: []
 date: '2017-08-01'
 publication_types:

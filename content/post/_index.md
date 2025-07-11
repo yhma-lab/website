@@ -1,11 +1,9 @@
 ---
-title: Posts
+title: Demo post
 
-# View.
-#   1 = List
-#   2 = Compact
-#   3 = Card
-view: compact
+date: 2023-10-01
+
+draft: true
 
 # Optional header image (relative to `static/media/` folder).
 header:

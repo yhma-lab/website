@@ -3,8 +3,8 @@ title: Non-Thermal Radiation of Black Holes off Canonical Typicality
 authors:
   - yhma
   - Qing-Yu Cai
-  - Hui Dong
-  - Chang-Pu Sun
+  - hdong
+  - cpsun
 author_notes: []
 date: '2018-06-01'
 publication_types:

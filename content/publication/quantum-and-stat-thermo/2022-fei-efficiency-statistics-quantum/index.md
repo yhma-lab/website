@@ -2,7 +2,7 @@
 title: Efficiency Statistics of a Quantum Otto Cycle
 authors:
   - Zhaoyu Fei
-  - Jin-Fu Chen
+  - jfchen
   - yhma
 author_notes: []
 date: '2022-02-01'

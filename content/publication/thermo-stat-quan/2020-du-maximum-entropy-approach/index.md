@@ -5,7 +5,7 @@ authors:
   - yhma
   - Yuan-Fa Wei
   - Xuefei Guan
-  - C. P. Sun
+  - cpsun
 author_notes: []
 date: '2020-01-01'
 publication_types:

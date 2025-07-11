@@ -2,8 +2,8 @@
 title: Universal Power-Efficiency Trade-off in Battery Charging
 featured: true
 authors:
-- Jia-Rui Lei
-- Yun-Qian Lin
+- jrlei
+- lynn
 - Shi-Gang Ou
 - yhma
 author_notes: []
