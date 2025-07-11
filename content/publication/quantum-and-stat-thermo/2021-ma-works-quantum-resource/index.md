@@ -11,17 +11,7 @@ publication_types:
 publication: 'arXiv.org'
 publication_short: ''
 doi: ''
-abstract:
-  We study the modification of the second law of thermodynamics for a quantum
-  system interacting with a reservoir regarding quantum coherence. The whole system
-  is isolated so that neither energy nor information is lost. It is discovered that
-  the coherence of the reservoir can serves as a useful resource allowing the system
-  extract more energy from the reservoir; among the coherence measures, only is the
-  relative entropy of coherence feasible to quantitatively characterize energy exchange.
-  We demonstrate that a thermodynamic cycle between two coherent reservoirs can output
-  more work than its classical counterpart. The efficiency of such cycle surpasses
-  the Carnot efficiency, which is the upper bound of heat engine efficiency in classical
-  regime.
+abstract: We study the modification of the second law of thermodynamics for a quantum system interacting with a reservoir regarding quantum coherence. The whole system is isolated so that neither energy nor information is lost. It is discovered that the coherence of the reservoir can serves as a useful resource allowing the system extract more energy from the reservoir; among the coherence measures, only is the relative entropy of coherence feasible to quantitatively characterize energy exchange. We demonstrate that a thermodynamic cycle between two coherent reservoirs can output more work than its classical counterpart. The efficiency of such cycle surpasses the Carnot efficiency, which is the upper bound of heat engine efficiency in classical regime.
 summary: ''
 tags:
   - Quantum Thermodynamics and Stochastic Thermodynamics
@@ -41,4 +31,3 @@ image:
 projects: []
 ---
 
-Add the **full text** or **supplementary notes** for the publication here using Markdown formatting.

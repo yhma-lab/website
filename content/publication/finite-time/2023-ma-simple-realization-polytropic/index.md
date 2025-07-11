@@ -7,14 +7,10 @@ author_notes: []
 date: '2023-07-01'
 publication_types:
 - article-journal
-publication: '*American Journal of Physics*'
+publication: 'American Journal of Physics'
 publication_short: ''
 doi: 10.1119/5.0104382
-abstract: In most thermodynamics textbooks, polytropic processes are introduced by defining the process equation rather than explaining their physical origin. In this paper, we propose a simple model to realize a polytropic process for an ideal gas.
-  The ideal gas is compressed or expanded quasi-statically while in thermal contact
-  with a finite reservoir with constant heat capacity, and the entire system is thermally
-  isolated from the outside environment. We propose an experimental implementation
-  of our model with realistic parameters.
+abstract: In most thermodynamics textbooks, polytropic processes are introduced by defining the process equation rather than explaining their physical origin. In this paper, we propose a simple model to realize a polytropic process for an ideal gas. The ideal gas is compressed or expanded quasi-statically while in thermal contact with a finite reservoir with constant heat capacity, and the entire system is thermally isolated from the outside environment. We propose an experimental implementation of our model with realistic parameters.
 summary: ''
 tags:
 - Finite-time and Finite-size Thermodynamics
@@ -33,5 +29,3 @@ image:
   preview_only: false
 projects: []
 ---
-
-Add the **full text** or **supplementary notes** for the publication here using Markdown formatting.

@@ -11,7 +11,7 @@ publication_types:
 publication: 'Physical Review E'
 publication_short: ''
 doi: 10.1103/physreve.105.l022101
-abstract: ''
+abstract: We study the nonequilibrium thermodynamics of a heat engine operating between two finite-sized reservoirs with well-defined temperatures. Within the linear response regime, it is found that the uniform temperature of the two reservoirs at final time 𝜏 is bounded from below by the entropy production $\sigma_{min}$ $\propto$ 1/$tau$. We discover a general power-efficiency tradeoff depending on the ratio of heat capacities ($\gamma$) of the reservoirs for the engine, and a universal efficiency at maximum average power of the engine for arbitrary $\gamma$ is obtained. For practical purposes, the operation protocol of an ideal gas heat engine to achieve the optimal performance associated with $\sigma_{min}$ is demonstrated. Our findings can be used to develop a general optimization scenario for thermodynamic cycles with finite-sized reservoirs in real-world circumstances.
 summary: ''
 tags:
   - Finite-time and Finite-size Thermodynamics
@@ -31,4 +31,3 @@ image:
 projects: []
 ---
 
-Add the **full text** or **supplementary notes** for the publication here using Markdown formatting.

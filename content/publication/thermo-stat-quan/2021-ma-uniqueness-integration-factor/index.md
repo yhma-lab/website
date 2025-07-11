@@ -12,10 +12,7 @@ publication_types:
 publication: '*Fundamental Research*'
 publication_short: ''
 doi: 10.1016/j.fmre.2020.11.003
-abstract:
-  State functions play important roles in thermodynamics. Different from the
-  process function, such as the exchanged heat $δ$Q and the applied work $δ$W, the change of the state function can be expressed as an exact differential. We prove here that, for a generic thermodynamic system, only the inverse of the temperature,
-  namely 1/$\tau$, can serve as the integration factor for the exchanged heat $δ$Q. The uniqueness of the integration factor invalidates any attempt to define other state functions associated with the exchanged heat, and in turn, reveals the incorrectness of defining the entransy Evh=CVT2/2 as a state function by treating T as an integration factor. We further show the errors in the derivation of entransy by treating the heat capacity CV as a temperature-independent constant.
+abstract: State functions play important roles in thermodynamics. Different from the process function, such as the exchanged heat $\delta Q$ and the applied work $\delta W$, the change of the state function can be expressed as an exact differential. We prove here that, for a generic thermodynamic system, only the inverse of the temperature, namely $1/\tau$, can serve as the integration factor for the exchanged heat $\delta Q$. The uniqueness of the integration factor invalidates any attempt to define other state functions associated with the exchanged heat, and in turn, reveals the incorrectness of defining the entransy $E_{vh}=C_V T^2/2$ as a state function by treating $T$ as an integration factor. We further show the errors in the derivation of entransy by treating the heat capacity $C_V$ as a temperature-independent constant.
 summary: ''
 tags:
   - Exchanged heat
@@ -40,4 +37,3 @@ image:
 projects: []
 ---
 
-Add the **full text** or **supplementary notes** for the publication here using Markdown formatting.
