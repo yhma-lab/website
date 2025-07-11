@@ -1,9 +1,9 @@
 {
   "name": "yhma-yyds-group",
-  "version": "0.1.0",
+  "version": "2025.07.11",
   "description": "",
   "scripts": {
-    "publish": "wrangler pages deploy ./public",
+    "publish": "source .env && wrangler pages deploy",
     "debug": "wrangler pages --help",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
