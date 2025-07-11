@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 
 serve:
-	hugo server --bind "0.0.0.0" -D --printPathWarnings --printUnusedTemplates
+	hugo server --bind "0.0.0.0" --printPathWarnings --printI18nWarnings
 
 get-mod:
 	hugo mod get -u
