@@ -1,9 +1,11 @@
 ---
-title: Eri  (陈苗)
+title: Eri Chen (陈婉妍)
 first_name: Wanyan
 last_name: Chen
-role: Master Student
-user_group: Master Students
+
+role: Grad Student
+user_groups:
+  - Graduate Students
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
 email: wanyanchen0304@mail.bnu.edu.cn
@@ -31,7 +33,7 @@ education:
   - area: Master in Theoretical Physics
     institution: Beijing Normal University
     date_start: 2024-09-01
-    date_end: ""
+    date_end: ''
     summary: |2-
       Supervisor: Associate Prof. Yuhan Ma
     # button:
@@ -40,32 +42,9 @@ education:
   - area: B.Sc. in Computer Science and Technology
     institution: Beijing Normal University
     date_start: 2019-09-01
-    date_end: 2023-06-01
-
-
-
-
+    date_end: 2023-06-30
 # Awards.
 #   Add/remove as many awards below as you like.
 #   Only `title`, `awarder`, and `date` are required.
 #   Begin multi-line `summary` with YAML's `|` or `|2-` multi-line prefix and indent 2 spaces below.
-
-
-# Organizational groups that you belong to (for People block)
-#
-# Currently, supported groups are:
-#
-#   - Principal Investigator
-#   - Faculty Members
-#   - Postdoctoral Scholars
-#   - PhD Students
-#   - Students
-#   - Research Assistants
-#   - Collaborators
-#   - Visitors
-#   - Alumni
-user_groups:
-  - Principal Investigator
 ---
-
-

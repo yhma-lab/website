@@ -8,7 +8,7 @@ authors:
   - Tan-Ji Zhou
   - Wen-Zhao Zhang
   - Xin Wang
-  - Jin-Can Chen
+  - Jin-Can Chen # (陈金灿)
   - C. L. Liu
   - Yu-Xiao Liu
   - Guo-Hui Dong

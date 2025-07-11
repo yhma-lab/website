@@ -6,4 +6,6 @@ first_name: Haitao
 last_name: Quan
 
 role: Professor
+user_groups:
+  - Collaborators
 ---

@@ -2,7 +2,7 @@
 # Display name
 title: Lanqing Huang
 
-# Full name (for SEO)
+# Full name
 first_name: Lanqing
 last_name: Huang
 
@@ -13,7 +13,9 @@ status:
   icon: ':coffee:'
 
 # Role/position/tagline
-role: Advisor for Computing Science and Artificial Intelligence
+role: Advisor # for Computing Science and Artificial Intelligence
+user_groups:
+  - Collaborators
 
 # Organizations/Affiliations to show in About widget
 organizations:
@@ -37,12 +39,12 @@ interests:
 education:
   - area: M.Sc. in Physics
     institution: Beijing Computational Science Research Center
-    date_start: 2015-09
-    date_end: 2018-06
+    date_start: 2015-09-01
+    date_end: 2018-06-60
   - area: B.Sc. in Physics
     institution: Beijing Normal University
-    date_start: 2011-09
-    date_end: 2015-06
+    date_start: 2011-09-01
+    date_end: 2015-06-60
 
 # Social network links
 profiles:
@@ -52,20 +54,16 @@ profiles:
   - icon: brands/github
     link: https://github.com/lqhuang
     label: GitHub
-  - icon: brands/linkedin
-    link: https://www.linkedin.com/in/lanqing-huang-a4ba20332/
-    label: X (Twitter)
-  - icon: brands/x
-    link: https://x.com/_lqhuang
-    label: X (Twitter)
+  # - icon: brands/linkedin
+  #   link: https://www.linkedin.com/in/lanqing-huang-a4ba20332/
+  #   label: LinkedIn
+  # - icon: brands/x
+  #   link: https://x.com/_lqhuang
+  #   label: X (Twitter)
   - icon: academicons/orcid
     link: https://orcid.org/0000-0002-9890-5013
     label: OrcID
   - icon: academicons/google-scholar
     link: https://scholar.google.com/citations?user=P0hXwosAAAAJ
     label: Google Scholar
-
-user_groups:
-  - Collaborators
-  - All
 ---

@@ -138,11 +138,11 @@ awards:
 #   - Principal Investigator
 #   - Faculty Members
 #   - Postdoctoral Scholars
-#   - PhD Students
+#   - Graduate Students
 #   - Students
 #   - Research Assistants
 #   - Collaborators
-#   - Visitors
+#   - Visiting Scholars
 #   - Alumni
 user_groups:
   - Principal Investigator

@@ -12,11 +12,11 @@ sections:
         - Principal Investigator
         - Faculty Members
         - Postdoctoral Scholars
-        - PhD Students
+        - Graduate Students
         - Students
         - Research Assistants
         - Collaborators
-        - Visitors
+        - Visiting Scholars
         - Alumni
       sort_by: Params.last_name
       sort_ascending: true
