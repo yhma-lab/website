@@ -8,8 +8,12 @@ title: Publications
 #   4 = Citation
 view: citation
 
+count: 20
+
 # Optional header image (relative to `static/media/` folder).
 header:
   caption: ''
   image: ''
 ---
+
+The full list of our publications

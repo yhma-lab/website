@@ -36,6 +36,17 @@ markup:
     style: monokai
     tabWidth: 4
 
+pagination:
+  disableAliases: false
+  pagerSize: 20
+  path: page
+
+# taxonomies:
+#   category: categories
+#   tag: tags
+#   projects: project
+#   publication: publications
+
 security:
   _merge: 'deep'
 sitemap:
