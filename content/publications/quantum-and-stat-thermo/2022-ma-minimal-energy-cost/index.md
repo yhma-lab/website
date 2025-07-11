@@ -1,7 +1,7 @@
 ---
 title: Minimal Energy Cost to Initialize a Bit with Tolerable Error
 authors:
-- Yu-Han Ma
+- yhma
 - Jin-Fu Chen
 - C. P. Sun
 - Hui Dong

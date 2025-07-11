@@ -1,17 +1,17 @@
 ---
-title: Effect of Finite-Size Heat Source's Heat Capacity on the Efficiency of Heat
-  Engine
+title: Effect of Finite-Size Heat Source's Heat Capacity on the Efficiency of Heat Engine
 authors:
-- Yu-Han Ma
+  - yhma
 author_notes: []
 date: '2020-09-01'
 publishDate: '2025-07-10T04:36:35.783789Z'
 publication_types:
-- article-journal
+  - article-journal
 publication: '*Entropy*'
 publication_short: ''
 doi: 10.3390/e22091002
-abstract: Heat engines used to output useful work have important practical significance,
+abstract:
+  Heat engines used to output useful work have important practical significance,
   which, in general, operate between heat baths of infinite size and constant temperature.
   In this paper, we study the efficiency of a heat engine operating between two finite-size
   heat sources with initial temperature difference. The total output work of such
@@ -29,10 +29,10 @@ abstract: Heat engines used to output useful work have important practical signi
   The corresponding EMW is proved to be $η$MW=2-2.
 summary: ''
 tags:
-- efficiency at maximum power
-- finite-size heat source
-- Finite-time and Finite-size Thermodynamics
-- efficiency at maximum work
+  - efficiency at maximum power
+  - finite-size heat source
+  - Finite-time and Finite-size Thermodynamics
+  - efficiency at maximum work
 featured: false
 url_pdf: ''
 url_code: ''
@@ -48,6 +48,5 @@ image:
   preview_only: false
 projects: []
 ---
-
 
 Add the **full text** or **supplementary notes** for the publication here using Markdown formatting.

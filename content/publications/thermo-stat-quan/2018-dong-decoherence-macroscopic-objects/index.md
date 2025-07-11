@@ -2,7 +2,7 @@
 title: Decoherence of Macroscopic Objects from Relativistic Effect*
 authors:
 - Guo-Hui Dong
-- Yu-Han Ma
+- yhma
 - Jing-Fu Chen
 - Xin Wang
 - Chang-Pu Sun

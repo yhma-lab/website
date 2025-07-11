@@ -2,7 +2,7 @@
 title: Quantum Illumination Assistant with Error-Correcting Codes
 authors:
 - Wen-Zhao Zhang
-- Yu-Han Ma
+- yhma
 - Jing-Fu Chen
 - Chang-Pu Sun
 author_notes: []

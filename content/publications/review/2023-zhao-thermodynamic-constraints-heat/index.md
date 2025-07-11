@@ -1,19 +1,21 @@
 ---
-title: Thermodynamic constraints on heat engine cycles between asymmetrical finite-sized
+title:
+  Thermodynamic constraints on heat engine cycles between asymmetrical finite-sized
   reservoirs
 authors:
-- Zhao Xiuhua
-- T. U. Zhanchun
-- M. A. Yuhan
+  - Xiuhua Zhao
+  - Zhanchun Tu
+  - yhma
 author_notes: []
 date: '2023-12-01'
 publishDate: '2025-07-10T12:11:12.552809Z'
 publication_types:
-- article-journal
+  - article-journal
 publication: '*Journal of Beijing Normal University(Natural Science)*'
 publication_short: ''
 doi: 10.12202/j.0476-0301.2023066
-abstract: $<$p$>$To study thermodynamic constraints associated with finite-sized reservoirs
+abstract:
+  $<$p$>$To study thermodynamic constraints associated with finite-sized reservoirs
   in more general cases, a thermodynamic cycle between two reservoirs with finite
   and non-symmetrical heat capacities is proposed, assuming that heat capacities satisfy
   Debye law $<$inline-formula$>$ Cpropto Ttextasciicircumn $<$img text_id='M9' class='formula-img'
@@ -52,7 +54,7 @@ abstract: $<$p$>$To study thermodynamic constraints associated with finite-sized
   style='display:none;' src='2023066_M19.jpg'$><$alternatives$><$/alternatives$><$/inline-formula$>$．$<$/p$>$
 summary: ''
 tags:
-- review
+  - review
 featured: false
 url_pdf: ''
 url_code: ''
@@ -68,6 +70,5 @@ image:
   preview_only: false
 projects: []
 ---
-
 
 Add the **full text** or **supplementary notes** for the publication here using Markdown formatting.

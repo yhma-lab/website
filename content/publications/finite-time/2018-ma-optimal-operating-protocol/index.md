@@ -1,19 +1,20 @@
 ---
 title: Optimal Operating Protocol to Achieve Efficiency at Maximum Power of Heat Engines
 authors:
-- Yu-Han Ma
-- Dazhi Xu
-- Hui Dong
-- Chang-Pu Sun
+  - yhma
+  - Dazhi Xu
+  - Hui Dong
+  - Chang-Pu Sun
 author_notes: []
 date: '2018-08-01'
 publishDate: '2025-07-10T04:36:35.790317Z'
 publication_types:
-- article-journal
-publication: '*Physical Review E*'
+  - article-journal
+publication: 'Physical Review E'
 publication_short: ''
 doi: 10.1103/PhysRevE.98.022133
-abstract: Efficiency at maximum power has been investigated extensively, yet the practical
+abstract:
+  Efficiency at maximum power has been investigated extensively, yet the practical
   control scheme to achieve it remains elusive. We fill this gap with a stepwise Carnot-like
   cycle, which consists of the discrete isothermal process (DIP) and adiabatic process.
   With DIP, we validate the widely adopted assumption of the $C$/$t$ relation of the
@@ -27,7 +28,7 @@ abstract: Efficiency at maximum power has been investigated extensively, yet the
   control scheme in the previous low-dissipation model or its equivalents.
 summary: ''
 tags:
-- Finite-time and Finite-size Thermodynamics
+  - Finite-time and Finite-size Thermodynamics
 featured: false
 url_pdf: ''
 url_code: ''
@@ -43,6 +44,5 @@ image:
   preview_only: false
 projects: []
 ---
-
 
 Add the **full text** or **supplementary notes** for the publication here using Markdown formatting.

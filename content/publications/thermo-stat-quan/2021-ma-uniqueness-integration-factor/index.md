@@ -2,7 +2,7 @@
 title: The Uniqueness of the Integration Factor Associated with the Exchanged Heat
   in Thermodynamics
 authors:
-- Yu-Han Ma
+- yhma
 - Hui Dong
 - Hai-Tao Quan
 - Chang-Pu Sun

@@ -2,7 +2,7 @@
 title: Directional Quantum Random Walk Induced by Coherence
 authors:
 - Jin-Fu Chen
-- Yu-Han Ma
+- yhma
 - Chang-Pu Sun
 author_notes: []
 date: '2020-04-01'

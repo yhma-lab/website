@@ -2,7 +2,7 @@
 title: Consistency of Optimizing Finite-Time Carnot Engines with the Low-Dissipation
   Model in the Two-Level Atomic Heat Engine
 authors:
-- Yu-Han Ma
+- yhma
 - C. P. Sun
 - Hui Dong
 author_notes: []

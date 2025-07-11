@@ -1,17 +1,18 @@
 ---
 title: Quantum Sensing of Rotation Velocity Based on Transverse Field Ising Model
 authors:
-- Yu-Han Ma
-- Chang-Pu Sun
+  - yhma
+  - Chang-Pu Sun
 author_notes: []
 date: '2017-10-01'
 publishDate: '2025-07-10T13:23:54.630686Z'
 publication_types:
-- article-journal
+  - article-journal
 publication: '*The European Physical Journal D*'
 publication_short: ''
 doi: 10.1140/epjd/e2017-80247-x
-abstract: We study a transverse-field Ising model (TFIM) in a rotational reference
+abstract:
+  We study a transverse-field Ising model (TFIM) in a rotational reference
   frame. We find that the effective Hamiltonian of the TFIM of this system depends
   on the system's rotation velocity. Since the rotation contributes an additional
   transverse field, the dynamics of TFIM sensitively responses to the rotation velocity
@@ -25,14 +26,14 @@ abstract: We study a transverse-field Ising model (TFIM) in a rotational referen
   the number of spins N belonging the TFIM.
 summary: ''
 tags:
-- Quantum Measurement and Metrology
-- Quantum Imaging and Sensing
-- Theoretical Mathematical and Computational Physics
-- Spintronics
-- Quantum Gyroscope, Quantum Walks and Quantum Illumination
-- Quantum Information
-- Quantum Computing
-- Quantum Physics
+  - Quantum Measurement and Metrology
+  - Quantum Imaging and Sensing
+  - Theoretical Mathematical and Computational Physics
+  - Spintronics
+  - Quantum Gyroscope, Quantum Walks and Quantum Illumination
+  - Quantum Information
+  - Quantum Computing
+  - Quantum Physics
 featured: false
 url_pdf: ''
 url_code: ''
@@ -48,6 +49,5 @@ image:
   preview_only: false
 projects: []
 ---
-
 
 Add the **full text** or **supplementary notes** for the publication here using Markdown formatting.

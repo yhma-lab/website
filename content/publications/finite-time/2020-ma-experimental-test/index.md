@@ -3,7 +3,7 @@ title: Experimental Test of the $1/ensuremathtau$-Scaling Entropy Generation in 
   Thermodynamics
 featured: true
 authors:
-- Yu-Han Ma
+- yhma
 - Ruo-Xun Zhai
 - Jinfu Chen
 - C. P. Sun

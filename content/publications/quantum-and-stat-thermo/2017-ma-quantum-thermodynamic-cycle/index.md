@@ -1,7 +1,7 @@
 ---
 title: Quantum Thermodynamic Cycle with Quantum Phase Transition
 authors:
-- Yu-Han Ma
+- yhma
 - Shan-He Su
 - Chang-Pu Sun
 author_notes: []

@@ -41,11 +41,12 @@ pagination:
   pagerSize: 20
   path: page
 
-# taxonomies:
-#   category: categories
-#   tag: tags
-#   projects: project
-#   publication: publications
+taxonomies:
+  projects: projects
+  # authors: author
+  # category: categories
+  # tags: tags
+  # publication: publications
 
 security:
   _merge: 'deep'

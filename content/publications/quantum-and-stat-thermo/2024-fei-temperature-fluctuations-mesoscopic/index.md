@@ -3,7 +3,7 @@ title: Temperature Fluctuations in Mesoscopic Systems
 featured: true
 authors:
 - Zhaoyu Fei
-- Yu-Han Ma
+- yhma
 author_notes: []
 date: '2024-04-01'
 publishDate: '2025-07-10T12:51:19.981498Z'

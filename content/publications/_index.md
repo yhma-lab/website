@@ -1,19 +1,22 @@
 ---
-title: Publications
+title: 'Publications'
+date: 2024-05-19
+type: landing
 
-# View.
-#   1 = List
-#   2 = Compact
-#   3 = Card
-#   4 = Citation
-view: citation
+design:
+  # Section spacing
+  spacing: '5rem'
 
-count: 20
-
-# Optional header image (relative to `static/media/` folder).
-header:
-  caption: ''
-  image: ''
+# Page sections
+sections:
+  - block: collection
+    content:
+      title: Publications
+      text: The full list of our publications
+      # filters:
+      #   folders:
+      #     - publications
+    design:
+      view: citation
+      fill_image: false
 ---
-
-The full list of our publications

@@ -1,7 +1,7 @@
 ---
 title: 'Finite-Time Thermodynamics: A Journey Beginning with Optimizing Heat Engines'
 authors:
-- Yu-Han Ma
+- yhma
 - Xiu-Hua Zhao
 author_notes: []
 date: '2024-11-01'

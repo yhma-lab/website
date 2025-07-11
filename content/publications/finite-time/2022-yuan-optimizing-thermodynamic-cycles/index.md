@@ -2,7 +2,7 @@
 title: Optimizing Thermodynamic Cycles with Two Finite-Sized Reservoirs
 authors:
 - Hong Yuan
-- Yu-Han Ma
+- yhma
 - C. P. Sun
 author_notes: []
 date: '2022-02-01'

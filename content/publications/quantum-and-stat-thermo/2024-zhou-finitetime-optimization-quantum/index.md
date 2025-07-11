@@ -3,7 +3,7 @@ title: Finite-Time Optimization of a Quantum Szilard Heat Engine
 featured: true
 authors:
 - Tan-Ji Zhou
-- Yu-Han Ma
+- yhma
 - C. P. Sun
 author_notes: []
 date: '2024-10-01'

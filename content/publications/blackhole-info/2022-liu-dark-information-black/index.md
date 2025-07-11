@@ -2,7 +2,7 @@
 title: Dark Information in Black Hole with $Łambdaǎrphi$ Fluid
 authors:
 - Yu-Xiao Liu
-- Yu-Han Ma
+- yhma
 - Yong-Qiang Wang
 - Shao-Wen Wei
 - Chang-Pu Sun

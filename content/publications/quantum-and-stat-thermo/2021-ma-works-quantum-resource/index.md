@@ -1,7 +1,7 @@
 ---
 title: Works with Quantum Resource of Coherence
 authors:
-- Yu-Han Ma
+- yhma
 - C. L. Liu
 - C. P. Sun
 author_notes: []

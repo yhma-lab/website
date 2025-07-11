@@ -2,7 +2,7 @@
 title: Maximum Entropy Approach to Reliability
 authors:
 - Yi-Mu Du
-- Yu-Han Ma
+- yhma
 - Yuan-Fa Wei
 - Xuefei Guan
 - C. P. Sun

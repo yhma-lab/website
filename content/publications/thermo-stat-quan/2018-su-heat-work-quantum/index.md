@@ -3,7 +3,7 @@ title: The Heat and Work of Quantum Thermodynamic Processes with Quantum Coheren
 authors:
 - Shanhe Su
 - Jinfu Chen
-- Yuhan Ma
+- yhma
 - Jincan Chen
 - Changpu Sun
 author_notes: []

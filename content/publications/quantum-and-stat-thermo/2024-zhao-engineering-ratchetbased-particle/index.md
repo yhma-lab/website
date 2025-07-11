@@ -4,7 +4,7 @@ featured: true
 authors:
 - Xiu-Hua Zhao
 - Z. C. Tu
-- Yu-Han Ma
+- yhma
 author_notes: []
 date: '2024-09-01'
 publishDate: '2025-07-10T12:51:20.000983Z'
