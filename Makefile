@@ -16,3 +16,7 @@ build: clean
 	hugo --cleanDestinationDir --gc --minify
 
 setup: clean-mod get-mod
+
+
+deploy:
+	pnpm run publish

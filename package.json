@@ -3,8 +3,8 @@
   "version": "2025.07.11",
   "description": "",
   "scripts": {
-    "publish": "source .env && wrangler pages deploy",
-    "debug": "wrangler pages --help",
+    "publish": "wrangler pages deploy --project-name yhma-yyds-group",
+    "debug": "wrangler --help",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
