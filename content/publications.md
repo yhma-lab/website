@@ -16,7 +16,7 @@ sections:
       count: 10
       filters:
         folders:
-          - publications
+          - publication
       # sort_by: 'Date'
     design:
       # view: citation

@@ -16,7 +16,7 @@ sections:
       count: 10
       filters:
         folders:
-          - project
+          - funding
       # sort_by: 'Date'
     design:
       # view: citation

@@ -7,18 +7,21 @@ main:
   - name: Home
     url: '/'
     weight: 10
+  - name: News
+    url: '#news'
+    weight: 60
   - name: People
     url: '/people'
     weight: 20
   - name: Publications
     url: '/publications'
     weight: 30
-  - name: Projects
-    url: '/projects'
+  - name: Fundings
+    url: '/fundings'
     weight: 40
-  # - name: Posts
-  #   url: '#posts'
-  #   weight: 30
+  - name: 'Talks & Events'
+    url: '/talks'
+    weight: 50
   # - name: Contact
   #   url: '/contact'
   #   weight: 60

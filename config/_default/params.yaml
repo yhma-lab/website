@@ -16,7 +16,7 @@ header:
     enable: true
     blox: 'navbar'
     show_logo: true
-    show_language: true
+    show_language: false
     show_theme_chooser: true
     show_search: false
     highlight_active_link: true
@@ -29,7 +29,7 @@ footer:
     notice: '© {year} yhma lab. This site is licensed under {license}'
     license:
       enable: true
-      allow_derivatives: false
+      allow_derivatives: true
       share_alike: true
       allow_commercial: false
 
@@ -51,7 +51,7 @@ features:
   repository:
     url: 'https://github.com/yhma-lab/website'
     content_dir: content
-    branch: master
+    branch: hugo
   avatar:
     gravatar: true
     shape: circle
@@ -68,7 +68,7 @@ extensions:
 
 security:
   # Allow frame for embedding speaker notes in slides
-  allow_frame: true
+  allow_frame: false
   permissions:
     policy: >-
       accelerometer=(), camera=(), geolocation=(), gyroscope=(),

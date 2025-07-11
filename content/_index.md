@@ -17,10 +17,10 @@ sections:
 
         Our team is passionate about exploring new frontiers in Thermodynamics, Non-equilibrium dynamics, Physics Education.
       announcement:
-        text: PRL interview of our latest progress.
+        text: 🎉 Phys.org reports our latest research.
         link:
           text: Read more
-          url: https://example.com
+          url: https://phys.org/news/2025-01-rethinking-carnot-scientists-traditional-power.html
       primary_action:
         text: Publications
         url: /publications/

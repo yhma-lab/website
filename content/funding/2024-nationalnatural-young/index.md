@@ -10,11 +10,11 @@ dateEnd: '2026-12-01'
 # Optional external URL for project (replaces project detail page).
 external_link: ''
 
-links:
-  - icon: twitter
-    icon_pack: fab
-    name: Follow
-    url: https://twitter.com/_lqhuang
+# links:
+#   - icon: twitter
+#     icon_pack: fab
+#     name: Follow
+#     url: https://twitter.com/_lqhuang
 url_code: ''
 url_pdf: ''
 url_slides: ''
