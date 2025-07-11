@@ -1,0 +1,92 @@
+---
+# Display name
+title: 孙昌璞
+
+# Full name (for SEO)
+first_name: 昌璞
+last_name: 孙
+
+# Is this the primary user of the site?
+superuser: true
+
+# Role/position/tagline
+role: 
+  - 院士，中国科学院理论物理研究所
+  - 院长，中国工程物理研究院研究生院
+  - 讲座教授，北京计算科学研究中心
+  - 院士，发展中国家（第三世界）科学院
+
+# Organizations/Affiliations to show in About widget
+organizations:
+  - name: 中国工程物理研究院研究生院
+    url: https://gscaep.ac.cn/
+  - name: 中国科学院理论物理研究所
+    url: http://itp.cas.cn/
+  - name: 北京计算科学研究中心
+    url: https://www.csrc.ac.cn/en/
+
+# Short bio (displayed in user profile at end of posts)
+bio: 物理
+
+# Interests to show in About widget
+interests:
+  - 量子物理
+  - 量子信息
+  - 数学物理
+
+# Education to show in About widget
+education:
+  courses:
+    - course: 理学博士
+      institution: 南开大学
+      year: 1989 ~ 1992
+    - course: 理学硕士
+      institution: 东北师范大学
+      year: 1984 ~ 1987
+    - course: 理学学士
+      institution: 东北师范大学
+      year: 1980 ~ 1984
+
+# Social/Academic Networking
+# For available icons, see: https://wowchemy.com/docs/getting-started/page-builder/#icons
+#   For an email link, use "fas" icon pack, "envelope" icon, and a link in the
+#   form "mailto:your-email@example.com" or "/#contact" for contact widget.
+social:
+  - icon: envelope
+    icon_pack: fas
+    link: '/#contact'
+  # - icon: twitter
+  #   icon_pack: fab
+  #   link: https://twitter.com/GeorgeCushen
+  #   label: Follow me on Twitter
+  #   display:
+  #     header: true
+  - icon: google-scholar
+    icon_pack: ai
+    link: https://scholar.google.com/citations?user=FkPp4D4AAAAJ&hl=en
+  - icon: research group website
+    link: http://suncp.gscaep.ac.cn/
+
+# Link to a PDF of your resume/CV.
+# To use: copy your resume to `static/uploads/resume.pdf`, enable `ai` icons in `params.yaml`,
+# and uncomment the lines below.
+# - icon: cv
+#   icon_pack: ai
+#   link: uploads/resume.pdf
+
+# Enter email to display Gravatar (if Gravatar enabled in Config)
+email: 'suncp@gscaep.ac.cn'
+
+# Highlight the author in author lists? (true/false)
+highlight_name: true
+---
+
+课题组网页：http://suncp.gscaep.ac.cn/
+
+孙昌璞博士，1962年生于辽宁省新金县(今普兰店市)，1984年毕业于东北师范大学本科，1987年于该校获得硕士学位， 1992年于南开数学研究所获博士学位。1990年和1992年先后破格晋升东北师范大学副教授和教授， 1994年兼任吉林大学博士生导师。1996年，调任中国科学院理论物理所研究员。从2012年7月起， 任中国工程物理研究院北京计算科学研究中心教授；从2015年5月起， 任中国工程物理研究院研究生院院长。2009年11月当选为中国科学院院士， 2011年11月被选为发展中国家科学院（原第三世界科学院，TWAS）院士。曾获国家自然科学二等奖、 中国科学院青年科学家一等奖、国家教委科技进步一等奖和中国青年科技奖等奖项，以及全国先进工作者和 吉林省特等劳动模范等荣誉称号，10次被评为中国科学院“优秀研究生指导教师”和“优秀导师”。 
+
+孙昌璞长期从事量子物理、数学物理及量子信息基础理论研究。已发表学术论文300余篇。 其中q-变形玻色子的工作是该领域国际上三个开创性工作之一，获美国ISI“经典引文奖”。 该论文入选美国斯坦福大学图书馆《Papers most cited in mathematical physics articles》。 美国《科学》1995年专刊介绍中国科学发展，提及了这个工作。基于这个研究，他用代数方法构造了杨-Baxter方程新解， 由此发展了基于原子自旋波激发的量子存储方案。他在20世纪80年代末，先后发展了两种量子绝热近似方法的非绝热修正理论。 十多年后，人们从实验角度开始关注和应用相关的理论观念，孙昌璞等也由此提出了类似斯特恩-盖拉赫实验分离手征分子的理论方案。 在20世纪90年代初，孙昌璞建立了量子测量和量子耗散的因子化模型，由此发现，具有内部关联的环境出现量子相变时， 与它耦合的系统的退相干会被显著增强。他于2006年预言的这种量子临界环境的动力学敏感性，在2008年后被德国、加拿大、 意大利和中国的5个实验所检验和证实。孙昌璞还提出了与电荷量子比特耦合进行纳米机械振子致冷的主动机制， 德国冷却LC介观电路的实验原理与此一致。他与日本理化学所合作发现，反演对称性破坏的约瑟夫森多结系统， 会发生自然原子电偶极选择定则所禁戒的跃迁，从而形成循环结构的三能级人工原子。日本和德国联合实验证实了这种人工原子的存在。 他研究了低维纳米结构中单光子的传输和探测，探索了人工光合作用的物理基础，分析了空间结构对光捕获 复合物LH2中细菌叶绿素(BChl)的激发能量转移中的影响。文章被推荐为封面文章发表在JCP上。 
+
+近年他主要研究低维结构中光子传输、生命过程中的量子相干效应和复杂系统的可靠性。 他积极探索国家需求牵引的基础研究模式创新，并在中物院研新型究生院创建中进行实践。 
+
+孙昌璞注重青年人才的培养。他指导的研究生有6人获“中科院优秀博士论文”，2人获全国“百篇优秀博士论文”，1人获2006年中科院院长特别奖和美国Los Alamos国家实验室的Director Fellowship。
