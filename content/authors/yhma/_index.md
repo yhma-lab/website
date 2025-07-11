@@ -10,7 +10,7 @@ last_name: Ma
 email: yhma@bnu.edu.cn
 
 # Role/position/tagline
-role: Assistant Professor
+role: Associate Professor
 
 # Organizations/Affiliations to show in About widget
 organizations:
@@ -36,41 +36,54 @@ interests:
 # Education to show in About widget
 education:
   - area: PhD in Theoretical Physics
-    institution: CSRC, CAEP
-    date_start: 2015-09
-    date_end: 2020-06
-    summary: Thesis on _aaaa_
+    institution: Computational Science Research Center, CAEP
+    date_start: 2015-09-01
+    date_end: 2020-06-01
+    summary: |2-
+      Thesis: _Applications of Finite-System Thermodynamics and Noncanonical Statistics to the Black Hole Information Problem_
+
+      Supervisor: Prof. ChangPu Sun
     button:
       text: 'Read Thesis'
       url: 'https://example.com'
   - area: B.Sc. in Physics
     institution: Beijing Normal University
-    date_start: 2011-09
-    date_end: 2015-06
+    date_start: 2011-09-01
+    date_end: 2015-06-01
+    summary: |2-
+      Thesis: _Quantum Gyroscope Technology and Its Physical Foundations_
+
+      Supervisor: A. Prof. Xiaowen Li
 
 work:
-  - position: Director of Cloud Infrastructure
-    company_name: GenCoin
-    company_url: ''
+  - position: Associate Professor
+    company_name: School of Physics and Astronomy, Beijing Normal University
+    company_url: 'https://english.bnu.edu.cn/'
+    company_logo: org-bnu
+    date_start: 2025-07-01
+    date_end: ''
+  - title: Lecturer
+    company: School of Physics and Astronomy, Beijing Normal University
+    company_url: https://english.bnu.edu.cn/
+    company_logo: org-bnu
+    date_start: 2023-02-01
+    date_end: 2025-06-01
+    description: Taught electronic dynamics and researched semiconductor physics.
+  - position: Post-doctoral Fellow
+    company_name: Computational Science Research Center, China Academy of Engineering Physics
+    company_url: https://gscaep.ac.cn
     company_logo: ''
     date_start: 2021-01-01
-    date_end: ''
-    # summary: |2-
-    #   Responsibilities include:
-    #   - lorem ipsum dolor sit amet, consectetur adipiscing elit
-    #   - lorem ipsum dolor sit amet, consectetur adipiscing elit
-    #   - lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - position: Backend Software Engineer
-    company_name: X
-    company_url: ''
-    company_logo: ''
-    date_start: 2016-01-01
-    date_end: 2020-12-31
-    # summary: |
-    #   Responsibilities include:
-    #   - Migrated infrastructure to a new data center
-    #   - lorem ipsum dolor sit amet, consectetur adipiscing elit
-    #   - lorem ipsum dolor sit amet, consectetur adipiscing elit
+    date_end: 2022-12-01
+    summary: Boqiang Scholar, National Boqiang Program
+  - title: Visiting Scholar
+    company: Computational Science Research Center, China Academy of Engineering Physics
+    company_url: https://gscaep.ac.cn
+    company_logo: org-gc
+    location: 北京
+    date_start: 2020-07-01
+    date_end: 2021-02-01
+    description: 博强计划 "博强学者"
 
 # Social network links
 profiles:
@@ -135,4 +148,6 @@ user_groups:
   - Principal Investigator
 ---
 
-Work in progress...
+My research interests lie in the thermodynamics and nonequilibrium statistical physics of finite systems, including theoretical investigations in quantum thermodynamics and the black hole information problem, as well as both theoretical and experimental studies in finite-time thermodynamics. Since 2015, I have published over 50 journal articles and hold three granted national patents and two publicly disclosed patents. I have authored 29 research papers in international journals such as _Physical Review Letters_, _Physical Review E/A_, _New Journal of Physics_, _Nuclear Physics B_, and _Frontiers of Physics_, including 23 as first or corresponding author. My work has been cited over 700 times, with the most cited paper receiving 92 citations, and my current h-index is 13 (Google Scholar).
+
+In teaching, I focus on developing inquiry-based talent training systems and curriculum design within the context of general physics education and academic competitions. I have published 23 teaching-related papers in Chinese core journals, including _University Physics_, _Physics and Engineering_, _Physics Teacher_, and _Physics Experimentation_.
