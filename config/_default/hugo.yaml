@@ -43,10 +43,7 @@ pagination:
 
 taxonomies:
   projects: projects
-  # authors: author
-  # category: categories
-  # tags: tags
-  # publication: publications
+  authors: authors
 
 security:
   _merge: 'deep'
