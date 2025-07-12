@@ -2,9 +2,9 @@
 title: 一种移动空气净化装置及应用该装置的车轮、汽车
 authors:
   - yhma
-  - 赵芸赫
+  - Yunhe Zhao
   - lqhuang
-  - 吴嘉怡
+  - Jiayi Wu
 # author_notes:
 #   - "Equal contribution"
 #   - "Equal contribution"

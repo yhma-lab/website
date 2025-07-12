@@ -2,7 +2,7 @@
 title: 一种基于理想气体的有限时间热力学实验平台
 authors:
   - yhma
-  - 翟若迅
+  - Ruoxun Zhai
   - jfchen
   - cpsun
   - hdong
