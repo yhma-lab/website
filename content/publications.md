@@ -5,7 +5,7 @@ type: landing
 
 design:
   # Section spacing
-  spacing: '5rem'
+  spacing: '3rem'
 
 # Page sections
 sections:
@@ -13,12 +13,13 @@ sections:
     content:
       title: Publications
       text: The full list of our publications
-      count: 10
+      count: 0
       filters:
         folders:
           - publication
       # sort_by: 'Date'
+      date_format: Jan 2006
     design:
-      # view: list
+      view: citation
       fill_image: false
 ---

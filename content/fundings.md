@@ -13,12 +13,12 @@ sections:
     content:
       title: Fund projects
       # text: The full list of our publications
-      count: 10
+      count: 0
       filters:
         folders:
           - funding
       # sort_by: 'Date'
     design:
-      # view: citation
+      view: card
       fill_image: false
 ---

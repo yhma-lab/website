@@ -10,7 +10,7 @@ design:
 sections:
   - block: resume-biography
     content:
-      username: yhma
+      username: sandy
       # Show a call-to-action button under your biography? (optional)
       # button:
       #   text: Download CV
@@ -28,7 +28,7 @@ sections:
   - block: resume-experience
     content:
       # The user's folder name in `content/authors/`
-      username: yhma
+      username: sandy
     design:
       # Hugo date format
       date_format: 'January 2006'
@@ -38,5 +38,5 @@ sections:
     content:
       title: Awards
       # Note: `username` refers to the user's folder name in `content/authors/`
-      username: yhma
+      username: sandy
 ---

@@ -82,8 +82,7 @@
 {{ $columns := $block.design.columns | default "2" }}
 
 {{ if $block.content.title }}
-<div class="flex flex-col items-center max-w-prose mx-auto gap-3 justify-center px-6 md:px-0">
-
+<div class="flex flex-col items-center max-w-prose mx-auto gap-3 justify-center px-6 mb-8 md:px-0">
   <div class="mb-6 text-3xl font-bold text-gray-900 dark:text-white">
     {{ $block.content.title | emojify | $page.RenderString }}
   </div>
@@ -95,13 +94,14 @@
 <div class="flex flex-col items-center px-6">
 
   {{ $config := dict "columns" ($block.design.columns | default 2) "len" (len $query) "fill_image" ($block.design.fill_image | default true) }}
-  {{ partial "functions/render_view" (dict "fragment" "start" "page" $block "item" . "view" $view "config" $config) }}
+
+  {{/* {{ partial "functions/render_view" (dict "fragment" "start" "page" $block "item" . "view" $view "config" $config) }} */}}
 
   {{ range $index, $item := $query }}
     {{ partial "functions/render_view" (dict "page" $block "item" . "view" $view "index" $index "config" $config) }}
   {{end}}
 
-  {{ partial "functions/render_view" (dict "fragment" "end" "page" $block "item" . "view" $view) }}
+  {{/* {{ partial "functions/render_view" (dict "fragment" "end" "page" $block "item" . "view" $view) }} */}}
 
 </div>
 
