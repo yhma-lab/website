@@ -2,7 +2,7 @@
 title: Construction of an experimental platform for finite-timethermodynamics of ideal gases and recent advances infinite-time thermodynamics 
 title_zh: 理想气体有限时间热力学实验平台的搭建与有限时间热力学的前沿研究
 authors:
-  - 翟若迅
+  - Ruoxun Zhai
   - yhma
   - hdong
   - cpsun
