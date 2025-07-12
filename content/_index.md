@@ -8,7 +8,7 @@ design:
   spacing: '6rem'
 
 sections:
-  - block: community/hero
+  - block: hero
     content:
       title: 'Theoretical Physics Lab' # 📚
       subtitle: ''
@@ -63,7 +63,7 @@ sections:
           parallax: false
   - block: community/people
     content:
-      title: Meet the incredible team 
+      title: Meet the incredible team
       subtitle: check full list of all members in the **[People](/people/)** page
       user_groups:
         - Principal Investigator
@@ -76,7 +76,7 @@ sections:
     design:
       show_role: true
       show_social: true
-      show_interests: true
+      show_interests: false
   # - block: collection
   #   content:
   #     title: Recent Publications

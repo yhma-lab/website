@@ -1,10 +1,10 @@
 ---
 title: Maximum Entropy Approach to Reliability
 authors:
-  - Yi-Mu Du
+  - ymdu
   - yhma
   - Yuan-Fa Wei
-  - Xuefei Guan
+  - xfguan
   - cpsun
 author_notes: []
 date: '2020-01-01'

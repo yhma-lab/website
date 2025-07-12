@@ -11,14 +11,11 @@ authors:
   - Jin-Can Chen # (陈金灿)
   - C. L. Liu
   - Yu-Xiao Liu
-  - Guo-Hui Dong
   - Hong Yuan
   - Qing-Yu Cai
-  - Yi-Mu Du
   - Zhaoyu Fei
   - Yuan-Fa Wei
   - Yong-Qiang Wang
-  - Xuefei Guan
   - Shi-Gang Ou
 
   - 赵芸赫
