@@ -17,6 +17,7 @@ abstract: Designing efficient and fast-charging batteries is an important goal i
 summary: ''
 tags:
 - Finite-time and Finite-size Thermodynamics
+- Florence2025_Stat29
 featured: false
 url_pdf: ''
 url_code: ''
