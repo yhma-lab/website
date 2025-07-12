@@ -12,11 +12,14 @@
 
     {{ if $block.content.announcement.text }}
     {{ $announcement := $block.content.announcement }}
-    <div class="hidden sm:mb-8 sm:flex">
-      <div class="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 dark:text-gray-300 ring-1 ring-gray-900/10 dark:ring-gray-300 hover:ring-gray-900/20 dark:hover:ring-gray-400">
-        {{$announcement.text | markdownify}} {{if $announcement.link.text}}<a href="{{$announcement.link.url}}" class="font-semibold text-primary-600 dark:text-primary-300"><span class="absolute inset-0" aria-hidden="true"></span>{{$announcement.link.text}} <span aria-hidden="true">&rarr;</span></a>{{end}}
+      <div class="lg:flex-row flex-col flex justify-center lg:justify-start gap-1 rounded-full px-2 mb-4 text-sm leading-6 text-gray-600 dark:text-gray-300 lg:ring-1 ring-gray-900/10 dark:ring-gray-300 hover:ring-gray-900/20 dark:hover:ring-gray-400">
+        <span>{{$announcement.text | markdownify}}</span>
+        <a href="{{$announcement.link.url | default '#'}}" class="font-semibold text-primary-600 dark:text-primary-300">
+          <span aria-hidden="true">
+          {{if $announcement.link.text}}{{$announcement.link.text}}{{end}}&rarr;
+          </span>
+        </a>
       </div>
-    </div>
     {{end}}
 
     <div class="">

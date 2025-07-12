@@ -7,7 +7,7 @@
 appearance:
   mode: system
   font: native
-  font_size: L
+  # font_size: L
 
 # Site header
 
@@ -15,6 +15,11 @@ header:
   navbar:
     enable: true
     blox: 'navbar'
+    align: 'right'
+    fixed_to_top: true
+    logo:
+      text: 'yhma Lab'
+      # filename: 'logo.jpg' # cannot circle crop
     show_logo: true
     show_language: false
     show_theme_chooser: true
@@ -26,7 +31,7 @@ header:
 footer:
   widget: minimal
   copyright:
-    notice: '© {year} yhma lab. This site is licensed under {license}'
+    notice: 'yhma Lab © {year}. This site is licensed under {license}. Build with ❤️'
     license:
       enable: true
       allow_derivatives: true
@@ -86,6 +91,6 @@ marketing:
     baidu: ''
     bing: ''
   analytics:
-    # google_analytics: ''
+    google_analytics: 'G-H0VB6P6W7B'
     # microsoft_clarity: 'YOUR_ID'
     # plausible: 'YOUR_ID'

@@ -5,10 +5,10 @@ en:
   # contentDir: content
   title: Research Group of Yuhan Ma
 
-zh:
-  languageCode: zh-Hans
-  contentDir: content/zh
-  title: 马宇翰研究组
+# zh:
+#   languageCode: zh-Hans
+#   contentDir: content/zh
+#   title: 马宇翰研究组
 #  params:
 #    description: Site description in Chinese...
 #  menu:
