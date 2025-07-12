@@ -10,7 +10,7 @@ authors:
 author_notes: []
 date: '2020-11-01'
 publication_types:
-- article-journal
+  - article-journal
 publication: 'Physical Review Letters'
 publication_short: ''
 doi: 10.1103/PhysRevLett.125.210601
@@ -18,7 +18,6 @@ abstract: The finite-time dynamics, apart from its fundamental importance in non
 summary: ''
 tags:
   - Finite-time and Finite-size Thermodynamics
-featured: false
 url_pdf: ''
 url_code: ''
 url_dataset: ''
@@ -33,4 +32,3 @@ image:
   preview_only: false
 projects: []
 ---
-

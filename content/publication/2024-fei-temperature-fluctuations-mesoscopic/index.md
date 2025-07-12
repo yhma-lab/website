@@ -1,9 +1,9 @@
 ---
-title: "Temperature Fluctuations in Mesoscopic Systems"
+title: 'Temperature Fluctuations in Mesoscopic Systems'
 featured: true
 authors:
-- Zhaoyu Fei
-- yhma
+  - Zhaoyu Fei
+  - yhma
 author_notes: []
 date: '2024-04-01'
 publication_types:
@@ -15,8 +15,7 @@ abstract: Temperature is a fundamental concept in thermodynamics. In macroscopic
 
 summary: ''
 tags:
-- Quantum Thermodynamics and Stochastic Thermodynamics
-featured: false
+  - Quantum Thermodynamics and Stochastic Thermodynamics
 url_pdf: ''
 url_code: ''
 url_dataset: ''
@@ -31,4 +30,3 @@ image:
   preview_only: false
 projects: []
 ---
-

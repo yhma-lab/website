@@ -3,7 +3,7 @@ title: 'Low-Cost Demonstration of the Zeeman Effect: From Qualitative Observatio
 featured: true
 # Authors
 # A YAML list of author names
-# If you created a profile for a user (e.g. the default `admin` user at `content/authors/admin/`), 
+# If you created a profile for a user (e.g. the default `admin` user at `content/authors/admin/`),
 # write the username (folder name) here, and it will be replaced with their full name and linked to their profile.
 authors:
   - shqin
@@ -38,9 +38,6 @@ tags:
   - Physics - Physics Education
   - Quantum Physics
 
-# Display this page in a list of Featured pages?
-featured: false
-
 # Links
 url_pdf: ''
 url_code: ''
@@ -52,9 +49,9 @@ url_source: ''
 url_video: ''
 
 # Custom links (uncomment lines below)
-# links:
-# - name: Custom Link
-#   url: http://example.org
+links:
+  - name: arXiv
+    url: https://arxiv.org/abs/2408.15142
 
 # Publication image
 # Add an image named `featured.jpg/png` to your page's folder then add a caption below.
@@ -69,7 +66,4 @@ image:
 #   E.g. `projects: ['internal-project']` links to `content/project/internal-project/index.md`.
 #   Otherwise, set `projects: []`.
 projects: []
-links:
-- name: arXiv
-  url: https://arxiv.org/abs/2408.15142
 ---
