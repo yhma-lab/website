@@ -6,7 +6,7 @@ last_name: Tu
 
 role: Professor
 user_groups:
-  - Collaborators
+  # - Collaborators
 
 # Organizations/Affiliations to show in About widget
 organizations:

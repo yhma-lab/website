@@ -9,6 +9,7 @@ design:
 
 sections:
   - block: hero
+    id: news
     content:
       title: 'Theoretical Physics Lab' # 📚
       subtitle: ''
@@ -30,17 +31,18 @@ sections:
       #   url: https://example.com
     design:
       no_padding: true
-  # - block: collection
-  #   id: papers
-  #   content:
-  #     title: Featured Publications
-  #     filters:
-  #       folders:
-  #         - publication
-  #       featured_only: true
-  #   design:
-  #     view: article-grid
-  #     columns: 2
+  - block: collection
+    id: papers
+    content:
+      title: Featured Publications
+      count: 0
+      filters:
+        folders:
+          - publication
+        featured_only: true
+    design:
+      view: citation
+      columns: 1
   - block: resume-biography-3
     content:
       username: yhma

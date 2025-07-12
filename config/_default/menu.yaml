@@ -8,7 +8,7 @@ main:
     url: '/'
     weight: 10
   - name: News
-    url: '#news'
+    url: '/#news'
     weight: 60
   - name: People
     url: '/people'

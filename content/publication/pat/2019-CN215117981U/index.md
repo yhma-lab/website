@@ -17,7 +17,8 @@ doi: ''
 # 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;
 # 3 = Preprint / Working Paper; 4 = Report; 5 = Book; 6 = Book section;
 # 7 = Thesis; 8 = Patent
-publication_types: ['8']
+publication_types:
+  - patent
 
 # Publication name and optional abbreviated publication name.
 publication: 'Patent CN215117981U'
@@ -35,7 +36,7 @@ featured: false
 # links:
 # - name: ""
 #   url: ""
-url_pdf: http://arxiv.org/pdf/1512.04133v1
+url_pdf: ''
 url_code: ''
 url_dataset: ''
 url_poster: ''
@@ -65,4 +66,3 @@ projects: []
 #   Otherwise, set `slides: ""`.
 slides: ''
 ---
-

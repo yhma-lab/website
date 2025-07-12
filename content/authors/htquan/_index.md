@@ -7,7 +7,7 @@ last_name: Quan
 
 role: Professor
 user_groups:
-  - Collaborators
+  # - Collaborators
 
 # Organizations/Affiliations to show in About widget
 organizations:

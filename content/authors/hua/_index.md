@@ -7,5 +7,5 @@ last_name: Zhao
 
 role: PhD Student
 user_groups:
-  - Collaborators
+  # - Collaborators
 ---

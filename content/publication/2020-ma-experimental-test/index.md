@@ -1,5 +1,5 @@
 ---
-title: Experimental Test of the $1/ensuremathtau$-Scaling Entropy Generation in Finite-Time Thermodynamics
+title: Experimental Test of the $1/\tau$-Scaling Entropy Generation in Finite-Time Thermodynamics
 featured: true
 authors:
   - yhma

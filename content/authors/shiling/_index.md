@@ -2,9 +2,10 @@
 title: Shiling Liang # 梁师翎
 first_name: Shiling
 last_name: Liang
+
 role: ELBE Postdoc Fellow
 user_groups:
-  - Collaborators
+  # - Collaborators
 
 # Organizations/Affiliations to show in About widget
 organizations:

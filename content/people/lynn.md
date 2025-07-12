@@ -34,9 +34,21 @@ sections:
       date_format: 'January 2006'
       # Education or Experience section first?
       is_education_first: false
-  - block: resume-awards
+  - block: collection
     content:
-      title: Awards
-      # Note: `username` refers to the user's folder name in `content/authors/`
-      username: lynn
+      title: Publications
+      count: 0
+      filters:
+        folders:
+          - publication
+        author: lynn
+    design:
+      # Choose a listing view
+      view: citation
+
+  # - block: resume-awards
+  #   content:
+  #     title: Awards
+  #     # Note: `username` refers to the user's folder name in `content/authors/`
+  #     username: lynn
 ---

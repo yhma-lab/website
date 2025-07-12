@@ -5,7 +5,7 @@ last_name: Chen
 
 role: Post-doctor of Physics
 user_groups:
-  - Collaborators
+  # - Collaborators
 
 # Organizations/Affiliations to show in About widget
 organizations:

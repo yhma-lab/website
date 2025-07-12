@@ -20,7 +20,7 @@ tags:
 url_pdf: ''
 url_code: ''
 url_dataset: ''
-url_poster: ''
+url_poster: 'publication/2024-zhao-engineering-ratchet-based-particle/Poster-STA29-yhma-particle-seperation.pdf'
 url_project: ''
 url_slides: ''
 url_source: ''
