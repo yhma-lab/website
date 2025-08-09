@@ -1,5 +1,5 @@
 ---
-title: Yunqian Lynn Lin # (林蕴芊)
+title: Yunqian Lin # (林蕴芊)
 
 first_name: Yunqian
 last_name: Lin
