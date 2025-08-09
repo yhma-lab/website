@@ -1,5 +1,5 @@
 ---
-title: Miao Sandy Chen # (陈苗)
+title: Miaom Chen # (陈苗)
 first_name: Miao
 last_name: Chen
 
