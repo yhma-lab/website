@@ -1,5 +1,5 @@
 ---
-title: Dark Information in Black Hole with $Łambdaǎrphi$ Fluid
+title: Dark Information in Black Hole with $\lambda\varphi$ Fluid
 authors:
   - Yu-Xiao Liu
   - yhma
@@ -13,7 +13,8 @@ publication_types:
 publication: 'Symmetry'
 publication_short: ''
 doi: 10.3390/sym14010118
-abstract: It has been shown that the nonthermal spectrum of Hawking radiation willlead to information-carrying correlations between emitted particles in the radiation. The mutual information carried by such correlations can not be locally observed and hence is dark. With dark information, the black hole information is conserved. In this paper, we look for the spherically symmetric black hole solution in a $łambdaǎrphi$ fluid model and investigate the radiation spectrum and dark information of the black hole. The spacetime structure of this black hole is similar to that of the Schwarzschild one, while its horizon radius is decreased by the $łambdařphi$ fluid. By using the statistical mechanical method, the nonthermal radiation spectrum is calculated. This radiation spectrum is very different from the Schwarzschild case at its last stage because of the effect of the $łambdavp̌hi$ fluid. The $łambdavaȟi$ fluid reduces the lifetime of the black hole, but increases the dark information of the Hawking radiation.
+abstract: >
+  It has been shown that the nonthermal spectrum of Hawking radiation willlead to information-carrying correlations between emitted particles in the radiation. The mutual information carried by such correlations can not be locally observed and hence is dark. With dark information, the black hole information is conserved. In this paper, we look for the spherically symmetric black hole solution in a $\lambda\varphi$ fluid model and investigate the radiation spectrum and dark information of the black hole. The spacetime structure of this black hole is similar to that of the Schwarzschild one, while its horizon radius is decreased by the $\lambda\varphi$ fluid. By using the statistical mechanical method, the nonthermal radiation spectrum is calculated. This radiation spectrum is very different from the Schwarzschild case at its last stage because of the effect of the $\lambda\varphi$ fluid. The $\lambda\varphi$ fluid reduces the lifetime of the black hole, but increases the dark information of the Hawking radiation.
 summary: ''
 tags:
   - black hole
@@ -34,4 +35,3 @@ image:
   preview_only: false
 projects: []
 ---
-
