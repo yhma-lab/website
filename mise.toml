@@ -1,0 +1,5 @@
+[tools]
+hk = "latest"
+jactionlint = "latest"
+node = "26.11.1"
+rclone = { version = "latest", lazy = true }
