@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "TSConfig for React Library with JSX",
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    /**
+     * Modules
+     */
+    /**
+     * Type Checking
+     */
+    // "exactOptionalPropertyTypes": true,
+    /**
+     * Modules
+     */
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    /**
+     * Language and Environment
+     */
+    "jsx": "react-jsx",
+    "lib": ["ESNext", "ESNext.Temporal", "DOM"]
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "storybook-static", ".references"]
+}

@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Base TSConfig",
+  "compilerOptions": {
+    // currently align with TypeScript 7.0
+    // see https://www.typescriptlang.org/tsconfig/#compilerOptions
+
+    /**
+     * Type Checking
+     */
+    "allowUnusedLabels": false,
+    "exactOptionalPropertyTypes": true, // May too strict for other external libraries
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "strict": true,
+
+    /**
+     * Modules
+     */
+    "allowArbitraryExtensions": false, // only enable in sub configs while using bundler (e.g. react.json/next.json)
+    "allowImportingTsExtensions": true,
+    "allowUmdGlobalAccess": false,
+    // "baseUrl": ".",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    // "noUncheckedSideEffectImports": true, // `true` by default
+    "resolveJsonModule": true,
+    "resolvePackageJsonExports": true,
+    "resolvePackageJsonImports": true,
+    "rewriteRelativeImportExtensions": true,
+    // "rootDir": "./src/",
+    // "types": ["node", "jest", "express"],
+
+    /**
+     * Emit
+     */
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "inlineSourceMap": false,
+    "inlineSources": false,
+    "noEmit": false,
+    // "outDir": "dist/",
+    "preserveConstEnums": true,
+    "removeComments": true,
+    "sourceMap": false,
+    "stripInternal": true,
+
+    /**
+     * JavaScript Support
+     */
+    "allowJs": false,
+    "checkJs": false,
+
+    /**
+     * Editor Support
+     */
+    // "disableSizeLimit": false,
+
+    /**
+     * Interop Constraints
+     */
+    // "allowSyntheticDefaultImports": false, // deprecated since TS 7.0
+    "erasableSyntaxOnly": true,
+    // "esModuleInterop": false, // deprecated since TS 7.0
+    // "forceConsistentCasingInFileNames": true, true by default
+    // "isolatedDeclarations": true,
+    "isolatedModules": true, // also implied by `verbatimModuleSyntax`
+    "verbatimModuleSyntax": true,
+
+    /**
+     * Backwards Compatibility
+     */
+
+    /**
+     * Language and Environment
+     */
+    // "emitDecoratorMetadata": false,
+    // "experimentalDecorators": false,
+    // "jsx": "preserve", // should be customized in sub configs
+    "lib": ["ESNext"], // base config could be as modern as possible, sub configs need to override it
+    "moduleDetection": "force",
+    // "target": "esnext", // `esnext` if "module" is `nodenext`. the "module" setting will decide the target here, so we don't need to set it.
+    "useDefineForClassFields": true,
+
+    /**
+     * Compiler Diagnostics
+     */
+    // "explainFiles": true,
+    // "extendedDiagnostics": true,
+    // "listEmittedFiles": true,
+    // "listFiles": true,
+
+    /**
+     * Projects
+     */
+    "composite": true,
+    // "disableReferencedProjectLoad": false, // only true when monorepo is too large
+    // "disableSolutionSearching": false, // only true when monorepo is too large
+    // "incremental": true, // true by default when "composite" is true
+
+    /**
+     * Output Formatting
+     */
+    "noErrorTruncation": true,
+
+    /**
+     * Completeness
+     */
+    // "skipDefaultLibCheck": true,
+    "skipLibCheck": true
+
+    /**
+     * Watch Options
+     */
+  },
+  "exclude": ["node_modules/", "dist/", "dist-*/"]
+}

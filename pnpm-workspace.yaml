@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://www.schemastore.org/pnpm-workspace.json
+
+autoDedupe: true
+
+allowBuilds:
+  "@astryxdesign/cli": true
+  "@astryxdesign/core": true
+  "@swc/core": true
+  esbuild: true
+  msw: false
+  protobufjs: false
+  workerd: false
+
+overrides:
+  "es-set-tostringtag": "npm:@nolyfill/es-set-tostringtag@^1"
+  "hasown": "npm:@nolyfill/hasown@^1"
+  "safe-buffer": "npm:@nolyfill/safe-buffer@^1"
+  "side-channel": "npm:@nolyfill/side-channel@^1"

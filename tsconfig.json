@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "files": [],
+  "exclude": ["node_modules", ".references"],
+  "references": [
+    { "path": "./tsconfig.src.json" },
+    { "path": "./tsconfig.toolchain.json" }
+  ]
+}
