@@ -28,8 +28,8 @@ export default defineConfig({
 
 ```ts
 export default defineConfig({
-  build: { sourcemap: false },  // Inherited by all environments
-  optimizeDeps: { include: ['lib'] },  // Client only
+  build: { sourcemap: false }, // Inherited by all environments
+  optimizeDeps: { include: ['lib'] }, // Client only
   environments: {
     // SSR environment
     server: {},
@@ -82,7 +82,9 @@ Environments run modules through a runner. Two dev environment shapes exist:
 
 ```ts
 if (isRunnableDevEnvironment(server.environments.ssr)) {
-  const mod = await server.environments.ssr.runner.import('/src/entry-server.ts')
+  const mod = await server.environments.ssr.runner.import(
+    '/src/entry-server.ts',
+  )
 }
 ```
 
@@ -95,8 +97,8 @@ if (isRunnableDevEnvironment(server.environments.ssr)) {
 ```js [build.js]
 import { createBuilder } from 'vite'
 
-const builder = await createBuilder()      // build-time equivalent of createServer
-await builder.buildApp()                    // build every configured environment
+const builder = await createBuilder() // build-time equivalent of createServer
+await builder.buildApp() // build every configured environment
 // await builder.build(builder.environments.ssr) // or one at a time
 ```
 

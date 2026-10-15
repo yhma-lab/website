@@ -1,6 +1,6 @@
-import { resolveInternal } from './links.ts'
-
 import type { ReactNode } from 'react'
+
+import { resolveInternal } from './links.ts'
 
 /**
  * Inline markdown for the short authored fields.
@@ -12,7 +12,9 @@ import type { ReactNode } from 'react'
  * inside a server component.
  */
 export function renderInlineMarkdown(text: string, prefix: string): ReactNode {
-  const parts = text.split(/(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\)|`[^`]+`|_[^_]+_)/g).filter(Boolean)
+  const parts = text
+    .split(/(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\)|`[^`]+`|_[^_]+_)/g)
+    .filter(Boolean)
 
   return (
     <>

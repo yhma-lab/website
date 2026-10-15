@@ -9,14 +9,16 @@
 **ONLY** use the alt text argument when the text is different than the primary value and is not already present in the DOM. I.e. this is wrong:
 
 HTML:
+
 ```html
 <button class="save">Save</button>
 ```
 
 CSS:
+
 ```css
 button.save::before {
-  content: url(cloud.svg) / "Save";
+  content: url(cloud.svg) / 'Save';
 }
 ```
 

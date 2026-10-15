@@ -1,14 +1,13 @@
-import * as stylex from '@stylexjs/stylex'
+import type { PageSection } from '@/lib/content-schemas.ts'
+import type { FundingPage, PublicationPage } from '@/lib/source.ts'
 import type { ReactNode } from 'react'
 
-import { BlockHeading } from '@/components/block.tsx'
 import { styles as blockStyles } from '@/components/block.stylex.ts'
+import { BlockHeading } from '@/components/block.tsx'
 import { FundingCard } from '@/components/cards.tsx'
 import { CitationItem } from '@/components/citation.tsx'
 import { sortedFundings, sortedPublications } from '@/lib/sort.ts'
-
-import type { PageSection } from '@/lib/content-schemas.ts'
-import type { FundingPage, PublicationPage } from '@/lib/source.ts'
+import * as stylex from '@stylexjs/stylex'
 
 const styles = stylex.create({
   columns: {
@@ -41,11 +40,19 @@ export interface CollectionProps {
  * which is all the landing pages use; `tag`/`category`/`author` filters were
  * never authored here, so they are intentionally not implemented.
  */
-export function Collection({ featuredOnly, heading, limit, section, subtitle, text, type }: CollectionProps) {
+export function Collection({
+  featuredOnly,
+  heading,
+  limit,
+  section,
+  subtitle,
+  text,
+  type,
+}: CollectionProps) {
   const columns = section.design.columns
 
   const publicationItems = featuredOnly
-    ? sortedPublications().filter((page) => page.data.featured)
+    ? sortedPublications().filter(page => page.data.featured)
     : sortedPublications()
   const fundingItems = sortedFundings()
 
@@ -55,12 +62,18 @@ export function Collection({ featuredOnly, heading, limit, section, subtitle, te
       {text ? <div {...stylex.props(styles.intro)}>{text}</div> : null}
       <div {...stylex.props(blockStyles.centered)}>
         <div
-          style={{ gridTemplateColumns: `repeat(${String(columns)}, minmax(0, 1fr))` }}
+          style={{
+            gridTemplateColumns: `repeat(${String(columns)}, minmax(0, 1fr))`,
+          }}
           {...stylex.props(styles.columns)}
         >
           {type === 'funding'
-            ? take(fundingItems, limit).map((page) => <FundingCard key={page.url} page={page} />)
-            : take(publicationItems, limit).map((page) => <CitationItem key={page.url} page={page} />)}
+            ? take(fundingItems, limit).map(page => (
+                <FundingCard key={page.url} page={page} />
+              ))
+            : take(publicationItems, limit).map(page => (
+                <CitationItem key={page.url} page={page} />
+              ))}
         </div>
       </div>
     </>

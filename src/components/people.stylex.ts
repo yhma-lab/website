@@ -1,6 +1,12 @@
 import * as stylex from '@stylexjs/stylex'
 
-import { SPACE, TEXT, gray, primary, secondary } from '../styles/tokens.stylex.ts'
+import {
+  gray,
+  primary,
+  secondary,
+  SPACE,
+  TEXT,
+} from '../styles/tokens.stylex.ts'
 
 /**
  * Ancestor selector for the dark colour scheme.
@@ -11,7 +17,6 @@ import { SPACE, TEXT, gray, primary, secondary } from '../styles/tokens.stylex.t
  * stub and fail condition validation.
  */
 const DARK = '[data-theme="dark"]'
-
 
 /** Ports `layouts/partials/blox/community/people.html`. */
 export const styles = stylex.create({

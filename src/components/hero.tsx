@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
 
-import { Icon } from './icon.tsx'
 import { styles } from './hero.stylex.ts'
+import { Icon } from './icon.tsx'
 
 export interface HeroAction {
   icon?: string | undefined
@@ -14,7 +14,9 @@ export interface HeroProps {
   noPadding?: boolean
   title: string
   text: string
-  announcement?: { link?: { text: string; url: string } | undefined; text: string } | undefined
+  announcement?:
+    | { link?: { text: string; url: string } | undefined; text: string }
+    | undefined
   primaryAction?: HeroAction | undefined
   secondaryAction?: HeroAction | undefined
   /** Renders an internal action URL through the locale prefix. */
@@ -43,8 +45,13 @@ export function Hero({
         {announcement ? (
           <div {...stylex.props(styles.announcement)}>
             <span>{announcement.text}</span>
-            <a href={announcement.link ? resolve(announcement.link.url) : '#'} {...stylex.props(styles.announcementLink)}>
-              <span aria-hidden="true">{announcement.link?.text ?? ''}&rarr;</span>
+            <a
+              href={announcement.link ? resolve(announcement.link.url) : '#'}
+              {...stylex.props(styles.announcementLink)}
+            >
+              <span aria-hidden="true">
+                {announcement.link?.text ?? ''}&rarr;
+              </span>
             </a>
           </div>
         ) : null}
@@ -55,8 +62,8 @@ export function Hero({
           <div {...stylex.props(styles.subtitle)}>
             {text
               .split(/\n{2,}/)
-              .filter((paragraph) => paragraph.trim().length > 0)
-              .map((paragraph) => (
+              .filter(paragraph => paragraph.trim().length > 0)
+              .map(paragraph => (
                 <p key={paragraph}>{paragraph.trim()}</p>
               ))}
           </div>
@@ -65,7 +72,10 @@ export function Hero({
         {primaryAction || secondaryAction ? (
           <div {...stylex.props(styles.actionRow)}>
             {primaryAction ? (
-              <a href={resolve(primaryAction.url)} {...stylex.props(styles.action, styles.primaryAction)}>
+              <a
+                href={resolve(primaryAction.url)}
+                {...stylex.props(styles.action, styles.primaryAction)}
+              >
                 {primaryAction.text}
                 {primaryAction.icon ? (
                   <span {...stylex.props(styles.actionIcon)}>
@@ -75,7 +85,10 @@ export function Hero({
               </a>
             ) : null}
             {secondaryAction ? (
-              <a href={resolve(secondaryAction.url)} {...stylex.props(styles.secondaryAction)}>
+              <a
+                href={resolve(secondaryAction.url)}
+                {...stylex.props(styles.secondaryAction)}
+              >
                 {secondaryAction.text} <span aria-hidden="true">→</span>
               </a>
             ) : null}

@@ -1,7 +1,8 @@
+import type { ContentFamily } from '../content-schemas.ts'
+
 import { describe, expect, it } from 'vitest'
 
-import { schemaFor, type ContentFamily } from '../content-schemas.ts'
-
+import { schemaFor } from '../content-schemas.ts'
 import { authorSlugs, collectionEntries } from './content-fixtures.ts'
 
 /**
@@ -23,7 +24,9 @@ import { authorSlugs, collectionEntries } from './content-fixtures.ts'
 function validate(family: ContentFamily, data: unknown): string[] {
   const parsed = schemaFor(family).safeParse(data)
   if (parsed.success) return []
-  return parsed.error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`)
+  return parsed.error.issues.map(
+    issue => `${issue.path.join('.')}: ${issue.message}`,
+  )
 }
 
 describe('content model', () => {
@@ -31,14 +34,24 @@ describe('content model', () => {
 
   it('finds every migrated collection entry', () => {
     expect(entries.length).toBeGreaterThan(0)
-    for (const family of ['authors', 'events', 'fundings', 'pages', 'publications']) {
-      expect(entries.filter((entry) => entry.family === family).length, family).toBeGreaterThan(0)
+    for (const family of [
+      'authors',
+      'events',
+      'fundings',
+      'pages',
+      'publications',
+    ]) {
+      expect(
+        entries.filter(entry => entry.family === family).length,
+        family,
+      ).toBeGreaterThan(0)
     }
   })
 
-  it.each(collectionEntries())('$file satisfies its schema', (entry) => {
+  it.each(collectionEntries())('$file satisfies its schema', entry => {
     const issues = validate(entry.family as ContentFamily, entry.data)
-    if (issues.length > 0) throw new Error(`${entry.file}: ${issues.join('; ')}`)
+    if (issues.length > 0)
+      throw new Error(`${entry.file}: ${issues.join('; ')}`)
   })
 })
 
@@ -50,11 +63,12 @@ describe('author references', () => {
     for (const entry of collectionEntries()) {
       const authors = entry.data['authors']
       if (Array.isArray(authors)) {
-        for (const author of authors) if (typeof author === 'string') referenced.add(author)
+        for (const author of authors)
+          if (typeof author === 'string') referenced.add(author)
       }
     }
 
-    const local = [...referenced].filter((author) => known.has(author))
+    const local = [...referenced].filter(author => known.has(author))
     expect(local.length).toBeGreaterThan(0)
     // External collaborators intentionally have no profile directory; every
     // reference that *does* have one must use the exact directory name.

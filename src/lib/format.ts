@@ -30,7 +30,10 @@ export function formatDate(value: string | undefined): string {
 export function formatMonthYear(value: string | undefined): string {
   const date = toDate(value)
   if (!date) return ''
-  return new Intl.DateTimeFormat(LOCALE, { month: 'long', year: 'numeric' }).format(date)
+  return new Intl.DateTimeFormat(LOCALE, {
+    month: 'long',
+    year: 'numeric',
+  }).format(date)
 }
 
 /** `2006` -- the year used inside a citation. */
@@ -43,7 +46,11 @@ export function formatYear(value: string | undefined): string {
 export function formatLongDate(value: string | undefined): string {
   const date = toDate(value)
   if (!date) return ''
-  return new Intl.DateTimeFormat(LOCALE, { day: 'numeric', month: 'long', year: 'numeric' }).format(date)
+  return new Intl.DateTimeFormat(LOCALE, {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  }).format(date)
 }
 
 export function isFuture(value: string | undefined, now = new Date()): boolean {
@@ -73,7 +80,11 @@ export type ShareTarget = keyof typeof SHARE_TEMPLATES
 /** Enabled share targets, matching the entries that were active in `data/page_sharer.yaml`. */
 export const SHARE_TARGETS: readonly ShareTarget[] = ['email', 'x', 'linkedin']
 
-export function shareHref(target: ShareTarget, url: string, title: string): string {
+export function shareHref(
+  target: ShareTarget,
+  url: string,
+  title: string,
+): string {
   return SHARE_TEMPLATES[target]
     .replaceAll('{title}', encodeURIComponent(title))
     .replaceAll('{url}', encodeURIComponent(url))

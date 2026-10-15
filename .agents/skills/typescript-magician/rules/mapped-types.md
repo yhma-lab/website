@@ -15,8 +15,8 @@ Mapped types allow you to create new types by transforming each property of an e
 
 ```typescript
 type MappedType<T> = {
-  [K in keyof T]: TransformedType;
-};
+  [K in keyof T]: TransformedType
+}
 ```
 
 ## Simple Examples
@@ -25,16 +25,16 @@ type MappedType<T> = {
 
 ```typescript
 type MyPartial<T> = {
-  [K in keyof T]?: T[K];
-};
-
-interface User {
-  id: string;
-  name: string;
-  email: string;
+  [K in keyof T]?: T[K]
 }
 
-type PartialUser = MyPartial<User>;
+interface User {
+  id: string
+  name: string
+  email: string
+}
+
+type PartialUser = MyPartial<User>
 // { id?: string; name?: string; email?: string }
 ```
 
@@ -42,24 +42,24 @@ type PartialUser = MyPartial<User>;
 
 ```typescript
 type MyRequired<T> = {
-  [K in keyof T]-?: T[K]; // -? removes optional modifier
-};
+  [K in keyof T]-?: T[K] // -? removes optional modifier
+}
 ```
 
 ### Make All Properties Readonly
 
 ```typescript
 type MyReadonly<T> = {
-  readonly [K in keyof T]: T[K];
-};
+  readonly [K in keyof T]: T[K]
+}
 ```
 
 ### Make All Properties Mutable
 
 ```typescript
 type Mutable<T> = {
-  -readonly [K in keyof T]: T[K]; // -readonly removes readonly modifier
-};
+  -readonly [K in keyof T]: T[K] // -readonly removes readonly modifier
+}
 ```
 
 ## Preserving Original Keys
@@ -68,8 +68,8 @@ When you just iterate over `keyof T`, you preserve the original keys:
 
 ```typescript
 type Preserve<T> = {
-  [K in keyof T]: T[K]; // Same type, just recreated
-};
+  [K in keyof T]: T[K] // Same type, just recreated
+}
 ```
 
 ## Key Remapping with `as`
@@ -78,23 +78,23 @@ Transform keys while mapping using the `as` clause:
 
 ```typescript
 type RemapKeys<T> = {
-  [K in keyof T as NewKeyType]: T[K];
-};
+  [K in keyof T as NewKeyType]: T[K]
+}
 ```
 
 ### Add Prefix to Keys
 
 ```typescript
 type Prefixed<T, P extends string> = {
-  [K in keyof T as K extends string ? `${P}${K}` : K]: T[K];
-};
-
-interface User {
-  name: string;
-  age: number;
+  [K in keyof T as K extends string ? `${P}${K}` : K]: T[K]
 }
 
-type PrefixedUser = Prefixed<User, "user_">;
+interface User {
+  name: string
+  age: number
+}
+
+type PrefixedUser = Prefixed<User, 'user_'>
 // { user_name: string; user_age: number }
 ```
 
@@ -102,10 +102,10 @@ type PrefixedUser = Prefixed<User, "user_">;
 
 ```typescript
 type RemoveFields<T, K extends keyof T> = {
-  [P in keyof T as P extends K ? never : P]: T[P];
-};
+  [P in keyof T as P extends K ? never : P]: T[P]
+}
 
-type UserWithoutEmail = RemoveFields<User, "email">;
+type UserWithoutEmail = RemoveFields<User, 'email'>
 // { id: string; name: string }
 ```
 
@@ -113,17 +113,17 @@ type UserWithoutEmail = RemoveFields<User, "email">;
 
 ```typescript
 type RemoveMapsPrefixFromObj<T> = {
-  [K in keyof T as RemoveMaps<K>]: T[K];
-};
-
-type RemoveMaps<T> = T extends `maps:${infer Rest}` ? Rest : T;
-
-interface ApiData {
-  "maps:longitude": string;
-  "maps:latitude": string;
+  [K in keyof T as RemoveMaps<K>]: T[K]
 }
 
-type CleanData = RemoveMapsPrefixFromObj<ApiData>;
+type RemoveMaps<T> = T extends `maps:${infer Rest}` ? Rest : T
+
+interface ApiData {
+  'maps:longitude': string
+  'maps:latitude': string
+}
+
+type CleanData = RemoveMapsPrefixFromObj<ApiData>
 // { longitude: string; latitude: string }
 ```
 
@@ -134,17 +134,17 @@ Use conditional types in the `as` clause to filter:
 ```typescript
 // Only keep string properties
 type OnlyStrings<T> = {
-  [K in keyof T as T[K] extends string ? K : never]: T[K];
-};
-
-interface Mixed {
-  name: string;
-  age: number;
-  email: string;
-  active: boolean;
+  [K in keyof T as T[K] extends string ? K : never]: T[K]
 }
 
-type StringProps = OnlyStrings<Mixed>;
+interface Mixed {
+  name: string
+  age: number
+  email: string
+  active: boolean
+}
+
+type StringProps = OnlyStrings<Mixed>
 // { name: string; email: string }
 ```
 
@@ -152,20 +152,20 @@ type StringProps = OnlyStrings<Mixed>;
 
 ```typescript
 type RequiredKeys<T> = {
-  [K in keyof T]-?: undefined extends T[K] ? never : K;
-}[keyof T];
+  [K in keyof T]-?: undefined extends T[K] ? never : K
+}[keyof T]
 
-type OnlyRequired<T> = Pick<T, RequiredKeys<T>>;
+type OnlyRequired<T> = Pick<T, RequiredKeys<T>>
 ```
 
 ### Keep Only Optional Properties
 
 ```typescript
 type OptionalKeys<T> = {
-  [K in keyof T]-?: undefined extends T[K] ? K : never;
-}[keyof T];
+  [K in keyof T]-?: undefined extends T[K] ? K : never
+}[keyof T]
 
-type OnlyOptional<T> = Pick<T, OptionalKeys<T>>;
+type OnlyOptional<T> = Pick<T, OptionalKeys<T>>
 ```
 
 ## Transforming Property Types
@@ -174,15 +174,15 @@ type OnlyOptional<T> = Pick<T, OptionalKeys<T>>;
 
 ```typescript
 type Promisify<T> = {
-  [K in keyof T]: Promise<T[K]>;
-};
-
-interface SyncApi {
-  getUser(): User;
-  getPost(): Post;
+  [K in keyof T]: Promise<T[K]>
 }
 
-type AsyncApi = Promisify<SyncApi>;
+interface SyncApi {
+  getUser(): User
+  getPost(): Post
+}
+
+type AsyncApi = Promisify<SyncApi>
 // { getUser: Promise<() => User>; getPost: Promise<() => Post> }
 ```
 
@@ -190,15 +190,15 @@ type AsyncApi = Promisify<SyncApi>;
 
 ```typescript
 type Arrayify<T> = {
-  [K in keyof T]: T[K][];
-};
-
-interface Single {
-  name: string;
-  count: number;
+  [K in keyof T]: T[K][]
 }
 
-type Multiple = Arrayify<Single>;
+interface Single {
+  name: string
+  count: number
+}
+
+type Multiple = Arrayify<Single>
 // { name: string[]; count: number[] }
 ```
 
@@ -206,8 +206,8 @@ type Multiple = Arrayify<Single>;
 
 ```typescript
 type Nullable<T> = {
-  [K in keyof T]: T[K] | null;
-};
+  [K in keyof T]: T[K] | null
+}
 ```
 
 ## Deep Mapped Types
@@ -216,20 +216,18 @@ Apply transformations recursively:
 
 ```typescript
 type DeepReadonly<T> = {
-  readonly [K in keyof T]: T[K] extends object
-    ? DeepReadonly<T[K]>
-    : T[K];
-};
+  readonly [K in keyof T]: T[K] extends object ? DeepReadonly<T[K]> : T[K]
+}
 
 interface Nested {
   user: {
     profile: {
-      name: string;
-    };
-  };
+      name: string
+    }
+  }
 }
 
-type ReadonlyNested = DeepReadonly<Nested>;
+type ReadonlyNested = DeepReadonly<Nested>
 // All levels are readonly
 ```
 
@@ -237,8 +235,8 @@ type ReadonlyNested = DeepReadonly<Nested>;
 
 ```typescript
 type DeepPartial<T> = {
-  [K in keyof T]?: T[K] extends object ? DeepPartial<T[K]> : T[K];
-};
+  [K in keyof T]?: T[K] extends object ? DeepPartial<T[K]> : T[K]
+}
 ```
 
 ## Practical Examples
@@ -247,22 +245,22 @@ type DeepPartial<T> = {
 
 ```typescript
 type Getters<T> = {
-  [K in keyof T as `get${Capitalize<string & K>}`]: () => T[K];
-};
-
-type Setters<T> = {
-  [K in keyof T as `set${Capitalize<string & K>}`]: (value: T[K]) => void;
-};
-
-interface Person {
-  name: string;
-  age: number;
+  [K in keyof T as `get${Capitalize<string & K>}`]: () => T[K]
 }
 
-type PersonGetters = Getters<Person>;
+type Setters<T> = {
+  [K in keyof T as `set${Capitalize<string & K>}`]: (value: T[K]) => void
+}
+
+interface Person {
+  name: string
+  age: number
+}
+
+type PersonGetters = Getters<Person>
 // { getName: () => string; getAge: () => number }
 
-type PersonSetters = Setters<Person>;
+type PersonSetters = Setters<Person>
 // { setName: (value: string) => void; setAge: (value: number) => void }
 ```
 
@@ -272,16 +270,16 @@ type PersonSetters = Setters<Person>;
 type EventHandlers<T> = {
   [K in keyof T as `on${Capitalize<string & K>}Change`]: (
     newValue: T[K],
-    oldValue: T[K]
-  ) => void;
-};
-
-interface State {
-  count: number;
-  name: string;
+    oldValue: T[K],
+  ) => void
 }
 
-type StateHandlers = EventHandlers<State>;
+interface State {
+  count: number
+  name: string
+}
+
+type StateHandlers = EventHandlers<State>
 // {
 //   onCountChange: (newValue: number, oldValue: number) => void;
 //   onNameChange: (newValue: string, oldValue: string) => void;
@@ -292,16 +290,16 @@ type StateHandlers = EventHandlers<State>;
 
 ```typescript
 type ValidationErrors<T> = {
-  [K in keyof T]?: string[];
-};
-
-interface RegistrationForm {
-  email: string;
-  password: string;
-  confirmPassword: string;
+  [K in keyof T]?: string[]
 }
 
-type RegistrationErrors = ValidationErrors<RegistrationForm>;
+interface RegistrationForm {
+  email: string
+  password: string
+  confirmPassword: string
+}
+
+type RegistrationErrors = ValidationErrors<RegistrationForm>
 // { email?: string[]; password?: string[]; confirmPassword?: string[] }
 ```
 
@@ -311,8 +309,8 @@ type RegistrationErrors = ValidationErrors<RegistrationForm>;
 
 ```typescript
 type PickAndTransform<T, K extends keyof T> = {
-  [P in K]: T[P] extends Function ? T[P] : Readonly<T[P]>;
-};
+  [P in K]: T[P] extends Function ? T[P] : Readonly<T[P]>
+}
 ```
 
 ### Merge Two Types
@@ -322,9 +320,9 @@ type Merge<A, B> = {
   [K in keyof A | keyof B]: K extends keyof B
     ? B[K]
     : K extends keyof A
-    ? A[K]
-    : never;
-};
+      ? A[K]
+      : never
+}
 ```
 
 ## Index Signatures in Mapped Types
@@ -332,10 +330,10 @@ type Merge<A, B> = {
 ```typescript
 // Create index signature from union
 type FromUnion<K extends string, V> = {
-  [P in K]: V;
-};
+  [P in K]: V
+}
 
-type Dict = FromUnion<"a" | "b" | "c", number>;
+type Dict = FromUnion<'a' | 'b' | 'c', number>
 // { a: number; b: number; c: number }
 ```
 
@@ -348,13 +346,13 @@ Template literals require string keys:
 ```typescript
 // Error: Type 'K' is not assignable to type 'string'
 type Wrong<T> = {
-  [K in keyof T as `prefix_${K}`]: T[K];
-};
+  [K in keyof T as `prefix_${K}`]: T[K]
+}
 
 // Correct: Check K extends string
 type Correct<T> = {
-  [K in keyof T as K extends string ? `prefix_${K}` : never]: T[K];
-};
+  [K in keyof T as K extends string ? `prefix_${K}` : never]: T[K]
+}
 ```
 
 ### Losing Modifiers
@@ -364,13 +362,13 @@ Remapping can lose optional/readonly modifiers:
 ```typescript
 // Original optional modifier lost
 type Transform<T> = {
-  [K in keyof T as `new_${string & K}`]: T[K];
-};
+  [K in keyof T as `new_${string & K}`]: T[K]
+}
 
 // Preserve optional with conditional
 type TransformPreserve<T> = {
-  [K in keyof T as `new_${string & K}`]+?: T[K];
-};
+  [K in keyof T as `new_${string & K}`]+?: T[K]
+}
 ```
 
 ### Infinite Recursion
@@ -380,13 +378,13 @@ Deep mapped types can cause issues:
 ```typescript
 // Potential infinite recursion with circular types
 type DeepReadonly<T> = {
-  readonly [K in keyof T]: DeepReadonly<T[K]>;
-};
+  readonly [K in keyof T]: DeepReadonly<T[K]>
+}
 
 // Add base case for primitives
 type DeepReadonlySafe<T> = T extends object
   ? { readonly [K in keyof T]: DeepReadonlySafe<T[K]> }
-  : T;
+  : T
 ```
 
 ## When to Use Mapped Types

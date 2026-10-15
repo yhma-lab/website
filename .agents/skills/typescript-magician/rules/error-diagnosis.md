@@ -30,7 +30,7 @@ Type '{ name: string; }' is not assignable to type 'User'.
 Use IDE hover tooltips extensively:
 
 ```typescript
-const result = someFunction(arg);
+const result = someFunction(arg)
 //    ^ Hover here to see the inferred type
 ```
 
@@ -39,7 +39,7 @@ const result = someFunction(arg);
 Navigate to type definitions to understand what's expected:
 
 ```typescript
-document.querySelector("body");
+document.querySelector('body')
 //       ^ Go-to-definition to see overloads
 ```
 
@@ -49,12 +49,12 @@ Extract parts of complex types to understand them:
 
 ```typescript
 // Complex expression
-type Result = SomeComplexType<Input>[keyof Input][number];
+type Result = SomeComplexType<Input>[keyof Input][number]
 
 // Break it down
-type Step1 = SomeComplexType<Input>;
-type Step2 = Step1[keyof Input];
-type Step3 = Step2[number];
+type Step1 = SomeComplexType<Input>
+type Step2 = Step1[keyof Input]
+type Step3 = Step2[number]
 ```
 
 ## Common Error Patterns
@@ -62,19 +62,20 @@ type Step3 = Step2[number];
 ### "Type 'X' is not assignable to type 'Y'"
 
 The most common error. Check:
+
 1. Are you missing properties?
 2. Are property types incompatible?
 3. Is there a literal vs widened type mismatch?
 
 ```typescript
 // Example: Literal type mismatch
-const status = "active"; // Type: string (widened)
-function setStatus(s: "active" | "inactive") {}
-setStatus(status); // Error!
+const status = 'active' // Type: string (widened)
+function setStatus(s: 'active' | 'inactive') {}
+setStatus(status) // Error!
 
 // Fix: Use as const
-const status = "active" as const; // Type: "active"
-setStatus(status); // OK
+const status = 'active' as const // Type: "active"
+setStatus(status) // OK
 ```
 
 ### "Property 'X' does not exist on type 'Y'"
@@ -84,13 +85,13 @@ The type doesn't have the expected property:
 ```typescript
 // Check 1: Is the type correct?
 function process(data: unknown) {
-  data.name; // Error: 'name' doesn't exist on 'unknown'
+  data.name // Error: 'name' doesn't exist on 'unknown'
 }
 
 // Fix: Add type guard
 function process(data: unknown) {
-  if (typeof data === "object" && data !== null && "name" in data) {
-    data.name; // OK
+  if (typeof data === 'object' && data !== null && 'name' in data) {
+    data.name // OK
   }
 }
 ```
@@ -101,12 +102,12 @@ You're trying to access a property that might not exist:
 
 ```typescript
 function getValue<T>(obj: T, key: string) {
-  return obj[key]; // Error: string can't index T
+  return obj[key] // Error: string can't index T
 }
 
 // Fix: Constrain the key
 function getValue<T, K extends keyof T>(obj: T, key: K) {
-  return obj[key]; // OK
+  return obj[key] // OK
 }
 ```
 
@@ -116,12 +117,12 @@ Function argument type mismatch:
 
 ```typescript
 // Often happens with narrower function signatures
-const items = ["a", "b", "c"] as const;
-items.includes(someString);
+const items = ['a', 'b', 'c'] as const
+items.includes(someString)
 // Error: 'string' not assignable to '"a" | "b" | "c"'
 
 // Fix: Cast appropriately
-(items as readonly string[]).includes(someString);
+;(items as readonly string[]).includes(someString)
 ```
 
 ### "Type 'X' is not generic"
@@ -129,12 +130,12 @@ items.includes(someString);
 Trying to pass type arguments to a non-generic type:
 
 ```typescript
-type NotGeneric = string;
-type Attempt = NotGeneric<number>; // Error!
+type NotGeneric = string
+type Attempt = NotGeneric<number> // Error!
 
 // Check if you need to add a generic parameter
-type IsGeneric<T> = T;
-type Works = IsGeneric<number>; // OK
+type IsGeneric<T> = T
+type Works = IsGeneric<number> // OK
 ```
 
 ### Generic Constraint Errors
@@ -158,13 +159,13 @@ Remove complexity until the error is clear:
 const result = complexFunction()
   .map(transform)
   .filter(predicate)
-  .reduce(accumulator);
+  .reduce(accumulator)
 
 // Simplify to isolate
-const step1 = complexFunction();
+const step1 = complexFunction()
 // Check: Is step1 what you expect?
 
-const step2 = step1.map(transform);
+const step2 = step1.map(transform)
 // Check: Is step2 what you expect?
 // Continue until you find the issue
 ```
@@ -175,11 +176,11 @@ Force TypeScript to tell you what's wrong:
 
 ```typescript
 // Before: Error somewhere in here
-const result = getData().process();
+const result = getData().process()
 
 // After: Explicit annotations reveal issues
-const data: ExpectedDataType = getData(); // Error if getData returns wrong type
-const result: ExpectedResultType = data.process(); // Error if process returns wrong type
+const data: ExpectedDataType = getData() // Error if getData returns wrong type
+const result: ExpectedResultType = data.process() // Error if process returns wrong type
 ```
 
 ### 3. Use `// @ts-expect-error` to Confirm Understanding
@@ -187,7 +188,7 @@ const result: ExpectedResultType = data.process(); // Error if process returns w
 ```typescript
 // If you think this should error:
 // @ts-expect-error - string is not assignable to number
-const x: number = "hello";
+const x: number = 'hello'
 
 // If the @ts-expect-error is unused, TypeScript will tell you
 // meaning the code is actually valid
@@ -201,9 +202,9 @@ For library types, check the actual definitions:
 // In lib.dom.d.ts
 interface Document {
   querySelector<K extends keyof HTMLElementTagNameMap>(
-    selectors: K
-  ): HTMLElementTagNameMap[K] | null;
-  querySelector(selectors: string): Element | null;
+    selectors: K,
+  ): HTMLElementTagNameMap[K] | null
+  querySelector(selectors: string): Element | null
 }
 ```
 
@@ -230,8 +231,8 @@ but required in type '{ fullName: string; agePlus10: number; }'.
 Create type aliases to understand the comparison:
 
 ```typescript
-type Actual = typeof problematicValue;
-type Expected = ExpectedType;
+type Actual = typeof problematicValue
+type Expected = ExpectedType
 
 // Now hover these to compare
 ```
@@ -249,7 +250,7 @@ type Expected = ExpectedType;
 Look for `(+N overload)` in tooltips:
 
 ```typescript
-document.addEventListener("click", handler);
+document.addEventListener('click', handler)
 //       ^ Shows (+1 overload)
 
 // Go-to-definition to see all overloads
@@ -264,16 +265,16 @@ Sometimes library types are wrong or incomplete:
 
 ```typescript
 // When you know better than TypeScript
-const element = document.getElementById("root") as HTMLDivElement;
+const element = document.getElementById('root') as HTMLDivElement
 ```
 
 ### Solution 2: Declaration Merging
 
 ```typescript
 // Extend existing types
-declare module "some-library" {
+declare module 'some-library' {
   interface SomeType {
-    missingProperty: string;
+    missingProperty: string
   }
 }
 ```
@@ -302,10 +303,10 @@ Every `any` is a potential type hole:
 
 ```typescript
 // Instead of
-const data: any = fetchData();
+const data: any = fetchData()
 
 // Use
-const data: unknown = fetchData();
+const data: unknown = fetchData()
 // Then narrow with type guards
 ```
 

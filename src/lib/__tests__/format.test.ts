@@ -44,9 +44,18 @@ describe('date formatting', () => {
 
 describe('sorting', () => {
   it('orders by date and treats missing dates as oldest', () => {
-    const items = ['2024-01-01', '2026-03-19', '', '2017-01-01'].map((date) => ({ date }))
-    const sorted = items.toSorted((a, b) => timestamp(b.date) - timestamp(a.date))
-    expect(sorted.map((item) => item.date)).toEqual(['2026-03-19', '2024-01-01', '2017-01-01', ''])
+    const items = ['2024-01-01', '2026-03-19', '', '2017-01-01'].map(date => ({
+      date,
+    }))
+    const sorted = items.toSorted(
+      (a, b) => timestamp(b.date) - timestamp(a.date),
+    )
+    expect(sorted.map(item => item.date)).toEqual([
+      '2026-03-19',
+      '2024-01-01',
+      '2017-01-01',
+      '',
+    ])
   })
 
   it('detects future dates', () => {

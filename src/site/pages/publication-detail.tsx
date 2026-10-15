@@ -1,16 +1,15 @@
-import * as stylex from '@stylexjs/stylex'
+import type { Locale } from '@/lib/i18n.ts'
+import type { PublicationPage } from '@/lib/source.ts'
 
 import { styles as blockStyles } from '@/components/block.stylex.ts'
 import { DetailRow } from '@/components/cards.tsx'
 import { PublicationAuthors, PublicationDate } from '@/components/citation.tsx'
-import { Attachments } from '@/components/view-links.tsx'
-import { shared } from '@/components/views.stylex.ts'
 import { MathText } from '@/components/math-text.tsx'
 import { getMdxComponents } from '@/components/mdx.tsx'
+import { Attachments } from '@/components/view-links.tsx'
+import { shared } from '@/components/views.stylex.ts'
 import { translate } from '@/lib/strings.ts'
-
-import type { Locale } from '@/lib/i18n.ts'
-import type { PublicationPage } from '@/lib/source.ts'
+import * as stylex from '@stylexjs/stylex'
 
 const styles = stylex.create({
   detail: {
@@ -58,10 +57,15 @@ export function PublicationDetail({ locale, page }: PublicationDetailProps) {
           <PublicationAuthors page={page} />
           {' · '}
           <PublicationDate page={page} />
-          {page.data.publication.length > 0 ? <span>{page.data.publication}</span> : null}
+          {page.data.publication.length > 0 ? (
+            <span>{page.data.publication}</span>
+          ) : null}
         </div>
         <div {...stylex.props(blockStyles.attachmentRow)}>
-          <Attachments size="large" source={{ ...page.data, slugs: page.slugs }} />
+          <Attachments
+            size="large"
+            source={{ ...page.data, slugs: page.slugs }}
+          />
         </div>
       </div>
 
@@ -94,7 +98,10 @@ export function PublicationDetail({ locale, page }: PublicationDetailProps) {
 
 /** The APA line shown under `Cite`, matching `views/citation.html`. */
 function citationLine(page: PublicationPage): string {
-  const venue = page.data.publication_short.length > 0 ? page.data.publication_short : page.data.publication
+  const venue =
+    page.data.publication_short.length > 0
+      ? page.data.publication_short
+      : page.data.publication
   const year = page.data.date.slice(0, 4)
   return `${page.data.authors.join(', ')} (${year}). ${page.data.title}. ${venue}.`
 }

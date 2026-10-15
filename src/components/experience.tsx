@@ -1,11 +1,11 @@
+import type { ExperienceEntry } from './bio-text.ts'
+
+import { renderInlineMarkdown } from '@/lib/inline-markdown.tsx'
 import * as stylex from '@stylexjs/stylex'
 
 import { entrySubtitle, entryTitle, entryYears } from './bio-text.ts'
 import { styles } from './biography.stylex.ts'
 import { Icon } from './icon.tsx'
-import { renderInlineMarkdown } from '@/lib/inline-markdown.tsx'
-
-import type { ExperienceEntry } from './bio-text.ts'
 
 export interface ExperienceListProps {
   /** `i18n "experience"` / `i18n "education"`. */
@@ -22,7 +22,12 @@ export interface ExperienceListProps {
  * The original drew a bordered `<ol>` with an absolutely positioned icon dot per
  * entry and a `date_start – date_end` line, falling back to `Present`.
  */
-export function ExperienceList({ entries, heading, icon, presentLabel }: ExperienceListProps) {
+export function ExperienceList({
+  entries,
+  heading,
+  icon,
+  presentLabel,
+}: ExperienceListProps) {
   if (entries.length === 0) return null
 
   return (
@@ -32,15 +37,24 @@ export function ExperienceList({ entries, heading, icon, presentLabel }: Experie
         {entries.map((entry, index) => {
           const years = entryYears(entry)
           return (
-            <li key={`${entryTitle(entry)}-${String(index)}`} {...stylex.props(styles.timelineEntry)}>
+            <li
+              key={`${entryTitle(entry)}-${String(index)}`}
+              {...stylex.props(styles.timelineEntry)}
+            >
               <span {...stylex.props(styles.timelineDot)}>
                 <Icon name={icon} />
               </span>
-              <h3 {...stylex.props(styles.timelineTitle)}>{entryTitle(entry)}</h3>
+              <h3 {...stylex.props(styles.timelineTitle)}>
+                {entryTitle(entry)}
+              </h3>
               {entrySubtitle(entry).length > 0 ? (
-                <span {...stylex.props(styles.timelineOrg, styles.muted)}>{entrySubtitle(entry)}</span>
+                <span {...stylex.props(styles.timelineOrg, styles.muted)}>
+                  {entrySubtitle(entry)}
+                </span>
               ) : null}
-              <time {...stylex.props(styles.timelineTime, styles.muted)}>{formatRange(years, presentLabel)}</time>
+              <time {...stylex.props(styles.timelineTime, styles.muted)}>
+                {formatRange(years, presentLabel)}
+              </time>
               {entry.summary ? (
                 <div {...stylex.props(styles.timelineSummary, styles.muted)}>
                   {renderInlineMarkdown(entry.summary, '')}

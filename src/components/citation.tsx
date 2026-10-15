@@ -1,15 +1,14 @@
+import type { PublicationPage } from '../lib/source.ts'
+
 import * as stylex from '@stylexjs/stylex'
 
 import { resolveAuthors } from '../lib/authors.ts'
 import { formatDate, formatYear } from '../lib/format.ts'
-
 import { styles as blockStyles } from './block.stylex.ts'
 import { Icon } from './icon.tsx'
 import { MathText } from './math-text.tsx'
 import { Attachments } from './view-links.tsx'
 import { citation } from './views.stylex.ts'
-
-import type { PublicationPage } from '../lib/source.ts'
 
 export interface PublicationItemProps {
   page: PublicationPage
@@ -23,7 +22,10 @@ export interface PublicationItemProps {
  */
 export function CitationItem({ page }: PublicationItemProps) {
   const authors = resolveAuthors(page.data.authors, page.data.author_notes)
-  const venue = page.data.publication_short.length > 0 ? page.data.publication_short : page.data.publication
+  const venue =
+    page.data.publication_short.length > 0
+      ? page.data.publication_short
+      : page.data.publication
 
   return (
     <div {...stylex.props(citation.item)}>
@@ -32,7 +34,11 @@ export function CitationItem({ page }: PublicationItemProps) {
           <span key={`${author.id}-${String(index)}`}>
             {index > 0 ? ', ' : ''}
             <span {...stylex.props(author.highlight && citation.bold)}>
-              {author.page ? <a href={author.page.url}>{author.name}</a> : author.name}
+              {author.page ? (
+                <a href={author.page.url}>{author.name}</a>
+              ) : (
+                author.name
+              )}
             </span>
           </span>
         ))}
@@ -43,7 +49,10 @@ export function CitationItem({ page }: PublicationItemProps) {
       </a>
       {venue.length > 0 ? `. ${venue}.` : '.'}
       <div {...stylex.props(blockStyles.attachmentRow)}>
-        <Attachments size="small" source={{ ...page.data, slugs: page.slugs }} />
+        <Attachments
+          size="small"
+          source={{ ...page.data, slugs: page.slugs }}
+        />
       </div>
     </div>
   )
@@ -62,7 +71,11 @@ export function PublicationAuthors({ page }: PublicationAuthorsProps) {
         <span key={`${author.id}-${String(index)}`}>
           {index > 0 ? ', ' : ''}
           <span {...stylex.props(author.highlight && citation.bold)}>
-            {author.page ? <a href={author.page.url}>{author.name}</a> : author.name}
+            {author.page ? (
+              <a href={author.page.url}>{author.name}</a>
+            ) : (
+              author.name
+            )}
           </span>
         </span>
       ))}
@@ -76,7 +89,9 @@ export interface PublicationDateProps {
 
 export function PublicationDate({ page }: PublicationDateProps) {
   const formatted = formatDate(page.data.date)
-  return formatted.length > 0 ? <time dateTime={page.data.date}>{formatted}</time> : null
+  return formatted.length > 0 ? (
+    <time dateTime={page.data.date}>{formatted}</time>
+  ) : null
 }
 
 export interface AttachmentIconProps {

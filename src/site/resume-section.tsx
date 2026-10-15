@@ -1,20 +1,19 @@
-import * as stylex from '@stylexjs/stylex'
+import type { ExperienceEntry } from '@/components/bio-text.ts'
+import type { PageSection } from '@/lib/content-schemas.ts'
+import type { Locale } from '@/lib/i18n.ts'
 import type { ReactNode } from 'react'
 
 import { AwardsList } from '@/components/awards.tsx'
 import { styles } from '@/components/biography.stylex.ts'
 import { ExperienceList } from '@/components/experience.tsx'
-import { AuthorBio, PersonHeader } from '@/components/resume.tsx'
 import { Icon } from '@/components/icon.tsx'
+import { AuthorBio, PersonHeader } from '@/components/resume.tsx'
 import { normalizeEducation } from '@/lib/education.ts'
 import { renderInlineMarkdown } from '@/lib/inline-markdown.tsx'
 import { resolveInternal } from '@/lib/links.ts'
 import { findAuthor } from '@/lib/sort.ts'
 import { translate } from '@/lib/strings.ts'
-
-import type { ExperienceEntry } from '@/components/bio-text.ts'
-import type { PageSection } from '@/lib/content-schemas.ts'
-import type { Locale } from '@/lib/i18n.ts'
+import * as stylex from '@stylexjs/stylex'
 
 export interface ResumeProps {
   locale: Locale
@@ -35,7 +34,8 @@ export function Resume({ locale, prefix, section }: ResumeProps) {
   if (!author) return null
 
   const labels = translate(locale)
-  const role = section.content.text.length > 0 ? section.content.text : author.data.role
+  const role =
+    section.content.text.length > 0 ? section.content.text : author.data.role
 
   switch (section.block) {
     case 'resume-biography':
@@ -51,14 +51,16 @@ export function Resume({ locale, prefix, section }: ResumeProps) {
               author={author}
               role={section.block === 'resume-biography-3' ? role : undefined}
               social={data.profiles
-                .filter((profile) => profile.url.length > 0)
-                .map((profile) => (
+                .filter(profile => profile.url.length > 0)
+                .map(profile => (
                   <li key={profile.icon}>
                     <a
                       aria-label={profile.icon}
                       href={profile.url}
                       rel="noopener noreferrer"
-                      target={profile.url.startsWith('http') ? '_blank' : undefined}
+                      target={
+                        profile.url.startsWith('http') ? '_blank' : undefined
+                      }
                       title={profile.label}
                     >
                       <Icon name={profile.icon} size="large" />
@@ -75,7 +77,11 @@ export function Resume({ locale, prefix, section }: ResumeProps) {
 
             {button ? (
               <p>
-                <a href={resolveInternal(prefix, button.url)} rel="noopener noreferrer" target="_blank">
+                <a
+                  href={resolveInternal(prefix, button.url)}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
                   {button.text}
                 </a>
               </p>
@@ -84,9 +90,11 @@ export function Resume({ locale, prefix, section }: ResumeProps) {
             <div {...stylex.props(styles.gridTwo)}>
               {data.interests.length > 0 ? (
                 <div>
-                  <div {...stylex.props(styles.sectionHeading)}>{labels.interests}</div>
+                  <div {...stylex.props(styles.sectionHeading)}>
+                    {labels.interests}
+                  </div>
                   <ul {...stylex.props(styles.interests)}>
-                    {data.interests.map((interest) => (
+                    {data.interests.map(interest => (
                       <li key={interest} {...stylex.props(styles.interestItem)}>
                         {interest}
                       </li>
@@ -97,17 +105,26 @@ export function Resume({ locale, prefix, section }: ResumeProps) {
 
               {education.length > 0 ? (
                 <div>
-                  <div {...stylex.props(styles.sectionHeading)}>{labels.education}</div>
+                  <div {...stylex.props(styles.sectionHeading)}>
+                    {labels.education}
+                  </div>
                   <ul {...stylex.props(styles.interests)}>
                     {education.map((entry, index) => (
-                      <li key={`${entry.area ?? entry.course ?? ''}-${String(index)}`} {...stylex.props(styles.interestItem)}>
+                      <li
+                        key={`${entry.area ?? entry.course ?? ''}-${String(index)}`}
+                        {...stylex.props(styles.interestItem)}
+                      >
                         <span {...stylex.props(styles.iconWrap)}>
                           <Icon name="academic-cap" />
                         </span>{' '}
                         {entry.area ?? entry.course ?? ''}
-                        {(entry.year ?? '').length > 0 ? `, ${entry.year ?? ''}` : ''}
+                        {(entry.year ?? '').length > 0
+                          ? `, ${entry.year ?? ''}`
+                          : ''}
                         <br />
-                        <span {...stylex.props(styles.muted)}>{entry.institution ?? ''}</span>
+                        <span {...stylex.props(styles.muted)}>
+                          {entry.institution ?? ''}
+                        </span>
                       </li>
                     ))}
                   </ul>
@@ -146,8 +163,14 @@ export function Resume({ locale, prefix, section }: ResumeProps) {
           <AwardsList
             awards={author.data.awards}
             dateFormat="year"
-            heading={section.content.title.length > 0 ? section.content.title : labels.awards}
-            renderSummary={(text: string): ReactNode => renderInlineMarkdown(text, prefix)}
+            heading={
+              section.content.title.length > 0
+                ? section.content.title
+                : labels.awards
+            }
+            renderSummary={(text: string): ReactNode =>
+              renderInlineMarkdown(text, prefix)
+            }
           />
         </div>
       )

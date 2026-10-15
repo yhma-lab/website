@@ -1,5 +1,5 @@
-import { PeopleDetail } from '@/site/pages/people.tsx'
 import { authorParams } from '@/lib/source.ts'
+import { PeopleDetail } from '@/site/pages/people.tsx'
 
 const LOCALE = 'en'
 
@@ -10,5 +10,9 @@ export default function Detail({ slugs }: { slugs: string[] }) {
 /** Only this locale's entries are prerendered; an untranslated page has no path. */
 export async function getConfig() {
   // Prerendered at build time, with document SSR disabled (see AGENTS.md).
-  return { render: 'static', staticPaths: authorParams(LOCALE), unstable_disableSSR: true } as const
+  return {
+    render: 'static',
+    staticPaths: authorParams(LOCALE),
+    unstable_disableSSR: true,
+  } as const
 }

@@ -1,11 +1,10 @@
+import type { FundingPage } from '../lib/source.ts'
+
 import * as stylex from '@stylexjs/stylex'
 
 import { formatDate } from '../lib/format.ts'
-
 import { MathText } from './math-text.tsx'
 import { card as cardStyles, detail, shared } from './views.stylex.ts'
-
-import type { FundingPage } from '../lib/source.ts'
 
 /**
  * Funding entry.

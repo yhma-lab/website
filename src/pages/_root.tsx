@@ -3,7 +3,6 @@ import type { ReactNode } from 'react'
 import { HB_DARK } from '@/styles/tokens.stylex.ts'
 
 import 'katex/dist/katex.min.css'
-
 import '../styles/global.css'
 
 /** Applied to `<html>` by the theme bootstrap when no stored preference exists. */

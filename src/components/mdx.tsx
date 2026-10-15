@@ -1,10 +1,10 @@
-import * as stylex from '@stylexjs/stylex'
+import type { StyleXStyles } from '@stylexjs/stylex'
 import type { MDXComponents } from 'mdx/types'
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 
-import { prose } from './prose.stylex.ts'
+import * as stylex from '@stylexjs/stylex'
 
-import type { StyleXStyles } from '@stylexjs/stylex'
+import { prose } from './prose.stylex.ts'
 
 /**
  * MDX element mapping.
@@ -27,7 +27,10 @@ function styled<Tag extends keyof React.JSX.IntrinsicElements>(
   extra?: Record<string, unknown>,
 ) {
   const Element = tag
-  const Comp = ({ children, ...props }: ElementProps<Tag> & { children?: ReactNode }) => (
+  const Comp = ({
+    children,
+    ...props
+  }: ElementProps<Tag> & { children?: ReactNode }) => (
     // @ts-expect-error -- `Element` is a dynamic intrinsic tag.
     <Element {...extra} {...props} {...stylex.props(style)}>
       {children}

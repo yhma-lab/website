@@ -1,6 +1,5 @@
+import { localizedParams, publications } from '@/lib/source.ts'
 import { PublicationsDetail } from '@/site/pages/publications.tsx'
-import { localizedParams } from '@/lib/source.ts'
-import { publications } from '@/lib/source.ts'
 
 const LOCALE = 'en'
 

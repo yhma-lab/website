@@ -1,18 +1,17 @@
-import * as stylex from '@stylexjs/stylex'
+import type { Locale } from '@/lib/i18n.ts'
+import type { EventPage } from '@/lib/source.ts'
 
-import { BlockHeading } from '@/components/block.tsx'
 import { styles as blockStyles } from '@/components/block.stylex.ts'
-import { card as cardStyles, shared } from '@/components/views.stylex.ts'
+import { BlockHeading } from '@/components/block.tsx'
 import { DetailRow } from '@/components/cards.tsx'
 import { MathText } from '@/components/math-text.tsx'
 import { getMdxComponents } from '@/components/mdx.tsx'
 import { Attachments } from '@/components/view-links.tsx'
+import { card as cardStyles, shared } from '@/components/views.stylex.ts'
 import { formatLongDate } from '@/lib/format.ts'
 import { sortedEvents } from '@/lib/sort.ts'
 import { events, pages } from '@/lib/source.ts'
-
-import type { Locale } from '@/lib/i18n.ts'
-import type { EventPage } from '@/lib/source.ts'
+import * as stylex from '@stylexjs/stylex'
 
 const styles = stylex.create({
   detail: {
@@ -32,14 +31,17 @@ const styles = stylex.create({
  * published at `/event/`, so the route is preserved here under `/events/`.
  */
 export function EventsList({ locale }: { locale: Locale }) {
-  const frontMatter = pages.getPages(locale).find((page) => page.slugs.length === 1 && page.slugs[0] === 'events')
-  const heading = frontMatter === undefined ? 'Talks & Events' : frontMatter.data.title
+  const frontMatter = pages
+    .getPages(locale)
+    .find(page => page.slugs.length === 1 && page.slugs[0] === 'events')
+  const heading =
+    frontMatter === undefined ? 'Talks & Events' : frontMatter.data.title
 
   return (
     <>
       <BlockHeading title={heading} />
       <div {...stylex.props(blockStyles.centered)}>
-        {sortedEvents().map((page) => (
+        {sortedEvents().map(page => (
           <EventCard key={page.url} page={page} />
         ))}
       </div>
@@ -47,8 +49,16 @@ export function EventsList({ locale }: { locale: Locale }) {
   )
 }
 
-export function EventsDetail({ locale, slugs }: { locale: Locale; slugs: string[] }) {
-  const page = events.getPages(locale).find((candidate) => sameSlugs(candidate.slugs, slugs))
+export function EventsDetail({
+  locale,
+  slugs,
+}: {
+  locale: Locale
+  slugs: string[]
+}) {
+  const page = events
+    .getPages(locale)
+    .find(candidate => sameSlugs(candidate.slugs, slugs))
   if (!page) return null
   const MDX = page.data.body
   const abstract = page.data.abstract
@@ -59,11 +69,16 @@ export function EventsDetail({ locale, slugs }: { locale: Locale; slugs: string[
       <div {...stylex.props(shared.meta, styles.meta)}>
         {page.data.event.length > 0 ? <div>{page.data.event}</div> : null}
         <div>
-          <time dateTime={page.data.date}>{formatLongDate(page.data.date)}</time>
+          <time dateTime={page.data.date}>
+            {formatLongDate(page.data.date)}
+          </time>
         </div>
       </div>
       <div {...stylex.props(blockStyles.attachmentRow)}>
-        <Attachments size="large" source={{ ...page.data, slugs: page.slugs }} />
+        <Attachments
+          size="large"
+          source={{ ...page.data, slugs: page.slugs }}
+        />
       </div>
       {abstract.length > 0 ? (
         <DetailRow label="Abstract">
@@ -89,9 +104,13 @@ function EventCard({ page }: { page: EventPage }) {
       <div {...stylex.props(cardStyles.row)}>
         <div {...stylex.props(cardStyles.body)}>
           <div {...stylex.props(cardStyles.title)}>{page.data.title}</div>
-          {page.data.summary.length > 0 ? <p {...stylex.props(cardStyles.summary)}>{page.data.summary}</p> : null}
+          {page.data.summary.length > 0 ? (
+            <p {...stylex.props(cardStyles.summary)}>{page.data.summary}</p>
+          ) : null}
           <p {...stylex.props(shared.meta)}>
-            <time dateTime={page.data.date}>{formatLongDate(page.data.date)}</time>
+            <time dateTime={page.data.date}>
+              {formatLongDate(page.data.date)}
+            </time>
             {page.data.location.length > 0 ? ` · ${page.data.location}` : ''}
           </p>
         </div>
@@ -101,5 +120,7 @@ function EventCard({ page }: { page: EventPage }) {
 }
 
 function sameSlugs(a: string[], b: string[]): boolean {
-  return a.length === b.length && a.every((segment, index) => segment === b[index])
+  return (
+    a.length === b.length && a.every((segment, index) => segment === b[index])
+  )
 }

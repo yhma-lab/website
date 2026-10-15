@@ -1,6 +1,5 @@
+import { fundings, localizedParams } from '@/lib/source.ts'
 import { FundingsDetail } from '@/site/pages/fundings.tsx'
-import { localizedParams } from '@/lib/source.ts'
-import { fundings } from '@/lib/source.ts'
 
 const LOCALE = 'en'
 
@@ -11,5 +10,9 @@ export default function Detail({ slugs }: { slugs: string[] }) {
 /** Only this locale's entries are prerendered; an untranslated page has no path. */
 export async function getConfig() {
   // Prerendered at build time, with document SSR disabled (see AGENTS.md).
-  return { render: 'static', staticPaths: localizedParams(fundings, LOCALE), unstable_disableSSR: true } as const
+  return {
+    render: 'static',
+    staticPaths: localizedParams(fundings, LOCALE),
+    unstable_disableSSR: true,
+  } as const
 }

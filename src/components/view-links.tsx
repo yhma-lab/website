@@ -57,9 +57,19 @@ function attachmentsFor(source: AttachmentSource): Attachment[] {
   const items: Attachment[] = []
 
   if (source.url_pdf.length > 0) {
-    items.push({ href: source.url_pdf, icon: 'document-text', key: 'pdf', label: 'PDF' })
+    items.push({
+      href: source.url_pdf,
+      icon: 'document-text',
+      key: 'pdf',
+      label: 'PDF',
+    })
   }
-  items.push({ href: citeHref(source), icon: 'document-duplicate', key: 'cite', label: 'Cite' })
+  items.push({
+    href: citeHref(source),
+    icon: 'document-duplicate',
+    key: 'cite',
+    label: 'Cite',
+  })
 
   const optional: [keyof AttachmentSource, string, string][] = [
     ['url_code', 'code-bracket', 'Code'],
@@ -77,7 +87,12 @@ function attachmentsFor(source: AttachmentSource): Attachment[] {
   }
 
   if (source.doi !== undefined && source.doi.length > 0) {
-    items.push({ href: `https://doi.org/${source.doi}`, icon: undefined, key: 'doi', label: 'DOI' })
+    items.push({
+      href: `https://doi.org/${source.doi}`,
+      icon: undefined,
+      key: 'doi',
+      label: 'DOI',
+    })
   }
 
   for (const [index, link] of source.links.entries()) {
@@ -99,13 +114,16 @@ export function Attachments({ size, source }: AttachmentsProps) {
 
   return (
     <>
-      {items.map((item) => (
+      {items.map(item => (
         <a
           href={item.href}
           key={item.key}
           rel="noopener noreferrer"
           target="_blank"
-          {...stylex.props(styles.attachmentLink, size === 'small' && styles.attachmentSmall)}
+          {...stylex.props(
+            styles.attachmentLink,
+            size === 'small' && styles.attachmentSmall,
+          )}
         >
           {item.icon === undefined ? null : <AttachmentIcon name={item.icon} />}
           {item.label}

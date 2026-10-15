@@ -201,7 +201,9 @@ const authorSchema = pageSchema.extend({
   title: z.string().default(''),
   awards: z.array(awardSchema).default([]),
   bio: z.string().default(''),
-  education: z.union([z.array(datedEntrySchema), legacyEducationSchema]).default([]),
+  education: z
+    .union([z.array(datedEntrySchema), legacyEducationSchema])
+    .default([]),
   email: z.string().default(''),
   first_name: z.string().default(''),
   highlight_name: z.boolean().default(false),
@@ -253,7 +255,13 @@ const sectionContentSchema = z.object({
       featured_only: z.boolean().default(false),
       folders: z.array(z.string()).default([]),
     })
-    .default({ exclude_featured: false, exclude_future: false, exclude_past: false, featured_only: false, folders: [] }),
+    .default({
+      exclude_featured: false,
+      exclude_future: false,
+      exclude_past: false,
+      featured_only: false,
+      folders: [],
+    }),
   order: z.enum(['asc', 'desc']).default('desc'),
   primary_action: actionSchema.optional(),
   secondary_action: actionSchema.optional(),
@@ -276,7 +284,9 @@ const sectionDesignSchema = z.object({
   show_organizations: z.boolean().default(false),
   show_role: z.boolean().default(true),
   show_social: z.boolean().default(false),
-  view: z.enum(['article-grid', 'card', 'citation', 'date-title-summary']).default('citation'),
+  view: z
+    .enum(['article-grid', 'card', 'citation', 'date-title-summary'])
+    .default('citation'),
 })
 
 type SectionContent = z.infer<typeof sectionContentSchema>

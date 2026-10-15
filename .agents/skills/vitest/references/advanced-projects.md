@@ -10,12 +10,12 @@ Run different test configurations in the same Vitest process.
 ## v5 Config Inheritance & Nested Projects
 
 - **Inline projects inherit the root config by default** — `extends` now defaults to `true`, so root Vite options (`plugins`, `resolve.alias`) and test options are inherited. Arrays like `setupFiles` are appended, not replaced. Opt out with `extends: false`, or inherit from another file with `extends: './vitest.shared.ts'`. Projects referenced as config files/directories still don't inherit the root.
-- **Referenced config files can declare their own `projects`** — such a config acts as a container providing *nested projects* named `app (unit)`, `app (e2e)`, etc. In v4 a referenced config's `projects` field was silently ignored, so audit merged configs that pull one in.
+- **Referenced config files can declare their own `projects`** — such a config acts as a container providing _nested projects_ named `app (unit)`, `app (e2e)`, etc. In v4 a referenced config's `projects` field was silently ignored, so audit merged configs that pull one in.
 - **Inline projects share the declaring config's Vite server by default** ([`sharedViteServer`](core-config.md)) — the declaring config runs once, so plugin `config` hooks no longer run per project. A project gets its own server only when it changes the Vite config (`plugins`, `alias`, `css`, `deps.optimizer`, `root`, `browser`, `mode`). Set `sharedViteServer: false` if a plugin must be re-instantiated per project.
 
 ```ts
-import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   plugins: [react()], // inherited by every inline project (v4 needed extends: true)
@@ -38,7 +38,7 @@ defineConfig({
     projects: [
       // Glob patterns for config files
       'packages/*',
-      
+
       // Inline config
       {
         test: {
@@ -150,14 +150,14 @@ defineConfig({
 ## Shared Configuration
 
 ```ts
+// vitest.config.ts
+import { sharedConfig } from './vitest.shared'
+
 // vitest.shared.ts
 export const sharedConfig = {
   testTimeout: 10000,
   setupFiles: ['./tests/setup.ts'],
 }
-
-// vitest.config.ts
-import { sharedConfig } from './vitest.shared'
 
 defineConfig({
   test: {
@@ -228,6 +228,9 @@ vitest -p "app (unit)"        # just one nested project
 Share values from config to tests:
 
 ```ts
+// In tests, use inject
+import { inject } from 'vitest'
+
 // vitest.config.ts
 defineConfig({
   test: {
@@ -253,9 +256,6 @@ defineConfig({
     ],
   },
 })
-
-// In tests, use inject
-import { inject } from 'vitest'
 
 test('uses correct api', () => {
   const url = inject('apiUrl')
@@ -286,7 +286,7 @@ defineConfig({
       {
         test: {
           name: 'unit',
-          isolate: false,                 // fast, non-isolated unit tests
+          isolate: false, // fast, non-isolated unit tests
           exclude: ['**/*.integration.test.ts'],
         },
       },
@@ -294,7 +294,7 @@ defineConfig({
         test: {
           name: 'sequential',
           include: ['**/*.sequential.test.ts'],
-          fileParallelism: false,         // run these files one at a time
+          fileParallelism: false, // run these files one at a time
         },
       },
       {
@@ -335,7 +335,7 @@ defineConfig({
 - Inline projects inherit root config by default (v5 `extends: true`); set `extends: false` to opt out
 - Referenced configs that declare `projects` provide nested projects (`name (child)`)
 
-<!-- 
+<!--
 Source references:
 - https://vitest.dev/guide/projects.html
 -->

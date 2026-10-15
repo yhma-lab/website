@@ -2,17 +2,20 @@
 
 autoDedupe: true
 
+lockfile:
+  includeResolutionSettings: true
+
 allowBuilds:
-  "@astryxdesign/cli": true
-  "@astryxdesign/core": true
-  "@swc/core": true
+  '@astryxdesign/cli': true
+  '@astryxdesign/core': true
+  '@swc/core': true
   esbuild: true
   msw: false
   protobufjs: false
   workerd: false
 
 overrides:
-  "es-set-tostringtag": "npm:@nolyfill/es-set-tostringtag@^1"
-  "hasown": "npm:@nolyfill/hasown@^1"
-  "safe-buffer": "npm:@nolyfill/safe-buffer@^1"
-  "side-channel": "npm:@nolyfill/side-channel@^1"
+  'es-set-tostringtag': 'npm:@nolyfill/es-set-tostringtag@^1'
+  'hasown': 'npm:@nolyfill/hasown@^1'
+  'safe-buffer': 'npm:@nolyfill/safe-buffer@^1'
+  'side-channel': 'npm:@nolyfill/side-channel@^1'

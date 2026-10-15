@@ -19,13 +19,12 @@ A policy is a set of rules for sanitizing content. You create it using `trustedT
 
 ```javascript
 const myPolicy = trustedTypes.createPolicy('my-no-pretzel-policy', {
-  createHTML: (input) => {
+  createHTML: input => {
     // A simple replacement rule.
     // In a real app, you might use the Sanitizer API, or a library like DOMPurify.
-    return input
-      .replace(/pretzel/g, "popcorn");
-  }
-});
+    return input.replace(/pretzel/g, 'popcorn')
+  },
+})
 ```
 
 ### 2. Using the Policy
@@ -33,13 +32,13 @@ const myPolicy = trustedTypes.createPolicy('my-no-pretzel-policy', {
 Instead of passing a string directly to a sink, you call the policy's creation method.
 
 ```javascript
-const untrustedInput = 'I love eating a soft pretzel.';
+const untrustedInput = 'I love eating a soft pretzel.'
 
 // In an enforced environment, this would throw a TypeError:
 // element.innerHTML = untrustedInput;
 
 // This returns a TrustedHTML object:
-const cleanHTML = myPolicy.createHTML(untrustedInput);
+const cleanHTML = myPolicy.createHTML(untrustedInput)
 // Result: "I love eating a soft popcorn."
 ```
 
@@ -48,22 +47,23 @@ const cleanHTML = myPolicy.createHTML(untrustedInput);
 Update each instance where you write to a sink to first convert it to a Trusted Type object. To help locate where code needs to be updated, you can define a temporary `default` policy that logs when a sink is written to with a string rather than a TrustedType.
 
 ```javascript
-trustedTypes.createPolicy("default", {
+trustedTypes.createPolicy('default', {
   createHTML(value) {
-    console.warn("String passed instead of Trusted Type.");
-    return sanitize(value);
+    console.warn('String passed instead of Trusted Type.')
+    return sanitize(value)
   },
-});
+})
 ```
 
 Common sinks that support Trusted Types include:
+
 - **HTML:** `element.innerHTML`, `element.outerHTML`, `document.write()`, `element.setHTMLUnsafe()`, `document.parseHTMLUnsafe()`
 - **Script:** `<script src>`, `eval()`
 - **ScriptURL:** `Worker()`, `SharedWorker()`
 
 ```javascript
 // Assign the TrustedHTML object.
-element.innerHTML = cleanHTML;
+element.innerHTML = cleanHTML
 ```
 
 Note that the "safe" HTML sanitization methods (`element.setHTML()` and `document.parseHTML()`, for instance), do not support Trusted Types, as they always sanitize potential XSS attacks.
@@ -118,7 +118,7 @@ For browsers that do not yet support Trusted Types, you can use a minimal "tinyf
 if (!window.trustedTypes) {
   window.trustedTypes = {
     createPolicy: (name, rules) => rules,
-  };
+  }
 }
 ```
 

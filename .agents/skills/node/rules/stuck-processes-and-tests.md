@@ -10,6 +10,7 @@ metadata:
 ## Activation triggers (apply this rule immediately)
 
 Use this rule when prompts/logs include any of:
+
 - "`node --test` hangs" / "test run never exits"
 - "CI timed out" after tests appear done
 - "process is still running" / "did not exit cleanly"
@@ -84,30 +85,30 @@ Use it for diagnostics only; gate noisy output behind an environment flag in CI.
 
 ```typescript
 it('serves requests', async () => {
-  const server = await startServer({ port: 0 });
-  const id = setInterval(() => {}, 1000);
+  const server = await startServer({ port: 0 })
+  const id = setInterval(() => {}, 1000)
   // test body...
   // ❌ no deterministic teardown
-});
+})
 ```
 
 ### Good (deterministic teardown)
 
 ```typescript
-import { once } from 'node:events';
+import { once } from 'node:events'
 
-it('serves requests', async (t) => {
-  const server = await startServer({ port: 0 });
-  const id = setInterval(() => {}, 1000);
+it('serves requests', async t => {
+  const server = await startServer({ port: 0 })
+  const id = setInterval(() => {}, 1000)
 
   t.after(async () => {
-    clearInterval(id);
-    server.close();
-    await once(server, 'close');
-  });
+    clearInterval(id)
+    server.close()
+    await once(server, 'close')
+  })
 
   // test body...
-});
+})
 ```
 
 ## Definition of done (must all pass)

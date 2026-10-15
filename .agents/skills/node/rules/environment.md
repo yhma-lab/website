@@ -24,13 +24,13 @@ node --env-file=.env --env-file=.env.local app.ts
 Load environment files programmatically with `process.loadEnvFile()`:
 
 ```typescript
-import { loadEnvFile } from 'node:process';
+import { loadEnvFile } from 'node:process'
 
 // Load .env from current directory
-loadEnvFile();
+loadEnvFile()
 
 // Load specific file
-loadEnvFile('.env.local');
+loadEnvFile('.env.local')
 ```
 
 ## Environment Variables Validation
@@ -40,24 +40,27 @@ loadEnvFile('.env.local');
 Use [env-schema](https://github.com/fastify/env-schema) with [TypeBox](https://github.com/sinclairzx81/typebox) for type-safe environment validation:
 
 ```typescript
-import { envSchema } from 'env-schema';
-import { Type, Static } from '@sinclair/typebox';
+import { Static, Type } from '@sinclair/typebox'
+import { envSchema } from 'env-schema'
 
 const schema = Type.Object({
   PORT: Type.Number({ default: 3000 }),
   DATABASE_URL: Type.String(),
   API_KEY: Type.String({ minLength: 1 }),
-  LOG_LEVEL: Type.Union([
-    Type.Literal('debug'),
-    Type.Literal('info'),
-    Type.Literal('warn'),
-    Type.Literal('error'),
-  ], { default: 'info' }),
-});
+  LOG_LEVEL: Type.Union(
+    [
+      Type.Literal('debug'),
+      Type.Literal('info'),
+      Type.Literal('warn'),
+      Type.Literal('error'),
+    ],
+    { default: 'info' },
+  ),
+})
 
-type Env = Static<typeof schema>;
+type Env = Static<typeof schema>
 
-export const env = envSchema<Env>({ schema });
+export const env = envSchema<Env>({ schema })
 ```
 
 ### Using Zod
@@ -65,30 +68,30 @@ export const env = envSchema<Env>({ schema });
 Alternatively, use [Zod](https://github.com/colinhacks/zod) for validation:
 
 ```typescript
-import { z } from 'zod';
+import { z } from 'zod'
 
 const EnvSchema = z.object({
   PORT: z.coerce.number().default(3000),
   DATABASE_URL: z.string().url(),
   API_KEY: z.string().min(1),
   LOG_LEVEL: z.enum(['debug', 'info', 'warn', 'error']).default('info'),
-});
+})
 
-type Env = z.infer<typeof EnvSchema>;
+type Env = z.infer<typeof EnvSchema>
 
 function loadEnv(): Env {
-  const result = EnvSchema.safeParse(process.env);
+  const result = EnvSchema.safeParse(process.env)
 
   if (!result.success) {
-    console.error('Invalid environment variables:');
-    console.error(result.error.format());
-    process.exit(1);
+    console.error('Invalid environment variables:')
+    console.error(result.error.format())
+    process.exit(1)
   }
 
-  return result.data;
+  return result.data
 }
 
-export const env = loadEnv();
+export const env = loadEnv()
 ```
 
 ## Avoid NODE_ENV
@@ -105,9 +108,9 @@ This leads to problems:
 ```typescript
 // BAD - NODE_ENV conflates concerns
 if (process.env.NODE_ENV === 'development') {
-  enableDebugLogging();    // logging concern
-  disableRateLimiting();   // security concern
-  useMockDatabase();       // infrastructure concern
+  enableDebugLogging() // logging concern
+  disableRateLimiting() // security concern
+  useMockDatabase() // infrastructure concern
 }
 ```
 
@@ -127,10 +130,11 @@ const config = {
   database: {
     url: process.env.DATABASE_URL,
   },
-};
+}
 ```
 
 This approach:
+
 - Makes configuration explicit and discoverable
 - Allows fine-grained control per environment
 - Avoids hidden behavior changes
@@ -143,21 +147,21 @@ Create a typed configuration object:
 ```typescript
 interface Config {
   server: {
-    port: number;
-    host: string;
-  };
+    port: number
+    host: string
+  }
   database: {
-    url: string;
-    poolSize: number;
-  };
+    url: string
+    poolSize: number
+  }
   auth: {
-    jwtSecret: string;
-    jwtExpiresIn: string;
-  };
+    jwtSecret: string
+    jwtExpiresIn: string
+  }
   features: {
-    enableMetrics: boolean;
-    enableTracing: boolean;
-  };
+    enableMetrics: boolean
+    enableTracing: boolean
+  }
 }
 
 function createConfig(): Config {
@@ -178,18 +182,18 @@ function createConfig(): Config {
       enableMetrics: process.env.ENABLE_METRICS === 'true',
       enableTracing: process.env.ENABLE_TRACING === 'true',
     },
-  };
+  }
 }
 
 function requireEnv(name: string): string {
-  const value = process.env[name];
+  const value = process.env[name]
   if (!value) {
-    throw new Error(`Missing required environment variable: ${name}`);
+    throw new Error(`Missing required environment variable: ${name}`)
   }
-  return value;
+  return value
 }
 
-export const config = createConfig();
+export const config = createConfig()
 ```
 
 ## .env File Structure
@@ -216,20 +220,24 @@ DATABASE_URL=postgresql://test:test@localhost:5432/myapp_test
 Never commit secrets to version control. Use a secrets management service appropriate for your infrastructure:
 
 **Cloud Provider Services:**
+
 - [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/)
 - [Google Cloud Secret Manager](https://cloud.google.com/secret-manager)
 - [Azure Key Vault](https://azure.microsoft.com/en-us/products/key-vault)
 
 **Infrastructure Tools:**
+
 - [HashiCorp Vault](https://www.vaultproject.io/)
 - [Doppler](https://www.doppler.com/)
 - [Infisical](https://infisical.com/)
 
 **Container Orchestration:**
+
 - Kubernetes Secrets
 - Docker Swarm Secrets
 
 **CI/CD Platforms:**
+
 - GitHub Actions Secrets
 - GitLab CI/CD Variables
 - CircleCI Contexts
@@ -245,9 +253,9 @@ const features = {
   newDashboard: process.env.FEATURE_NEW_DASHBOARD === 'true',
   betaApi: process.env.FEATURE_BETA_API === 'true',
   darkMode: process.env.FEATURE_DARK_MODE === 'true',
-};
+}
 
 export function isFeatureEnabled(feature: keyof typeof features): boolean {
-  return features[feature] ?? false;
+  return features[feature] ?? false
 }
 ```

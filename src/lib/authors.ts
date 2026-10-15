@@ -1,7 +1,7 @@
+import type { AuthorPage } from './source.ts'
+
 import { formatDate } from './format.ts'
 import { authors } from './source.ts'
-
-import type { AuthorPage } from './source.ts'
 
 export interface ResolvedAuthor {
   /** Slug as written in a publication's `authors:` list. */
@@ -35,21 +35,35 @@ for (const page of authors.getPages()) {
 function fallbackName(id: string): string {
   return id
     .split('-')
-    .map((part) => (part.length <= 2 ? part.toUpperCase() : `${part[0]?.toUpperCase() ?? ''}${part.slice(1)}`))
+    .map(part =>
+      part.length <= 2
+        ? part.toUpperCase()
+        : `${part[0]?.toUpperCase() ?? ''}${part.slice(1)}`,
+    )
     .join(' ')
 }
 
-export function resolveAuthors(ids: readonly string[], notes: readonly string[] = []): ResolvedAuthor[] {
+export function resolveAuthors(
+  ids: readonly string[],
+  notes: readonly string[] = [],
+): ResolvedAuthor[] {
   return ids.map((id, index) => {
     const page = profiles.get(id)
-    const first = typeof page?.data.first_name === 'string' ? page.data.first_name : ''
-    const last = typeof page?.data.last_name === 'string' ? page.data.last_name : ''
+    const first =
+      typeof page?.data.first_name === 'string' ? page.data.first_name : ''
+    const last =
+      typeof page?.data.last_name === 'string' ? page.data.last_name : ''
     const fullName = [first, last].filter(Boolean).join(' ')
 
     return {
       highlight: page?.data.highlight_name === true,
       id,
-      name: fullName.length > 0 ? fullName : page ? page.data.title : fallbackName(id),
+      name:
+        fullName.length > 0
+          ? fullName
+          : page
+            ? page.data.title
+            : fallbackName(id),
       note: notes[index],
       page,
     }

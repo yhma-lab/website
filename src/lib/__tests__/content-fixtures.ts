@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, readdirSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -50,9 +50,11 @@ function readFrontMatter(file: string): Record<string, unknown> {
  * files that must satisfy a collection schema.
  */
 export function collectionEntries(family?: string): FrontMatterFile[] {
-  const families = family ? [family] : readdirSync(contentRoot, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => entry.name)
+  const families = family
+    ? [family]
+    : readdirSync(contentRoot, { withFileTypes: true })
+        .filter(entry => entry.isDirectory())
+        .map(entry => entry.name)
 
   const out: FrontMatterFile[] = []
   for (const name of families) {
@@ -76,6 +78,6 @@ export function collectionEntries(family?: string): FrontMatterFile[] {
 /** Author slugs that have a profile directory. */
 export function authorSlugs(): string[] {
   return readdirSync(path.join(contentRoot, 'authors'), { withFileTypes: true })
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => entry.name)
+    .filter(entry => entry.isDirectory())
+    .map(entry => entry.name)
 }

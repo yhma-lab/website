@@ -1,7 +1,7 @@
-import * as stylex from '@stylexjs/stylex'
+import type { Locale } from '@/lib/i18n.ts'
 
-import { BlockHeading } from '@/components/block.tsx'
 import { styles as blockStyles } from '@/components/block.stylex.ts'
+import { BlockHeading } from '@/components/block.tsx'
 import { DetailRow, FundingCard } from '@/components/cards.tsx'
 import { MathText } from '@/components/math-text.tsx'
 import { getMdxComponents } from '@/components/mdx.tsx'
@@ -9,8 +9,7 @@ import { shared } from '@/components/views.stylex.ts'
 import { formatDate } from '@/lib/format.ts'
 import { sortedFundings } from '@/lib/sort.ts'
 import { fundings, pages } from '@/lib/source.ts'
-
-import type { Locale } from '@/lib/i18n.ts'
+import * as stylex from '@stylexjs/stylex'
 
 const styles = stylex.create({
   detail: {
@@ -29,14 +28,15 @@ const styles = stylex.create({
 export function FundingsList({ locale }: { locale: Locale }) {
   const frontMatter = pages
     .getPages(locale)
-    .find((page) => page.slugs.length === 1 && page.slugs[0] === 'fundings')
-  const heading = frontMatter === undefined ? 'Fundings' : frontMatter.data.title
+    .find(page => page.slugs.length === 1 && page.slugs[0] === 'fundings')
+  const heading =
+    frontMatter === undefined ? 'Fundings' : frontMatter.data.title
 
   return (
     <>
       <BlockHeading title={heading} />
       <div {...stylex.props(blockStyles.centered)}>
-        {sortedFundings().map((page) => (
+        {sortedFundings().map(page => (
           <FundingCard key={page.url} page={page} />
         ))}
       </div>
@@ -44,14 +44,24 @@ export function FundingsList({ locale }: { locale: Locale }) {
   )
 }
 
-export function FundingsDetail({ locale, slugs }: { locale: Locale; slugs: string[] }) {
-  const page = fundings.getPages(locale).find((candidate) => sameSlugs(candidate.slugs, slugs))
+export function FundingsDetail({
+  locale,
+  slugs,
+}: {
+  locale: Locale
+  slugs: string[]
+}) {
+  const page = fundings
+    .getPages(locale)
+    .find(candidate => sameSlugs(candidate.slugs, slugs))
   if (!page) return null
   const MDX = page.data.body
 
   return (
     <div {...stylex.props(styles.detail)}>
-      <h1 {...stylex.props(shared.pageTitle, styles.title)}>{page.data.title}</h1>
+      <h1 {...stylex.props(shared.pageTitle, styles.title)}>
+        {page.data.title}
+      </h1>
       <p {...stylex.props(shared.meta)}>
         <time dateTime={page.data.date}>{formatDate(page.data.date)}</time>
       </p>
@@ -68,5 +78,7 @@ export function FundingsDetail({ locale, slugs }: { locale: Locale; slugs: strin
 }
 
 function sameSlugs(a: string[], b: string[]): boolean {
-  return a.length === b.length && a.every((segment, index) => segment === b[index])
+  return (
+    a.length === b.length && a.every((segment, index) => segment === b[index])
+  )
 }

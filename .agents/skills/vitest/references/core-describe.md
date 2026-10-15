@@ -10,7 +10,8 @@ Group related tests into suites for organization and shared setup.
 ## Basic Usage
 
 ```ts
-import { describe, expect, test } from 'vitest'
+// Alias: suite
+import { describe, expect, suite, test } from 'vitest'
 
 describe('Math', () => {
   test('adds numbers', () => {
@@ -22,8 +23,6 @@ describe('Math', () => {
   })
 })
 
-// Alias: suite
-import { suite } from 'vitest'
 suite('equivalent to describe', () => {})
 ```
 
@@ -189,7 +188,7 @@ describe.only.shuffle('only and shuffled', () => {})
 - Shuffle order depends on `sequence.seed` config
 - `describe.sequential` was removed in v5 — use `{ concurrent: false }`
 
-<!-- 
+<!--
 Source references:
 - https://vitest.dev/api/describe.html
 -->

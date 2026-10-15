@@ -1,6 +1,13 @@
 import * as stylex from '@stylexjs/stylex'
 
-import { SPACE, TEXT, gray, neutral, primary, zinc } from '../styles/tokens.stylex.ts'
+import {
+  gray,
+  neutral,
+  primary,
+  SPACE,
+  TEXT,
+  zinc,
+} from '../styles/tokens.stylex.ts'
 
 /**
  * Ancestor selector for the dark colour scheme.
@@ -11,7 +18,6 @@ import { SPACE, TEXT, gray, neutral, primary, zinc } from '../styles/tokens.styl
  * stub and fail condition validation.
  */
 const DARK = '[data-theme="dark"]'
-
 
 /** Ports `layouts/partials/blox/resume-biography.html` and `-3`. */
 export const styles = stylex.create({

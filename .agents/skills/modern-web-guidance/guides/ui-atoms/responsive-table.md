@@ -14,6 +14,7 @@ The core of a responsive table is maintaining the relationship between data cell
 ## Implementation Steps
 
 ### 1. Markup and Layout
+
 Structure your table with standard semantic headers. Use a `.table-wrapper` to handle overflow and provide a container for queries.
 
 ```html
@@ -40,6 +41,7 @@ Structure your table with standard semantic headers. Use a `.table-wrapper` to h
 ```
 
 ### 2. Configure Sticky Headers
+
 Enable scrolling and make headers sticky. Use logical properties and explicit z-index values to manage the stacking order.
 
 ```css
@@ -71,17 +73,23 @@ tbody th {
 ```
 
 ### 3. Responsive Stacked Layout
+
 When space is limited, hide the original header row and transform the table into cards. Inject labels using pseudo-elements, providing the accessible name directly in CSS.
 
 ```css
 @container (width < 600px) {
-  table, thead, tbody, tr, th, td {
+  table,
+  thead,
+  tbody,
+  tr,
+  th,
+  td {
     display: block;
   }
 
   thead {
     /* MANDATORY: Hide column header from layout and screen readers. */
-    display: none
+    display: none;
   }
 
   tr {
@@ -99,20 +107,20 @@ When space is limited, hide the original header row and transform the table into
 
   /* Define column labels as CSS variables (often set via JS) */
   table {
-    --label-1: "Employee";
-    --label-2: "Role";
-    --label-3: "Status";
+    --label-1: 'Employee';
+    --label-2: 'Role';
+    --label-3: 'Status';
   }
 
   /* Inject labels with accessible names */
   td:nth-child(2)::before {
     /* MANDATORY: The accessible name (after the /) ensures screen readers 
        announce the label correctly without the trailing colon. */
-    content: var(--label-2) ": " / var(--label-2);
+    content: var(--label-2) ': ' / var(--label-2);
   }
   /* MANDATORY: Map the label for each column */
   td:nth-child(3)::before {
-    content: var(--label-3) ": " / var(--label-3);
+    content: var(--label-3) ': ' / var(--label-3);
   }
 }
 ```

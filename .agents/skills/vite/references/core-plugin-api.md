@@ -48,7 +48,9 @@ const plugin = () => {
       config = resolvedConfig
     },
     transform(code, id) {
-      if (config.command === 'serve') { /* dev */ }
+      if (config.command === 'serve') {
+        /* dev */
+      }
     },
   }
 }
@@ -279,7 +281,7 @@ Client side:
 
 ```ts
 if (import.meta.hot) {
-  import.meta.hot.on('my:event', (data) => {
+  import.meta.hot.on('my:event', data => {
     console.log(data.msg)
   })
 }

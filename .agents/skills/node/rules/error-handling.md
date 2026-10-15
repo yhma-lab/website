@@ -12,15 +12,19 @@ metadata:
 Use [@fastify/create-error](https://github.com/fastify/fastify-error) for creating custom errors with codes:
 
 ```typescript
-import createError from '@fastify/create-error';
+import createError from '@fastify/create-error'
 
-const NotFoundError = createError('NOT_FOUND', '%s not found', 404);
-const ValidationError = createError('VALIDATION_ERROR', '%s', 400);
-const DatabaseError = createError('DATABASE_ERROR', 'Database operation failed: %s', 500);
+const NotFoundError = createError('NOT_FOUND', '%s not found', 404)
+const ValidationError = createError('VALIDATION_ERROR', '%s', 400)
+const DatabaseError = createError(
+  'DATABASE_ERROR',
+  'Database operation failed: %s',
+  500,
+)
 
 // Usage
-throw new NotFoundError('User');
-throw new ValidationError('Email is required');
+throw new NotFoundError('User')
+throw new ValidationError('Email is required')
 ```
 
 ## Minimal Error Code Implementation
@@ -29,35 +33,42 @@ If you prefer no dependencies, use this minimal pattern:
 
 ```typescript
 interface AppErrorOptions {
-  code: string;
-  statusCode?: number;
-  cause?: Error;
+  code: string
+  statusCode?: number
+  cause?: Error
 }
 
 function createAppError(message: string, options: AppErrorOptions): Error {
-  const error = new Error(message, { cause: options.cause });
-  (error as any).code = options.code;
-  (error as any).statusCode = options.statusCode ?? 500;
-  Error.captureStackTrace(error, createAppError);
-  return error;
+  const error = new Error(message, { cause: options.cause })
+  ;(error as any).code = options.code
+  ;(error as any).statusCode = options.statusCode ?? 500
+  Error.captureStackTrace(error, createAppError)
+  return error
 }
 
 // Factory functions for common errors
 function notFound(resource: string): Error {
-  return createAppError(`${resource} not found`, { code: 'NOT_FOUND', statusCode: 404 });
+  return createAppError(`${resource} not found`, {
+    code: 'NOT_FOUND',
+    statusCode: 404,
+  })
 }
 
 function validationError(message: string): Error {
-  return createAppError(message, { code: 'VALIDATION_ERROR', statusCode: 400 });
+  return createAppError(message, { code: 'VALIDATION_ERROR', statusCode: 400 })
 }
 
 function databaseError(message: string, cause?: Error): Error {
-  return createAppError(message, { code: 'DATABASE_ERROR', statusCode: 500, cause });
+  return createAppError(message, {
+    code: 'DATABASE_ERROR',
+    statusCode: 500,
+    cause,
+  })
 }
 
 // Usage
-throw notFound('User');
-throw validationError('Email is required');
+throw notFound('User')
+throw validationError('Email is required')
 ```
 
 ## Checking Error Codes
@@ -65,17 +76,19 @@ throw validationError('Email is required');
 Check errors by code, not by class:
 
 ```typescript
-function isAppError(error: unknown): error is Error & { code: string; statusCode: number } {
-  return error instanceof Error && 'code' in error && 'statusCode' in error;
+function isAppError(
+  error: unknown,
+): error is Error & { code: string; statusCode: number } {
+  return error instanceof Error && 'code' in error && 'statusCode' in error
 }
 
 try {
-  await fetchUser(id);
+  await fetchUser(id)
 } catch (error) {
   if (isAppError(error) && error.code === 'NOT_FOUND') {
-    return null;
+    return null
   }
-  throw error;
+  throw error
 }
 ```
 
@@ -86,16 +99,16 @@ Always use try-catch with async/await and propagate errors properly:
 ```typescript
 async function fetchUser(id: string): Promise<User> {
   try {
-    const user = await db.users.findById(id);
+    const user = await db.users.findById(id)
     if (!user) {
-      throw notFound('User');
+      throw notFound('User')
     }
-    return user;
+    return user
   } catch (error) {
     if (isAppError(error)) {
-      throw error;
+      throw error
     }
-    throw databaseError('Failed to fetch user', error as Error);
+    throw databaseError('Failed to fetch user', error as Error)
   }
 }
 ```
@@ -111,23 +124,23 @@ See [graceful-shutdown.md](./graceful-shutdown.md) for proper shutdown handling.
 Fastify has built-in error handling:
 
 ```typescript
-import Fastify from 'fastify';
+import Fastify from 'fastify'
 
-const app = Fastify({ logger: true });
+const app = Fastify({ logger: true })
 
 app.setErrorHandler((error, request, reply) => {
-  const statusCode = (error as any).statusCode ?? 500;
-  const code = (error as any).code ?? 'INTERNAL_ERROR';
+  const statusCode = (error as any).statusCode ?? 500
+  const code = (error as any).code ?? 'INTERNAL_ERROR'
 
-  request.log.error(error);
+  request.log.error(error)
 
   reply.status(statusCode).send({
     error: {
       code,
       message: error.message,
     },
-  });
-});
+  })
+})
 ```
 
 ## Never Swallow Errors
@@ -137,17 +150,17 @@ Never use empty catch blocks that hide errors:
 ```typescript
 // BAD - error is swallowed
 try {
-  await riskyOperation();
+  await riskyOperation()
 } catch (error) {
   // Do nothing
 }
 
 // GOOD - handle or re-throw
 try {
-  await riskyOperation();
+  await riskyOperation()
 } catch (error) {
-  logger.error({ err: error }, 'Operation failed');
-  throw error;
+  logger.error({ err: error }, 'Operation failed')
+  throw error
 }
 ```
 
@@ -157,8 +170,8 @@ Use the `cause` option to preserve error chains:
 
 ```typescript
 try {
-  await externalService.call();
+  await externalService.call()
 } catch (error) {
-  throw new Error('Service call failed', { cause: error });
+  throw new Error('Service call failed', { cause: error })
 }
 ```

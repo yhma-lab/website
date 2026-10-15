@@ -10,8 +10,7 @@
  * Exits non-zero when a baseline route has no counterpart, so a ported page
  * cannot silently go missing.
  */
-
-import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
@@ -35,9 +34,9 @@ function baselineRoutes() {
   if (base === undefined) throw new Error('no <loc> in sitemap.xml')
 
   return [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)]
-    .map((match) => match[1].replace(base, ''))
-    .map((route) => (route.endsWith('/') ? route.slice(0, -1) : route))
-    .map((route) => (route === '' ? '/' : route))
+    .map(match => match[1].replace(base, ''))
+    .map(route => (route.endsWith('/') ? route.slice(0, -1) : route))
+    .map(route => (route === '' ? '/' : route))
 }
 
 function walk(dir, out = []) {
@@ -51,15 +50,17 @@ function walk(dir, out = []) {
 
 function generatedRoutes() {
   return walk(OUTPUT)
-    .map((file) => path.relative(OUTPUT, path.dirname(file)))
-    .map((route) => `/${route}`)
-    .map((route) => (route === '/.' ? '/' : route))
+    .map(file => path.relative(OUTPUT, path.dirname(file)))
+    .map(route => `/${route}`)
+    .map(route => (route === '/.' ? '/' : route))
     .sort()
 }
 
 function main() {
   if (!existsSync(BASELINE_SITEMAP)) {
-    console.log('No hugo-public/sitemap.xml; the baseline was already removed, nothing to compare.')
+    console.log(
+      'No hugo-public/sitemap.xml; the baseline was already removed, nothing to compare.',
+    )
     return
   }
   if (!existsSync(OUTPUT)) {
@@ -69,7 +70,9 @@ function main() {
 
   const expected = baselineRoutes()
   const actual = new Set(generatedRoutes())
-  const missing = expected.filter((route) => !actual.has(route) && !INTENTIONAL_GAPS.has(route))
+  const missing = expected.filter(
+    route => !actual.has(route) && !INTENTIONAL_GAPS.has(route),
+  )
 
   console.log(`baseline routes: ${expected.length}`)
   console.log(`generated routes: ${actual.size}`)

@@ -34,7 +34,11 @@ function displayName(slug: string, loaded: Profile | undefined): string {
   if (loaded) return loaded.title ?? slug
   return slug
     .split('-')
-    .map((part) => (part.length <= 2 ? part.toUpperCase() : `${part[0]?.toUpperCase() ?? ''}${part.slice(1)}`))
+    .map(part =>
+      part.length <= 2
+        ? part.toUpperCase()
+        : `${part[0]?.toUpperCase() ?? ''}${part.slice(1)}`,
+    )
     .join(' ')
 }
 
@@ -48,7 +52,9 @@ describe('author display names', () => {
 
   it('title-cases external collaborators who have no profile', () => {
     expect(displayName('c-l-liu', undefined)).toBe('C L Liu')
-    expect(displayName('daniel-maria-busiello', undefined)).toBe('Daniel Maria Busiello')
+    expect(displayName('daniel-maria-busiello', undefined)).toBe(
+      'Daniel Maria Busiello',
+    )
   })
 
   it('keeps `highlight_name` as the bold flag', () => {

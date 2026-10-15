@@ -1,5 +1,5 @@
-import { site } from '@/lib/site.ts'
 import { absoluteUrl } from '@/lib/links.ts'
+import { site } from '@/lib/site.ts'
 import { authors, fundings, pages, publications } from '@/lib/source.ts'
 
 /**
@@ -42,9 +42,12 @@ function escapeXml(value: string): string {
 
 export const GET = () => {
   const urls = entries()
-    .map((entry) => {
+    .map(entry => {
       const loc = `<loc>${escapeXml(absoluteUrl(site.baseUrl, normalize(entry.loc)))}</loc>`
-      const lastmod = entry.lastmod.length > 0 ? `<lastmod>${escapeXml(entry.lastmod)}</lastmod>` : ''
+      const lastmod =
+        entry.lastmod.length > 0
+          ? `<lastmod>${escapeXml(entry.lastmod)}</lastmod>`
+          : ''
       return `<url>${loc}${lastmod}<changefreq>weekly</changefreq></url>`
     })
     .join('')

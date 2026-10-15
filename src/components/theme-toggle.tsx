@@ -4,7 +4,6 @@ import * as stylex from '@stylexjs/stylex'
 import { useCallback, useSyncExternalStore } from 'react'
 
 import { SPACE } from '../styles/tokens.stylex.ts'
-
 import { Icon } from './icon.tsx'
 
 /**
@@ -54,7 +53,9 @@ function subscribe(onChange: () => void): () => void {
     attributeFilter: ['data-theme'],
     attributes: true,
   })
-  return () => { observer.disconnect(); }
+  return () => {
+    observer.disconnect()
+  }
 }
 
 export function ThemeToggle() {
@@ -73,7 +74,11 @@ export function ThemeToggle() {
   return (
     <button
       accessKey="t"
-      aria-label={theme === 'dark' ? 'Switch to light appearance' : 'Switch to dark appearance'}
+      aria-label={
+        theme === 'dark'
+          ? 'Switch to light appearance'
+          : 'Switch to dark appearance'
+      }
       onClick={toggle}
       title="appearance"
       type="button"

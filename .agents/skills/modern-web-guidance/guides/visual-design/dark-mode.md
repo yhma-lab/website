@@ -10,7 +10,7 @@ MANDATORY: To help prevent a "flash of un-themed content" (FOUC), place a `<meta
 
 ```html
 <!-- MANDATORY: Declare support for both light and dark themes -->
-<meta name="color-scheme" content="light dark">
+<meta name="color-scheme" content="light dark" />
 ```
 
 ### 2. Apply page-wide color scheme to CSS :root or html
@@ -41,7 +41,10 @@ For more control over the colors of built-in UI such as `accent-color` or `scrol
   --color-brand-text-dark: oklch(40% 0.23 270);
 
   --color-brand: light-dark(var(--color-brand-light), var(--color-brand-dark));
-  --color-brand-text: light-dark(var(--color-brand-text-light), var(--color-brand-text-dark));
+  --color-brand-text: light-dark(
+    var(--color-brand-text-light),
+    var(--color-brand-text-dark)
+  );
 
   /* MANDATORY: Automatically adapt native UI to user system preferences */
   color-scheme: light dark;
@@ -61,7 +64,6 @@ OPTIONAL: A number of system colors are available, which also automatically adap
 Even when overriding the system default, it can be useful to use the `prefers-color-scheme` media query to define **different** color pairs that take into account the colors of the browser and OS chrome around the page (or of the surrounding page, when the page is used as an iframe).
 
 For example, use a slightly dimmer light theme when the system setting is `dark`, or a more contrasting dark theme when the system setting is `light`, so the page is not visually overpowered by the surrounding UI.
-
 
 ## Fine-grained browser UI customization
 
@@ -106,6 +108,7 @@ You can use `scrollbar-color` together with `light-dark()` to set custom scrollb
 ### Further customization
 
 Most browser UI exposes pseudo-elements to fully customize its appearance, such as:
+
 - `::placeholder`
 - `::spelling-error`
 - `::grammar-error`
@@ -182,7 +185,7 @@ To adapt to the user's preferences in older browsers, use `prefers-color-scheme`
 }
 
 button.primary {
-	background-color: var(--color-brand);
+  background-color: var(--color-brand);
 }
 ```
 
@@ -207,7 +210,10 @@ For browsers that support `color-scheme` but not yet `light-dark()`, light and d
 
   /* OPTIONAL: use light-dark() for more control of built-in UI colors */
   @supports (color: light-dark(white, black)) {
-    --accent-color: light-dark(var(--brand-accent-light), var(--brand-accent-dark));
+    --accent-color: light-dark(
+      var(--brand-accent-light),
+      var(--brand-accent-dark)
+    );
   }
 
   /* MANDATORY: Automatically adapt native UI to user system preferences */
@@ -217,7 +223,8 @@ For browsers that support `color-scheme` but not yet `light-dark()`, light and d
   accent-color: var(--accent-color);
 }
 
-pre, code {
+pre,
+code {
   color-scheme: dark;
 
   /* **Mandatory**: any inherited color properties must be set again, even if to the same design tokens */
@@ -239,19 +246,22 @@ Define the switch once on `:root`. Every use site then only needs both images in
 ```css
 :root {
   --light-type: ;
-  --dark-type: type("image/do-not-use");
+  --dark-type: type('image/do-not-use');
 
   /* MANDATORY: Fallback for browsers without light-dark() image support */
   @media (prefers-color-scheme: dark) {
-    --light-type: type("image/do-not-use");
+    --light-type: type('image/do-not-use');
     --dark-type: ;
   }
 }
 
 .hero {
-  background-image: image-set(url(hero-light.png) var(--light-type), url(hero-dark.png) var(--dark-type));
+  background-image: image-set(
+    url(hero-light.png) var(--light-type),
+    url(hero-dark.png) var(--dark-type)
+  );
 
-  @supports (background-image: light-dark(url("a"), url("b"))) {
+  @supports (background-image: light-dark(url('a'), url('b'))) {
     background-image: light-dark(url(hero-light.png), url(hero-dark.png));
   }
 }
@@ -274,7 +284,7 @@ Simpler when only a handful of images vary, but every image needs its own media 
     --hero-image: url(hero-dark.png);
   }
 
-  @supports (background-image: light-dark(url("a"), url("b"))) {
+  @supports (background-image: light-dark(url('a'), url('b'))) {
     --hero-image: light-dark(url(hero-light.png), url(hero-dark.png));
   }
 }

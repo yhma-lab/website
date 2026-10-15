@@ -1,6 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 
-import { SPACE, TEXT, gray, primary } from '../styles/tokens.stylex.ts'
+import { gray, primary, SPACE, TEXT } from '../styles/tokens.stylex.ts'
 
 /**
  * Ancestor selector for the dark colour scheme.
@@ -11,7 +11,6 @@ import { SPACE, TEXT, gray, primary } from '../styles/tokens.stylex.ts'
  * stub and fail condition validation.
  */
 const DARK = '[data-theme="dark"]'
-
 
 /** Authored `design.columns`, mapped to a grid template. */
 const COLUMNS: Record<number, string> = {

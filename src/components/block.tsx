@@ -1,5 +1,6 @@
-import * as stylex from '@stylexjs/stylex'
 import type { ReactNode } from 'react'
+
+import * as stylex from '@stylexjs/stylex'
 
 import { styles } from './block.stylex.ts'
 
@@ -12,7 +13,10 @@ export interface BlockProps {
 /** `<section class="relative hbb-section" style="padding: {spacing} 0">`. */
 export function Block({ children, spacing }: BlockProps) {
   return (
-    <section style={{ padding: `${spacing} 0` }} {...stylex.props(styles.block)}>
+    <section
+      style={{ padding: `${spacing} 0` }}
+      {...stylex.props(styles.block)}
+    >
       {children}
     </section>
   )

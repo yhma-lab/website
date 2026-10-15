@@ -1,6 +1,6 @@
-import { SiteFrame } from '@/components/site-frame.tsx'
-
 import type { ReactNode } from 'react'
+
+import { SiteFrame } from '@/components/site-frame.tsx'
 
 export interface LocalizedLayoutProps {
   children: ReactNode

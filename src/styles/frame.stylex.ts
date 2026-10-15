@@ -1,6 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 
-import { TEXT, WIDTH, neutral, theme } from './tokens.stylex.ts'
+import { neutral, TEXT, theme, WIDTH } from './tokens.stylex.ts'
 
 const DARK = '[data-theme="dark"]'
 

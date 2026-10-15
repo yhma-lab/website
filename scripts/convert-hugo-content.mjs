@@ -24,9 +24,8 @@
  * `content.generated/` still matches its source, and because the git history is
  * the backup for the original front matter.
  */
-
-import { cp, mkdir, readdir, readFile, writeFile } from 'node:fs/promises'
 import { existsSync } from 'node:fs'
+import { cp, mkdir, readdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
@@ -64,7 +63,14 @@ const DATE_KEYS = new Set([
   'publishDate',
 ])
 
-const IMAGE_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg'])
+const IMAGE_EXTENSIONS = new Set([
+  '.jpg',
+  '.jpeg',
+  '.png',
+  '.webp',
+  '.gif',
+  '.svg',
+])
 
 const report = { assets: 0, files: 0, skipped: [], warnings: [] }
 
@@ -76,10 +82,10 @@ const report = { assets: 0, files: 0, skipped: [], warnings: [] }
  * than a kebab-case transform so that the generated directory name and the
  * `authors:` references in publications always agree.
  */
-const authorSlug = (name) => name.toLowerCase().replaceAll(' ', '-')
+const authorSlug = name => name.toLowerCase().replaceAll(' ', '-')
 
 /** Stable publication/funding/event slug: mirrors Hugo's content path rules. */
-const contentSlug = (name) => name.toLowerCase()
+const contentSlug = name => name.toLowerCase()
 
 function splitFrontMatter(source, file) {
   const match = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/.exec(source)
@@ -95,7 +101,9 @@ function normalizeValue(key, value) {
   if (DATE_KEYS.has(key) && typeof value === 'string') return value
   if (value instanceof Date) return value.toISOString().slice(0, 10)
   if (Array.isArray(value)) {
-    const items = value.map((item) => normalizeValue(key, item)).filter((item) => item !== undefined)
+    const items = value
+      .map(item => normalizeValue(key, item))
+      .filter(item => item !== undefined)
     return items.length > 0 ? items : undefined
   }
   if (typeof value === 'object') {
@@ -133,8 +141,12 @@ function targetFileFor(name) {
   const locale = /\.zh\.mdx?$/.test(name) ? 'cn' : 'en'
   const bare = name.replace(/\.zh\.mdx?$/, '').replace(/\.mdx?$/, '')
   const isEntry = bare === '_index'
-  if (isEntry) return { isEntry, name: locale === 'cn' ? 'index.cn.mdx' : 'index.mdx' }
-  return { isEntry, name: `${bare.replace(/^_/, '')}${locale === 'cn' ? '.cn' : ''}.mdx` }
+  if (isEntry)
+    return { isEntry, name: locale === 'cn' ? 'index.cn.mdx' : 'index.mdx' }
+  return {
+    isEntry,
+    name: `${bare.replace(/^_/, '')}${locale === 'cn' ? '.cn' : ''}.mdx`,
+  }
 }
 
 /**
@@ -148,7 +160,9 @@ async function convertBundle({ dir, family }) {
 
   for (const entry of files) {
     if (entry.isDirectory()) {
-      report.warnings.push(`${path.relative(SRC, path.join(dir, entry.name))}: nested directory not migrated`)
+      report.warnings.push(
+        `${path.relative(SRC, path.join(dir, entry.name))}: nested directory not migrated`,
+      )
       continue
     }
     const extension = path.extname(entry.name).toLowerCase()
@@ -169,11 +183,14 @@ async function convertBundle({ dir, family }) {
     written.add(targetName)
 
     const source = await readFile(path.join(dir, name), 'utf8')
-    const { body, data } = splitFrontMatter(source, path.relative(ROOT, path.join(dir, name)))
+    const { body, data } = splitFrontMatter(
+      source,
+      path.relative(ROOT, path.join(dir, name)),
+    )
 
     if (family === 'authors') {
       if (Array.isArray(data['authors'])) {
-        data['authors'] = data['authors'].map((item) => authorSlug(item))
+        data['authors'] = data['authors'].map(item => authorSlug(item))
       }
       if (data['profiles'] === undefined && data['social'] !== undefined) {
         data['profiles'] = data['social']
@@ -187,7 +204,7 @@ async function convertBundle({ dir, family }) {
 
     if (family.startsWith('publications') || family === 'events') {
       if (Array.isArray(data['authors'])) {
-        data['authors'] = data['authors'].map((item) => authorSlug(item))
+        data['authors'] = data['authors'].map(item => authorSlug(item))
       }
     }
 
@@ -244,11 +261,18 @@ async function main() {
     if (!entry.isDirectory()) continue
     const dir = path.join(authorsDir, entry.name)
     const slug = authorSlug(entry.name)
-    const { assets } = await convertBundle({ dir, family: 'authors', origin: entry.name })
+    const { assets } = await convertBundle({
+      dir,
+      family: 'authors',
+      origin: entry.name,
+    })
     for (const asset of assets) {
       const extension = path.extname(asset).toLowerCase()
       if (IMAGE_EXTENSIONS.has(extension)) {
-        await copyAsset(path.join(dir, asset), path.join(PUBLIC, 'authors', slug, asset))
+        await copyAsset(
+          path.join(dir, asset),
+          path.join(PUBLIC, 'authors', slug, asset),
+        )
       }
     }
   }
@@ -263,18 +287,32 @@ async function main() {
         if (!nested.isDirectory()) continue
         const nestedDir = path.join(dir, nested.name)
         const slug = contentSlug(nested.name)
-        const { assets } = await convertBundle({ dir: nestedDir, family, origin: `pat/${nested.name}` })
+        const { assets } = await convertBundle({
+          dir: nestedDir,
+          family,
+          origin: `pat/${nested.name}`,
+        })
         for (const asset of assets) {
-          await copyAsset(path.join(nestedDir, asset), path.join(PUBLIC, family, slug, asset))
+          await copyAsset(
+            path.join(nestedDir, asset),
+            path.join(PUBLIC, family, slug, asset),
+          )
         }
       }
       continue
     }
     if (!entry.isDirectory()) continue
     const slug = contentSlug(entry.name)
-    const { assets } = await convertBundle({ dir, family: 'publications', origin: entry.name })
+    const { assets } = await convertBundle({
+      dir,
+      family: 'publications',
+      origin: entry.name,
+    })
     for (const asset of assets) {
-      await copyAsset(path.join(dir, asset), path.join(PUBLIC, 'publications', slug, asset))
+      await copyAsset(
+        path.join(dir, asset),
+        path.join(PUBLIC, 'publications', slug, asset),
+      )
     }
   }
 
@@ -291,15 +329,28 @@ async function main() {
       if (!entry.isDirectory()) continue
       const dir = path.join(base, entry.name)
       const slug = contentSlug(entry.name)
-      const { assets } = await convertBundle({ dir, family, origin: entry.name })
+      const { assets } = await convertBundle({
+        dir,
+        family,
+        origin: entry.name,
+      })
       for (const asset of assets) {
-        await copyAsset(path.join(dir, asset), path.join(PUBLIC, family, slug, asset))
+        await copyAsset(
+          path.join(dir, asset),
+          path.join(PUBLIC, family, slug, asset),
+        )
       }
     }
   }
 
   // Top-level landing/legal pages -> content.generated/pages/<slug>/
-  const pages = ['_index.md', 'publications.md', 'fundings.md', 'privacy.md', 'terms.md']
+  const pages = [
+    '_index.md',
+    'publications.md',
+    'fundings.md',
+    'privacy.md',
+    'terms.md',
+  ]
   for (const name of pages) {
     const file = path.join(SRC, name)
     if (!existsSync(file)) {
@@ -320,9 +371,13 @@ async function main() {
     void readKeys
   }
 
-  console.log(`${WRITE ? 'wrote' : 'would write'} ${report.files} content file(s), copied ${report.assets} asset(s)`)
-  if (report.skipped.length > 0) console.log('skipped:\n  ' + report.skipped.join('\n  '))
-  if (report.warnings.length > 0) console.log('warnings:\n  ' + report.warnings.join('\n  '))
+  console.log(
+    `${WRITE ? 'wrote' : 'would write'} ${report.files} content file(s), copied ${report.assets} asset(s)`,
+  )
+  if (report.skipped.length > 0)
+    console.log('skipped:\n  ' + report.skipped.join('\n  '))
+  if (report.warnings.length > 0)
+    console.log('warnings:\n  ' + report.warnings.join('\n  '))
 }
 
 await main()

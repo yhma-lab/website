@@ -1,4 +1,3 @@
-import * as stylex from '@stylexjs/stylex'
 import type { ReactNode } from 'react'
 
 import { Footer } from '@/components/footer.tsx'
@@ -6,6 +5,7 @@ import { Navbar } from '@/components/navbar.tsx'
 import { siteHref } from '@/lib/links.ts'
 import { frameStyles } from '@/styles/frame.stylex.ts'
 import { themeMarker } from '@/styles/tokens.stylex.ts'
+import * as stylex from '@stylexjs/stylex'
 
 export interface SiteFrameProps {
   children: ReactNode

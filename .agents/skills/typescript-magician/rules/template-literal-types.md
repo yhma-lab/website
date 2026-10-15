@@ -14,10 +14,10 @@ Template literal types allow you to manipulate string types using the same synta
 ## Basic Syntax
 
 ```typescript
-type Greeting = `Hello, ${string}`;
+type Greeting = `Hello, ${string}`
 
-const valid: Greeting = "Hello, World"; // OK
-const invalid: Greeting = "Hi, World"; // Error: doesn't match pattern
+const valid: Greeting = 'Hello, World' // OK
+const invalid: Greeting = 'Hi, World' // Error: doesn't match pattern
 ```
 
 ## String Literal Unions
@@ -25,10 +25,10 @@ const invalid: Greeting = "Hi, World"; // Error: doesn't match pattern
 Template literals distribute over unions:
 
 ```typescript
-type Size = "small" | "medium" | "large";
-type Color = "red" | "blue" | "green";
+type Size = 'small' | 'medium' | 'large'
+type Color = 'red' | 'blue' | 'green'
 
-type SizedColor = `${Size}-${Color}`;
+type SizedColor = `${Size}-${Color}`
 // "small-red" | "small-blue" | "small-green" |
 // "medium-red" | "medium-blue" | "medium-green" |
 // "large-red" | "large-blue" | "large-green"
@@ -40,32 +40,34 @@ Extract parts of string types:
 
 ```typescript
 // Remove "maps:" prefix
-type RemoveMaps<T> = T extends `maps:${infer Rest}` ? Rest : T;
+type RemoveMaps<T> = T extends `maps:${infer Rest}` ? Rest : T
 
-type Test1 = RemoveMaps<"maps:longitude">; // "longitude"
-type Test2 = RemoveMaps<"maps:latitude">; // "latitude"
-type Test3 = RemoveMaps<"other">; // "other"
+type Test1 = RemoveMaps<'maps:longitude'> // "longitude"
+type Test2 = RemoveMaps<'maps:latitude'> // "latitude"
+type Test3 = RemoveMaps<'other'> // "other"
 ```
 
 ### Remove Suffix
 
 ```typescript
-type RemovePostSuffix<T> = T extends `${infer Prefix}:post` ? Prefix : T;
+type RemovePostSuffix<T> = T extends `${infer Prefix}:post` ? Prefix : T
 
-type Test = RemovePostSuffix<"attribute:post">; // "attribute"
+type Test = RemovePostSuffix<'attribute:post'> // "attribute"
 ```
 
 ### Split on Delimiter
 
 ```typescript
-type Split<S extends string, D extends string> =
-  S extends `${infer Head}${D}${infer Tail}`
-    ? [Head, ...Split<Tail, D>]
-    : S extends ""
+type Split<
+  S extends string,
+  D extends string,
+> = S extends `${infer Head}${D}${infer Tail}`
+  ? [Head, ...Split<Tail, D>]
+  : S extends ''
     ? []
-    : [S];
+    : [S]
 
-type Parts = Split<"a-b-c", "-">; // ["a", "b", "c"]
+type Parts = Split<'a-b-c', '-'> // ["a", "b", "c"]
 ```
 
 ## Built-in String Manipulation Types
@@ -73,10 +75,10 @@ type Parts = Split<"a-b-c", "-">; // ["a", "b", "c"]
 TypeScript provides utility types for case conversion:
 
 ```typescript
-type Upper = Uppercase<"hello">; // "HELLO"
-type Lower = Lowercase<"HELLO">; // "hello"
-type Cap = Capitalize<"hello">; // "Hello"
-type Uncap = Uncapitalize<"Hello">; // "hello"
+type Upper = Uppercase<'hello'> // "HELLO"
+type Lower = Lowercase<'HELLO'> // "hello"
+type Cap = Capitalize<'hello'> // "Hello"
+type Uncap = Uncapitalize<'Hello'> // "hello"
 ```
 
 ## Practical Examples
@@ -87,31 +89,31 @@ type Uncap = Uncapitalize<"Hello">; // "hello"
 type CamelCase<S extends string> =
   S extends `${infer P1}-${infer P2}${infer P3}`
     ? `${Lowercase<P1>}${Uppercase<P2>}${CamelCase<P3>}`
-    : Lowercase<S>;
+    : Lowercase<S>
 
-type Test = CamelCase<"background-color">; // "backgroundColor"
-type Test2 = CamelCase<"border-top-width">; // "borderTopWidth"
+type Test = CamelCase<'background-color'> // "backgroundColor"
+type Test2 = CamelCase<'border-top-width'> // "borderTopWidth"
 ```
 
 ### Event Name Generation
 
 ```typescript
-type EventName<T extends string> = `on${Capitalize<T>}`;
+type EventName<T extends string> = `on${Capitalize<T>}`
 
-type MouseEvents = "click" | "mousedown" | "mouseup";
-type MouseHandlers = EventName<MouseEvents>;
+type MouseEvents = 'click' | 'mousedown' | 'mouseup'
+type MouseHandlers = EventName<MouseEvents>
 // "onClick" | "onMousedown" | "onMouseup"
 ```
 
 ### Getter/Setter Names
 
 ```typescript
-type Getter<T extends string> = `get${Capitalize<T>}`;
-type Setter<T extends string> = `set${Capitalize<T>}`;
+type Getter<T extends string> = `get${Capitalize<T>}`
+type Setter<T extends string> = `set${Capitalize<T>}`
 
-type PropName = "name" | "age";
-type Getters = Getter<PropName>; // "getName" | "getAge"
-type Setters = Setter<PropName>; // "setName" | "setAge"
+type PropName = 'name' | 'age'
+type Getters = Getter<PropName> // "getName" | "getAge"
+type Setters = Setter<PropName> // "setName" | "setAge"
 ```
 
 ## Object Key Transformation
@@ -120,15 +122,15 @@ type Setters = Setter<PropName>; // "setName" | "setAge"
 
 ```typescript
 type AddPrefix<T, P extends string> = {
-  [K in keyof T as K extends string ? `${P}${K}` : K]: T[K];
-};
-
-interface User {
-  name: string;
-  age: number;
+  [K in keyof T as K extends string ? `${P}${K}` : K]: T[K]
 }
 
-type PrefixedUser = AddPrefix<User, "user_">;
+interface User {
+  name: string
+  age: number
+}
+
+type PrefixedUser = AddPrefix<User, 'user_'>
 // { user_name: string; user_age: number }
 ```
 
@@ -136,15 +138,15 @@ type PrefixedUser = AddPrefix<User, "user_">;
 
 ```typescript
 type AddSuffix<T, S extends string> = {
-  [K in keyof T as K extends string ? `${K}${S}` : never]: T[K];
-};
-
-interface Data {
-  a: number;
-  b: number;
+  [K in keyof T as K extends string ? `${K}${S}` : never]: T[K]
 }
 
-type NewData = AddSuffix<Data, "_new">;
+interface Data {
+  a: number
+  b: number
+}
+
+type NewData = AddSuffix<Data, '_new'>
 // { a_new: number; b_new: number }
 ```
 
@@ -154,19 +156,19 @@ type NewData = AddSuffix<Data, "_new">;
 type SnakeToCamel<S extends string> =
   S extends `${infer P1}_${infer P2}${infer P3}`
     ? `${Lowercase<P1>}${Uppercase<P2>}${SnakeToCamel<P3>}`
-    : S;
+    : S
 
 type CamelizeKeys<T> = {
-  [K in keyof T as K extends string ? SnakeToCamel<K> : K]: T[K];
-};
-
-interface ApiResponse {
-  user_id: string;
-  first_name: string;
-  last_name: string;
+  [K in keyof T as K extends string ? SnakeToCamel<K> : K]: T[K]
 }
 
-type CamelResponse = CamelizeKeys<ApiResponse>;
+interface ApiResponse {
+  user_id: string
+  first_name: string
+  last_name: string
+}
+
+type CamelResponse = CamelizeKeys<ApiResponse>
 // { userId: string; firstName: string; lastName: string }
 ```
 
@@ -177,18 +179,18 @@ type ExtractRouteParams<T extends string> =
   T extends `${string}:${infer Param}/${infer Rest}`
     ? Param | ExtractRouteParams<`/${Rest}`>
     : T extends `${string}:${infer Param}`
-    ? Param
-    : never;
+      ? Param
+      : never
 
-type Params = ExtractRouteParams<"/users/:userId/posts/:postId">;
+type Params = ExtractRouteParams<'/users/:userId/posts/:postId'>
 // "userId" | "postId"
 
 // Create typed params object
 type RouteParams<T extends string> = {
-  [K in ExtractRouteParams<T>]: string;
-};
+  [K in ExtractRouteParams<T>]: string
+}
 
-type UserPostParams = RouteParams<"/users/:userId/posts/:postId">;
+type UserPostParams = RouteParams<'/users/:userId/posts/:postId'>
 // { userId: string; postId: string }
 ```
 
@@ -197,30 +199,30 @@ type UserPostParams = RouteParams<"/users/:userId/posts/:postId">;
 ### Email Pattern (Simplified)
 
 ```typescript
-type ValidEmail = `${string}@${string}.${string}`;
+type ValidEmail = `${string}@${string}.${string}`
 
 function validateEmail<T extends string>(
-  email: T extends ValidEmail ? T : never
+  email: T extends ValidEmail ? T : never,
 ): T {
-  return email;
+  return email
 }
 
-validateEmail("user@example.com"); // OK
-validateEmail("invalid"); // Error
+validateEmail('user@example.com') // OK
+validateEmail('invalid') // Error
 ```
 
 ### URL Pattern
 
 ```typescript
-type Protocol = "http" | "https";
-type ValidUrl = `${Protocol}://${string}`;
+type Protocol = 'http' | 'https'
+type ValidUrl = `${Protocol}://${string}`
 
 function fetchUrl(url: ValidUrl): Promise<Response> {
-  return fetch(url);
+  return fetch(url)
 }
 
-fetchUrl("https://api.example.com"); // OK
-fetchUrl("ftp://files.example.com"); // Error
+fetchUrl('https://api.example.com') // OK
+fetchUrl('ftp://files.example.com') // Error
 ```
 
 ## Complex Parsing
@@ -232,22 +234,21 @@ type ParseQueryString<T extends string> =
   T extends `${infer Key}=${infer Value}&${infer Rest}`
     ? { [K in Key]: Value } & ParseQueryString<Rest>
     : T extends `${infer Key}=${infer Value}`
-    ? { [K in Key]: Value }
-    : {};
+      ? { [K in Key]: Value }
+      : {}
 
-type QueryParams = ParseQueryString<"name=John&age=30&city=NYC">;
+type QueryParams = ParseQueryString<'name=John&age=30&city=NYC'>
 // { name: "John" } & { age: "30" } & { city: "NYC" }
 ```
 
 ### Parse Dot Notation Path
 
 ```typescript
-type ParsePath<T extends string> =
-  T extends `${infer Key}.${infer Rest}`
-    ? [Key, ...ParsePath<Rest>]
-    : [T];
+type ParsePath<T extends string> = T extends `${infer Key}.${infer Rest}`
+  ? [Key, ...ParsePath<Rest>]
+  : [T]
 
-type Path = ParsePath<"user.address.city">; // ["user", "address", "city"]
+type Path = ParsePath<'user.address.city'> // ["user", "address", "city"]
 ```
 
 ## When to Use Template Literal Types
@@ -269,7 +270,7 @@ TypeScript has recursion limits. Very deep template literal operations may fail:
 // May hit recursion limit with very long strings
 type DeepSplit<S extends string> = S extends `${infer H}${infer T}`
   ? [H, ...DeepSplit<T>]
-  : [];
+  : []
 ```
 
 ### Greedy Matching
@@ -278,9 +279,9 @@ Template literals match greedily:
 
 ```typescript
 // This captures everything before the LAST .json
-type GetPath<T> = T extends `${infer Path}.json` ? Path : never;
+type GetPath<T> = T extends `${infer Path}.json` ? Path : never
 
-type Test = GetPath<"folder/file.backup.json">;
+type Test = GetPath<'folder/file.backup.json'>
 // "folder/file.backup" (includes the extra .backup)
 ```
 
@@ -291,8 +292,8 @@ Template literals only work with string keys:
 ```typescript
 type AddPrefix<T, P extends string> = {
   // Need to check K extends string to filter out symbols
-  [K in keyof T as K extends string ? `${P}${K}` : never]: T[K];
-};
+  [K in keyof T as K extends string ? `${P}${K}` : never]: T[K]
+}
 ```
 
 ## Best Practices

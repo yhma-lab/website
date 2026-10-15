@@ -1,15 +1,15 @@
 /** @import { ConfigWithExtends } from '@eslint/config-helpers' */
 import process from 'node:process'
-import packageJson from 'eslint-package-json'
-import { defineConfig, globalIgnores } from 'eslint/config'
-import perfectionist from 'eslint-plugin-perfectionist'
-import unicorn from 'eslint-plugin-unicorn'
-import tseslint from 'typescript-eslint'
 
 import eslintReact from '@eslint-react/eslint-plugin'
 import { rules } from '@stylexjs/eslint-plugin'
+import packageJson from 'eslint-package-json'
+import perfectionist from 'eslint-plugin-perfectionist'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactYouMightNotNeedAnEffect from 'eslint-plugin-react-you-might-not-need-an-effect'
+import unicorn from 'eslint-plugin-unicorn'
+import { defineConfig, globalIgnores } from 'eslint/config'
+import tseslint from 'typescript-eslint'
 
 /** @type { ConfigWithExtends } */
 const packageJsonConfig = {

@@ -17,8 +17,7 @@
  * committed, so this only needs running to add an icon or to recover from a
  * corrupted file.
  */
-
-import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import process from 'node:process'
@@ -75,9 +74,13 @@ function fromSvgLiteral(svg) {
 }
 
 function readSets() {
-  const hero = JSON.parse(readFileSync(path.join(ICON_DIR, 'hero.json'), 'utf8')).icons
+  const hero = JSON.parse(
+    readFileSync(path.join(ICON_DIR, 'hero.json'), 'utf8'),
+  ).icons
   const blox = parse(readFileSync(path.join(ICON_DIR, 'hb.yaml'), 'utf8')).icons
-  const academicons = JSON.parse(readFileSync(path.join(ICON_DIR, 'academicons.json'), 'utf8')).icons
+  const academicons = JSON.parse(
+    readFileSync(path.join(ICON_DIR, 'academicons.json'), 'utf8'),
+  ).icons
   return { academicons, blox, hero }
 }
 
@@ -114,7 +117,9 @@ function main() {
       found[name] = sources.built[name]
       continue
     }
-    const [prefix, bare] = name.includes('/') ? name.split('/', 2) : [undefined, name]
+    const [prefix, bare] = name.includes('/')
+      ? name.split('/', 2)
+      : [undefined, name]
     if (prefix === 'academicons' && sources.academicons[bare]) {
       found[name] = {
         body: sources.academicons[bare].body.replace(/\s+/g, ' ').trim(),
@@ -124,7 +129,10 @@ function main() {
     }
     if (sources.hero[bare]) {
       const { body } = sources.hero[bare]
-      found[name] = { body: body.replace(/\s+/g, ' ').trim(), viewBox: '0 0 24 24' }
+      found[name] = {
+        body: body.replace(/\s+/g, ' ').trim(),
+        viewBox: '0 0 24 24',
+      }
       continue
     }
     if (sources.blox[bare]) {
@@ -173,7 +181,9 @@ function main() {
   lines.push('')
 
   writeFileSync(OUT, lines.join('\n'), 'utf8')
-  console.log(`wrote ${Object.keys(found).length} icons to ${path.relative(ROOT, OUT)}`)
+  console.log(
+    `wrote ${Object.keys(found).length} icons to ${path.relative(ROOT, OUT)}`,
+  )
 }
 
 main()

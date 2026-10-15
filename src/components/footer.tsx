@@ -1,7 +1,5 @@
-import * as stylex from '@stylexjs/stylex'
-
 import { license, site } from '@/lib/site.ts'
-
+import * as stylex from '@stylexjs/stylex'
 
 const DARK = '[data-theme="dark"]'
 
@@ -51,14 +49,30 @@ export function Footer() {
     <footer>
       <p {...stylex.props(styles.text)}>
         {`${site.shortTitle} © ${BUILD_YEAR}. This site is licensed under `}
-        <a href={license.url} rel="noopener noreferrer" target="_blank" {...stylex.props(styles.link)}>
+        <a
+          href={license.url}
+          rel="noopener noreferrer"
+          target="_blank"
+          {...stylex.props(styles.link)}
+        >
           {license.name}
         </a>
         {'. Build with ❤️'}
       </p>
       <p {...stylex.props(styles.iconRow)}>
-        <a aria-label={license.name} href={license.url} rel="noopener noreferrer" target="_blank">
-          <img alt={license.name} height={31} src="/media/cc-by-nc-sa.svg" width={88} {...stylex.props(styles.badge)} />
+        <a
+          aria-label={license.name}
+          href={license.url}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <img
+            alt={license.name}
+            height={31}
+            src="/media/cc-by-nc-sa.svg"
+            width={88}
+            {...stylex.props(styles.badge)}
+          />
         </a>
       </p>
     </footer>

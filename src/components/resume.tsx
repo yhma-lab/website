@@ -1,14 +1,14 @@
-import * as stylex from '@stylexjs/stylex'
 import type { MDXContent } from 'mdx/types'
 import type { ReactNode } from 'react'
+import type { AuthorPage } from '../lib/source.ts'
+import type { ExperienceEntry } from './bio-text.ts'
+
+import * as stylex from '@stylexjs/stylex'
 
 import { styles } from './biography.stylex.ts'
 import { Icon } from './icon.tsx'
-import { avatarFor } from './people.tsx'
 import { getMdxComponents } from './mdx.tsx'
-
-import type { ExperienceEntry } from './bio-text.ts'
-import type { AuthorPage } from '../lib/source.ts'
+import { avatarFor } from './people.tsx'
 
 /** Renders an author's Markdown body with the shared prose mapping. */
 export function AuthorBio({ body }: { body: MDXContent }) {
@@ -48,9 +48,11 @@ export function PersonHeader({ author, role, social }: PersonHeaderProps) {
       <div>
         <div {...stylex.props(styles.name)}>{author.data.title}</div>
         {role ? <h3 {...stylex.props(styles.role)}>{role}</h3> : null}
-        {organizations.map((organization) => (
+        {organizations.map(organization => (
           <div key={organization.name} {...stylex.props(styles.org)}>
-            <ExternalLink href={organization.url.length > 0 ? organization.url : undefined}>
+            <ExternalLink
+              href={organization.url.length > 0 ? organization.url : undefined}
+            >
               {organization.name}
             </ExternalLink>
           </div>
@@ -61,7 +63,13 @@ export function PersonHeader({ author, role, social }: PersonHeaderProps) {
   )
 }
 
-export function ExternalLink({ children, href }: { children: ReactNode; href: string | undefined }) {
+export function ExternalLink({
+  children,
+  href,
+}: {
+  children: ReactNode
+  href: string | undefined
+}) {
   if (!href) return <>{children}</>
   return (
     <a href={href} rel="noopener noreferrer" target="_blank">
@@ -69,4 +77,3 @@ export function ExternalLink({ children, href }: { children: ReactNode; href: st
     </a>
   )
 }
-

@@ -1,6 +1,6 @@
 import { absoluteUrl } from '@/lib/links.ts'
-import { sortedFundings, sortedPublications } from '@/lib/sort.ts'
 import { localeTitles, site } from '@/lib/site.ts'
+import { sortedFundings, sortedPublications } from '@/lib/sort.ts'
 
 /**
  * Site feed.
@@ -13,20 +13,22 @@ import { localeTitles, site } from '@/lib/site.ts'
 type Item = { date: string; description: string; link: string; title: string }
 
 function items(): Item[] {
-  const publications = sortedPublications().map((page) => ({
+  const publications = sortedPublications().map(page => ({
     date: page.data.date,
     description: page.data.abstract,
     link: page.url,
     title: page.data.title,
   }))
-  const fundings = sortedFundings().map((page) => ({
+  const fundings = sortedFundings().map(page => ({
     date: page.data.date,
     description: page.data.summary,
     link: page.url,
     title: page.data.title,
   }))
 
-  return [...publications, ...fundings].toSorted((a, b) => Date.parse(b.date) - Date.parse(a.date))
+  return [...publications, ...fundings].toSorted(
+    (a, b) => Date.parse(b.date) - Date.parse(a.date),
+  )
 }
 
 function escapeXml(value: string): string {
@@ -51,7 +53,7 @@ export const GET = () => {
     `<language>${site.languageCode}</language>`,
     `<lastBuildDate>${new Date(lastBuild).toUTCString()}</lastBuildDate>`,
     list
-      .map((item) =>
+      .map(item =>
         [
           '<item>',
           `<title>${escapeXml(item.title)}</title>`,
@@ -66,7 +68,9 @@ export const GET = () => {
     '</channel></rss>',
   ].join('')
 
-  return new Response(body, { headers: { 'content-type': 'application/rss+xml' } })
+  return new Response(body, {
+    headers: { 'content-type': 'application/rss+xml' },
+  })
 }
 
 function ensureSlash(pathname: string): string {

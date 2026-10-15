@@ -17,9 +17,9 @@ Each method returns a new or modified builder with updated type information:
 
 ```typescript
 new DbSeeder()
-  .addUser("matt", { name: "Matt" })
-  .addPost("post1", { title: "Hello" })
-  .transact();
+  .addUser('matt', { name: 'Matt' })
+  .addPost('post1', { title: 'Hello' })
+  .transact()
 // Each step updates the type to include what was added
 ```
 
@@ -29,20 +29,20 @@ new DbSeeder()
 
 ```typescript
 interface User {
-  id: string;
-  name: string;
+  id: string
+  name: string
 }
 
 interface Post {
-  id: string;
-  title: string;
-  authorId: string;
+  id: string
+  title: string
+  authorId: string
 }
 
 // Shape that constrains our generic
 interface DbShape {
-  users: Record<string, User>;
-  posts: Record<string, Post>;
+  users: Record<string, User>
+  posts: Record<string, Post>
 }
 ```
 
@@ -50,34 +50,34 @@ interface DbShape {
 
 ```typescript
 export class DbSeeder<TDatabase extends DbShape> {
-  public users: DbShape["users"] = {};
-  public posts: DbShape["posts"] = {};
+  public users: DbShape['users'] = {}
+  public posts: DbShape['posts'] = {}
 
   // Each method returns DbSeeder with EXTENDED type information
   addUser = <Id extends string>(
     id: Id,
-    user: Omit<User, "id">,
-  ): DbSeeder<TDatabase & { users: TDatabase["users"] & Record<Id, User> }> => {
-    this.users[id] = { ...user, id };
-    return this;
-  };
+    user: Omit<User, 'id'>,
+  ): DbSeeder<TDatabase & { users: TDatabase['users'] & Record<Id, User> }> => {
+    this.users[id] = { ...user, id }
+    return this
+  }
 
   addPost = <Id extends string>(
     id: Id,
-    post: Omit<Post, "id">,
-  ): DbSeeder<TDatabase & { posts: TDatabase["posts"] & Record<Id, Post> }> => {
-    this.posts[id] = { ...post, id };
-    return this;
-  };
+    post: Omit<Post, 'id'>,
+  ): DbSeeder<TDatabase & { posts: TDatabase['posts'] & Record<Id, Post> }> => {
+    this.posts[id] = { ...post, id }
+    return this
+  }
 
   // Final method returns the built result with correct types
   transact = async () => {
     // Actual database operations would go here
     return {
-      users: this.users as TDatabase["users"],
-      posts: this.posts as TDatabase["posts"],
-    };
-  };
+      users: this.users as TDatabase['users'],
+      posts: this.posts as TDatabase['posts'],
+    }
+  }
 }
 ```
 
@@ -86,18 +86,18 @@ export class DbSeeder<TDatabase extends DbShape> {
 ```typescript
 const usage = async () => {
   const result = await new DbSeeder()
-    .addUser("matt", { name: "Matt" })
-    .addPost("post1", { authorId: "matt", title: "Hello" })
-    .addPost("post2", { authorId: "matt", title: "World" })
-    .transact();
+    .addUser('matt', { name: 'Matt' })
+    .addPost('post1', { authorId: 'matt', title: 'Hello' })
+    .addPost('post2', { authorId: 'matt', title: 'World' })
+    .transact()
 
   // result.users.matt is typed as User
   // result.posts.post1 is typed as Post
   // result.posts.post2 is typed as Post
 
-  console.log(result.users.matt.name); // Type-safe!
-  console.log(result.posts.post1.title); // Type-safe!
-};
+  console.log(result.users.matt.name) // Type-safe!
+  console.log(result.posts.post1.title) // Type-safe!
+}
 ```
 
 ## How the Types Build Up
@@ -136,7 +136,7 @@ addUser = <Id extends string>(
 Use `&` to add new type information while preserving existing:
 
 ```typescript
-TDatabase & { users: TDatabase["users"] & Record<Id, User> }
+TDatabase & { users: TDatabase['users'] & Record<Id, User> }
 ```
 
 ### 3. Cast in Terminal Methods
@@ -146,26 +146,26 @@ The runtime types don't match compile-time types, so cast in the final method:
 ```typescript
 transact = async () => {
   return {
-    users: this.users as TDatabase["users"],
-    posts: this.posts as TDatabase["posts"],
-  };
-};
+    users: this.users as TDatabase['users'],
+    posts: this.posts as TDatabase['posts'],
+  }
+}
 ```
 
 ## Pattern: Query Builder
 
 ```typescript
 interface QueryState {
-  table: string | null;
-  columns: string[];
-  whereClause: string | null;
+  table: string | null
+  columns: string[]
+  whereClause: string | null
 }
 
 class QueryBuilder<TState extends QueryState> {
-  private state: TState;
+  private state: TState
 
   private constructor(state: TState) {
-    this.state = state;
+    this.state = state
   }
 
   static create() {
@@ -173,99 +173,95 @@ class QueryBuilder<TState extends QueryState> {
       table: null,
       columns: [],
       whereClause: null,
-    });
+    })
   }
 
-  from<T extends string>(
-    table: T
-  ): QueryBuilder<TState & { table: T }> {
-    return new QueryBuilder({ ...this.state, table });
+  from<T extends string>(table: T): QueryBuilder<TState & { table: T }> {
+    return new QueryBuilder({ ...this.state, table })
   }
 
   select<C extends string[]>(
     ...columns: C
   ): QueryBuilder<TState & { columns: C }> {
-    return new QueryBuilder({ ...this.state, columns });
+    return new QueryBuilder({ ...this.state, columns })
   }
 
   where<W extends string>(
-    clause: W
+    clause: W,
   ): QueryBuilder<TState & { whereClause: W }> {
-    return new QueryBuilder({ ...this.state, whereClause: clause });
+    return new QueryBuilder({ ...this.state, whereClause: clause })
   }
 
   // Only allow build if table is set
   build(this: QueryBuilder<TState & { table: string }>): string {
-    const cols = this.state.columns.length
-      ? this.state.columns.join(", ")
-      : "*";
-    let sql = `SELECT ${cols} FROM ${this.state.table}`;
+    const cols = this.state.columns.length ? this.state.columns.join(', ') : '*'
+    let sql = `SELECT ${cols} FROM ${this.state.table}`
     if (this.state.whereClause) {
-      sql += ` WHERE ${this.state.whereClause}`;
+      sql += ` WHERE ${this.state.whereClause}`
     }
-    return sql;
+    return sql
   }
 }
 
 // Usage
 const query = QueryBuilder.create()
-  .from("users")
-  .select("id", "name")
-  .where("active = true")
-  .build();
+  .from('users')
+  .select('id', 'name')
+  .where('active = true')
+  .build()
 
 // Error: Can't build without from()
-QueryBuilder.create().select("id").build(); // Type error!
+QueryBuilder.create().select('id').build() // Type error!
 ```
 
 ## Pattern: Configuration Builder with Required Fields
 
 ```typescript
 interface ServerConfig {
-  host: string;
-  port: number;
-  ssl?: boolean;
-  timeout?: number;
+  host: string
+  port: number
+  ssl?: boolean
+  timeout?: number
 }
 
-type RequiredFields = "host" | "port";
-type ConfiguredFields<T> = { [K in keyof T]-?: K };
+type RequiredFields = 'host' | 'port'
+type ConfiguredFields<T> = { [K in keyof T]-?: K }
 
-class ConfigBuilder<TConfigured extends Partial<Record<keyof ServerConfig, true>>> {
-  private config: Partial<ServerConfig> = {};
+class ConfigBuilder<
+  TConfigured extends Partial<Record<keyof ServerConfig, true>>,
+> {
+  private config: Partial<ServerConfig> = {}
 
   host(value: string): ConfigBuilder<TConfigured & { host: true }> {
-    this.config.host = value;
-    return this as any;
+    this.config.host = value
+    return this as any
   }
 
   port(value: number): ConfigBuilder<TConfigured & { port: true }> {
-    this.config.port = value;
-    return this as any;
+    this.config.port = value
+    return this as any
   }
 
   ssl(value: boolean): ConfigBuilder<TConfigured & { ssl: true }> {
-    this.config.ssl = value;
-    return this as any;
+    this.config.ssl = value
+    return this as any
   }
 
   // Only allow build when required fields are set
-  build(
-    this: ConfigBuilder<{ host: true; port: true }>
-  ): ServerConfig {
-    return this.config as ServerConfig;
+  build(this: ConfigBuilder<{ host: true; port: true }>): ServerConfig {
+    return this.config as ServerConfig
   }
 }
 
 // Usage
 const config = new ConfigBuilder()
-  .host("localhost")
+  .host('localhost')
   .port(3000)
   .ssl(true)
-  .build();
+  .build()
 
 // Error: Missing required fields
-new ConfigBuilder().host("localhost").build(); // Type error!
+new ConfigBuilder().host('localhost').build() // Type error!
 ```
 
 ## Advanced: Default Values
@@ -273,18 +269,18 @@ new ConfigBuilder().host("localhost").build(); // Type error!
 ```typescript
 export class DbSeeder<
   TDatabase extends DbShape = {
-    users: { defaultUser: User };
-    posts: {};
-  }
+    users: { defaultUser: User }
+    posts: {}
+  },
 > {
-  public users: DbShape["users"] = {
-    defaultUser: { id: "default", name: "Default User" },
-  };
+  public users: DbShape['users'] = {
+    defaultUser: { id: 'default', name: 'Default User' },
+  }
   // ...
 }
 
 // Now every DbSeeder starts with defaultUser
-const seeder = new DbSeeder();
+const seeder = new DbSeeder()
 // seeder has users.defaultUser by default
 ```
 
@@ -319,16 +315,16 @@ transact = async () => {
   return {
     users: this.users, // Type: Record<string, User>, not TDatabase["users"]
     posts: this.posts,
-  };
-};
+  }
+}
 
 // GOOD - cast to match accumulated type
 transact = async () => {
   return {
-    users: this.users as TDatabase["users"],
-    posts: this.posts as TDatabase["posts"],
-  };
-};
+    users: this.users as TDatabase['users'],
+    posts: this.posts as TDatabase['posts'],
+  }
+}
 ```
 
 ### Returning `this` Instead of New Type

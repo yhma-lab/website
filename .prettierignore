@@ -1,0 +1,4 @@
+.references/
+.agents/
+pnpm-lock.yaml
+dist/

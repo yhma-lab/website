@@ -21,22 +21,22 @@ For a `<textarea>` with custom enter-to-submit, check the native `isComposing` p
 ```
 
 ```js
-const textarea = document.getElementById('chat-input');
-const form = document.getElementById('chat-form');
+const textarea = document.getElementById('chat-input')
+const form = document.getElementById('chat-form')
 
-textarea.addEventListener('keydown', (event) => {
+textarea.addEventListener('keydown', event => {
   if (event.key === 'Enter' && !event.shiftKey) {
     // Prevent the default newline behavior
-    event.preventDefault();
+    event.preventDefault()
 
     // If the user is composing text, return early.
     if (event.isComposing) {
-      return;
+      return
     }
 
-    form.requestSubmit();
+    form.requestSubmit()
   }
-});
+})
 ```
 
 Note: Other custom submission shortcuts (such as `Cmd+Enter` or `Ctrl+Enter`) do not conflict with IME confirmation keys and do not require IME safety checks.
@@ -60,41 +60,41 @@ If you need to support cross-browser compatibility across older versions of Safa
 By pairing `event.isComposing` with a check for `event.keyCode === 229`, you can reliably catch Safari's out-of-order confirming `Enter` keydown. Because this is nested under the `event.key === 'Enter'` gate, it is safe from mobile virtual keyboards that might use `229` for normal character layout entry.
 
 ```js
-textarea.addEventListener('keydown', (event) => {
+textarea.addEventListener('keydown', event => {
   if (event.key === 'Enter' && !event.shiftKey) {
-    event.preventDefault();
+    event.preventDefault()
 
     // Block submission if composing natively or if keyCode is 229
     if (event.isComposing || event.keyCode === 229) {
-      return;
+      return
     }
 
-    form.requestSubmit();
+    form.requestSubmit()
   }
-});
+})
 ```
 
 ### Strategy 2: The `event.timeStamp` window workaround (alternative)
 
-For codebases that strictly forbid the use of deprecated APIs like `keyCode`, or if there are known issues with the `229` check in specific targeted environments, you can track the browser-reported event dispatch timestamp instead. 
+For codebases that strictly forbid the use of deprecated APIs like `keyCode`, or if there are known issues with the `229` check in specific targeted environments, you can track the browser-reported event dispatch timestamp instead.
 
-Because Safari dispatches the confirming `Enter` keydown event extremely close to the `compositionend` event (often within 5ms, and sometimes with the keydown timestamp being slightly *earlier* due to handler delivery order inversion), checking the time difference is highly reliable and is unlikely to trigger false-positives on mobile virtual keyboards under standard conditions.
+Because Safari dispatches the confirming `Enter` keydown event extremely close to the `compositionend` event (often within 5ms, and sometimes with the keydown timestamp being slightly _earlier_ due to handler delivery order inversion), checking the time difference is highly reliable and is unlikely to trigger false-positives on mobile virtual keyboards under standard conditions.
 
 ```js
-let lastCompositionEndAt = null;
+let lastCompositionEndAt = null
 
-textarea.addEventListener('compositionend', (event) => {
+textarea.addEventListener('compositionend', event => {
   // IMPORTANT: Always use event.timeStamp, not Date.now() or performance.now().
   // Handler-time measurements are vulnerable to drift when the main thread is blocked.
-  lastCompositionEndAt = event.timeStamp;
-});
+  lastCompositionEndAt = event.timeStamp
+})
 
-textarea.addEventListener('keydown', (event) => {
+textarea.addEventListener('keydown', event => {
   if (event.key === 'Enter' && !event.shiftKey) {
-    event.preventDefault();
+    event.preventDefault()
 
     if (event.isComposing) {
-      return;
+      return
     }
 
     // Block submission if the event occurs within a 50ms window of composition ending.
@@ -103,10 +103,10 @@ textarea.addEventListener('keydown', (event) => {
       lastCompositionEndAt !== null &&
       Math.abs(event.timeStamp - lastCompositionEndAt) < 50
     ) {
-      return;
+      return
     }
 
-    form.requestSubmit();
+    form.requestSubmit()
   }
-});
+})
 ```

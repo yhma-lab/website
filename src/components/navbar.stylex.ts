@@ -1,6 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 
-import { SPACE, TEXT, primary, zinc } from '../styles/tokens.stylex.ts'
+import { primary, SPACE, TEXT, zinc } from '../styles/tokens.stylex.ts'
 
 const DARK = '[data-theme="dark"]'
 const LG = '@media (min-width: 1024px)'

@@ -1,6 +1,5 @@
-import * as stylex from '@stylexjs/stylex'
-
 import { SiteFrame } from '@/components/site-frame.tsx'
+import * as stylex from '@stylexjs/stylex'
 
 const styles = stylex.create({
   body: {
@@ -29,7 +28,11 @@ export default function NotFound() {
       <div {...stylex.props(styles.body)}>
         <h1 {...stylex.props(styles.title)}>404 Page not found</h1>
         <p>
-          The page you are looking for does not exist. <a href="/" {...stylex.props(styles.link)}>Back home</a>.
+          The page you are looking for does not exist.{' '}
+          <a href="/" {...stylex.props(styles.link)}>
+            Back home
+          </a>
+          .
         </p>
       </div>
     </SiteFrame>

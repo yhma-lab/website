@@ -1,6 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 
-import { SPACE, TEXT, gray, neutral, primary } from '../styles/tokens.stylex.ts'
+import { gray, neutral, primary, SPACE, TEXT } from '../styles/tokens.stylex.ts'
 
 /**
  * Ancestor selector for the dark colour scheme.
@@ -11,7 +11,6 @@ import { SPACE, TEXT, gray, neutral, primary } from '../styles/tokens.stylex.ts'
  * stub and fail condition validation.
  */
 const DARK = '[data-theme="dark"]'
-
 
 /** Ports `layouts/partials/blox/hero.html`. */
 export const styles = stylex.create({
@@ -34,7 +33,8 @@ export const styles = stylex.create({
   },
   announcement: {
     borderColor: {
-      default: 'color-mix(in oklab, oklch(0.21 0.006 285.885) 10%, transparent)',
+      default:
+        'color-mix(in oklab, oklch(0.21 0.006 285.885) 10%, transparent)',
       [stylex.when.ancestor(DARK)]: gray['300'],
     },
     borderRadius: '9999px',

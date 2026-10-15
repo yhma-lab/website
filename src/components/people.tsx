@@ -1,13 +1,12 @@
-import * as stylex from '@stylexjs/stylex'
 import type { ReactNode } from 'react'
+import type { AuthorPage } from '../lib/source.ts'
+
+import * as stylex from '@stylexjs/stylex'
 
 import { peopleByGroup } from '../lib/sort.ts'
-
 import { styles as blockStyles } from './block.stylex.ts'
 import { Icon } from './icon.tsx'
 import { styles } from './people.stylex.ts'
-
-import type { AuthorPage } from '../lib/source.ts'
 
 export interface PeopleGridProps {
   /** `content.title` renders above the groups. */
@@ -47,16 +46,22 @@ export function PeopleGrid({
       {title ? (
         <div {...stylex.props(blockStyles.headingWrap)}>
           <h1 {...stylex.props(blockStyles.heading)}>{title}</h1>
-          {subtitle ? <p {...stylex.props(blockStyles.bodyText)}>{subtitle}</p> : null}
+          {subtitle ? (
+            <p {...stylex.props(blockStyles.bodyText)}>{subtitle}</p>
+          ) : null}
         </div>
       ) : null}
-      {intro ? <div {...stylex.props(blockStyles.centered)}>{intro}</div> : null}
+      {intro ? (
+        <div {...stylex.props(blockStyles.centered)}>{intro}</div>
+      ) : null}
 
-      {grouped.map((group) => (
+      {grouped.map(group => (
         <div key={group.group} {...stylex.props(styles.groupWrap)}>
-          {showGroupHeadings ? <h2 {...stylex.props(styles.groupHeading)}>{group.group}</h2> : null}
+          {showGroupHeadings ? (
+            <h2 {...stylex.props(styles.groupHeading)}>{group.group}</h2>
+          ) : null}
           <div {...stylex.props(styles.grid)}>
-            {group.people.map((person) => (
+            {group.people.map(person => (
               <Person
                 key={person.url}
                 person={person}
@@ -81,7 +86,13 @@ export interface PersonProps {
   showOrganizations: boolean
 }
 
-function Person({ person, showInterests, showOrganizations, showRole, showSocial }: PersonProps) {
+function Person({
+  person,
+  showInterests,
+  showOrganizations,
+  showRole,
+  showSocial,
+}: PersonProps) {
   const slug = person.slugs.at(-1)
   const avatar = avatarFor(slug)
   const statusIcon = person.data.status?.icon ?? ''
@@ -94,9 +105,18 @@ function Person({ person, showInterests, showOrganizations, showRole, showSocial
       {avatar.length > 0 ? (
         <div {...stylex.props(styles.avatarWrap)}>
           <a href={person.url}>
-            <img alt="" height={100} loading="lazy" src={avatar} width={100} {...stylex.props(styles.avatar)} />
+            <img
+              alt=""
+              height={100}
+              loading="lazy"
+              src={avatar}
+              width={100}
+              {...stylex.props(styles.avatar)}
+            />
           </a>
-          {statusIcon.length > 0 ? <span {...stylex.props(styles.avatarEmoji)}>{statusIcon}</span> : null}
+          {statusIcon.length > 0 ? (
+            <span {...stylex.props(styles.avatarEmoji)}>{statusIcon}</span>
+          ) : null}
         </div>
       ) : null}
 
@@ -105,20 +125,26 @@ function Person({ person, showInterests, showOrganizations, showRole, showSocial
           <h2 {...stylex.props(styles.name)}>{person.data.title}</h2>
         </a>
         {showOrganizations
-          ? organizations.map((organization) => <h3 key={organization.name}>{organization.name}</h3>)
+          ? organizations.map(organization => (
+              <h3 key={organization.name}>{organization.name}</h3>
+            ))
           : null}
-        {showRole && person.data.role.length > 0 ? <h3 {...stylex.props(styles.role)}>{person.data.role}</h3> : null}
+        {showRole && person.data.role.length > 0 ? (
+          <h3 {...stylex.props(styles.role)}>{person.data.role}</h3>
+        ) : null}
         {showSocial ? (
           <ul {...stylex.props(styles.socialRow)}>
             {profiles
-              .filter((profile) => profile.url.length > 0)
-              .map((profile) => (
+              .filter(profile => profile.url.length > 0)
+              .map(profile => (
                 <li key={profile.icon}>
                   <a
                     aria-label={profile.icon}
                     href={profile.url}
                     rel="noopener noreferrer"
-                    target={profile.url.startsWith('http') ? '_blank' : undefined}
+                    target={
+                      profile.url.startsWith('http') ? '_blank' : undefined
+                    }
                     title={profile.label}
                   >
                     <Icon name={profile.icon} size="large" />
@@ -128,7 +154,9 @@ function Person({ person, showInterests, showOrganizations, showRole, showSocial
           </ul>
         ) : null}
         {showInterests && interests.length > 0 ? (
-          <p {...stylex.props(styles.interests, blockStyles.muted)}>{interests.join(', ')}</p>
+          <p {...stylex.props(styles.interests, blockStyles.muted)}>
+            {interests.join(', ')}
+          </p>
         ) : null}
       </div>
     </div>

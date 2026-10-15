@@ -1,5 +1,5 @@
-import { toFumadocsSource } from 'fumadocs-mdx/runtime/server'
 import { loader } from 'fumadocs-core/source'
+import { toFumadocsSource } from 'fumadocs-mdx/runtime/server'
 
 import {
   authorDocs,
@@ -8,7 +8,6 @@ import {
   pageDocs,
   publicationDocs,
 } from '../../.source/server.ts'
-
 import { i18n } from './i18n.ts'
 
 /**
@@ -70,8 +69,8 @@ export function localizedParams(
 ): string[][] {
   return source
     .generateParams()
-    .filter((entry) => entry.lang === locale)
-    .map((entry) => entry.slug)
+    .filter(entry => entry.lang === locale)
+    .map(entry => entry.slug)
 }
 
 /**
@@ -84,8 +83,8 @@ export function localizedParams(
 export function authorParams(locale: string): string[][] {
   return authors
     .getPages(locale)
-    .filter((page) => page.data.title.length > 0)
-    .map((page) => page.slugs)
+    .filter(page => page.data.title.length > 0)
+    .map(page => page.slugs)
 }
 
 /**
@@ -99,7 +98,7 @@ const EXPLICIT_PAGE_SLUGS = new Set(['fundings', 'publications'])
 
 /** `[...slugs]` parameters for the standalone pages, excluding the explicit ones. */
 export function standalonePageParams(locale: string): string[][] {
-  return localizedParams(pages, locale).filter((slugs) => {
+  return localizedParams(pages, locale).filter(slugs => {
     const first = slugs[0]
     return first !== undefined && !EXPLICIT_PAGE_SLUGS.has(first)
   })

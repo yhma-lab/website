@@ -22,17 +22,17 @@ If prompts mention **repeated async lookups**, **duplicate concurrent requests**
 Use [mnemoist](https://github.com/Yomguithereal/mnemonist) for synchronous memoization:
 
 ```typescript
-import { LRUCache } from 'mnemonist';
+import { LRUCache } from 'mnemonist'
 
-const cache = new LRUCache<string, User>(1000);
+const cache = new LRUCache<string, User>(1000)
 
 function getUser(id: string): User | undefined {
   if (cache.has(id)) {
-    return cache.get(id);
+    return cache.get(id)
   }
-  const user = fetchUserSync(id);
-  cache.set(id, user);
-  return user;
+  const user = fetchUserSync(id)
+  cache.set(id, user)
+  return user
 }
 ```
 
@@ -41,28 +41,32 @@ function getUser(id: string): User | undefined {
 Use [async-cache-dedupe](https://github.com/mcollina/async-cache-dedupe) for async operations with request deduplication:
 
 ```typescript
-import { createCache } from 'async-cache-dedupe';
+import { createCache } from 'async-cache-dedupe'
 
 const cache = createCache({
   ttl: 60, // seconds
   stale: 5, // serve stale while revalidating
   storage: { type: 'memory' },
-});
+})
 
 cache.define('getUser', async (id: string) => {
-  return await db.users.findById(id);
-});
+  return await db.users.findById(id)
+})
 
-cache.define('getPost', {
-  ttl: 300,
-  stale: 30,
-}, async (id: string) => {
-  return await db.posts.findById(id);
-});
+cache.define(
+  'getPost',
+  {
+    ttl: 300,
+    stale: 30,
+  },
+  async (id: string) => {
+    return await db.posts.findById(id)
+  },
+)
 
 // Usage - concurrent calls are deduplicated
-const user = await cache.getUser('123');
-const post = await cache.getPost('456');
+const user = await cache.getUser('123')
+const post = await cache.getPost('456')
 ```
 
 ### Request Deduplication
@@ -75,7 +79,7 @@ const [user1, user2, user3] = await Promise.all([
   cache.getUser('123'),
   cache.getUser('123'),
   cache.getUser('123'),
-]);
+])
 ```
 
 ### Stream/ETL enrichment example
@@ -83,18 +87,20 @@ const [user1, user2, user3] = await Promise.all([
 Use deduplicated async cache inside an `async function*` transform when rows repeatedly reference the same key:
 
 ```typescript
-import { createCache } from 'async-cache-dedupe';
+import { createCache } from 'async-cache-dedupe'
 
-const cache = createCache({ ttl: 120, stale: 10, storage: { type: 'memory' } });
+const cache = createCache({ ttl: 120, stale: 10, storage: { type: 'memory' } })
 
 cache.define('getPlan', async (planId: string) => {
-  return await db.plans.findById(planId);
-});
+  return await db.plans.findById(planId)
+})
 
-async function* enrichRows(source: AsyncIterable<{ userId: string, planId: string }>) {
+async function* enrichRows(
+  source: AsyncIterable<{ userId: string; planId: string }>,
+) {
   for await (const row of source) {
-    const plan = await cache.getPlan(row.planId); // one in-flight call per planId
-    yield { ...row, planName: plan.name };
+    const plan = await cache.getPlan(row.planId) // one in-flight call per planId
+    yield { ...row, planName: plan.name }
   }
 }
 ```
@@ -104,10 +110,10 @@ async function* enrichRows(source: AsyncIterable<{ userId: string, planId: strin
 For distributed caching across multiple instances:
 
 ```typescript
-import { createCache } from 'async-cache-dedupe';
-import Redis from 'ioredis';
+import { createCache } from 'async-cache-dedupe'
+import Redis from 'ioredis'
 
-const redis = new Redis();
+const redis = new Redis()
 
 const cache = createCache({
   ttl: 60,
@@ -115,7 +121,7 @@ const cache = createCache({
     type: 'redis',
     options: { client: redis },
   },
-});
+})
 ```
 
 ## LRU Cache
@@ -123,16 +129,16 @@ const cache = createCache({
 Use [lru-cache](https://github.com/isaacs/node-lru-cache) for bounded in-memory caching:
 
 ```typescript
-import { LRUCache } from 'lru-cache';
+import { LRUCache } from 'lru-cache'
 
 const cache = new LRUCache<string, User>({
-  max: 500,           // Maximum items
+  max: 500, // Maximum items
   ttl: 1000 * 60 * 5, // 5 minutes
   updateAgeOnGet: true,
-});
+})
 
-cache.set('user:123', user);
-const cached = cache.get('user:123');
+cache.set('user:123', user)
+const cached = cache.get('user:123')
 ```
 
 ## Cache Invalidation Patterns
@@ -141,22 +147,22 @@ const cached = cache.get('user:123');
 
 ```typescript
 const cache = createCache({
-  ttl: 60,    // Fresh for 60 seconds
-  stale: 30,  // Serve stale for 30 more seconds while revalidating
-});
+  ttl: 60, // Fresh for 60 seconds
+  stale: 30, // Serve stale for 30 more seconds while revalidating
+})
 ```
 
 ### Manual Invalidation
 
 ```typescript
 // Invalidate single entry
-await cache.invalidate('getUser', '123');
+await cache.invalidate('getUser', '123')
 
 // Invalidate all entries for a function
-await cache.clear('getUser');
+await cache.clear('getUser')
 
 // Clear entire cache
-await cache.clear();
+await cache.clear()
 ```
 
 ### Reference-Based Invalidation
@@ -165,22 +171,30 @@ await cache.clear();
 const cache = createCache({
   ttl: 60,
   storage: { type: 'memory' },
-});
+})
 
-cache.define('getUser', {
-  references: (args, key, result) => [`user:${result.id}`],
-}, async (id: string) => {
-  return await db.users.findById(id);
-});
+cache.define(
+  'getUser',
+  {
+    references: (args, key, result) => [`user:${result.id}`],
+  },
+  async (id: string) => {
+    return await db.users.findById(id)
+  },
+)
 
-cache.define('getUserPosts', {
-  references: (args, key, result) => [`user:${args[0]}`],
-}, async (userId: string) => {
-  return await db.posts.findByUserId(userId);
-});
+cache.define(
+  'getUserPosts',
+  {
+    references: (args, key, result) => [`user:${args[0]}`],
+  },
+  async (userId: string) => {
+    return await db.posts.findByUserId(userId)
+  },
+)
 
 // Invalidate all cache entries referencing this user
-await cache.invalidateAll(`user:123`);
+await cache.invalidateAll(`user:123`)
 ```
 
 ## When to Cache
