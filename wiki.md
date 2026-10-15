@@ -1,1 +1,0 @@
-- [中国大学矢量校徽大全](https://www.urongda.com/)

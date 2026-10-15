@@ -23,6 +23,10 @@ const packageJsonConfig = {
     // https://github.com/sindresorhus/eslint-package-json/blob/main/docs/rules/sort-properties.md
     'package-json/sort-properties': 'off',
     'package-json/no-pre-release-dependencies': 'off',
+    // `@types/mdx` supplies `MDXContent` for the compiled bodies; the MDX
+    // compiler itself is `fumadocs-mdx`, so there is no `mdx` package to pair
+    // with it.
+    'package-json/no-orphan-types': 'off',
   },
 }
 const reactExtends = [
@@ -46,87 +50,109 @@ const stylexConfig = {
   rules: { ...stylexRules },
 }
 
+/**
+ * `dangerouslySetInnerHTML` is used in three places, each with a fixed, trusted
+ * source: KaTeX's own output for front-matter math, the inlined SVG bodies from
+ * `icon-data.ts`, and the pre-paint theme bootstrap script.
+ */
+const trustedHtml = {
+  files: [
+    'src/components/math-text.tsx',
+    'src/components/icon.tsx',
+    'src/pages/_root.tsx',
+  ],
+  rules: { '@eslint-react/dom-no-dangerously-set-innerhtml': 'off' },
+}
+
 const customIgnores = globalIgnores([
   '**/node_modules/**',
   '**/dist/**',
   '**/.emit/**',
   '**/.references/**',
   '**/.agents/**',
+  // Generated: `.source/` by fumadocs-mdx, `src/pages.gen.ts` by Waku router typegen.
+  '**/.source/**',
+  '**/src/pages.gen.ts',
 ])
 
-const config = defineConfig(customIgnores, packageJsonConfig, {
-  files: [tseslint.globs.ts],
-  languageOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    parser: tseslint.parser,
-    parserOptions: {
-      ecmaFeatures: { jsx: true },
-      projectService: {
-        // allowDefaultProject: ['eslint.config.js'],
-        defaultProject: 'tsconfig.json',
+const config = defineConfig(
+  customIgnores,
+  packageJsonConfig,
+  {
+    files: [tseslint.globs.ts],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      parser: tseslint.parser,
+      parserOptions: {
+        ecmaFeatures: { jsx: true },
+        projectService: {
+          // allowDefaultProject: ['eslint.config.js'],
+          defaultProject: 'tsconfig.json',
+        },
+        tsconfigRootDir: process.cwd(),
       },
-      tsconfigRootDir: process.cwd(),
     },
-  },
-  plugins: {
-    '@typescript-eslint': tseslint.plugin,
-    perfectionist,
-    unicorn,
+    plugins: {
+      '@typescript-eslint': tseslint.plugin,
+      perfectionist,
+      unicorn,
 
-    // '@stylexjs': { rules },
-  },
-  extends: [
-    tseslint.configs.strictTypeChecked,
-    tseslint.configs.stylisticTypeChecked,
-    ...reactExtends,
-  ],
-  rules: {
-    '@typescript-eslint/consistent-type-imports': [
-      'error',
-      {
-        disallowTypeAnnotations: true,
-        fixStyle: 'separate-type-imports',
-        prefer: 'type-imports',
-      },
+      // '@stylexjs': { rules },
+    },
+    extends: [
+      tseslint.configs.strictTypeChecked,
+      tseslint.configs.stylisticTypeChecked,
+      ...reactExtends,
     ],
-    '@typescript-eslint/consistent-type-exports': [
-      'error',
-      { fixMixedExportsWithInlineTypeSpecifier: true },
-    ],
+    rules: {
+      '@typescript-eslint/consistent-type-imports': [
+        'error',
+        {
+          disallowTypeAnnotations: true,
+          fixStyle: 'separate-type-imports',
+          prefer: 'type-imports',
+        },
+      ],
+      '@typescript-eslint/consistent-type-exports': [
+        'error',
+        { fixMixedExportsWithInlineTypeSpecifier: true },
+      ],
 
-    '@typescript-eslint/consistent-type-definitions': 'warn',
+      '@typescript-eslint/consistent-type-definitions': 'warn',
 
-    '@typescript-eslint/restrict-template-expressions': [
-      'error',
-      { allowNumber: true, allowBoolean: true },
-    ],
+      '@typescript-eslint/restrict-template-expressions': [
+        'error',
+        { allowNumber: true, allowBoolean: true },
+      ],
 
-    '@typescript-eslint/no-import-type-side-effects': 'error',
-    '@typescript-eslint/no-restricted-types': [
-      'error',
-      {
-        types: {
-          FC: {
-            message:
-              'Avoid `React.FC`. Use explicit prop types and return values instead.',
+      '@typescript-eslint/no-import-type-side-effects': 'error',
+      '@typescript-eslint/no-restricted-types': [
+        'error',
+        {
+          types: {
+            FC: {
+              message:
+                'Avoid `React.FC`. Use explicit prop types and return values instead.',
+            },
           },
         },
-      },
-    ],
+      ],
 
-    // FIXME: temporarily disabled for refactoring / optimization
-    '@typescript-eslint/require-await': 'warn',
-    '@typescript-eslint/no-misused-promises': 'warn',
-    '@typescript-eslint/no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-expressions': 'off',
+      // FIXME: temporarily disabled for refactoring / optimization
+      '@typescript-eslint/require-await': 'warn',
+      '@typescript-eslint/no-misused-promises': 'warn',
+      '@typescript-eslint/no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-expressions': 'off',
 
-    // // Spread any additional rules provided in the options
-    // ...rules,
+      // // Spread any additional rules provided in the options
+      // ...rules,
+    },
+
+    // Spread any additional overrides provided in the options
+    // ...stylexRules,
   },
-
-  // Spread any additional overrides provided in the options
-  // ...stylexRules,
-})
+  trustedHtml,
+)
 
 export default config

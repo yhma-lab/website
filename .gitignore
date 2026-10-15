@@ -1,41 +1,19 @@
-# Generated files by hugo
-/public/
-/resources/_gen/
-/assets/jsconfig.json
-hugo_stats.json
-.cache/
-.DS_Store
+# Dependencies
+node_modules/
 
+# Waku build output
+dist/
+
+# Generated source + route types
+.source/
+src/pages.gen.ts
+
+# Tooling scratch
+.emit/
+.cache/
 .venv/
 .env
+*.tsbuildinfo
 
-node_modules/
-pnpm-lock.yaml
-
-
-# Executable may be added to repository
-hugo.exe
-hugo.darwin
-hugo.linux
-
-# Temporary lock file while building
-/.hugo_build.lock
-
-# Binaries for programs and plugins
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib
-
-# Test binary, built with `go test -c`
-*.test
-
-# Output of the go coverage tool, specifically when used with LiteIDE
-*.out
-
-# Dependency directories (remove the comment below to include it)
-# vendor/
-
-# Go workspace file
-go.work
+# Editor / OS
+.DS_Store

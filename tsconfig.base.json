@@ -39,9 +39,6 @@
     /**
      * Emit
      */
-    "declaration": true,
-    "declarationMap": true,
-    "emitDeclarationOnly": true,
     "inlineSourceMap": false,
     "inlineSources": false,
     "noEmit": false,
@@ -99,7 +96,6 @@
     /**
      * Projects
      */
-    "composite": true,
     // "disableReferencedProjectLoad": false, // only true when monorepo is too large
     // "disableSolutionSearching": false, // only true when monorepo is too large
     // "incremental": true, // true by default when "composite" is true
