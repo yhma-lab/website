@@ -1,9 +1,13 @@
 # yaml-language-server: $schema=https://www.schemastore.org/pnpm-workspace.json
 
-autoDedupe: true
+# autoDedupe: true
 
-lockfile:
-  includeResolutionSettings: true
+# lockfile:
+#   includeResolutionSettings: true
+
+packages:
+  - packages/*
+  - sites/*
 
 allowBuilds:
   '@astryxdesign/cli': true

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "React package typecheck",
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    /**
+     * Modules
+     *
+     * Imports carry explicit `.ts`/`.tsx` extensions so the same specifiers work
+     * for Vite and for Node's type stripping. Nothing is emitted, so the
+     * extension rewriting that `rewriteRelativeImportExtensions` normally
+     * performs is disabled: it rejects aliased paths such as `@/lib/source.ts`.
+     */
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "rewriteRelativeImportExtensions": false,
+
+    /**
+     * Emit
+     *
+     * Sites and the shared package are check-only: `waku build` produces the
+     * artifacts and nothing needs declaration emit.
+     */
+    "noEmit": true,
+
+    /**
+     * Language and Environment
+     */
+    "jsx": "react-jsx",
+    "lib": ["ESNext", "ESNext.Temporal", "DOM", "DOM.Iterable"],
+    "types": ["node", "vite/client"]
+  }
+}

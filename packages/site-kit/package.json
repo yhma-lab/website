@@ -1,0 +1,59 @@
+{
+  "name": "@yhma/site-kit",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Shared components, content model and build configuration for the Ma Research group sites",
+  "keywords": [
+    "sites"
+  ],
+  "license": "MIT",
+  "author": "Lanqing Huang <lqhuang@outlook.com>",
+  "sideEffects": [
+    "./src/content/collections.ts",
+    "./src/shell/root-shell.tsx",
+    "./src/styles/global.css"
+  ],
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./content": "./src/content/index.ts",
+    "./content/collections": "./src/content/collections.ts",
+    "./routes": "./src/routes/index.ts",
+    "./shell": "./src/shell/index.ts",
+    "./styles/global.css": "./src/styles/global.css",
+    "./views": "./src/views/index.ts",
+    "./waku-config": "./src/waku-config.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@stylexjs/stylex": "^0.19.1",
+    "fumadocs-core": "^16.17.3",
+    "fumadocs-mdx": "^15.4.7",
+    "katex": "^0.19.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@rolldown/plugin-babel": "^0.2.4",
+    "@stylexjs/babel-plugin": "^0.19.1",
+    "@stylexjs/unplugin": "^0.19.1",
+    "@types/mdx": "^2.0.14",
+    "@types/node": "^26.6.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "browserslist": "^4.29.3",
+    "lightningcss": "^1.33.0",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0",
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
+    "vite": "^8.3.0",
+    "waku": "^1.0.0-rc.3"
+  },
+  "engines": {
+    "node": ">=26.12.1"
+  }
+}

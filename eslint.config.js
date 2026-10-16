@@ -23,6 +23,13 @@ const packageJsonConfig = {
     // https://github.com/sindresorhus/eslint-package-json/blob/main/docs/rules/sort-properties.md
     'package-json/sort-properties': 'off',
     'package-json/no-pre-release-dependencies': 'off',
+    /**
+     * The rule assumes a nested `package.json` is a sub-directory of the root
+     * package, which a consumer never resolves by name. A pnpm workspace member is
+     * nested by path but *is* resolved by name (pnpm links it into
+     * `node_modules/`), so its `exports` is honored and the rule does not apply.
+     */
+    'package-json/no-nested-exports': 'off',
     // `@types/mdx` supplies `MDXContent` for the compiled bodies; the MDX
     // compiler itself is `fumadocs-mdx`, so there is no `mdx` package to pair
     // with it.
@@ -57,9 +64,9 @@ const stylexConfig = {
  */
 const trustedHtml = {
   files: [
-    'src/components/math-text.tsx',
-    'src/components/icon.tsx',
-    'src/pages/_root.tsx',
+    'packages/site-kit/src/components/math-text.tsx',
+    'packages/site-kit/src/components/icon.tsx',
+    'packages/site-kit/src/shell/root-shell.tsx',
   ],
   rules: { '@eslint-react/dom-no-dangerously-set-innerhtml': 'off' },
 }
@@ -86,9 +93,15 @@ const config = defineConfig(
       parser: tseslint.parser,
       parserOptions: {
         ecmaFeatures: { jsx: true },
+        /**
+         * Typed linting across a workspace: `service: true` finds the nearest
+         * `tsconfig.json` for each file instead of assuming a single project at
+         * the repository root (the sites and the kit each own theirs).
+         */
         projectService: {
-          // allowDefaultProject: ['eslint.config.js'],
-          defaultProject: 'tsconfig.json',
+          defaultProject: false,
+          // `eslint.config.js` itself is not part of any tsconfig.
+          allowDefaultProject: ['eslint.config.js'],
         },
         tsconfigRootDir: process.cwd(),
       },

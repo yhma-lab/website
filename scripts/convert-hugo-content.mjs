@@ -6,6 +6,8 @@
  *
  *  1. file naming: Hugo uses `_index.md` for a section index and `.zh.md` for a
  *     translation; fumadocs uses `index.mdx` and `.cn.mdx` with `parser: 'dot'`.
+ *     The collection globs in `packages/site-kit/src/content/collections.ts` must
+ *     match both names, or a translation is never imported.
  *  2. front matter: Hugo carries several keys that only Hugo understands
  *     (`build`, `cascade`, `headless`, `widget`, `active`, `weight`,
  *     `type: landing`). They are dropped here; `source.config.ts` rejects
@@ -21,7 +23,7 @@
  *   git show <migration-commit>^:content | ...   # or `git checkout <ref> -- content`
  *
  * It is kept because re-running it is the only way to prove that
- * `content.generated/` still matches its source, and because the git history is
+ * `content/` still matches its source, and because the git history is
  * the backup for the original front matter.
  */
 import { existsSync } from 'node:fs'
@@ -34,7 +36,7 @@ import { parse, stringify } from 'yaml'
 
 const ROOT = path.resolve(fileURLToPath(new URL('..', import.meta.url)))
 const SRC = path.join(ROOT, 'content')
-const OUT = path.join(ROOT, 'content.generated')
+const OUT = path.join(ROOT, 'content')
 const PUBLIC = path.join(ROOT, 'public')
 
 const WRITE = process.argv.includes('--write')
@@ -150,7 +152,7 @@ function targetFileFor(name) {
 }
 
 /**
- * Rewrite `content/<type>/<dir>/` into `content.generated/<outType>/<slug>/`.
+ * Rewrite `content/<type>/<dir>/` into `content/<outType>/<slug>/`.
  */
 async function convertBundle({ dir, family }) {
   const files = await readdir(dir, { withFileTypes: true })
@@ -255,7 +257,7 @@ async function main() {
     process.exit(1)
   }
 
-  // content/authors/<slug>/  ->  content.generated/authors/<slug>/
+  // content/authors/<slug>/  ->  content/authors/<slug>/
   const authorsDir = path.join(SRC, 'authors')
   for (const entry of await readdir(authorsDir, { withFileTypes: true })) {
     if (!entry.isDirectory()) continue
@@ -343,7 +345,7 @@ async function main() {
     }
   }
 
-  // Top-level landing/legal pages -> content.generated/pages/<slug>/
+  // Top-level landing/legal pages -> content/pages/<slug>/
   const pages = [
     '_index.md',
     'publications.md',

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Regenerate `src/components/icon-data.ts`.
+ * Regenerate `packages/site-kit/src/components/icon-data.ts`.
  *
  * The icon keys come from the authored front matter (`icon: academicons/arxiv`,
  * `icon: at-symbol`) exactly as Hugo resolved them through
@@ -13,9 +13,9 @@
  *
  * Prerequisites, both removed with the Hugo migration: the Hugo Blox module
  * cache (`~/Library/Caches/hugo_cache`) and `hugo-public/people/`, which is where
- * the Academicons paths were harvested from. `src/components/icon-data.ts` is
- * committed, so this only needs running to add an icon or to recover from a
- * corrupted file.
+ * the Academicons paths were harvested from.
+ * `packages/site-kit/src/components/icon-data.ts` is committed, so this only
+ * needs running to add an icon or to recover from a corrupted file.
  */
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import os from 'node:os'
@@ -26,7 +26,7 @@ import { fileURLToPath } from 'node:url'
 import { parse } from 'yaml'
 
 const ROOT = path.resolve(fileURLToPath(new URL('..', import.meta.url)))
-const OUT = path.join(ROOT, 'src/components/icon-data.ts')
+const OUT = path.join(ROOT, 'packages/site-kit/src/components/icon-data.ts')
 
 const ICON_DIR = path.join(
   os.homedir(),

@@ -4,9 +4,9 @@ node_modules/
 # Waku build output
 dist/
 
-# Generated source + route types
+# Generated source + route types (one set per site package)
 .source/
-src/pages.gen.ts
+pages.gen.ts
 
 # Tooling scratch
 .emit/

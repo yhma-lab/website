@@ -1,45 +1,23 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "Site typecheck",
+  "display": "Workspace tooling typecheck",
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     /**
      * Modules
      *
-     * Imports carry explicit `.ts`/`.tsx` extensions so the same specifiers work
-     * for Vite and for Node's type stripping. Nothing is emitted, so the
-     * extension rewriting that `rewriteRelativeImportExtensions` normally
-     * performs is disabled: it rejects aliased paths such as `@/lib/site.ts`.
+     * Only the root tooling is checked here: each workspace package has its own
+     * `tsconfig.json` (extending `tsconfig.react.json`) and its own `typecheck`
+     * script, which is what the root `pnpm typecheck` fans out to.
      */
     "module": "esnext",
     "moduleResolution": "bundler",
-    "paths": {
-      "@/*": ["./src/*"]
-    },
     "rewriteRelativeImportExtensions": false,
-    /**
-     * Emit
-     *
-     * The site is a static export, so this project is check-only: `waku build`
-     * produces the artifacts and nothing needs declaration emit.
-     */
     "noEmit": true,
     "rootDir": "./",
-    /**
-     * Language and Environment
-     */
-    "jsx": "react-jsx",
-    "lib": ["ESNext", "ESNext.Temporal", "DOM", "DOM.Iterable"],
-    "types": ["node", "vite/client", "@vitejs/plugin-rsc/types"]
+    "lib": ["ESNext", "ESNext.Temporal"],
+    "types": ["node"]
   },
-  "include": [
-    ".source/**/*.ts",
-    "scripts/**/*.mjs",
-    "source.config.ts",
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "vitest.config.ts",
-    "waku.config.ts"
-  ],
+  "include": ["scripts/**/*.mjs", "vitest.config.ts"],
   "exclude": ["node_modules", ".references", "dist"]
 }

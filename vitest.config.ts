@@ -10,6 +10,11 @@ export default defineConfig({
       '**/.source/**',
     ],
     environment: 'node',
-    include: ['src/**/*.test.ts', 'src/**/*.test.tsx'],
+    include: [
+      'packages/*/src/**/*.test.ts',
+      'packages/*/src/**/*.test.tsx',
+      'sites/*/src/**/*.test.ts',
+      'sites/*/src/**/*.test.tsx',
+    ],
   },
 })
