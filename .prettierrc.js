@@ -16,8 +16,6 @@ const config = {
     '@prettier/plugin-oxc',
     'prettier-plugin-packagejson',
     '@ianvs/prettier-plugin-sort-imports',
-    'prettier-plugin-properties',
-    // '@castlabs/prettier-tsdoc-plugin',
   ],
   // Options for sort-imports plugin
   importOrder: [
@@ -35,14 +33,5 @@ const config = {
     '^[./]',
   ],
   importOrderTypeScriptVersion: '7.0.0',
-  // Overrides for specific file types
-  overrides: [
-    {
-      files: '.env*',
-      options: {
-        printWidth: 0,
-      },
-    },
-  ],
 }
 export default config
