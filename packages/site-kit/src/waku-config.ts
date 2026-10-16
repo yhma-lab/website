@@ -69,6 +69,54 @@ function sharedContentWatcher(): Plugin {
   }
 }
 
+/**
+ * The two tags `@stylexjs/unplugin` injects in dev mode: its stylesheet
+ * endpoint and the module that keeps a `<style>` element in sync with it.
+ *
+ * The shell module holds its markup in a `export default "…"` literal, so the
+ * tags are quoted the way `JSON.stringify` quotes them.
+ */
+const stylexDevTags = JSON.stringify(
+  [
+    '<link rel="stylesheet" href="/virtual:stylex.css">',
+    '<script type="module" src="/@id/virtual:stylex:runtime"></script>',
+  ].join(''),
+).slice(1, -1)
+
+/**
+ * Put StyleX's dev stylesheet into the document.
+ *
+ * The plugin adds those two tags with Vite's `transformIndexHtml` hook, which
+ * Waku only runs when the app ships an `index.html`: the fallback shell is a
+ * hard-coded string that receives the bootstrap script alone. Every route here
+ * disables SSR, so the fallback shell *is* the dev document, and without the
+ * tags the page renders `stylex.props()` class names that no stylesheet
+ * defines. The shell reaches Vite as a module whose default export is that
+ * markup, so the tags are spliced in at the same place instead.
+ *
+ * `apply` keeps this to dev, where the plugin serves the CSS; a build appends
+ * the same rules to the site's own stylesheet instead.
+ */
+function stylexDevStyles(): Plugin {
+  return {
+    apply: 'serve',
+    name: 'yhma:stylex-dev-styles',
+    transform(code, id) {
+      if (!id.includes('virtual:vite-rsc-waku/html-shell')) {
+        return
+      }
+      const bodyEnd = code.indexOf('</body>')
+      if (bodyEnd === -1) {
+        return
+      }
+      return {
+        code: code.slice(0, bodyEnd) + stylexDevTags + code.slice(bodyEnd),
+        map: null,
+      }
+    },
+  }
+}
+
 export function createWakuConfig(): Config {
   return defineConfig({
     vite: {
@@ -82,14 +130,12 @@ export function createWakuConfig(): Config {
         babelPlugin({ presets: [reactCompilerPreset()] }),
         react(),
         sharedContentWatcher(),
+        stylexDevStyles(),
       ],
       // The assets are shared by both sites; Vite copies this directory into
       // `dist/public` for each build.
       publicDir: path.join(repoRoot(), 'public'),
       resolve: { dedupe: ['waku'], tsconfigPaths: true },
-      optimizeDeps: {
-        include: ['@stylexjs/babel-plugin'],
-      },
       server: {
         fs: {
           // The content tree and the shared assets live outside the app root.

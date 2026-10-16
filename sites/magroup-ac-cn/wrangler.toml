@@ -1,5 +1,0 @@
-# Cloudflare Pages. `waku build` writes the static export to `dist/public`; the RSC
-# payloads under `dist/public/RSC/` are part of that output and must be published too.
-name = "magroup-ac-cn"
-pages_build_output_dir = "./dist/public"
-compatibility_date = "2025-05-05"

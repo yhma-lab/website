@@ -156,5 +156,12 @@ scales. Two StyleX constraints are worth knowing before editing those files:
   conditions therefore repeat `stylex.when.ancestor('[data-theme="dark"]')` per module.
 - Media queries must be literal `'@media (...)'` keys, for the same reason.
 
+`pnpm dev` serves the stylesheet from `/virtual:stylex.css`, loaded by the tags
+`stylexDevStyles()` in `packages/site-kit/src/waku-config.ts` adds. The plugin that owns
+that endpoint injects them with Vite's `transformIndexHtml` hook, and Waku only runs that
+hook for an app that ships its own `index.html` — not for the fallback document every
+route here renders, since they all set `unstable_disableSSR`. Builds are unaffected; the
+rules land in the site's stylesheet either way.
+
 `public/` holds the files copied verbatim into each build: author avatars, publication
 PDFs, the Inter variable font, KaTeX fonts and the Creative Commons badge.
