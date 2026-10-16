@@ -15,11 +15,14 @@ import { Resume } from './resume-section.tsx'
  */
 
 export interface LandingPageProps {
-  /** Slugs identifying the page inside the `pages` collection. */
-  slugs: string[]
+  /**
+   * Slugs identifying the page inside the `pages` collection; absent for the
+   * home page, which the `/` route renders.
+   */
+  slugs?: string[]
 }
 
-export function LandingPage({ slugs }: LandingPageProps) {
+export function LandingPage({ slugs = [] }: LandingPageProps) {
   const { source } = siteContext()
   const page = source.findPage(slugs)
   if (!page) return null

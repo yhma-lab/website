@@ -47,7 +47,7 @@ export function EventsList() {
   )
 }
 
-export function EventsDetail({ slugs }: { slugs: string[] }) {
+export function EventsDetail({ slugs = [] }: { slugs?: string[] }) {
   const { source } = siteContext()
   const page = source.findEvent(slugs)
   if (!page) return null

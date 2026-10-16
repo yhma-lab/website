@@ -41,7 +41,7 @@ export function FundingsList() {
   )
 }
 
-export function FundingsDetail({ slugs }: { slugs: string[] }) {
+export function FundingsDetail({ slugs = [] }: { slugs?: string[] }) {
   const { source } = siteContext()
   const page = source.findFunding(slugs)
   if (!page) return null

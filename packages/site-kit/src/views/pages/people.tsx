@@ -38,7 +38,7 @@ export function PeopleList() {
  * Ports `content/people/<slug>.md`, whose landing sections were
  * `resume-biography` + `resume-experience` (+ `resume-awards` where enabled).
  */
-export function PeopleDetail({ slugs }: { slugs: string[] }) {
+export function PeopleDetail({ slugs = [] }: { slugs?: string[] }) {
   const { locale, source } = siteContext()
   const page = source.findAuthor(slugs)
   if (!page) return null

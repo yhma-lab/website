@@ -1,4 +1,5 @@
 import type { ContentSource } from '../content/source.ts'
+import type { ApiHandler } from '../router/types.ts'
 import type { SiteConfig } from '../site/types.ts'
 
 import { absoluteUrl } from '../content/links.ts'
@@ -11,6 +12,9 @@ import { absoluteUrl } from '../content/links.ts'
  * and funded projects, newest first, each with a `pubDate` and a link. The
  * Chinese site gets its own feed in the same place, with its own titles and
  * absolute links.
+ *
+ * The handler is registered as a static API route by the shared route table, so
+ * the response is written to `dist/public/index.xml` at build time.
  */
 
 type Item = { date: string; description: string; link: string; title: string }
@@ -46,8 +50,12 @@ function ensureSlash(pathname: string): string {
   return pathname.endsWith('/') ? pathname : `${pathname}/`
 }
 
-export function feedRoute(site: SiteConfig, source: ContentSource) {
-  const GET = () => {
+export function feedHandler(
+  site: SiteConfig,
+  source: ContentSource,
+): ApiHandler {
+  /** The static build calls this once, so the body is built in one pass. */
+  return () => {
     const list = items(source)
     const lastBuild = list[0]?.date ?? new Date().toISOString()
 
@@ -76,14 +84,10 @@ export function feedRoute(site: SiteConfig, source: ContentSource) {
       '</channel></rss>',
     ].join('')
 
-    return new Response(body, {
-      headers: { 'content-type': 'application/rss+xml' },
-    })
-  }
-
-  return {
-    GET,
-    // Prerendered at build time; the API routes have no runtime component.
-    getConfig: () => Promise.resolve({ render: 'static' } as const),
+    return Promise.resolve(
+      new Response(body, {
+        headers: { 'content-type': 'application/rss+xml' },
+      }),
+    )
   }
 }

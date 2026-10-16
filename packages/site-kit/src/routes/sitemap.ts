@@ -1,4 +1,5 @@
 import type { ContentSource } from '../content/source.ts'
+import type { ApiHandler } from '../router/types.ts'
 import type { SiteConfig } from '../site/types.ts'
 
 import { absoluteUrl, alternateUrl } from '../content/links.ts'
@@ -14,6 +15,9 @@ import { absoluteUrl, alternateUrl } from '../content/links.ts'
  * Both sites publish the same paths, so every URL gets a `hreflang` pair —
  * except pages the other language has not translated yet, which is what
  * `source.hasTranslation` reports.
+ *
+ * The shared route table registers this as a static API route, so the response is
+ * written to `dist/public/sitemap.xml` at build time.
  */
 
 type Entry = { loc: string; lastmod: string }
@@ -50,11 +54,14 @@ function normalize(pathname: string): string {
   return pathname.endsWith('/') ? pathname : `${pathname}/`
 }
 
-export function sitemapRoute(site: SiteConfig, source: ContentSource) {
-  const alternateLanguage =
-    site.alternate.locale === 'cn' ? 'zh-Hans' : site.alternate.locale
-
-  const GET = () => {
+export function sitemapHandler(
+  site: SiteConfig,
+  source: ContentSource,
+): ApiHandler {
+  /** The static build calls this once, so the document is built in one pass. */
+  return () => {
+    const alternateLanguage =
+      site.alternate.locale === 'cn' ? 'zh-Hans' : site.alternate.locale
     const urls = entries(source)
       .map(entry => {
         const path = normalize(entry.loc)
@@ -75,14 +82,10 @@ export function sitemapRoute(site: SiteConfig, source: ContentSource) {
 
     const body = `<?xml version="1.0" encoding="utf-8" standalone="yes"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">${urls}</urlset>`
 
-    return new Response(body, {
-      headers: { 'content-type': 'application/xml' },
-    })
-  }
-
-  return {
-    GET,
-    // Prerendered at build time; the API routes have no runtime component.
-    getConfig: () => Promise.resolve({ render: 'static' } as const),
+    return Promise.resolve(
+      new Response(body, {
+        headers: { 'content-type': 'application/xml' },
+      }),
+    )
   }
 }

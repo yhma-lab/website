@@ -1,17 +1,22 @@
 #!/usr/bin/env node
 /**
- * Check that the English and Chinese sites stay in step.
+ * Check that the English and Chinese sites publish the same URLs.
  *
  * The language switch mirrors the current path onto the other site, so a route
- * that exists on one site but not the other is a broken link. Two checks:
+ * that exists on one site but not the other is a broken link. Two things keep
+ * them in step now:
  *
- *  1. both apps declare the same route files under `sites/*\/src/pages/**`;
- *  2. both builds publish the same URL set, when `dist/public` exists.
+ *  1. `pnpm test` asserts the shared route table (`sitePages` in
+ *     `@yhma/site-kit/router`) serves the same paths in both languages — a route
+ *     is declared once, so the declaration cannot drift;
+ *  2. this script compares what the two builds actually published, which catches
+ *     a route that builds on one site and not the other (a translation the
+ *     collection never imported, a path a site file claims, ...).
  *
  *   node scripts/check-route-parity.mjs
  *
- * Exits non-zero listing the difference, so a route added to one app cannot
- * silently go missing on the other.
+ * Exits non-zero listing the difference, so a route cannot silently go missing
+ * on one site.
  */
 import { existsSync, readdirSync, statSync } from 'node:fs'
 import path from 'node:path'
@@ -28,15 +33,6 @@ function walk(dir, out = []) {
     else out.push(full)
   }
   return out
-}
-
-/** Route files an app declares, relative to its `src/pages/`. */
-function routeFiles(site) {
-  const dir = path.join(ROOT, 'sites', site, 'src', 'pages')
-  if (!existsSync(dir)) return []
-  return walk(dir)
-    .map(file => path.relative(dir, file))
-    .sort()
 }
 
 /** Routes a built site publishes, as `/path/` strings. */
@@ -72,28 +68,25 @@ function report(label, expected, actual) {
 }
 
 function main() {
-  let ok = true
-
   const [first, second] = SITES
-  ok = report('route files', routeFiles(first), routeFiles(second)) && ok
-
-  for (const site of SITES) {
-    if (builtRoutes(site) === undefined) {
-      console.log(`no sites/${site}/dist/public; skipped the built-route check`)
-    }
-  }
-
   const builtFirst = builtRoutes(first)
   const builtSecond = builtRoutes(second)
-  if (builtFirst !== undefined && builtSecond !== undefined) {
-    ok = report('built routes', builtFirst, builtSecond) && ok
-  } else if (builtFirst === undefined || builtSecond === undefined) {
+
+  if (builtFirst === undefined || builtSecond === undefined) {
+    for (const site of SITES) {
+      if (builtRoutes(site) === undefined) {
+        console.log(
+          `no sites/${site}/dist/public; skipped the built-route check`,
+        )
+      }
+    }
     console.log(
       'run `pnpm build` (or `pnpm build:en`/`pnpm build:cn`) for both sites to compare outputs',
     )
+    return
   }
 
-  if (!ok) process.exit(1)
+  if (!report('built routes', builtFirst, builtSecond)) process.exit(1)
 }
 
 main()

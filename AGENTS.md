@@ -23,7 +23,7 @@ Requires Node.js 26+ and pnpm 11+.
 ```bash
 pnpm install
 pnpm dev          # both dev servers: :3000 English, :3001 Chinese
-pnpm typegen      # .source/ + src/pages.gen.ts per site
+pnpm typegen      # .source/ per site
 pnpm typecheck
 pnpm lint
 pnpm test
@@ -34,14 +34,18 @@ Read [development guide](./docs-dev/README.md) for more information.
 
 ## Conventions
 
-- **Routes are thin.** `sites/*/src/pages/**` only wires `getConfig` and delegates to a
-  view in `packages/site-kit/src/views/`; the two apps' route trees are identical, so
-  `pnpm check:routes` can compare them.
+- **Routes are declared once.** `packages/site-kit/src/router/` holds the route table both
+  sites publish: one entry per route, naming the languages that serve it (`locales`) and
+  the view that renders it. `createSharedRoutes()` registers it through Waku's
+  config-based API (`createPage`/`createLayout`/`createRoot`/`createApi`) for one language
+  and stamps that language on every page it creates; `createFileRoutes()` adds the routes
+  a single site owns from its own `src/pages/`. A route one language does not serve is an
+  entry with narrower `locales`, not a file that exists in one app only.
 - **The apps differ only in configuration.** Each site has one `src/site.config.ts`
   (identity: origin, locale, menu language, the paired site) and one `src/lib/source.ts`
   (the generated collections handed to the kit). `src/lib/site-context.ts` defines both
-  once at module load; `_root.tsx` and `_layout.tsx` import it, so every shared component
-  below reads the site with `siteContext()`.
+  once at module load; `src/waku.server.tsx` imports it before registering any route, so
+  every shared component below reads the site with `siteContext()`.
 - **Content shape is a schema.** `packages/site-kit/src/content/schemas.ts` is the single
   source of truth; `packages/site-kit/src/content/collections.ts` registers the
   collections and `pnpm test` validates the front matter against the same schemas.
@@ -55,8 +59,8 @@ Read [development guide](./docs-dev/README.md) for more information.
     constant binds as a StyleX value object and fails condition validation;
   - media queries must be literal `'@media (...)'` keys, for the same reason.
     See `packages/site-kit/src/styles/tokens.stylex.ts` and `README.md#styles`.
-- **Generated files are not edited.** Each site generates its own `.source/` and
-  `src/pages.gen.ts`; `packages/site-kit/src/components/icon-data.ts` comes from
+- **Generated files are not edited.** Each site generates its own `.source/`;
+  `packages/site-kit/src/components/icon-data.ts` comes from
   `scripts/generate-icon-data.mjs`.
 
 ## Rendering policy

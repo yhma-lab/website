@@ -45,7 +45,7 @@ export function PublicationsList() {
   )
 }
 
-export function PublicationsDetail({ slugs }: { slugs: string[] }) {
+export function PublicationsDetail({ slugs = [] }: { slugs?: string[] }) {
   const { source } = siteContext()
   const page = source.findPublication(slugs)
   if (!page) return null

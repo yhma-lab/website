@@ -18,6 +18,7 @@
     ".": "./src/index.ts",
     "./content": "./src/content/index.ts",
     "./content/collections": "./src/content/collections.ts",
+    "./router": "./src/router/index.ts",
     "./routes": "./src/routes/index.ts",
     "./shell": "./src/shell/index.ts",
     "./styles/global.css": "./src/styles/global.css",

@@ -103,8 +103,14 @@ export interface ContentSource {
   authorParams(): string[][]
   eventParams(): string[][]
   fundingParams(): string[][]
+  /**
+   * Params for the standalone pages: every entry of the `pages` collection
+   * except the site root, which the `/` route renders itself. Which of these
+   * the catch-all actually publishes is the router's business — it drops the
+   * paths another route has already claimed.
+   */
+  pageParams(): string[][]
   publicationParams(): string[][]
-  standalonePageParams(): string[][]
   /** Whether the `cn` storage holds a real `index.cn.mdx` for this URL. */
   hasTranslation(url: string): boolean
 }
@@ -129,15 +135,6 @@ function paramsFor(
     .filter(entry => entry.lang === locale)
     .map(entry => entry.slug)
 }
-
-/**
- * Pages the landing and archive routes own themselves.
- *
- * `LandingPage` renders the collection blocks, but `/publications/` and
- * `/fundings/` are implemented directly, so the catch-all must not claim them:
- * two route files for one path is a build error.
- */
-const EXPLICIT_PAGE_SLUGS = new Set(['fundings', 'publications'])
 
 function text(value: unknown): string | undefined {
   return typeof value === 'string' && value.length > 0 ? value : undefined
@@ -263,6 +260,9 @@ export function createSource(
     findPublication: slugs => findBySlugs(localizedPublications, slugs),
     fundingParams: () => paramsFor(fundings, locale),
     hasTranslation: url => translatedUrls.has(url),
+    /** The site root is `[]`, and it is the `/` route's page, not a standalone one. */
+    pageParams: () =>
+      paramsFor(pages, locale).filter(slugs => slugs.length > 0),
     peopleByGroup: (groups?: readonly string[]) =>
       groupPeople(authorPages, groups),
     peopleGroups,
@@ -271,14 +271,5 @@ export function createSource(
     sortedEvents: () => byDateDesc(eventPages),
     sortedFundings: () => byDateDesc(localizedFundings),
     sortedPublications: () => byDateDesc(localizedPublications),
-    /**
-     * `[...slugs]` parameters for the standalone pages, excluding the ones with
-     * their own route file.
-     */
-    standalonePageParams: () =>
-      paramsFor(pages, locale).filter(slugs => {
-        const first = slugs[0]
-        return first !== undefined && !EXPLICIT_PAGE_SLUGS.has(first)
-      }),
   } satisfies ContentSource
 }
