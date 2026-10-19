@@ -1,7 +1,12 @@
+import * as stylex from '@stylexjs/stylex'
+
+import { styles as blockStyles } from '../components/block.stylex.ts'
+import { HeroDiagram } from '../components/hero-diagram.tsx'
 import { Hero } from '../components/hero.tsx'
 import { PeopleGrid } from '../components/people.tsx'
 import { renderInlineMarkdown } from '../content/inline-markdown.tsx'
 import { resolveInternal } from '../content/links.ts'
+import { translate } from '../content/strings.ts'
 import { siteContext } from '../site-context.ts'
 import { Collection } from './collection.tsx'
 import { Resume } from './resume-section.tsx'
@@ -9,11 +14,13 @@ import { Resume } from './resume-section.tsx'
 /**
  * Landing page renderer.
  *
- * Every page in `content/pages/` is a `sections:` array, which
- * `partials/landing_page.html` walked over. Each entry names a block and carries
- * its `content`/`design`; the blocks themselves live in `src/components/`.
+ * Every page in `content/pages/` is a `sections:` array. Each entry names a block
+ * and carries its `content`; the blocks themselves live in `src/components/`.
+ *
+ * Vertical rhythm belongs to the design system (`blockStyles.section`) rather
+ * than the authored `design.spacing` value: one section cadence keeps the page
+ * coherent as sections are added, and the hero is the only flush section.
  */
-
 export interface LandingPageProps {
   /**
    * Slugs identifying the page inside the `pages` collection; absent for the
@@ -23,12 +30,12 @@ export interface LandingPageProps {
 }
 
 export function LandingPage({ slugs = [] }: LandingPageProps) {
-  const { source } = siteContext()
+  const { locale, source } = siteContext()
   const page = source.findPage(slugs)
   if (!page) return null
 
   const resolve = (url: string) => resolveInternal(url)
-  const spacing = page.data.design.spacing
+  const t = translate(locale)
 
   return (
     <>
@@ -42,7 +49,7 @@ export function LandingPage({ slugs = [] }: LandingPageProps) {
               <section
                 id={section.id}
                 key={key}
-                style={{ padding: `${spacing} 0` }}
+                {...stylex.props(blockStyles.sectionPlain)}
               >
                 <Hero
                   announcement={content.announcement}
@@ -52,6 +59,7 @@ export function LandingPage({ slugs = [] }: LandingPageProps) {
                   secondaryAction={content.secondary_action}
                   text={content.text}
                   title={content.title}
+                  visual={<HeroDiagram labels={t.heroDiagram} />}
                 />
               </section>
             )
@@ -61,7 +69,7 @@ export function LandingPage({ slugs = [] }: LandingPageProps) {
               <section
                 id={section.id}
                 key={key}
-                style={{ padding: `${spacing} 0` }}
+                {...stylex.props(blockStyles.section)}
               >
                 <Collection
                   featuredOnly={content.filters.featured_only}
@@ -71,7 +79,6 @@ export function LandingPage({ slugs = [] }: LandingPageProps) {
                       ? Number.POSITIVE_INFINITY
                       : content.count
                   }
-                  section={section}
                   subtitle={
                     content.subtitle.length > 0 ? content.subtitle : undefined
                   }
@@ -90,7 +97,7 @@ export function LandingPage({ slugs = [] }: LandingPageProps) {
               <section
                 id={section.id}
                 key={key}
-                style={{ padding: `${spacing} 0` }}
+                {...stylex.props(blockStyles.section)}
               >
                 <PeopleGrid
                   groups={
@@ -98,7 +105,11 @@ export function LandingPage({ slugs = [] }: LandingPageProps) {
                       ? content.user_groups
                       : source.peopleGroups()
                   }
-                  intro={content.text.length > 0 ? content.text : undefined}
+                  intro={
+                    content.text.length > 0
+                      ? renderInlineMarkdown(content.text)
+                      : undefined
+                  }
                   showInterests={section.design.show_interests}
                   showOrganizations={section.design.show_organizations}
                   showRole={section.design.show_role}
@@ -117,7 +128,7 @@ export function LandingPage({ slugs = [] }: LandingPageProps) {
               <section
                 id={section.id}
                 key={key}
-                style={{ padding: `${spacing} 0` }}
+                {...stylex.props(blockStyles.section)}
               >
                 <Resume section={section} />
               </section>

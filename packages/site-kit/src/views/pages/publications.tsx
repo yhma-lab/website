@@ -2,24 +2,18 @@ import * as stylex from '@stylexjs/stylex'
 
 import { styles as blockStyles } from '../../components/block.stylex.ts'
 import { BlockHeading } from '../../components/block.tsx'
-import { CitationItem } from '../../components/citation.tsx'
+import { PublicationList } from '../../components/citation.tsx'
+import { shared } from '../../components/views.stylex.ts'
 import { siteContext } from '../../site-context.ts'
 import { PublicationDetail } from './publication-detail.tsx'
-
-const styles = stylex.create({
-  list: {
-    display: 'flex',
-    flexDirection: 'column',
-    paddingInline: '1.5rem',
-  },
-})
 
 /**
  * `/publications/`.
  *
  * The heading and intro come from `content/pages/publications/index.mdx`, the
- * same front matter the Hugo collection block read, so the page stays
- * data-driven rather than hard-coded here.
+ * same front matter the old collection block read, so the page stays data-driven
+ * rather than hard-coded here. The archive itself is the shared year-grouped
+ * index, with `h2` year headings because the page owns the only `h1`.
  */
 export function PublicationsList() {
   const { source } = siteContext()
@@ -29,19 +23,16 @@ export function PublicationsList() {
   const intro = frontMatter?.data.sections[0]?.content.text ?? ''
 
   return (
-    <>
-      <BlockHeading
-        subtitle={intro.length > 0 ? intro : undefined}
-        title={heading}
-      />
-      <div {...stylex.props(blockStyles.centered)}>
-        <div {...stylex.props(styles.list)}>
-          {source.sortedPublications().map(page => (
-            <CitationItem key={page.url} page={page} />
-          ))}
-        </div>
+    <div {...stylex.props(shared.page)}>
+      <div {...stylex.props(blockStyles.measure)}>
+        <BlockHeading
+          as="h1"
+          subtitle={intro.length > 0 ? intro : undefined}
+          title={heading}
+        />
+        <PublicationList items={source.sortedPublications()} yearAs="h2" />
       </div>
-    </>
+    </div>
   )
 }
 
@@ -51,5 +42,3 @@ export function PublicationsDetail({ slugs = [] }: { slugs?: string[] }) {
   if (!page) return null
   return <PublicationDetail page={page} />
 }
-
-export { styles }

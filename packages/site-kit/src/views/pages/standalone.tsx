@@ -1,19 +1,42 @@
+import * as stylex from '@stylexjs/stylex'
 import { unstable_notFound } from 'waku/router/server'
 
+import { getMdxComponents } from '../../components/mdx.tsx'
+import { shared } from '../../components/views.stylex.ts'
 import { siteContext } from '../../site-context.ts'
 import { LandingPage } from '../landing.tsx'
 
 /**
  * A standalone page from the `pages` collection, e.g. `/privacy/` or `/terms/`.
  *
- * Ports the previous `[...slugs]` route file: the home, listing and archive
- * routes are entries of their own in the shared table, and this is what renders
- * everything else that collection publishes. A page the source does not know
- * about is a 404 rather than an empty document, so a translation that never got
- * imported fails the build instead of publishing a blank page.
+ * Pages with a `sections:` array render through the landing blocks; a page with
+ * only front matter and a Markdown body (the legal pages) renders as a plain
+ * article instead of an empty frame, which is what the previous build did.
+ * A page the source does not know about is a 404 rather than an empty document,
+ * so a translation that never got imported fails the build instead of publishing
+ * a blank page.
  */
 export function StandalonePage({ slugs = [] }: { slugs?: string[] }) {
   const { source } = siteContext()
-  if (!source.findPage(slugs)) unstable_notFound()
-  return <LandingPage slugs={slugs} />
+  const page = source.findPage(slugs)
+  if (!page) unstable_notFound()
+
+  if (page.data.sections.length > 0) {
+    return <LandingPage slugs={slugs} />
+  }
+
+  const MDX = page.data.body
+
+  return (
+    <div {...stylex.props(shared.page)}>
+      <header {...stylex.props(shared.header)}>
+        <h1 {...stylex.props(shared.title)}>{page.data.title}</h1>
+      </header>
+      <div {...stylex.props(shared.reading)}>
+        <div {...stylex.props(shared.body)}>
+          <MDX components={getMdxComponents()} />
+        </div>
+      </div>
+    </div>
+  )
 }

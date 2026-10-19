@@ -1,15 +1,124 @@
+/*
+ * Global stylesheet.
+ *
+ * The project styles components with StyleX; this file holds only what StyleX
+ * cannot express as a rule on a component: the self-hosted font faces, the
+ * document-level colour scheme, a three-line reset, the current-page navigation
+ * marker (owned by the document bootstrap through `aria-current`, which StyleX
+ * cannot select), and the KaTeX overflow guard. Everything else lives in the
+ * `.stylex.ts` modules.
+ */
+
+/*
+ * Source Serif 4 carries the editorial voice; Inter is the interface face.
+ * Both are variable Latin subsets vendored under `./fonts` (SIL Open Font
+ * License, see the OFL files beside them). The Chinese sites fall back to the
+ * platform's CJK faces declared in `tokens.stylex.ts`.
+ */
 @font-face {
-  font-family: 'Inter var';
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+  src: url('./fonts/SourceSerif4-Roman-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 200 900;
+  font-display: swap;
+  src: url('./fonts/SourceSerif4-Italic-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
-  src: url('/dist/font/Inter.var.woff2') format('woff2');
+  src: url('./fonts/InterVariable-latin.woff2') format('woff2');
 }
 
+/*
+ * Document palette.
+ *
+ * These custom properties exist for rules in this file only; component styles
+ * read the StyleX tokens. Keeping the light/dark pairs here lets the document
+ * background paint before React and lets the navigation marker follow the
+ * theme without a StyleX rule.
+ */
 :root {
   color-scheme: light;
+  --lab-bg: #f4f5f3;
+  --lab-fg: #171b1e;
+  --lab-fg-muted: #4a545a;
+  --lab-accent: #1d4ed8;
+  --lab-accent-soft: #e7ecfb;
+  --lab-border: #dde1db;
+  --lab-selection: #cfdbfa;
 }
 
 :root[data-theme='dark'] {
   color-scheme: dark;
+  --lab-bg: #0c1116;
+  --lab-fg: #e9eeec;
+  --lab-fg-muted: #a9b4ba;
+  --lab-accent: #82a6ff;
+  --lab-accent-soft: #18233d;
+  --lab-border: #232d35;
+  --lab-selection: #243a63;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--lab-bg);
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+::selection {
+  background: var(--lab-selection);
+  color: var(--lab-fg);
+}
+
+/*
+ * Current page marker.
+ *
+ * The document bootstrap sets `aria-current="page"` on the matching menu link so
+ * assistive technology can announce it; sighted readers get the same signal from
+ * an accent underline. Attribute selectors are outside StyleX's feature set,
+ * which is why this one rule lives here.
+ */
+#nav-menu a[aria-current='page'] {
+  color: var(--lab-fg);
+  text-decoration: underline;
+  text-decoration-color: var(--lab-accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 9px;
+}
+
+/*
+ * Display math can be wider than a phone. Let it scroll inside its row instead
+ * of forcing the whole page sideways.
+ */
+.katex-display {
+  margin-block: 1.25em;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: 0.25rem;
 }

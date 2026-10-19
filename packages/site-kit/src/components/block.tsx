@@ -4,42 +4,35 @@ import * as stylex from '@stylexjs/stylex'
 
 import { styles } from './block.stylex.ts'
 
-export interface BlockProps {
-  /** `design.spacing` from the page front matter, e.g. `3rem` or `2rem`. */
-  spacing: string
-  children: ReactNode
-}
-
-/** `<section class="relative hbb-section" style="padding: {spacing} 0">`. */
-export function Block({ children, spacing }: BlockProps) {
-  return (
-    <section
-      style={{ padding: `${spacing} 0` }}
-      {...stylex.props(styles.block)}
-    >
-      {children}
-    </section>
-  )
-}
-
 export interface BlockHeadingProps {
   title?: string | undefined
   /** Inline markdown already parsed to nodes; `**People**` appears in the hero. */
   subtitle?: ReactNode
+  /**
+   * The heading level the surrounding page needs. Section headings default to
+   * `h2`; an archive page uses `h1` because the heading is the page title.
+   */
+  as?: 'h1' | 'h2'
+  id?: string
 }
 
-/** The centered title/subtitle pair rendered above a collection. */
-export function BlockHeading({ subtitle, title }: BlockHeadingProps) {
+/** The left-aligned title/lead pair rendered above a section. */
+export function BlockHeading({
+  as = 'h2',
+  id,
+  subtitle,
+  title,
+}: BlockHeadingProps) {
   if (!title && !subtitle) return null
+  const Heading = as
   return (
     <div {...stylex.props(styles.headingWrap)}>
-      {title ? <div {...stylex.props(styles.heading)}>{title}</div> : null}
-      {subtitle ? <p {...stylex.props(styles.bodyText)}>{subtitle}</p> : null}
+      {title ? (
+        <Heading id={id} {...stylex.props(styles.heading)}>
+          {title}
+        </Heading>
+      ) : null}
+      {subtitle ? <p {...stylex.props(styles.lead)}>{subtitle}</p> : null}
     </div>
   )
-}
-
-/** `html:not(.dark)` equivalent: the inline-markdown links inside a subtitle. */
-export function Muted({ children }: { children: ReactNode }) {
-  return <span {...stylex.props(styles.muted)}>{children}</span>
 }

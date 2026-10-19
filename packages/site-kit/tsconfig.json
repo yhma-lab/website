@@ -3,8 +3,8 @@
   "display": "site-kit typecheck",
   "extends": "../../tsconfig.react.json",
   "compilerOptions": {
-    "rootDir": "./src"
+    "rootDir": "."
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "vitest.ui.config.ts"],
   "exclude": ["node_modules"]
 }

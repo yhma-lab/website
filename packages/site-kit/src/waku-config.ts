@@ -14,6 +14,8 @@ import rehypeKatex from 'rehype-katex'
 import remarkMath from 'remark-math'
 import { defineConfig } from 'waku/config'
 
+import { navigationBootstrap, themeBootstrap } from './shell/bootstrap.ts'
+
 /**
  * Build configuration shared by the two sites.
  *
@@ -83,24 +85,25 @@ const stylexDevTags = JSON.stringify(
   ].join(''),
 ).slice(1, -1)
 
+const bootstrapTags = JSON.stringify(
+  `<script>${themeBootstrap};${navigationBootstrap}</script>`,
+).slice(1, -1)
+
 /**
- * Put StyleX's dev stylesheet into the document.
+ * Enhance the actual document, not inert script tags mounted later through RSC.
  *
- * The plugin adds those two tags with Vite's `transformIndexHtml` hook, which
- * Waku only runs when the app ships an `index.html`: the fallback shell is a
- * hard-coded string that receives the bootstrap script alone. Every route here
- * disables SSR, so the fallback shell *is* the dev document, and without the
- * tags the page renders `stylex.props()` class names that no stylesheet
- * defines. The shell reaches Vite as a module whose default export is that
- * markup, so the tags are spliced in at the same place instead.
- *
- * `apply` keeps this to dev, where the plugin serves the CSS; a build appends
- * the same rules to the site's own stylesheet instead.
+ * Every route disables SSR. Waku's fallback HTML reaches Vite as a module with a
+ * string default export, bypassing transformIndexHtml. Inject the theme and link
+ * bootstrap here in both dev and production; its observer handles late RSC links.
+ * Dev also needs StyleX's virtual stylesheet/runtime. Production extracts CSS.
  */
-function stylexDevStyles(): Plugin {
+function documentShell(): Plugin {
+  let isDev = false
   return {
-    apply: 'serve',
-    name: 'yhma:stylex-dev-styles',
+    name: 'yhma:document-shell',
+    configResolved(config) {
+      isDev = config.command === 'serve'
+    },
     transform(code, id) {
       if (!id.includes('virtual:vite-rsc-waku/html-shell')) {
         return
@@ -110,7 +113,11 @@ function stylexDevStyles(): Plugin {
         return
       }
       return {
-        code: code.slice(0, bodyEnd) + stylexDevTags + code.slice(bodyEnd),
+        code:
+          code.slice(0, bodyEnd) +
+          bootstrapTags +
+          (isDev ? stylexDevTags : '') +
+          code.slice(bodyEnd),
         map: null,
       }
     },
@@ -120,6 +127,13 @@ function stylexDevStyles(): Plugin {
 export function createWakuConfig(): Config {
   return defineConfig({
     vite: {
+      environments: {
+        rsc: {
+          // Keep Waku's RSDW imports inside Vite so its patches and react-server
+          // condition apply. Native Node loading in dev would use ordinary React.
+          resolve: { noExternal: ['react-server-dom-webpack'] },
+        },
+      },
       plugins: [
         // StyleX must compile in every environment (client, ssr, rsc) so that
         // server components can call `stylex.props()` without a client boundary.
@@ -130,7 +144,7 @@ export function createWakuConfig(): Config {
         babelPlugin({ presets: [reactCompilerPreset()] }),
         react(),
         sharedContentWatcher(),
-        stylexDevStyles(),
+        documentShell(),
       ],
       // The assets are shared by both sites; Vite copies this directory into
       // `dist/public` for each build.

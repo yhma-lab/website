@@ -1,203 +1,219 @@
 import * as stylex from '@stylexjs/stylex'
 
-import { neutral, primary, secondary } from '../styles/tokens.stylex.ts'
+import {
+  FONT_SANS,
+  FONT_SERIF,
+  RADIUS,
+  TEXT,
+  theme,
+} from '../styles/tokens.stylex.ts'
+
+const DARK = '[data-theme="dark"]'
 
 /**
  * Long-form typography.
  *
- * The previous build relied on `@tailwindcss/typography`, whose `.prose` rules
- * are descendant selectors (`'.prose p'`). StyleX only accepts pseudo-class
- * conditions, so that single-rooted approach is not expressible here. Instead
- * the same values are attached to each element, and `getMdxComponents()` in
- * `src/lib/mdx.tsx` maps MDX output onto these components.
- *
- * Values are copied from the compiled Tailwind output, including the responsive
- * `prose` -> `lg:prose-xl` jump (1rem/1.75 to 1.25rem/1.8).
+ * StyleX has no descendant selector, so the reading styles attach to each MDX
+ * element through `getMdxComponents()` instead of hanging off a `.prose` root.
+ * The body is set in Source Serif 4 at reading size; the interface sans appears
+ * only in inline code, which is closer to a technical annotation than to prose.
  */
-
-const DARK = '[data-theme="dark"]'
-
 export const prose = stylex.create({
   a: {
     color: {
-      default: primary['600'],
-      [stylex.when.ancestor(DARK)]: primary['400'],
+      default: theme.accent,
+      [stylex.when.ancestor(DARK)]: '#a0baff',
     },
     fontWeight: 500,
     textDecorationColor: {
-      default: primary['300'],
-      [stylex.when.ancestor(DARK)]: neutral['500'],
+      default: theme.accent,
+      [stylex.when.ancestor(DARK)]: '#82a6ff',
     },
     textDecorationLine: 'underline',
-    ':hover': {
-      borderRadius: '0.09rem',
-      color: {
-        default: primary['600'],
-        [stylex.when.ancestor(DARK)]: primary['300'],
+    textDecorationThickness: 1,
+    textUnderlineOffset: 2,
+    ':focus-visible': {
+      borderRadius: RADIUS.sm,
+      outlineColor: {
+        default: theme.accent,
+        [stylex.when.ancestor(DARK)]: '#82a6ff',
       },
-      textDecorationLine: 'none',
+      outlineOffset: 2,
+      outlineStyle: 'solid',
+      outlineWidth: 2,
+    },
+    ':hover': {
+      textDecorationThickness: 2,
     },
   },
   blockquote: {
     borderInlineStartColor: {
-      default: primary['200'],
-      [stylex.when.ancestor(DARK)]: primary['900'],
+      default: theme.accent,
+      [stylex.when.ancestor(DARK)]: '#82a6ff',
     },
     borderInlineStartStyle: 'solid',
-    borderInlineStartWidth: '0.25rem',
+    borderInlineStartWidth: 2,
     color: {
-      default: neutral['700'],
-      [stylex.when.ancestor(DARK)]: neutral['200'],
+      default: theme.fgMuted,
+      [stylex.when.ancestor(DARK)]: '#a9b4ba',
     },
+    fontFamily: FONT_SERIF.family,
+    fontSize: '1.0625em',
     fontStyle: 'italic',
-    fontWeight: 500,
+    lineHeight: 1.6,
     marginBlock: '1.6em',
-    paddingInlineStart: '1em',
+    paddingInlineStart: '1.25em',
   },
   code: {
-    color: {
-      default: secondary['700'],
-      [stylex.when.ancestor(DARK)]: secondary['400'],
+    backgroundColor: {
+      default: theme.bgSubtle,
+      [stylex.when.ancestor(DARK)]: '#172028',
     },
-    fontSize: '0.875em',
-    fontWeight: 600,
+    borderColor: {
+      default: theme.border,
+      [stylex.when.ancestor(DARK)]: '#232d35',
+    },
+    borderRadius: RADIUS.sm,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    color: {
+      default: theme.fg,
+      [stylex.when.ancestor(DARK)]: '#e9eeec',
+    },
+    fontFamily: FONT_SANS.mono,
+    fontSize: '0.8125em',
+    fontWeight: 500,
+    paddingBlock: '0.1em',
+    paddingInline: '0.35em',
   },
   h1: {
     color: {
-      default: neutral['800'],
-      [stylex.when.ancestor(DARK)]: neutral['50'],
+      default: theme.fg,
+      [stylex.when.ancestor(DARK)]: '#e9eeec',
     },
-    fontSize: '2.25em',
-    fontWeight: 800,
-    lineHeight: 1.1111111,
-    marginBlockEnd: '0.8888889em',
-    marginBlockStart: 0,
+    fontFamily: FONT_SERIF.family,
+    fontSize: '2em',
+    fontWeight: 600,
+    letterSpacing: '-0.02em',
+    lineHeight: 1.15,
+    marginBlock: '0 0.6em',
   },
   h2: {
     color: {
-      default: neutral['800'],
-      [stylex.when.ancestor(DARK)]: neutral['50'],
+      default: theme.fg,
+      [stylex.when.ancestor(DARK)]: '#e9eeec',
     },
+    fontFamily: FONT_SERIF.family,
     fontSize: '1.5em',
-    fontWeight: 700,
-    lineHeight: 1.3333333,
-    marginBlockEnd: '1em',
-    marginBlockStart: '2em',
+    fontWeight: 600,
+    letterSpacing: '-0.015em',
+    lineHeight: 1.25,
+    marginBlock: '1.8em 0.65em',
   },
   h3: {
     color: {
-      default: neutral['800'],
-      [stylex.when.ancestor(DARK)]: neutral['50'],
+      default: theme.fg,
+      [stylex.when.ancestor(DARK)]: '#e9eeec',
     },
-    fontSize: '1.25em',
+    fontFamily: FONT_SERIF.family,
+    fontSize: '1.1875em',
     fontWeight: 600,
-    lineHeight: 1.6,
-    marginBlockEnd: '0.6em',
-    marginBlockStart: '1.6em',
+    letterSpacing: '-0.01em',
+    lineHeight: 1.3,
+    marginBlock: '1.6em 0.6em',
   },
   h4: {
     color: {
-      default: neutral['800'],
-      [stylex.when.ancestor(DARK)]: neutral['50'],
+      default: theme.fg,
+      [stylex.when.ancestor(DARK)]: '#e9eeec',
     },
+    fontFamily: FONT_SANS.family,
+    fontSize: '0.9375em',
     fontWeight: 600,
-    marginBlockEnd: '0.5em',
-    marginBlockStart: '1.5em',
+    lineHeight: 1.4,
+    marginBlock: '1.5em 0.5em',
   },
   hr: {
     borderTopColor: {
-      default: neutral['200'],
-      [stylex.when.ancestor(DARK)]: neutral['500'],
+      default: theme.border,
+      [stylex.when.ancestor(DARK)]: '#232d35',
     },
     borderTopStyle: 'solid',
     borderTopWidth: 1,
-    marginBlock: '3em',
+    marginBlock: '2.5em',
   },
   img: {
-    marginBlock: '2em',
+    borderRadius: RADIUS.md,
+    height: 'auto',
+    marginBlock: '1.75em',
     maxWidth: '100%',
   },
   li: {
     marginBlock: '0.5em',
-    paddingInlineStart: '0.375em',
+    paddingInlineStart: '0.25em',
   },
   mark: {
     backgroundColor: {
-      default: primary['600'],
-      [stylex.when.ancestor(DARK)]: primary['400'],
+      default: theme.accentSoft,
+      [stylex.when.ancestor(DARK)]: '#18233d',
     },
-    borderRadius: '0.25rem',
-    color: {
-      default: neutral['100'],
-      [stylex.when.ancestor(DARK)]: '#000000',
-    },
-    paddingBlock: '0.1rem',
-    paddingInline: '0.2rem',
+    borderRadius: RADIUS.sm,
+    color: 'inherit',
+    paddingBlock: '0.1em',
+    paddingInline: '0.2em',
   },
   ol: {
     listStyleType: 'decimal',
     marginBlock: '1.25em',
-    paddingInlineStart: '1.625em',
+    paddingInlineStart: '1.4em',
   },
   p: {
-    marginBlock: '1.25em',
+    marginBlock: '1.1em',
+    textWrap: 'pretty',
   },
   strong: {
     color: {
-      default: neutral['900'],
-      [stylex.when.ancestor(DARK)]: neutral['200'],
+      default: theme.fg,
+      [stylex.when.ancestor(DARK)]: '#e9eeec',
     },
     fontWeight: 600,
   },
   table: {
-    fontSize: '0.875em',
-    lineHeight: 1.7142857,
-    marginBlock: '2em',
+    borderCollapse: 'collapse',
+    fontSize: '0.9375em',
+    lineHeight: 1.55,
+    marginBlock: '1.75em',
     width: '100%',
   },
   td: {
-    borderBottomColor: {
-      default: neutral['300'],
-      [stylex.when.ancestor(DARK)]: neutral['700'],
+    borderBlockEndColor: {
+      default: theme.border,
+      [stylex.when.ancestor(DARK)]: '#232d35',
     },
-    borderBottomStyle: 'solid',
-    borderBottomWidth: 1,
-    paddingBlock: '0.75em',
+    borderBlockEndStyle: 'solid',
+    borderBlockEndWidth: 1,
+    paddingBlock: '0.6em',
     paddingInlineEnd: '0.75em',
     verticalAlign: 'top',
   },
   th: {
-    borderBottomColor: {
-      default: neutral['500'],
-      [stylex.when.ancestor(DARK)]: neutral['500'],
+    borderBlockEndColor: {
+      default: theme.borderStrong,
+      [stylex.when.ancestor(DARK)]: '#34424c',
     },
-    borderBottomStyle: 'solid',
-    borderBottomWidth: 1,
+    borderBlockEndStyle: 'solid',
+    borderBlockEndWidth: 1,
+    fontFamily: FONT_SANS.family,
+    fontSize: TEXT.small,
     fontWeight: 600,
-    paddingBlock: '0.5714286em',
-    paddingInlineEnd: '0.5714286em',
+    paddingBlock: '0.6em',
+    paddingInlineEnd: '0.75em',
     textAlign: 'start',
     verticalAlign: 'bottom',
   },
   ul: {
     listStyleType: 'disc',
     marginBlock: '1.25em',
-    paddingInlineStart: '1.625em',
-  },
-  /** The reading container; mirrors `.prose prose-slate lg:prose-xl`. */
-  root: {
-    color: {
-      default: neutral['700'],
-      [stylex.when.ancestor(DARK)]: neutral['300'],
-    },
-    fontSize: {
-      '@media (min-width: 1024px)': '1.25rem',
-      default: '1rem',
-    },
-    lineHeight: {
-      '@media (min-width: 1024px)': 1.8,
-      default: 1.75,
-    },
-    maxWidth: '65ch',
+    paddingInlineStart: '1.4em',
   },
 })

@@ -1,59 +1,73 @@
 /**
- * Inline bootstrap scripts.
- *
- * They live in their own module, with no React, StyleX or CSS imports, so the
- * navigation logic can be exercised by a plain unit test (the shell itself pulls
- * in the compiled stylesheet and cannot run outside the bundler).
+ * Inline bootstrap scripts, kept free of React and CSS imports so their browser
+ * behavior can also be exercised by plain unit tests.
  */
 
-/** Applied to `<html>` by the theme bootstrap when no stored preference exists. */
+/** Initial root-shell marker; the bootstrap resolves it to `light` or `dark`. */
 export const THEME_DEFAULT = 'system'
 
 /**
- * Theme bootstrap, inlined in `<head>`.
- *
- * Runs before the first paint, because a wrong `data-theme` flashes light on
- * dark. It only touches `document.documentElement`, so it is safe to run before
- * the body exists.
+ * Resolve appearance before paint and retain it when React acquires <html>.
+ * React clears singleton attributes on mount; valid user toggles remain authoritative.
  */
-export const themeBootstrap = `(function(){try{
-var s=localStorage.getItem('theme');
-var d=window.matchMedia('(prefers-color-scheme: dark)').matches;
-document.documentElement.dataset['theme']=s==='dark'||s==='light'?s:(d?'dark':'light');
-}catch(e){}})()`
+export const themeBootstrap = `(function(){
+var root=document.documentElement,s,d=false;
+var valid=function(value){return value==='dark'||value==='light'};
+try{s=localStorage.getItem('theme')}catch(e){}
+try{d=window.matchMedia('(prefers-color-scheme: dark)').matches}catch(e){}
+var theme=valid(s)?s:(d?'dark':'light');
+root.dataset['theme']=theme;
+new MutationObserver(function(records){
+var current=root.dataset['theme'];
+if(valid(current)){theme=current;return}
+for(var i=records.length-1;i>=0;i--){
+var previous=records[i].oldValue;
+if(valid(previous)){theme=previous;break}
+}
+root.dataset['theme']=theme;
+}).observe(root,{attributes:true,attributeFilter:['data-theme'],attributeOldValue:true});
+})()`
 
 /**
- * Language switch, inlined in `<head>` and applied once the document is parsed.
- *
- * The switch keeps the visitor on the same page of the paired site, and the
- * current path is only known in the browser: Waku does not hand a layout the
- * request path, so the server renders the paired site's home page as the
- * fallback href. The same pass marks the current menu entry, which the navbar
- * cannot do on the server for the same reason.
- *
- * Both steps wait for `DOMContentLoaded` — a script in `<head>` runs before the
- * elements it queries exist. Without JavaScript the fallback href and the
- * unmarked menu are what remains, and both are still usable.
+ * The document is the sole owner of language hrefs and active navigation.
+ * With SSR disabled, the RSC payload can mount or replace links after parsing.
+ * Observe child lists only: our own href/aria-current writes cannot retrigger it.
  */
 export const navigationBootstrap = `(function(){
 var norm=function(p){var t=p.replace(/\\/+$/,'');return t.length>0?t:'/'};
-var apply=function(){try{
+var set=function(node,key,value){if(node.getAttribute(key)!==value)node.setAttribute(key,value)};
+var apply=function(){
 var path=location.pathname;
+var currentPath=norm(path);
 var links=document.querySelectorAll('a[data-alt-site]');
 for(var i=0;i<links.length;i++){
 var base=links[i].getAttribute('data-alt-site');
 if(!base)continue;
 var hasExt=/\\.[a-z0-9]+$/i.test(path);
 var p=path.charAt(path.length-1)==='/'||hasExt?path:path+'/';
-links[i].setAttribute('href',base.replace(/\\/$/,'')+(p.charAt(0)==='/'?p:'/'+p)+location.search+location.hash);
+set(links[i],'href',base.replace(/\\/$/,'')+(p.charAt(0)==='/'?p:'/'+p)+location.search+location.hash);
 }
 var nav=document.querySelectorAll('#nav-menu a');
 for(var j=0;j<nav.length;j++){
 var raw=nav[j].getAttribute('href')||'';
-if(raw.indexOf('#')>=0)continue;
 var to=norm(raw);
-var current=to==='/'?norm(path)==='/':norm(path)===to||norm(path).indexOf(to+'/')===0;
-if(current)nav[j].setAttribute('aria-current','page');
-}}catch(e){}};
-if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',apply)}else{apply()}
+var current=raw.indexOf('#')<0&&(to==='/'?currentPath==='/':currentPath===to||currentPath.indexOf(to+'/')===0);
+if(current)set(nav[j],'aria-current','page');
+else if(nav[j].hasAttribute('aria-current'))nav[j].removeAttribute('aria-current');
+}
+};
+var relevant=function(node){return node.nodeType===1&&(node.matches('#nav-menu,a[data-alt-site]')||node.querySelector('#nav-menu,a[data-alt-site]'))};
+new MutationObserver(function(records){
+for(var i=0;i<records.length;i++){
+var record=records[i];
+if(record.target.nodeType===1&&record.target.closest('#nav-menu')){apply();return}
+for(var j=0;j<record.addedNodes.length;j++){
+if(relevant(record.addedNodes[j])){apply();return}
+}
+}
+}).observe(document.documentElement,{childList:true,subtree:true});
+window.addEventListener('hashchange',apply);
+window.addEventListener('popstate',apply);
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});
+else apply();
 })()`

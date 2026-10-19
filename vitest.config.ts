@@ -6,6 +6,7 @@ export default defineConfig({
     exclude: [
       '**/node_modules/**',
       '**/dist/**',
+      '**/*.browser.test.{ts,tsx}',
       '**/.references/**',
       '**/.source/**',
     ],

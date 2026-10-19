@@ -6,6 +6,8 @@
  * by `cpSun`. Both collapse to a title, a subtitle and a year range.
  */
 
+import { formatShortMonthYear } from '../content/format.ts'
+
 export interface ExperienceEntry {
   area?: string | undefined
   button?: { text: string; url: string } | undefined
@@ -37,4 +39,24 @@ export function entryYears(entry: ExperienceEntry): string[] {
   return [entry.date_start, entry.date_end].filter(
     (value): value is string => typeof value === 'string' && value.length > 0,
   )
+}
+
+/**
+ * A résumé date range. ISO content dates become `Sep 2015 – Jun 2020`; the
+ * legacy free-form `year` field passes through untouched, and an open end uses
+ * the localized `Present` label.
+ */
+export function formatRange(
+  years: readonly string[],
+  presentLabel: string,
+): string {
+  const [start, end] = years
+  if (start === undefined) return ''
+  if (end === undefined) return `${formatDateLabel(start)} – ${presentLabel}`
+  return `${formatDateLabel(start)} – ${formatDateLabel(end)}`
+}
+
+function formatDateLabel(value: string): string {
+  const formatted = formatShortMonthYear(value)
+  return formatted.length > 0 ? formatted : value
 }

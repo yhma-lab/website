@@ -3,36 +3,40 @@ import type { ExperienceEntry } from './bio-text.ts'
 import * as stylex from '@stylexjs/stylex'
 
 import { renderInlineMarkdown } from '../content/inline-markdown.tsx'
-import { entrySubtitle, entryTitle, entryYears } from './bio-text.ts'
+import {
+  entrySubtitle,
+  entryTitle,
+  entryYears,
+  formatRange,
+} from './bio-text.ts'
 import { styles } from './biography.stylex.ts'
-import { Icon } from './icon.tsx'
 
 export interface ExperienceListProps {
   /** `i18n "experience"` / `i18n "education"`. */
   heading: string
-  icon: string
   entries: readonly ExperienceEntry[]
   /** Localized `Present`, used when an entry has no end date. */
   presentLabel: string
 }
 
 /**
- * Résumé timeline, porting `partials/blox/resume-experience.html`.
+ * Résumé timeline.
  *
- * The original drew a bordered `<ol>` with an absolutely positioned icon dot per
- * entry and a `date_start – date_end` line, falling back to `Present`.
+ * The date range is the left column and the entry is the reading column: a
+ * visitor scans the years first, then the titles. The previous icon dot per row
+ * is gone because the hairlines already separate entries; dates carry the
+ * structure without an extra glyph repeating on every line.
  */
 export function ExperienceList({
   entries,
   heading,
-  icon,
   presentLabel,
 }: ExperienceListProps) {
   if (entries.length === 0) return null
 
   return (
-    <div>
-      <h3 {...stylex.props(styles.sectionHeading)}>{heading}</h3>
+    <section>
+      <h2 {...stylex.props(styles.sectionHeading)}>{heading}</h2>
       <ol {...stylex.props(styles.timeline)}>
         {entries.map((entry, index) => {
           const years = entryYears(entry)
@@ -41,36 +45,28 @@ export function ExperienceList({
               key={`${entryTitle(entry)}-${String(index)}`}
               {...stylex.props(styles.timelineEntry)}
             >
-              <span {...stylex.props(styles.timelineDot)}>
-                <Icon name={icon} />
-              </span>
-              <h3 {...stylex.props(styles.timelineTitle)}>
-                {entryTitle(entry)}
-              </h3>
-              {entrySubtitle(entry).length > 0 ? (
-                <span {...stylex.props(styles.timelineOrg, styles.muted)}>
-                  {entrySubtitle(entry)}
-                </span>
-              ) : null}
-              <time {...stylex.props(styles.timelineTime, styles.muted)}>
+              <span {...stylex.props(styles.timelineTime)}>
                 {formatRange(years, presentLabel)}
-              </time>
-              {entry.summary ? (
-                <div {...stylex.props(styles.timelineSummary, styles.muted)}>
-                  {renderInlineMarkdown(entry.summary)}
-                </div>
-              ) : null}
+              </span>
+              <div>
+                <h3 {...stylex.props(styles.timelineTitle)}>
+                  {entryTitle(entry)}
+                </h3>
+                {entrySubtitle(entry).length > 0 ? (
+                  <p {...stylex.props(styles.timelineOrg)}>
+                    {entrySubtitle(entry)}
+                  </p>
+                ) : null}
+                {entry.summary ? (
+                  <div {...stylex.props(styles.timelineSummary)}>
+                    {renderInlineMarkdown(entry.summary)}
+                  </div>
+                ) : null}
+              </div>
             </li>
           )
         })}
       </ol>
-    </div>
+    </section>
   )
-}
-
-function formatRange(years: string[], presentLabel: string): string {
-  const [start, end] = years
-  if (start === undefined) return ''
-  if (end === undefined) return `${start} – ${presentLabel}`
-  return `${start} – ${end}`
 }

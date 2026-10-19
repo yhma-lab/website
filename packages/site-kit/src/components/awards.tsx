@@ -1,8 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
 
-import { formatMonthYear } from '../content/format.ts'
+import { formatShortMonthYear } from '../content/format.ts'
 import { awardStyles as styles } from './biography.stylex.ts'
-import { Icon } from './icon.tsx'
 
 export interface AwardEntry {
   awarder: string
@@ -24,10 +23,11 @@ export interface AwardsListProps {
 }
 
 /**
- * Awards block, porting `partials/blox/resume-awards.html`.
+ * Awards list.
  *
- * The previous markup used `flex pt-12 pb-4` rows with the award icon in a
- * `place-self-center` column and the date under the awarder.
+ * The same date-plus-reading-column rhythm as the experience timeline, so an
+ * awards block placed after a résumé reads as one continuous record rather than
+ * a second visual system.
  */
 export function AwardsList({
   awards,
@@ -38,45 +38,43 @@ export function AwardsList({
   if (awards.length === 0) return null
 
   return (
-    <div>
+    <section>
       <h2 {...stylex.props(styles.heading)}>{heading}</h2>
-      {awards.map((award, index) => (
-        <div
-          key={`${award.title}-${String(index)}`}
-          {...stylex.props(styles.row)}
-        >
-          <div {...stylex.props(styles.iconColumn)}>
-            <Icon
-              name={award.icon.length > 0 ? award.icon : 'trophy'}
-              size="large"
-            />
-            {award.awarder.length > 0 ? (
-              <div {...stylex.props(styles.awarder)}>{award.awarder}</div>
-            ) : null}
-            {award.date ? (
-              <div {...stylex.props(styles.date)}>
-                {dateFormat === 'month'
-                  ? formatMonthYear(award.date)
-                  : award.date.slice(0, 4)}
-              </div>
-            ) : null}
+      {awards.map((award, index) => {
+        const date =
+          award.date === undefined
+            ? ''
+            : dateFormat === 'month'
+              ? formatShortMonthYear(award.date)
+              : award.date.slice(0, 4)
+        return (
+          <div
+            key={`${award.title}-${String(index)}`}
+            {...stylex.props(styles.row)}
+          >
+            <span {...stylex.props(styles.date)}>{date}</span>
+            <div {...stylex.props(styles.body)}>
+              <span {...stylex.props(styles.title)}>
+                {award.url.length > 0 ? (
+                  <a href={award.url} rel="noopener noreferrer" target="_blank">
+                    {award.title}
+                  </a>
+                ) : (
+                  award.title
+                )}
+              </span>
+              {award.awarder.length > 0 ? (
+                <span {...stylex.props(styles.awarder)}>{award.awarder}</span>
+              ) : null}
+              {award.summary.length > 0 ? (
+                <p {...stylex.props(styles.summary)}>
+                  {renderSummary(award.summary)}
+                </p>
+              ) : null}
+            </div>
           </div>
-          <div {...stylex.props(styles.body)}>
-            {award.url.length > 0 ? (
-              <a href={award.url} rel="noopener noreferrer" target="_blank">
-                {award.title}
-              </a>
-            ) : (
-              <span>{award.title}</span>
-            )}
-            {award.summary.length > 0 ? (
-              <p {...stylex.props(styles.summary)}>
-                {renderSummary(award.summary)}
-              </p>
-            ) : null}
-          </div>
-        </div>
-      ))}
-    </div>
+        )
+      })}
+    </section>
   )
 }

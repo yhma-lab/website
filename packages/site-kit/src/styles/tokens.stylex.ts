@@ -2,23 +2,27 @@ import * as stylex from '@stylexjs/stylex'
 import { defineConsts, defineVars } from '@stylexjs/stylex'
 
 /**
- * Design tokens.
+ * Design tokens for the lab sites.
  *
- * The values are lifted verbatim from the previous Tailwind build
- * (`hugo-public/dist/wc.min.*.css` plus `css/themes/blue.min.css`) so that the
- * ported components reproduce the original rendering rather than an
- * approximation of it.
+ * These are no longer the previous Tailwind ramp: the sites now share one
+ * editorial visual system — ink on paper, a scientific serif for reading, and a
+ * single cobalt accent that marks anything interactive. The palette keeps its
+ * light values here and its dark values beside each rule that uses them, because
+ * StyleX only accepts literals in conditional values (see the note on `DARK`
+ * below).
+ *
+ * Both sites build from this file; neither app overrides a token.
  */
 
 /**
  * Marks the subtree that renders with dark-mode values.
  *
- * The generated class is applied to the page shell (`themeMarker` in
- * `stylex.props`), and every `DARK` condition below compiles to
+ * The generated class is applied to `<html>` alongside `data-theme`
+ * (`themeMarker` in `stylex.props`), and every `DARK` condition compiles to
  * `:where(.x-default-marker[data-theme="dark"] *)`, which requires an ancestor
  * carrying both the marker class and the `data-theme="dark"` attribute.
  */
-export const themeMarker = stylex.defineMarker()
+export const themeMarker = stylex.defaultMarker()
 
 /**
  * Dark-mode condition for any descendant of the marked element.
@@ -27,27 +31,62 @@ export const themeMarker = stylex.defineMarker()
  * `{ default: light, [stylex.when.ancestor('[data-theme="dark"]')]: dark }`.
  * It must be written inline in each styling module, because the compiler only
  * rewrites `stylex.when.*` calls in the module it is processing: a shared
- * constant would resolve to the runtime stub and fail condition validation.
+ * constant would resolve to the runtime stub and fail condition validation. The
+ * same rule applies to the dark hex values themselves: an imported constant binds
+ * as a StyleX value object and fails condition validation, so the dark half of a
+ * pair is always a literal at the call site.
+ *
+ * The canonical pairs are, for reference:
+ *
+ * | token         | light     | dark      |
+ * | ------------- | --------- | --------- |
+ * | background    | `#f4f5f3` | `#0c1116` |
+ * | raised        | `#fbfcfa` | `#141b22` |
+ * | subtle        | `#ecefea` | `#172028` |
+ * | text          | `#171b1e` | `#e9eeec` |
+ * | text muted    | `#4a545a` | `#a9b4ba` |
+ * | text subtle   | `#667175` | `#7f8b92` |
+ * | border        | `#dde1db` | `#232d35` |
+ * | border strong | `#c9cfc8` | `#34424c` |
+ * | accent        | `#1d4ed8` | `#82a6ff` |
+ * | accent hover  | `#1a44bf` | `#a0baff` |
+ * | on accent     | `#ffffff` | `#0a1018` |
+ * | accent soft   | `#e7ecfb` | `#18233d` |
+ * | warm          | `#8f4b0d` | `#f0b76d` |
+ * | warm soft     | `#f6e9d8` | `#2a2013` |
  */
 
-/** The `Inter var` face, declared in `src/styles/global.css`. */
+/**
+ * Type families.
+ *
+ * Source Serif 4 carries the editorial voice (headings, publication titles and
+ * long-form prose); Inter is the interface face (navigation, metadata, controls).
+ * Both are self-hosted as variable Latin subsets and declared in
+ * `src/styles/global.css`; the Chinese sites fall back to the platform's CJK
+ * faces so the two locales share one hierarchy without a multi-megabyte CJK
+ * download.
+ */
+export const FONT_SERIF = defineConsts({
+  family:
+    '"Source Serif 4", "Source Serif Pro", "Songti SC", "STSong", "Noto Serif CJK SC", "Noto Serif SC", Georgia, "Times New Roman", serif',
+})
+
 export const FONT_SANS = defineConsts({
   family:
-    'Inter var, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+    'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Noto Sans SC", sans-serif',
   mono: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
 })
 
 /*
- * Responsive breakpoints are Tailwind's defaults and match the media queries in
- * the old build: 640px (`sm`), 768px (`md`), 1024px (`lg`), 1280px (`xl`).
- *
- * They are written as string literals inside each `stylex.create` call rather
- * than shared from this module: a shared constant resolves to a plain string at
- * compile time and the compiler then emits it as a custom-property name instead
- * of an at-rule.
+ * Responsive breakpoints are written as string literals inside each
+ * `stylex.create` call rather than shared from this module: a shared constant
+ * resolves to a plain string at compile time and the compiler then emits it as a
+ * custom-property name instead of an at-rule. The system uses three of them:
+ * 640px (large phone), 768px (tablet / two-column), 1024px (desktop navigation
+ * and reading layouts), plus 1280px where a layout needs the full container.
  */
 
-/** Tailwind's default `4px` spacing scale. */
+/** Spacing scale (Tailwind-compatible 4px steps, still used by every module). */
 export const SPACE = defineConsts({
   '0.5': '0.125rem',
   '1': '0.25rem',
@@ -79,136 +118,92 @@ export const SPACE = defineConsts({
   '64': '16rem',
 })
 
-/** Tailwind's default font-size scale. */
+/**
+ * Type scale.
+ *
+ * Two readings share one scale: `base`/`small`/`micro` are interface sizes,
+ * `body`/`lead` are reading sizes, and the serif display is fluid so a phone
+ * gets a headline rather than a squeezed desktop one.
+ */
 export const TEXT = defineConsts({
-  '2xl': '1.5rem',
-  '3xl': '1.875rem',
+  display: 'clamp(2.75rem, 5.6vw, 4.5rem)',
   '4xl': '2.25rem',
-  '5xl': '3rem',
-  '6xl': '3.75rem',
-  base: '1rem',
-  lg: '1.125rem',
-  sm: '0.875rem',
+  '3xl': '1.75rem',
+  '2xl': '1.5rem',
   xl: '1.25rem',
-  xs: '0.75rem',
+  lead: '1.1875rem',
+  body: '1.0625rem',
+  base: '0.9375rem',
+  small: '0.8125rem',
+  micro: '0.75rem',
 })
-
-/** Widths used by the page shell and the prose container. */
-export const WIDTH = defineConsts({
-  '2xl': '42rem',
-  '3xl': '48rem',
-  container: '80rem',
-  prose: '65ch',
-})
-
-/** Fixed sizes used by the avatar rendering. */
-export const SIZE = defineConsts({
-  avatar: '100px',
-  avatarLg: '150px',
-})
-
-/** `dark:bg-hb-dark`, the body background in dark mode. */
-export const HB_DARK = '#17181c'
 
 /**
- * Theme-level variables, referenced by component styles.
+ * Layout widths.
  *
- * These are plain `defineVars` rather than `createTheme` output on purpose:
- * dark mode is expressed per-property through `DARK`, which keeps a single
- * class list per element and avoids an extra theme class on the root.
+ * `page` is the one alignment edge shared by the hero, section headings, year
+ * labels and page titles; `measure` is the narrower column reading content sits
+ * in, left-aligned inside it. `prose` is a line measure, not a container.
+ */
+export const WIDTH = defineConsts({
+  container: '76rem',
+  content: '64rem',
+  measure: '64rem',
+  nav: '76rem',
+  page: '76rem',
+  prose: '68ch',
+})
+
+/** Fixed avatar sizes used by the people grid and the profile header. */
+export const SIZE = defineConsts({
+  avatar: '96px',
+  avatarLg: '152px',
+})
+
+/** Corner radii: controls, cards, and the one large surface. */
+export const RADIUS = defineConsts({
+  sm: '4px',
+  md: '6px',
+  lg: '10px',
+  xl: '14px',
+  full: '9999px',
+})
+
+/** Motion: strong custom curves, short UI durations. */
+export const MOTION = defineConsts({
+  easeInOut: 'cubic-bezier(0.77, 0, 0.175, 1)',
+  easeOut: 'cubic-bezier(0.23, 1, 0.32, 1)',
+  hover: '180ms',
+  move: '240ms',
+  press: '140ms',
+  reveal: '700ms',
+})
+
+/**
+ * Theme variables.
+ *
+ * Plain `defineVars` rather than `createTheme` output on purpose: dark mode is
+ * expressed per-property through the `DARK` condition, so each element keeps one
+ * class list and the document needs no extra theme class. Only colors that read
+ * the same in both modes can live here; a value with a dark counterpart is
+ * written as an inline pair at its call site.
  */
 export const theme = defineVars({
-  bg: '#ffffff',
-  bgMuted: '#fafafa',
-  border: '#e5e5e5',
-  borderStrong: '#d4d4d4',
-  fg: '#171717',
-  fgMuted: '#525252',
-  fgSubtle: '#737373',
+  accent: '#1d4ed8',
+  accentHover: '#1a44bf',
+  accentFg: '#ffffff',
+  accentSoft: '#e7ecfb',
+  bg: '#f4f5f3',
+  bgRaised: '#fbfcfa',
+  bgSubtle: '#ecefea',
+  border: '#dde1db',
+  borderStrong: '#c9cfc8',
+  fg: '#171b1e',
+  fgMuted: '#4a545a',
+  fgSubtle: '#667175',
+  warm: '#8f4b0d',
+  warmSoft: '#f6e9d8',
 })
 
-/** Tailwind's `neutral` ramp, used directly by the ported component styles. */
-export const neutral = defineVars({
-  '100': '#f5f5f5',
-  '200': '#e5e5e5',
-  '300': '#d4d4d4',
-  '400': '#a3a3a3',
-  '50': '#fafafa',
-  '500': '#737373',
-  '600': '#525252',
-  '700': '#404040',
-  '800': '#262626',
-  '900': '#171717',
-  '950': '#0a0a0a',
-})
-
-/** Tailwind's `neutral.DEFAULT`, only used inside the inverted prose palette. */
-export const NEUTRAL_DEFAULT = '#737373'
-
-/** Tailwind's `zinc` ramp, used by the dark-mode page chrome. */
-export const zinc = defineVars({
-  '100': '#f4f4f5',
-  '200': '#e4e4e7',
-  '300': '#d4d4d8',
-  '400': '#a1a1aa',
-  '500': '#71717a',
-  '600': '#52525b',
-  '700': '#3f3f46',
-  '800': '#27272a',
-  '900': '#18181b',
-})
-
-/** Tailwind's `slate` ramp, used by the publication headings. */
-export const slate = defineVars({
-  '100': '#f1f5f9',
-  '900': '#0f172a',
-})
-
-/** Tailwind's `gray` ramp, used by the resume blocks. */
-export const gray = defineVars({
-  '100': '#f3f4f6',
-  '200': '#e5e7eb',
-  '300': '#d1d5db',
-  '400': '#9ca3af',
-  '500': '#6b7280',
-  '600': '#4b5563',
-  '700': '#374151',
-  '800': '#1f2937',
-  '900': '#111827',
-})
-
-/**
- * Tailwind's `blue` ramp from `css/themes/blue.min.css`, backing every
- * `primary-*` utility in the original markup.
- */
-export const primary = defineVars({
-  '100': '#dbeafe',
-  '200': '#bfdbfe',
-  '300': '#93c5fd',
-  '400': '#60a5fa',
-  '50': '#eff6ff',
-  '500': '#3b82f6',
-  '600': '#2563eb',
-  '700': '#1d4ed8',
-  '800': '#1e40af',
-  '900': '#1e3a8a',
-  '950': '#172554',
-})
-
-/**
- * Tailwind's `cyan` ramp from `css/themes/blue.min.css`, backing every
- * `secondary-*` utility in the original markup.
- */
-export const secondary = defineVars({
-  '100': '#cffafe',
-  '200': '#a5f3fc',
-  '300': '#67e8f9',
-  '400': '#22d3ee',
-  '50': '#ecfeff',
-  '500': '#06b6d4',
-  '600': '#0891b2',
-  '700': '#0e7490',
-  '800': '#155e75',
-  '900': '#164e63',
-  '950': '#083344',
-})
+/** Body background in dark mode; also the `<meta name="theme-color">` value. */
+export const HB_DARK = '#0c1116'

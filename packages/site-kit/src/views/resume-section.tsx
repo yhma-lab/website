@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react'
-import type { ExperienceEntry } from '../components/bio-text.ts'
 import type { PageSection } from '../content/schemas.ts'
 
 import * as stylex from '@stylexjs/stylex'
@@ -7,8 +6,9 @@ import * as stylex from '@stylexjs/stylex'
 import { AwardsList } from '../components/awards.tsx'
 import { styles } from '../components/biography.stylex.ts'
 import { ExperienceList } from '../components/experience.tsx'
-import { Icon } from '../components/icon.tsx'
-import { AuthorBio, PersonHeader } from '../components/resume.tsx'
+import { AuthorBio, PersonHeader, ProfileFacts } from '../components/resume.tsx'
+import { actionLinkStyles } from '../components/ui/action-link.stylex.ts'
+import { ActionLink } from '../components/ui/action-link.tsx'
 import { normalizeEducation } from '../content/education.ts'
 import { renderInlineMarkdown } from '../content/inline-markdown.tsx'
 import { resolveInternal } from '../content/links.ts'
@@ -22,10 +22,10 @@ export interface ResumeProps {
 /**
  * Résumé blocks.
  *
- * `resume-biography` / `resume-biography-3` render the avatar, name, role,
- * affiliations, social icons and the author's Markdown body; `resume-experience`
- * renders the work and education timelines; `resume-awards` renders the awards
- * list. All three read `content.username`, which is the author directory name.
+ * `resume-biography` / `resume-biography-3` render the portrait, identity and
+ * facts in a sticky profile column beside the serif biography;
+ * `resume-experience` and `resume-awards` render the timeline lists. All four
+ * read `content.username`, which is the author directory name.
  */
 export function Resume({ section }: ResumeProps) {
   const { locale, source } = siteContext()
@@ -45,91 +45,37 @@ export function Resume({ section }: ResumeProps) {
 
       return (
         <div {...stylex.props(styles.container)}>
-          <div {...stylex.props(styles.column)}>
+          <div {...stylex.props(styles.profileSticky)}>
             <PersonHeader
               author={author}
+              nameAs="h2"
+              profiles={data.profiles}
               role={section.block === 'resume-biography-3' ? role : undefined}
-              social={data.profiles
-                .filter(profile => profile.url.length > 0)
-                .map(profile => (
-                  <li key={profile.icon}>
-                    <a
-                      aria-label={profile.icon}
-                      href={profile.url}
-                      rel="noopener noreferrer"
-                      target={
-                        profile.url.startsWith('http') ? '_blank' : undefined
-                      }
-                      title={profile.label}
-                    >
-                      <Icon name={profile.icon} size="large" />
-                    </a>
-                  </li>
-                ))}
+            />
+            <ProfileFacts
+              education={education}
+              interests={data.interests}
+              labels={labels}
             />
           </div>
 
           <div {...stylex.props(styles.bioColumn)}>
             <div {...stylex.props(styles.bio)}>
-              <AuthorBio body={author.data.body} />
+              <AuthorBio body={data.body} />
             </div>
-
             {button ? (
-              <p>
-                <a
+              <p {...stylex.props(styles.actionRow)}>
+                <ActionLink
                   href={resolveInternal(button.url)}
                   rel="noopener noreferrer"
                   target="_blank"
+                  xstyle={[actionLinkStyles.base, actionLinkStyles.secondary]}
                 >
                   {button.text}
-                </a>
+                  <Arrow />
+                </ActionLink>
               </p>
             ) : null}
-
-            <div {...stylex.props(styles.gridTwo)}>
-              {data.interests.length > 0 ? (
-                <div>
-                  <div {...stylex.props(styles.sectionHeading)}>
-                    {labels.interests}
-                  </div>
-                  <ul {...stylex.props(styles.interests)}>
-                    {data.interests.map(interest => (
-                      <li key={interest} {...stylex.props(styles.interestItem)}>
-                        {interest}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ) : null}
-
-              {education.length > 0 ? (
-                <div>
-                  <div {...stylex.props(styles.sectionHeading)}>
-                    {labels.education}
-                  </div>
-                  <ul {...stylex.props(styles.interests)}>
-                    {education.map((entry, index) => (
-                      <li
-                        key={`${entry.area ?? entry.course ?? ''}-${String(index)}`}
-                        {...stylex.props(styles.interestItem)}
-                      >
-                        <span {...stylex.props(styles.iconWrap)}>
-                          <Icon name="academic-cap" />
-                        </span>{' '}
-                        {entry.area ?? entry.course ?? ''}
-                        {(entry.year ?? '').length > 0
-                          ? `, ${entry.year ?? ''}`
-                          : ''}
-                        <br />
-                        <span {...stylex.props(styles.muted)}>
-                          {entry.institution ?? ''}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ) : null}
-            </div>
           </div>
         </div>
       )
@@ -139,26 +85,26 @@ export function Resume({ section }: ResumeProps) {
       const work = author.data.work
       const education = normalizeEducation(author.data.education)
       return (
-        <div {...stylex.props(styles.container, styles.experienceWrap)}>
-          <ExperienceList
-            entries={work}
-            heading={labels.experience}
-            icon="building-office"
-            presentLabel={labels.present}
-          />
-          <ExperienceList
-            entries={education}
-            heading={labels.education}
-            icon="academic-cap"
-            presentLabel={labels.present}
-          />
+        <div {...stylex.props(styles.timelineWrap)}>
+          <div {...stylex.props(styles.experienceWrap)}>
+            <ExperienceList
+              entries={work}
+              heading={labels.experience}
+              presentLabel={labels.present}
+            />
+            <ExperienceList
+              entries={education}
+              heading={labels.education}
+              presentLabel={labels.present}
+            />
+          </div>
         </div>
       )
     }
 
     case 'resume-awards':
       return (
-        <div {...stylex.props(styles.container)}>
+        <div {...stylex.props(styles.timelineWrap)}>
           <AwardsList
             awards={author.data.awards}
             dateFormat="year"
@@ -177,4 +123,24 @@ export function Resume({ section }: ResumeProps) {
     default:
       return null
   }
+}
+
+function Arrow() {
+  return (
+    <svg
+      aria-hidden="true"
+      fill="none"
+      height="12"
+      viewBox="0 0 12 12"
+      width="12"
+    >
+      <path
+        d="M2.5 6h7M6.5 3l3 3-3 3"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.5"
+      />
+    </svg>
+  )
 }

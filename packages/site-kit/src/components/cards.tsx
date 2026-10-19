@@ -4,14 +4,15 @@ import * as stylex from '@stylexjs/stylex'
 
 import { formatDate } from '../content/format.ts'
 import { MathText } from './math-text.tsx'
-import { card as cardStyles, detail, shared } from './views.stylex.ts'
+import { card as cardStyles, detail } from './views.stylex.ts'
 
 /**
  * Funding entry.
  *
- * Ports the project's overridden `layouts/partials/views/card.html`: an optional
- * square image beside a title, summary and date, linked through
- * `external_link` when present.
+ * A card is right here: four independent projects, each a self-contained thing.
+ * The whole card is the link when an external page exists; a local funding page
+ * is linked the same way. The title, summary and date are the only content the
+ * schema carries.
  */
 export function FundingCard({ page }: { page: FundingPage }) {
   const external = page.data.external_link.length > 0
@@ -24,19 +25,15 @@ export function FundingCard({ page }: { page: FundingPage }) {
       {...(external ? { rel: 'noopener noreferrer', target: '_blank' } : {})}
       {...stylex.props(cardStyles.item)}
     >
-      <div {...stylex.props(cardStyles.row)}>
-        <div {...stylex.props(cardStyles.body)}>
-          <div {...stylex.props(cardStyles.title)}>{page.data.title}</div>
-          {summary.length > 0 ? (
-            <p {...stylex.props(cardStyles.summary)}>
-              <MathText text={summary} />
-            </p>
-          ) : null}
-          <p {...stylex.props(shared.meta)}>
-            <time dateTime={page.data.date}>{formatDate(page.data.date)}</time>
-          </p>
-        </div>
-      </div>
+      <span {...stylex.props(cardStyles.title)}>{page.data.title}</span>
+      {summary.length > 0 ? (
+        <p {...stylex.props(cardStyles.summary)}>
+          <MathText text={summary} />
+        </p>
+      ) : null}
+      <p {...stylex.props(cardStyles.meta)}>
+        <time dateTime={page.data.date}>{formatDate(page.data.date)}</time>
+      </p>
     </a>
   )
 }
@@ -46,12 +43,12 @@ export interface DetailRowProps {
   children: React.ReactNode
 }
 
-/** The `Abstract` / `Cite` two-column row used on a publication page. */
+/** A labeled reading row (`Abstract`, `Cite`, `Summary`) on a detail page. */
 export function DetailRow({ children, label }: DetailRowProps) {
   return (
     <div {...stylex.props(detail.grid)}>
       <div {...stylex.props(detail.label)}>{label}</div>
-      <div>{children}</div>
+      <div {...stylex.props(detail.body)}>{children}</div>
     </div>
   )
 }

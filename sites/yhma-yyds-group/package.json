@@ -28,9 +28,11 @@
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@typescript/native": "catalog:",
+    "@vitejs/plugin-rsc": "catalog:",
     "eslint": "catalog:",
     "fumadocs-mdx": "catalog:",
     "typescript": "catalog:",
+    "vite": "catalog:",
     "waku": "catalog:"
   },
   "engines": {

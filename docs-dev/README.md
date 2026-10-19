@@ -2,14 +2,15 @@
 
 ## Stack
 
-| Concern       | Choice                                                                   |
-| ------------- | ------------------------------------------------------------------------ |
-| Workspace     | pnpm workspaces: `packages/*` (shared kit) and `sites/*` (two Waku apps) |
-| Build         | Waku (`waku build`), one static export per site in its `dist/public`     |
-| Content model | fumadocs-mdx collections with zod front-matter schemas                   |
-| Styling       | StyleX, design tokens lifted from the previous Tailwind build            |
-| Math          | `remark-math` + `rehype-katex` at build time, plus front matter          |
-| Host          | Cloudflare Pages, one project per site                                   |
+| Concern       | Choice                                                                    |
+| ------------- | ------------------------------------------------------------------------- |
+| Workspace     | pnpm workspaces: `packages/*` (shared kit) and `sites/*` (two Waku apps)  |
+| Build         | Waku (`waku build`), one static export per site in its `dist/public`      |
+| Content model | fumadocs-mdx collections with zod front-matter schemas                    |
+| Styling       | StyleX over one shared token system (editorial serif + Inter, light/dark) |
+| Controls      | React Aria Components for buttons/disclosure; native server action links  |
+| Math          | `remark-math` + `rehype-katex` at build time, plus front matter           |
+| Host          | Cloudflare Pages, one project per site                                    |
 
 ## Layout
 
@@ -31,6 +32,10 @@
   - `src/site/` — `SiteConfig` and the localized menu.
   - `src/shell/` — the document shell (theme + language-switch bootstrap) and the 404
     body; `src/routes/` — the `sitemap.xml` / `robots.txt` / `index.xml` handlers.
+  - `src/styles/` — `tokens.stylex.ts` (palette, type scale, widths, radii, motion),
+    `frame.stylex.ts` (page grid and skip link), `global.css` (font faces, document
+    palette, current-nav marker, KaTeX overflow) and `fonts/` (self-hosted Source Serif 4
+    and Inter variable Latin subsets with their OFL licences).
   - `src/site-context.ts` — `defineSite()` / `siteContext()`: the per-process site
     registry the shared components read. A React context is not an option here, because
     server components run against React's `react-server` build, which has no
@@ -47,9 +52,43 @@
   that still runs after the migration; the other two need the Hugo inputs restored from
   git history and say so in their headers.
 
+## Design system
+
+The two sites share one editorial system — ink on paper, a scientific serif for reading,
+Inter for the interface, and a single cobalt accent that marks anything interactive.
+
+- **Concept.** "State functions": the site reads like a well-set scientific monograph. The
+  one bold move is the home hero's temperature–entropy diagram, which sets the ideal
+  Carnot cycle (dashed) against the finite-time cycle the lab actually studies (solid).
+  Everything around it stays quiet: hairlines instead of card borders, no uppercase
+  labels, no decorative gradients, no second accent.
+- **Colour.** Paper/ink neutrals plus cobalt (`#1d4ed8` light, `#82a6ff` dark) and a warm
+  tone used only in the diagram and the news marker. Every text pair is AA in both
+  themes. Dark mode is expressed through the documented
+  `stylex.when.ancestor('[data-theme="dark"]')` condition; the theme marker lives on
+  `<html>`.
+- **Type.** Source Serif 4 carries headings, publication titles and long-form prose;
+  Inter carries navigation, metadata and controls. Tracking is size-specific (tight on
+  display type, near zero on body) and dates use tabular figures. The Chinese site falls
+  back to PingFang SC / Songti SC rather than downloading a CJK web font.
+- **Layout.** `WIDTH.page` is the one alignment edge (hero, section headings, year
+  labels, page titles); reading content sits in narrower left-aligned measures
+  (`WIDTH.measure`, `WIDTH.prose`). Section rhythm belongs to the design system, not to an
+  authored `design.spacing` value.
+- **Motion.** One orchestrated entrance on the home hero (copy rises in 60ms steps, the
+  finite-time loop draws once). Press feedback is a 140ms `scale(0.97)` on pointer-down;
+  hover states are behind `@media (hover: hover) and (pointer: fine)`; `prefers-reduced-motion`
+  keeps the finished state instead of hiding content.
+- **Accessibility.** Skip link to `<main>`, visible 2px accent focus ring, one `h1` per
+  page, `aria-current` styled on the nav, icon-only controls keep labels, the diagram has a
+  localized accessible name and a text legend, KaTeX display math scrolls instead of
+  forcing the page sideways, and the mobile menu keeps React Aria's disclosure semantics.
+
 ## Development
 
-Requires Node.js 26+ and pnpm 11+.
+Use a Node.js version satisfying `package.json` (`>=26.12.1`) and pnpm 12+.
+The current `mise.toml` pin is older than that engine range; select a compatible
+runtime locally rather than lowering the engine requirement.
 
 ```bash
 pnpm install
@@ -58,19 +97,67 @@ pnpm dev:en
 pnpm dev:cn
 ```
 
-| Command                | Purpose                                                          |
-| ---------------------- | ---------------------------------------------------------------- |
-| `pnpm dev`             | Both dev servers with HMR (3000 / 3001)                          |
-| `pnpm build`           | Static export of both sites                                      |
-| `pnpm build:en`        | `sites/yhma-yyds-group` only                                     |
-| `pnpm build:cn`        | `sites/magroup-ac-cn` only                                       |
-| `pnpm typecheck`       | Root tooling plus `tsc --noEmit` in every workspace package      |
-| `pnpm lint`            | ESLint across the workspace (per-file tsconfig lookup)           |
-| `pnpm test`            | Vitest: schemas, collection globs, route table, authors, sorting |
-| `pnpm check:routes`    | Both builds publish the same URLs                                |
-| `pnpm content:codegen` | Regenerate each site's `.source/` from the collections           |
-| `pnpm typegen`         | Regenerate each site's `.source/`                                |
-| `pnpm start`           | Serve a built site (`cd sites/<name> && pnpm start`)             |
+| Command                | Purpose                                                           |
+| ---------------------- | ----------------------------------------------------------------- |
+| `pnpm dev`             | Both dev servers with HMR (3000 / 3001)                           |
+| `pnpm build`           | Static export of both sites                                       |
+| `pnpm build:en`        | `sites/yhma-yyds-group` only                                      |
+| `pnpm build:cn`        | `sites/magroup-ac-cn` only                                        |
+| `pnpm typecheck`       | Root tooling plus `tsc --noEmit` in every workspace package       |
+| `pnpm lint`            | ESLint across the workspace (per-file tsconfig lookup)            |
+| `pnpm test`            | Fast Node Vitest: content, routes, authors, formatting, bootstrap |
+| `pnpm test:dev`        | Real Waku dev + Chromium smoke check (requires both dev servers)  |
+| `pnpm test:ui`         | Chromium component tests with real React Aria and compiled StyleX |
+| `pnpm check:routes`    | Both builds publish the same URLs                                 |
+| `pnpm content:codegen` | Regenerate each site's `.source/` from the collections            |
+| `pnpm typegen`         | Regenerate each site's `.source/`                                 |
+| `pnpm start`           | Serve a built site (`cd sites/<name> && pnpm start`)              |
+
+## Run browser checks
+
+After installing dependencies, install Playwright's Chromium once:
+
+```bash
+pnpm exec playwright install chromium
+pnpm test:ui
+```
+
+The browser suite is separate from `pnpm test`; it compiles StyleX and exercises
+real React Aria components in Chromium, including keyboard focus, pending/disabled
+buttons, responsive disclosure, theme changes and native links. It does not mock
+React Aria, StyleX or media queries. The browser config lives in
+[vitest.ui.config.ts](../packages/site-kit/vitest.ui.config.ts).
+
+Also test Waku's actual development environments, preferably after a fresh start:
+
+```bash
+# Terminal 1 (repository root)
+pnpm dev
+
+# Terminal 2 (after both servers report ready)
+pnpm test:dev
+```
+
+[The dev smoke check](../scripts/check-dev.mjs) connects to ports 3000 and 3001; it
+never starts or stops servers. It checks the RSC response, four page types per site,
+theme styling, mobile keyboard navigation and missing URLs. A successful static build
+or a 200 fallback HTML response alone cannot catch development-only module resolution
+errors. This check does not cover HMR.
+
+SSR stays disabled, but Waku still needs the `react-server` condition in its RSC
+environment. The [shared Vite config](../packages/site-kit/src/waku-config.ts) keeps
+`react-server-dom-webpack` in that environment's transform pipeline so Waku can patch
+it. Do not set a process-wide `NODE_OPTIONS=--conditions=react-server`: browser/HTML
+rendering needs ordinary React. The [shared package](../packages/site-kit/package.json)
+also declares React as a peer dependency so plugin-rsc discovers its React Aria
+dependency tree instead of loading those components against a separate native React
+instance in dev.
+
+For release smoke testing, build both sites, run `pnpm check:routes`, and serve each
+site's `dist/public` directory. Check the home, people, publication and event pages in
+both languages; test desktop/mobile navigation, keyboard focus, theme reloads (including
+blocked storage), and alternate-site links with a query and hash. Component tests alone
+do not verify the fallback HTML → RSC document mount.
 
 ## Deploying
 
@@ -99,7 +186,7 @@ English site, that means:
 
 |                                       | shell HTML per route      | content in the served HTML        |
 | ------------------------------------- | ------------------------- | --------------------------------- |
-| `unstable_disableSSR: true` (current) | ~750 B                    | no — arrives with the RSC payload |
+| `unstable_disableSSR: true` (current) | ~3.1 KB, with bootstrap   | no — arrives with the RSC payload |
 | flag removed                          | 40–420 KB (`/` is 420 KB) | yes                               |
 
 Both flags are set once, for every route, in
@@ -195,6 +282,43 @@ front-matter types. `pnpm build` and `pnpm dev` write it, so a fresh checkout go
 build — run it after adding a collection. Route types are not generated any more: they
 come from the shared table (`SharedPaths`), which the app's entry declares.
 
+## Shared UI boundaries
+
+The kit's internal components are deliberately small, not a public UI package:
+
+- [Button](../packages/site-kit/src/components/ui/button.tsx) is a client React Aria
+  button. RAC owns press events, keyboard/pointer behavior, slots, controlled props,
+  refs and render props. The default type is `button`; `isPending` does not imply
+  `isDisabled` (pending remains focusable).
+- [ActionLink](../packages/site-kit/src/components/ui/action-link.tsx) is a server-safe
+  native anchor with a required `href`. Hero CTAs, attachment links and the résumé
+  CTA use it; MDX prose, cards, social and navigation links remain native anchors.
+  Native URL, target, modifier-key and download behavior is not intercepted.
+- Both accept `xstyle?: StyleXStyles`. Composition is base → state → caller `xstyle`.
+  Generated **class names and inline styles** are retained; caller `className` is
+  appended and caller inline `style` wins. `Button` retains RAC's function-valued
+  `children`, `className` and `style`; `style` is never repurposed as StyleX input.
+- Navbar resolves site data, URLs and localized labels on the server. Its
+  [disclosure island](../packages/site-kit/src/components/navigation-disclosure.tsx)
+  receives native link children and owns only open/focus state. At 1024px it is
+  expanded; mobile starts closed. This is navigation, not an ARIA menu or focus trap.
+- Browser-derived alternate URLs and `aria-current` have one owner: the document
+  bootstrap. It handles navigation mounted after the RSC payload, replacements and
+  `hashchange`/`popstate`. Do not introduce a competing React location store.
+- The shared Waku config injects bootstrap scripts into the actual fallback HTML in
+  dev and production. Do not put them in `RootShell`: script elements mounted through
+  RSC do not execute. A filtered theme observer restores `data-theme` if React clears
+  the document singleton's attributes while mounting.
+- Theme bootstrap chooses an initial stored/system theme; the theme button observes
+  and toggles `html.dataset.theme`, persisting under `theme`. It does not follow later
+  OS preference changes. `<html>` carries both `stylex.defaultMarker()` and `data-theme`,
+  matching the default marker used by `stylex.when.ancestor()`.
+
+Do not pass server-only site registries, URL resolver functions or MDX/content objects
+through a client boundary. Adding a control does not require moving its whole view to
+`'use client'`, or introducing a global router/theme provider. Static routes still use
+the SSR-disabled rendering policy described above.
+
 ## Styles
 
 Component styles live in `*.stylex.ts` modules next to the components that use them, and
@@ -207,7 +331,7 @@ scales. Two StyleX constraints are worth knowing before editing those files:
 - Media queries must be literal `'@media (...)'` keys, for the same reason.
 
 `pnpm dev` serves the stylesheet from `/virtual:stylex.css`, loaded by the tags
-`stylexDevStyles()` in `packages/site-kit/src/waku-config.ts` adds. The plugin that owns
+`documentShell()` in `packages/site-kit/src/waku-config.ts` adds. The plugin that owns
 that endpoint injects them with Vite's `transformIndexHtml` hook, and Waku only runs that
 hook for an app that ships its own `index.html` — not for the fallback document every
 route here renders, since they all set `unstable_disableSSR`. Builds are unaffected; the

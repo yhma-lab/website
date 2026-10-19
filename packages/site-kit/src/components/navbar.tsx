@@ -1,83 +1,84 @@
 import * as stylex from '@stylexjs/stylex'
 
 import { alternateUrl, siteHref } from '../content/links.ts'
+import { translate } from '../content/strings.ts'
 import { siteContext } from '../site-context.ts'
 import { navFor } from '../site/nav.ts'
+import { frameStyles } from '../styles/frame.stylex.ts'
+import { BrandMark } from './brand-mark.tsx'
 import { styles } from './navbar.stylex.ts'
+import { NavigationDisclosure } from './navigation-disclosure.tsx'
 import { ThemeToggle } from './theme-toggle.tsx'
+import { controlStyles } from './ui/control.stylex.ts'
 
 /**
- * Site header.
+ * Server-owned navigation.
  *
- * Mirrors `partials/components/headers/navbar.html`: brand text, a
- * checkbox-driven mobile menu, the main menu and the theme chooser. Search stays
- * disabled because `params.yaml` set `show_search: false`.
- *
- * The language chooser is the one addition to the previous markup: it links to
- * the paired site at the same path. `RootShell` rewrites the `href` before first
- * paint from `location`, so the rendered fallback (the other site's home page)
- * is only what a reader without JavaScript gets.
+ * Every link is a native anchor; the only client island is the disclosure that
+ * controls their mobile visibility. The active page marker is written by the
+ * document bootstrap as `aria-current="page"` and painted by a single rule in
+ * `global.css`, because StyleX cannot select an attribute.
  */
 export function Navbar() {
   const { locale, site } = siteContext()
   const nav = navFor(locale)
   const alternate = site.alternate
+  const t = translate(locale)
 
   return (
     <div {...stylex.props(styles.wrapper)}>
       <header {...stylex.props(styles.header)}>
-        <nav aria-label="Main" {...stylex.props(styles.nav)}>
-          <a href="/" {...stylex.props(styles.brand)} title={site.title}>
-            {site.shortTitle}
-          </a>
-
-          <input
-            aria-hidden
-            {...stylex.props(styles.toggleInput)}
-            id="nav-toggle"
-            type="checkbox"
-          />
-          <label
-            aria-label="Toggle menu"
-            htmlFor="nav-toggle"
-            {...stylex.props(styles.toggle)}
-          >
-            <svg {...stylex.props(styles.toggleIcon)} viewBox="0 0 20 20">
-              <title>Open Menu</title>
-              <path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0V0z" />
-            </svg>
-          </label>
-
-          <ul {...stylex.props(styles.navList)} id="nav-menu">
-            {nav.map(item => (
-              <li key={item.label}>
-                <a
-                  href={siteHref(
-                    item.hash === undefined
-                      ? { to: item.to }
-                      : { hash: item.hash, to: item.to },
-                  )}
-                  {...stylex.props(styles.navLink)}
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-
-          <div {...stylex.props(styles.actions)}>
+        <div {...stylex.props(frameStyles.container)}>
+          <nav aria-label={t.navigation.label} {...stylex.props(styles.nav)}>
             <a
-              data-alt-site={alternate.baseUrl}
-              href={alternateUrl(alternate.baseUrl, '/')}
-              hrefLang={alternate.locale === 'cn' ? 'zh-Hans' : 'en'}
-              lang={alternate.locale === 'cn' ? 'zh-Hans' : 'en'}
-              {...stylex.props(styles.langSwitch)}
+              href="/"
+              title={site.title}
+              {...stylex.props(styles.brand, controlStyles.nativeFocusVisible)}
             >
-              {alternate.label}
+              <BrandMark xstyle={styles.brandMark} />
+              {site.shortTitle}
             </a>
-            <ThemeToggle />
-          </div>
-        </nav>
+
+            <NavigationDisclosure labels={t.navigation}>
+              <ul {...stylex.props(styles.navList)} id="nav-menu">
+                {nav.map(item => (
+                  <li key={item.label}>
+                    <a
+                      href={siteHref(
+                        item.hash === undefined
+                          ? { to: item.to }
+                          : { hash: item.hash, to: item.to },
+                      )}
+                      {...stylex.props(
+                        styles.navLink,
+                        controlStyles.nativeFocusVisible,
+                      )}
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </NavigationDisclosure>
+
+            <div {...stylex.props(styles.actions)}>
+              <a
+                data-alt-site={alternate.baseUrl}
+                href={alternateUrl(alternate.baseUrl, '/')}
+                hrefLang={alternate.locale === 'cn' ? 'zh-Hans' : 'en'}
+                lang={alternate.locale === 'cn' ? 'zh-Hans' : 'en'}
+                {...stylex.props(
+                  styles.langSwitch,
+                  controlStyles.nativeFocusVisible,
+                )}
+              >
+                {alternate.label}
+              </a>
+              <span aria-hidden="true" {...stylex.props(styles.divider)} />
+              <ThemeToggle labels={t.appearance} />
+            </div>
+          </nav>
+        </div>
       </header>
     </div>
   )

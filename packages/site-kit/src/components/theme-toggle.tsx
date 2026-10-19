@@ -1,43 +1,41 @@
 'use client'
 
+import type { UiStrings } from '../content/strings.ts'
+
 import * as stylex from '@stylexjs/stylex'
 import { useCallback, useSyncExternalStore } from 'react'
 
-import { SPACE } from '../styles/tokens.stylex.ts'
+import { MOTION, RADIUS, theme } from '../styles/tokens.stylex.ts'
 import { Icon } from './icon.tsx'
+import { Button } from './ui/button.tsx'
 
-/**
- * Theme chooser.
- *
- * The previous build shipped a small script plus a button with the same
- * `accesskey="t"`. The initial `data-theme` value is written by the bootstrap
- * script in `src/pages/_root.tsx` before first paint; this component only reads
- * and toggles it, and subscribes to `data-theme` mutations so its icon stays in
- * sync when the OS preference changes.
- */
-
+/** The bootstrap chooses the initial theme; this control observes and toggles it. */
 type Theme = 'dark' | 'light'
-
-const DARK = '[data-theme="dark"]'
 
 const styles = stylex.create({
   button: {
-    alignItems: 'center',
+    borderRadius: RADIUS.md,
     color: {
-      default: null,
-      [stylex.when.ancestor(DARK)]: '#ffffff',
+      default: theme.fgMuted,
+      [stylex.when.ancestor('[data-theme="dark"]')]: '#a9b4ba',
     },
-    cursor: 'pointer',
-    display: 'inline-flex',
-    paddingInline: SPACE['3'],
-    ':hover': {
-      opacity: 0.75,
+    minBlockSize: '2.25rem',
+    minInlineSize: '2.25rem',
+    transitionDuration: MOTION.hover,
+    transitionProperty: 'color, background-color',
+    transitionTimingFunction: MOTION.easeOut,
+    '@media (hover: hover) and (pointer: fine)': {
+      ':hover': {
+        backgroundColor: {
+          default: theme.bgSubtle,
+          [stylex.when.ancestor('[data-theme="dark"]')]: '#172028',
+        },
+        color: {
+          default: theme.fg,
+          [stylex.when.ancestor('[data-theme="dark"]')]: '#e9eeec',
+        },
+      },
     },
-  },
-  icon: {
-    blockSize: '1.5rem',
-    inlineSize: '1.5rem',
-    stroke: 'currentColor',
   },
 })
 
@@ -58,7 +56,11 @@ function subscribe(onChange: () => void): () => void {
   }
 }
 
-export function ThemeToggle() {
+export interface ThemeToggleProps {
+  labels: UiStrings['appearance']
+}
+
+export function ThemeToggle({ labels }: ThemeToggleProps) {
   const theme = useSyncExternalStore(subscribe, readTheme, () => 'light')
 
   const toggle = useCallback(() => {
@@ -72,19 +74,13 @@ export function ThemeToggle() {
   }, [])
 
   return (
-    <button
-      accessKey="t"
-      aria-label={
-        theme === 'dark'
-          ? 'Switch to light appearance'
-          : 'Switch to dark appearance'
-      }
-      onClick={toggle}
-      title="appearance"
-      type="button"
-      {...stylex.props(styles.button)}
+    <Button
+      aria-label={theme === 'dark' ? labels.toLight : labels.toDark}
+      onPress={toggle}
+      render={props => <button {...props} accessKey="t" title={labels.label} />}
+      xstyle={styles.button}
     >
       <Icon name={theme === 'dark' ? 'sun' : 'moon'} />
-    </button>
+    </Button>
   )
 }

@@ -26,6 +26,16 @@ export function formatDate(value: string | undefined): string {
   }).format(date)
 }
 
+/** `Jan 2006` -- compact form for résumé date ranges, where a year is enough. */
+export function formatShortMonthYear(value: string | undefined): string {
+  const date = toDate(value)
+  if (!date) return ''
+  return new Intl.DateTimeFormat(LOCALE, {
+    month: 'short',
+    year: 'numeric',
+  }).format(date)
+}
+
 /** `January 2006` -- the resume blocks' `date_format`. */
 export function formatMonthYear(value: string | undefined): string {
   const date = toDate(value)

@@ -1,124 +1,148 @@
 import * as stylex from '@stylexjs/stylex'
 
-import { gray, neutral, primary, SPACE, TEXT } from '../styles/tokens.stylex.ts'
+import {
+  FONT_SANS,
+  FONT_SERIF,
+  MOTION,
+  TEXT,
+  theme,
+} from '../styles/tokens.stylex.ts'
 
-/**
- * Ancestor selector for the dark colour scheme.
- *
- * Repeated in each styling module on purpose: `stylex.when.ancestor()` is only
- * rewritten when the compiler can evaluate the argument in the module it is
- * processing, so a shared constant from another file would reach the runtime
- * stub and fail condition validation.
- */
+/** Ancestor selector for the dark colour scheme; must stay local to this module. */
 const DARK = '[data-theme="dark"]'
 
-/** Ports `layouts/partials/blox/hero.html`. */
+/**
+ * The one orchestrated entrance in the system.
+ *
+ * The copy rises 14px and fades once per page load, staggered by role; the
+ * diagram's finite-time loop draws itself once. Both are removed entirely under
+ * `prefers-reduced-motion`, leaving the finished state rather than a hidden one.
+ */
+const rise = stylex.keyframes({
+  from: { opacity: 0, transform: 'translateY(14px)' },
+  to: { opacity: 1, transform: 'translateY(0)' },
+})
+
+/** Opening hero: the lab's title page. */
 export const styles = stylex.create({
-  action: {
-    borderRadius: '0.375rem',
-    boxShadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
-    fontSize: TEXT.sm,
-    fontWeight: 600,
-    paddingBlock: '0.625rem',
-    paddingInline: '0.875rem',
-    textDecorationLine: 'none',
-  },
-  actionIcon: {
-    paddingInlineStart: SPACE['2'],
-  },
   actionRow: {
-    columnGap: SPACE['6'],
+    alignItems: 'center',
+    columnGap: '1.25rem',
     display: 'flex',
-    marginBlockStart: SPACE['10'],
+    flexWrap: 'wrap',
+    marginBlockStart: '2rem',
+    rowGap: '0.875rem',
   },
   announcement: {
-    borderColor: {
-      default:
-        'color-mix(in oklab, oklch(0.21 0.006 285.885) 10%, transparent)',
-      [stylex.when.ancestor(DARK)]: gray['300'],
+    alignItems: 'baseline',
+    borderInlineStartColor: {
+      default: theme.warm,
+      [stylex.when.ancestor(DARK)]: '#f0b76d',
     },
-    borderRadius: '9999px',
-    borderStyle: 'solid',
-    borderWidth: {
-      default: 0,
-      '@media (min-width: 1024px)': 1,
-    },
+    borderInlineStartStyle: 'solid',
+    borderInlineStartWidth: 2,
     color: {
-      default: gray['600'],
-      [stylex.when.ancestor(DARK)]: gray['300'],
+      default: theme.fgMuted,
+      [stylex.when.ancestor(DARK)]: '#a9b4ba',
     },
-    columnGap: SPACE['1'],
+    columnGap: '0.5rem',
     display: 'flex',
-    flexDirection: {
-      default: 'column',
-      '@media (min-width: 1024px)': 'row',
+    flexWrap: 'wrap',
+    fontFamily: FONT_SANS.family,
+    fontSize: TEXT.small,
+    lineHeight: 1.55,
+    marginBlockEnd: '1.75rem',
+    paddingInlineStart: '0.875rem',
+  },
+  copy: {
+    maxWidth: '44rem',
+    minWidth: 0,
+  },
+  enter: {
+    animationDuration: MOTION.reveal,
+    animationFillMode: 'both',
+    animationName: {
+      default: rise,
+      '@media (prefers-reduced-motion: reduce)': 'none',
     },
-    fontSize: TEXT.sm,
-    justifyContent: {
-      default: 'center',
-      '@media (min-width: 1024px)': 'flex-start',
+    animationTimingFunction: MOTION.easeOut,
+  },
+  enterLate: {
+    animationDelay: {
+      default: '140ms',
+      '@media (prefers-reduced-motion: reduce)': '0ms',
     },
-    lineHeight: '1.5rem',
-    marginBlockEnd: SPACE['4'],
-    paddingInline: SPACE['2'],
   },
-  announcementLink: {
-    color: {
-      default: primary['600'],
-      [stylex.when.ancestor(DARK)]: primary['300'],
+  enterMid: {
+    animationDelay: {
+      default: '70ms',
+      '@media (prefers-reduced-motion: reduce)': '0ms',
     },
-    fontWeight: 600,
   },
-  inner: {
-    marginInline: 'auto',
-    maxWidth: '42rem',
-    paddingBlock: '8rem',
+  grid: {
+    alignItems: 'center',
+    columnGap: 'clamp(2rem, 5vw, 5rem)',
+    display: 'grid',
+    gridTemplateColumns: 'minmax(0, 1fr)',
+    rowGap: 'clamp(2.5rem, 6vw, 4rem)',
   },
-  innerCompact: {
-    paddingBlock: 0,
-  },
-  primaryAction: {
-    backgroundColor: primary['600'],
-    color: '#ffffff',
-    ':hover': {
-      backgroundColor: primary['500'],
+  gridWithVisual: {
+    gridTemplateColumns: {
+      default: 'minmax(0, 1fr)',
+      '@media (min-width: 960px)': 'minmax(0, 7fr) minmax(0, 5fr)',
     },
   },
   root: {
-    paddingInline: SPACE['6'],
+    marginInline: 'auto',
+    maxWidth: '76rem',
+    paddingBlock: 'clamp(3.5rem, 7vw, 5.5rem)',
+    paddingInline: 'clamp(1.25rem, 4vw, 2.5rem)',
     position: 'relative',
+    width: '100%',
   },
-  secondaryAction: {
-    color: {
-      default: gray['900'],
-      [stylex.when.ancestor(DARK)]: gray['100'],
-    },
-    fontSize: TEXT.sm,
-    fontWeight: 600,
-    lineHeight: '1.5rem',
-    textDecorationLine: 'none',
+  rootCompact: {
+    paddingBlockStart: 'clamp(2.5rem, 5vw, 4rem)',
   },
+  /** Hero paragraphs are UI-sized, not the reading serif: they set the scene. */
   subtitle: {
     color: {
-      default: gray['600'],
-      [stylex.when.ancestor(DARK)]: neutral['300'],
+      default: theme.fgMuted,
+      [stylex.when.ancestor(DARK)]: '#a9b4ba',
     },
-    fontSize: TEXT.lg,
-    lineHeight: '2rem',
-    marginBlockStart: SPACE['6'],
+    fontFamily: FONT_SANS.family,
+    fontSize: TEXT.lead,
+    lineHeight: 1.6,
+    marginBlock: 0,
+    marginBlockStart: '1.5rem',
+    maxWidth: '56ch',
     textWrap: 'pretty',
+  },
+  subtitleParagraph: {
+    marginBlock: 0,
+    marginBlockStart: '0.75rem',
   },
   title: {
     color: {
-      default: gray['900'],
-      [stylex.when.ancestor(DARK)]: gray['100'],
+      default: theme.fg,
+      [stylex.when.ancestor(DARK)]: '#e9eeec',
     },
-    fontSize: {
-      default: TEXT['3xl'],
-      '@media (min-width: 640px)': TEXT['5xl'],
-    },
-    fontWeight: 700,
-    letterSpacing: '-0.025em',
+    fontFamily: FONT_SERIF.family,
+    fontSize: TEXT.display,
+    fontOpticalSizing: 'auto',
+    fontWeight: 600,
+    letterSpacing: '-0.035em',
+    lineHeight: 0.98,
+    marginBlock: 0,
+    maxWidth: '13ch',
     textWrap: 'balance',
+  },
+  visual: {
+    justifySelf: {
+      default: 'center',
+      '@media (min-width: 960px)': 'end',
+    },
+    maxWidth: '30rem',
+    minWidth: 0,
+    width: '100%',
   },
 })
