@@ -18,7 +18,7 @@
 
 ## Quick start
 
-Requires Node.js 26+ and pnpm 11+.
+Requires Node.js >=26.12.0 and pnpm 12+ (see the package engines).
 
 ```bash
 pnpm install
@@ -53,12 +53,21 @@ Read [development guide](./docs-dev/README.md) for more information.
   site: an entry is `index.mdx` (English) plus an optional `index.cn.mdx` (Chinese), and
   the collection globs must match both names or a translation is never imported.
 - **Styling is StyleX only.** No Tailwind, no handwritten CSS except
-  `packages/site-kit/src/styles/global.css` (the `@font-face` and `color-scheme`) and the
-  vendored KaTeX stylesheet. Two compiler constraints to respect:
+  `packages/site-kit/src/styles/global.css` (the self-hosted font faces, the document
+  palette, `color-scheme`, the nav current-page marker and the KaTeX overflow guard) and
+  the vendored KaTeX stylesheet. Two compiler constraints to respect:
   - conditional (e.g. dark-mode) values must be inline literals, because an imported
     constant binds as a StyleX value object and fails condition validation;
   - media queries must be literal `'@media (...)'` keys, for the same reason.
     See `packages/site-kit/src/styles/tokens.stylex.ts` and `README.md#styles`.
+- **One shared design system.** Source Serif 4 (editorial voice) and Inter (interface) are
+  self-hosted variable Latin subsets under `packages/site-kit/src/styles/fonts/` (SIL OFL);
+  CJK falls back to platform faces. Every colour, radius and motion value comes from
+  `tokens.stylex.ts`, and the dark half of each colour pair stays inline at its call site.
+  The shared visual grammar is the page edge (`WIDTH.page`) with left-aligned reading
+  measures, a single cobalt accent for interactive elements, hairlines instead of card
+  borders, and one entrance animation (the home hero). Design notes live in
+  [docs-dev/README.md](./docs-dev/README.md#design-system).
 - **Generated files are not edited.** Each site generates its own `.source/`;
   `packages/site-kit/src/components/icon-data.ts` comes from
   `scripts/generate-icon-data.mjs`.
@@ -67,5 +76,7 @@ Read [development guide](./docs-dev/README.md) for more information.
 
 Every route is `render: 'static'`, so each site is a pure static export: no server runtime
 is needed and its `dist/public` is the publish directory. Waku does not pass the request
-path to a layout, so the navbar marks the active entry from a pre-paint script in
-`RootShell` instead, and the language switch derives its href the same way.
+path to a layout, so the document bootstrap owns active navigation and the language
+switch href. It also observes late-mounted/replaced navigation after the RSC payload
+arrives. Interactive controls use React Aria; navigation links remain native server
+components. Keep the current SSR-disabled fallback-shell policy unchanged.
